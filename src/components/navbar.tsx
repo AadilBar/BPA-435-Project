@@ -12,7 +12,7 @@ function Navbar() {
         >
             <Box>
                 <img
-                    src='src/assets/react.svg'
+                    src={import.meta.env.BASE_URL + '/react.svg'}
                     alt='logo'
                     style={{width: '50px', height: '50px', marginRight: '10px'}}
                 />
