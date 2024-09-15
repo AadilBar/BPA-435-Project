@@ -1,9 +1,12 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch: # Allows manual triggering of the workflow
+    inputs:
+      environment:
+        description: "Environment to deploy to"
+        required: true
+        default: "production"
 
 jobs:
   build:
