@@ -1,10 +1,11 @@
 import { Canvas } from "@react-three/fiber";
 import Experience from "../components/Experience";
+import styles from "./About.module.css";
 
 
 export default function About() {
     return (
-        <div>
+        <div className={styles.canvas} >
             <Canvas>
                 <Experience />
             </Canvas>
