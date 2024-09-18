@@ -5,6 +5,7 @@ import Home from './pages/Home.tsx';
 import About from './pages/About.tsx';
 import Store from './pages/Store.tsx';
 import Tour from './pages/Tour.tsx';
+import './App.css';
 
 function App() {
     return (
