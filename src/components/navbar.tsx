@@ -1,59 +1,98 @@
 import { Box, Flex, Link,} from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import styling from './navbar.module.css';
 
 
 function Navbar() {
-    return ( 
+    const location = useLocation();
+
+    return (
         <Flex
-            bg="#00000"
-            p={4}
+            bg="#000000"
+            pt={"16"}
+            pb={"4"}
             align="center"
             justify="space-between"
         >
-            <Box>
-                <img
-                    src={import.meta.env.BASE_URL + '/react.svg'}
-                    alt='logo'
-                    style={{width: '50px', height: '50px', marginRight: '10px'}}
-                />
-            </Box> 
-            <Box>
+            <Box alignItems="center" display="flex" justifyContent="center" width="100%">
                 <>
                     <Link
                         as={RouterLink}
                         to="/"
                         mr={4}
-                        color="Black"
-                        _hover={{ textDecoration: 'underline' }}
+                        fontFamily="Sansation"
+                        fontSize={16}
+                        fontWeight={'300'}
+                        bg={location.pathname === '/' ? 'white' : 'transparent'}
+                        color={location.pathname === '/' ? 'black' : 'White'}
+                        p="6px 12px"
                     >
-                        Home
+                        HOME
                     </Link>
                     <Link
                         as={RouterLink}
                         to="/about-us"
                         mr={4}
-                        color="Black"
-                        _hover={{ textDecoration: 'underline' }}
+                        fontFamily="Sansation"
+                        fontSize={16}
+                        fontWeight={'300'}
+                        bg={location.pathname === '/about-us' ? 'white' : 'transparent'}
+                        color={location.pathname === '/about-us' ? 'black' : 'White'}
+                        p="6px 12px"
                     >
-                        About Us
+                        ABOUT US
                     </Link>
                     <Link
                         as={RouterLink}
                         to="/tour"
                         mr={4}
-                        color="Black"
-                        _hover={{ textDecoration: 'underline' }}
+                        fontFamily="Sansation"
+                        fontSize={16}
+                        fontWeight={'300'}
+                        bg={location.pathname === '/tour' ? 'white' : 'transparent'}
+                        color={location.pathname === '/tour' ? 'black' : 'White'}
+                        p="6px 12px"
                     >
-                        tour
+                        TOUR
                     </Link>
                     <Link
                         as={RouterLink}
                         to="/store"
                         mr={4}
-                        color="Black"
-                        _hover={{ textDecoration: 'underline' }}
+                        fontFamily="Sansation"
+                        fontSize={16}
+                        fontWeight={'300'}
+                        bg={location.pathname === '/store' ? 'white' : 'transparent'}
+                        color={location.pathname === '/store' ? 'black' : 'White'}
+                        p="6px 12px"
                     >
-                        store
+                        STORE
+                    </Link>
+                    <Link
+                        as={RouterLink}
+                        to="/albums"
+                        mr={4}
+                        fontFamily="Sansation"
+                        fontSize={16}
+                        fontWeight={'300'}
+                        bg={location.pathname === '/albums' ? 'white' : 'transparent'}
+                        color={location.pathname === '/albums' ? 'black' : 'White'}
+                        p="6px 12px"
+                    >
+                        ALBUMS
+                    </Link>
+                    <Link
+                        as={RouterLink}
+                        to="/contact-us"
+                        mr={4}
+                        fontFamily="Sansation"
+                        fontSize={16}
+                        fontWeight={'300'}
+                        bg={location.pathname === '/contact-us' ? 'white' : 'transparent'}
+                        color={location.pathname === '/contact-us' ? 'black' : 'White'}
+                        p="5px 12px 6px 12px"
+                    >
+                        CONTACT US
                     </Link>
                 </>
 

@@ -1,4 +1,11 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    background-color: #000000;
+    
+}
+@font-face {
+    font-family: 'Sansation';
+    src: url('/src/assets/fonts/Sansation-Regular.ttf') format('truetype');
 }
