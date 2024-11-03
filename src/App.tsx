@@ -5,8 +5,8 @@ import Home from './pages/Home.tsx';
 import About from './pages/About.tsx';
 import Store from './pages/Store.tsx';
 import Tour from './pages/Tour.tsx';
-import Contact from './pages/contact.tsx';
-import Albums from './pages/albums.tsx';
+import Contact from './pages/Contact.tsx';
+import Albums from './pages/Albums.tsx';
 import './app.css';
 
 function App() {
