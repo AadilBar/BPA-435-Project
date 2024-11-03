@@ -6,6 +6,8 @@ import About from './pages/About.tsx';
 import Store from './pages/Store.tsx';
 import Tour from './pages/Tour.tsx';
 import './app.css';
+import Albums from './pages/albums.tsx';
+import Contact from './pages/contact.tsx';
 
 function App() {
     return (
@@ -17,6 +19,8 @@ function App() {
                     <Route path="/about-us" element={<About />} />
                     <Route path="/tour" element={<Tour />} />
                     <Route path="/store" element={<Store />} />
+                    <Route path="/albums" element={<Albums />} />
+                    <Route path="/contact-us" element={<Contact />} />
                 </Routes>
             </HashRouter>
         </ChakraProvider>
