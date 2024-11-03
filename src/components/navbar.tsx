@@ -1,6 +1,5 @@
 import { Box, Flex, Link,} from '@chakra-ui/react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import styling from './navbar.module.css';
 
 
 function Navbar() {
