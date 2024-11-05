@@ -93,9 +93,32 @@ function Navbar() {
                     >
                         CONTACT US
                     </Link>
+                    <Link
+                        href="https://spotify.com"
+                        isExternal
+                        mr={4}
+                        p="5px 0px 6px 12px"
+                    >
+                        <img src={`${import.meta.env.BASE_URL}/images/Spotify.png`} alt="Spotify" style={{ height: '24px' }} />
+                    </Link>
+                    <Link
+                        href="https://music.apple.com"
+                        isExternal
+                        mr={4}
+                        p="3px 0px 6px 0px"
+                    >
+                        <img src={`${import.meta.env.BASE_URL}/images/Apple.png`} alt="Apple Music" style={{ height: '24px' }} />
+                    </Link>
+                    <Link
+                        href="https://music.youtube.com"
+                        isExternal
+                        mr={4}
+                        p="5px 0px 6px 0px"
+                    >
+                        <img src={`${import.meta.env.BASE_URL}/images/Youtube.png`} alt="Youtube" style={{ height: '24px' }} />
+                    </Link>
                 </>
-
-      </Box>
+            </Box>
         </Flex>
     )
 
