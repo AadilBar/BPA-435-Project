@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, Stack } from '@chakra-ui/react';
 import Navbar from './components/navbar.tsx';
 import { Route, Routes, HashRouter } from 'react-router-dom';
 import Home from './pages/Home.tsx';
@@ -13,15 +13,17 @@ function App() {
     return (
         <ChakraProvider>
             <HashRouter>
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about-us" element={<About />} />
-                    <Route path="/tour" element={<Tour />} />
-                    <Route path="/store" element={<Store />} />
-                    <Route path="/albums" element={<Albums />} />
-                    <Route path="/contact-us" element={<Contact />} />
-                </Routes>
+                <Stack>
+                    <Navbar />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about-us" element={<About />} />
+                        <Route path="/tour" element={<Tour />} />
+                        <Route path="/store" element={<Store />} />
+                        <Route path="/albums" element={<Albums />} />
+                        <Route path="/contact-us" element={<Contact />} />
+                    </Routes>
+                </Stack>
             </HashRouter>
         </ChakraProvider>
     );
