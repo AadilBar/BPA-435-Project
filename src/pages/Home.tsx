@@ -20,9 +20,9 @@ export default function Home() {
                 <h1 style={{ fontFamily: 'Sansation', color: '#E9204F', fontSize: '20px', fontWeight: '700' }}>Click to View Songs</h1>
                 <div style={{ height: '50px' }}></div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', width: '80%', margin: '0 auto' }}>
-                    <Album />
-                    <Album />
-                    <Album />
+                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/Spotify.png`} releaseText='release text' title='title' description='description'/>
+                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/Spotify.png`} releaseText='release text' title='title' description='description'/>
+                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/Spotify.png`} releaseText='release text' title='title' description='description'/>
                 </div>
             </div>
 
