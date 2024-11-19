@@ -2,7 +2,7 @@ import React from 'react';
 
 const AlbumCard = () => {
   return (
-    <div style={styles.cardContainer}>
+    <div style={styles.cardContainer}> 
       <div style={styles.imageContainer}>
         <img
           src={`${import.meta.env.BASE_URL}/images/Spotify.png`} // Replace with actual album image URL
