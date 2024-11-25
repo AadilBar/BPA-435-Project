@@ -1,20 +1,27 @@
 import React from 'react';
 
-const AlbumCard = () => {
+interface AlbumCardProps {
+  imageUrl: string;
+  releaseText: string;
+  title: string;
+  description: string;
+}
+
+const Album: React.FC<AlbumCardProps> = ({ imageUrl, releaseText, title, description }) => {
   return (
     <div style={styles.cardContainer}> 
       <div style={styles.imageContainer}>
         <img
-          src={`${import.meta.env.BASE_URL}/images/Spotify.png`} // Replace with actual album image URL
+          src={imageUrl} 
           alt="Album Cover"
           style={styles.albumImage}
         />
       </div>
       <div style={styles.detailsContainer}>
-        <p style={styles.releaseText}>New Album Released</p>
-        <h3 style={styles.title}>Filler Name</h3>
+        <p style={styles.releaseText}>{releaseText}</p>
+        <h3 style={styles.title}>{title}</h3>
         <p style={styles.description}>
-          Lorem ipsum dummy Text is the Lorem ipsum dummy Text of the Lorem ipsum dummy text is the lorem
+          {description}
         </p>
         <div style={styles.playButton}>
           <span style={styles.playIcon}>&#9654;</span>
@@ -122,4 +129,4 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-export default AlbumCard;
+export default Album;
