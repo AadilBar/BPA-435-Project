@@ -23,7 +23,8 @@
   
   /* Image container styles */
   .image-container {
-    width: 300px;
+    width: 350px;
+    height: 400px;
     padding: 16px;
     border-radius: 12px;
     overflow: hidden;
@@ -39,14 +40,31 @@
     object-fit: cover;
   }
   
+  
 
 /* Title container styles */
 .title-container {
-    margin-top: 16px;
     background-color: transparent;
     font-family: Arial, sans-serif;
     width: 100%;
     text-align: left; /* Left-align text within this container */
+  }
+
+  .price-container
+  {
+    margin-top: 16px;
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    text-align: left; 
+  }
+  .price{
+    font-family: Sansation;
+    font-size: 25px;
+    font-weight: bold;
+
+    color: #efecec;
+    background-color: transparent;
   }
   
   /* Title styles */
@@ -68,8 +86,12 @@
     margin-top: 8px;
     line-height: 1.5;
     background-color: transparent; 
+    white-space: normal;
+    word-wrap: break-word;
+    overflow: hidden;
   }
   .description-container {
     background-color: transparent;
     width: 100%;
+    max-width: 350px;
   }

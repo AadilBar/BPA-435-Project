@@ -8,16 +8,20 @@ interface StoreCardProps {
   price: number;
   title: string;
   description: string;
-  link : string;
+  
 }
 
-const Item: React.FC<StoreCardProps> = ({ imageUrl, price, title, description, link}) => {
+const Item: React.FC<StoreCardProps> = ({ imageUrl, price, title, description}) => {
   return (
     <Link as={RouterLink} to="/checkout" className="item-link">
     <div className="item-container">
 
       <div className="image-container">
         <img src={imageUrl} alt="item picture" className="item-image" />
+      </div>
+
+      <div className="price-container">
+        <h2 className="price">${price}</h2>  
       </div>
 
       <div className="title-container">
