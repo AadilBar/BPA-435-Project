@@ -1,130 +1,169 @@
-import { Box, Flex, Link,} from '@chakra-ui/react';
+import React from 'react';
+import {
+  Box,
+  Flex,
+  Link,
+  Image,
+  IconButton,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  VStack,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-
 function Navbar() {
-    const location = useLocation();
+  const location = useLocation();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-    return (
+  const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (
+    <Link
+      as={RouterLink}
+      to={to}
+      fontFamily="Sansation"
+      fontSize={16}
+      fontWeight="300"
+      bg={location.pathname === to ? 'white' : 'transparent'}
+      color={location.pathname === to ? 'black' : 'white'}
+      p="6px 12px"
+      mr={4}
+      textAlign="center"
+      onClick={onClose}
+    >
+      {children}
+    </Link>
+  );
+
+  return (
+    <>
+      {/* Navbar */}
+      <Flex
+        bg="#000000"
+        pt={{ base: '16', md: '16' }} // Smaller padding for mobile
+        pb={{ base: '4', md: '4' }} // Smaller padding for mobile
+        align="center"
+        position="relative"
+        w="100%"
+        h={{ base: '48px', md: '64px' }} // Smaller height for mobile
+        px={4}
+      >
+        {/* Logo aligned to the left */}
+        <Box position="absolute" left="0" ml={{ base: 0, md: 5 }}>
+          <Link as={RouterLink} to="/">
+            <Image
+              src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
+              alt="Home"
+              height="50px"
+            /> 
+          </Link>
+        </Box>
+
+        {/* Desktop Navigation */}
         <Flex
-            bg="#000000"
-            pt={"16"}
-            pb={"4"}
-            align="center"
-            justify="space-between"
+          flex="1"
+          justify="center"
+          align="center"
+          display={{ base: 'none', md: 'flex' }}
         >
-            <Box alignItems="center" display="flex" justifyContent="center" width="100%">
-                <>
-                    <Link
-                        as={RouterLink}
-                        to="/"
-                        mr={4}
-                        fontFamily="Sansation"
-                        fontSize={16}
-                        fontWeight={'300'}
-                        bg={location.pathname === '/' ? 'white' : 'transparent'}
-                        color={location.pathname === '/' ? 'black' : 'White'}
-                        p="6px 12px"
-                    >
-                        HOME
-                    </Link>
-                    <Link
-                        as={RouterLink}
-                        to="/about-us"
-                        mr={4}
-                        fontFamily="Sansation"
-                        fontSize={16}
-                        fontWeight={'300'}
-                        bg={location.pathname === '/about-us' ? 'white' : 'transparent'}
-                        color={location.pathname === '/about-us' ? 'black' : 'White'}
-                        p="6px 12px"
-                    >
-                        ABOUT US
-                    </Link>
-                    <Link
-                        as={RouterLink}
-                        to="/tour"
-                        mr={4}
-                        fontFamily="Sansation"
-                        fontSize={16}
-                        fontWeight={'300'}
-                        bg={location.pathname === '/tour' ? 'white' : 'transparent'}
-                        color={location.pathname === '/tour' ? 'black' : 'White'}
-                        p="6px 12px"
-                    >
-                        TOUR
-                    </Link>
-                    <Link
-                        as={RouterLink}
-                        to="/store"
-                        mr={4}
-                        fontFamily="Sansation"
-                        fontSize={16}
-                        fontWeight={'300'}
-                        bg={location.pathname === '/store' ? 'white' : 'transparent'}
-                        color={location.pathname === '/store' ? 'black' : 'White'}
-                        p="6px 12px"
-                    >
-                        STORE
-                    </Link>
-                    <Link
-                        as={RouterLink}
-                        to="/albums"
-                        mr={4}
-                        fontFamily="Sansation"
-                        fontSize={16}
-                        fontWeight={'300'}
-                        bg={location.pathname === '/albums' ? 'white' : 'transparent'}
-                        color={location.pathname === '/albums' ? 'black' : 'White'}
-                        p="6px 12px"
-                    >
-                        ALBUMS
-                    </Link>
-                    <Link
-                        as={RouterLink}
-                        to="/contact-us"
-                        mr={4}
-                        fontFamily="Sansation"
-                        fontSize={16}
-                        fontWeight={'300'}
-                        bg={location.pathname === '/contact-us' ? 'white' : 'transparent'}
-                        color={location.pathname === '/contact-us' ? 'black' : 'White'}
-                        p="5px 12px 6px 12px"
-                    >
-                        CONTACT US
-                    </Link>
-                    <Link
-                        href="https://spotify.com"
-                        isExternal
-                        mr={4}
-                        p="5px 0px 6px 12px"
-                    >
-                        <img src={`${import.meta.env.BASE_URL}/images/Spotify.png`} alt="Spotify" style={{ height: '24px' }} />
-                    </Link>
-                    <Link
-                        href="https://music.apple.com"
-                        isExternal
-                        mr={4}
-                        p="3px 0px 6px 0px"
-                    >
-                        <img src={`${import.meta.env.BASE_URL}/images/Apple.png`} alt="Apple Music" style={{ height: '24px' }} />
-                    </Link>
-                    <Link
-                        href="https://music.youtube.com"
-                        isExternal
-                        mr={4}
-                        p="5px 0px 6px 0px"
-                    >
-                        <img src={`${import.meta.env.BASE_URL}/images/Youtube.png`} alt="Youtube" style={{ height: '24px' }} />
-                    </Link>
-                </>
-            </Box>
+          <NavLink to="/about-us">ABOUT US</NavLink>
+          <NavLink to="/tour">TOUR</NavLink>
+          <NavLink to="/store">STORE</NavLink>
+          <NavLink to="/albums">ALBUMS</NavLink>
+          <NavLink to="/contact-us">CONTACT US</NavLink>
         </Flex>
-    )
 
+        {/* External Links aligned to the right */}
+        <Box position="absolute" right="0" mr={5} display={{ base: 'none', md: 'flex' }}>
+          <Flex align="center">
+            <Link href="https://spotify.com" isExternal mr={4}>
+              <img
+                src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
+                alt="Spotify"
+                style={{ height: '24px' }}
+              />
+            </Link>
+            <Link href="https://music.apple.com" isExternal mr={4}>
+              <img
+                src={`${import.meta.env.BASE_URL}/images/Apple.png`}
+                alt="Apple Music"
+                style={{ height: '24px' }}
+              />
+            </Link>
+            <Link href="https://music.youtube.com" isExternal>
+              <img
+                src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
+                alt="Youtube"
+                style={{ height: '24px' }}
+              />
+            </Link>
+          </Flex>
+        </Box>
 
+        {/* Hamburger Menu for Mobile */}
+        <Box
+          position="absolute"
+          right="0"
+          mr={5}
+          display={{ base: 'flex', md: 'none' }}
+        >
+          <IconButton
+            icon={<HamburgerIcon />}
+            aria-label="Open menu"
+            size="lg"
+            variant="ghost"
+            color="white"
+            onClick={onOpen}
+          />
+        </Box>
+      </Flex>
 
-
+    <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xs">
+      <DrawerOverlay />
+        <DrawerContent bg="#000000" color="white" maxWidth="240px">
+          <DrawerCloseButton />
+          <DrawerHeader>Menu</DrawerHeader>
+          <DrawerBody>
+            <VStack align="start">
+                <NavLink to="/">HOME</NavLink>
+                <NavLink to="/about-us">ABOUT US</NavLink>
+                <NavLink to="/tour">TOUR</NavLink>
+                <NavLink to="/store">STORE</NavLink>
+                <NavLink to="/albums">ALBUMS</NavLink>
+                <NavLink to="/contact-us">CONTACT US</NavLink>
+                <Box mt={8} display="flex" justifyContent="space-between" width="60%">
+                    <Link href="https://spotify.com" isExternal mr={4}>
+                        <img
+                            src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
+                            alt="Spotify"
+                            style={{ height: '24px' }}
+                        />
+                    </Link>
+                    <Link href="https://music.apple.com" isExternal mr={4}>
+                        <img
+                            src={`${import.meta.env.BASE_URL}/images/Apple.png`}
+                            alt="Apple Music"
+                            style={{ height: '24px' }}
+                        />
+                    </Link>
+                    <Link href="https://music.youtube.com" isExternal>
+                        <img
+                            src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
+                            alt="Youtube"
+                            style={{ height: '24px' }}
+                        />
+                    </Link>
+                </Box>
+            </VStack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
 }
 
 export default Navbar;
