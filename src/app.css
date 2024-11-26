@@ -4,10 +4,6 @@
     box-sizing: border-box;
     background-color: #000000;
 }
-@font-face {
-    font-family: 'Sansation';
-    src: url('/src/assets/fonts/Sansation-Regular.ttf') format('truetype');
-}
 
 /* Style the scrollbar */
 ::-webkit-scrollbar {
