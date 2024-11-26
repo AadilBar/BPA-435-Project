@@ -21,7 +21,7 @@ export default function Home() {
                 <div style={{ height: '50px' }}></div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', width: '80%', margin: '0 auto' }}>
                     <Album imageUrl={`${import.meta.env.BASE_URL}/images/Spotify.png`} releaseText='release text' title='title' description='description'/>
-                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/Spotify.png`} releaseText='release text' title='title' description='description'/>
+                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/Big Stage Fright Logo.png`} releaseText='release text' title='title' description='description'/>
                     <Album imageUrl={`${import.meta.env.BASE_URL}/images/Spotify.png`} releaseText='release text' title='title' description='description'/>
                 </div>
             </div>

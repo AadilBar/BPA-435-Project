@@ -7,9 +7,9 @@ interface AlbumCardProps {
   description: string;
 }
 
-const AlbumCard: React.FC<AlbumCardProps> = ({ imageUrl, releaseText, title, description }) => {
+const Album: React.FC<AlbumCardProps> = ({ imageUrl, releaseText, title, description }) => {
   return (
-    <div style={styles.cardContainer}>
+    <div style={styles.cardContainer}> 
       <div style={styles.imageContainer}>
         <img
           src={imageUrl} 
@@ -129,4 +129,4 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-export default AlbumCard;
+export default Album;
