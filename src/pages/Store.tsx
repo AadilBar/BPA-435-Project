@@ -1,5 +1,3 @@
-import { Button } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 import Item from '../components/merch_item';
 
 export default function Store() {

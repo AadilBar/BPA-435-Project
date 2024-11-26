@@ -1,7 +1,7 @@
 import React from 'react';
-import './Item.css'; // Import the external CSS file
-import { Box, Flex, Link,} from '@chakra-ui/react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import './Item.css';
+import { Link,} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface StoreCardProps {
   imageUrl: string;
