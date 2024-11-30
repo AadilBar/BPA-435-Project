@@ -1,7 +1,7 @@
 import React from 'react';
 import './Item.css';
 import { Link,} from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 
 interface StoreCardProps {
   imageUrl: string;
@@ -13,7 +13,7 @@ interface StoreCardProps {
 
 const Item: React.FC<StoreCardProps> = ({ imageUrl, price, title, description}) => {
   return (
-    <Link as={RouterLink} to="/checkout" className="item-link">
+    <Link as={RouterLink} href="/checkout" className="item-link">
     <div className="item-container">
 
       <div className="image-container">
