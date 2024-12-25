@@ -10,19 +10,16 @@ const ProductDetails: React.FC = () => {
     <div className="product-container">
 
 
-
-
     <div className="image_container">  
-        <img src={imageUrl} alt={title} className="product-image" />
+ <img src={imageUrl} alt={title} className="product-image" />
     </div>
 
 
-        <div className="empty-space-right"></div> 
 
 <div className="details_container">
       <h2 className="product-title">{title}</h2>
       <p className="product-description">{description}</p>
-      <p className="product-price">${price}</p>
+      
       <div className= "horizontal-line"></div>
 
 <h3 style={{
@@ -60,9 +57,29 @@ const ProductDetails: React.FC = () => {
 
     </div> 
 
+<div>
+<h3 style={{
+        fontFamily: 'Copperplate, serif',
+        color: 'white',
+        marginTop: '10px'}}>size</h3>
+
+</div>
+
+<div className='sizes'> 
+
+  <div className='size'>S</div>
+  <div className='size'>M</div>
+  <div className='size'>L</div>
+  <div className='size'>XL</div>
+
+</div>
 
 </div>
    
+
+   <div className="price_container"> 
+   <p className="product-price">${price}</p>
+    </div>
 
    
     </div>
