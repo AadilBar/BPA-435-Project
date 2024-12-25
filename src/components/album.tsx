@@ -1,7 +1,5 @@
 import React from 'react';
 import './album.css';
-import { Link, useDisclosure,} from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router';
 
 interface StoreCardProps {
   imageUrl: string;
@@ -11,10 +9,9 @@ interface StoreCardProps {
   
 }
 const Album: React.FC<StoreCardProps> = ({ imageUrl, releaseText, title, description }) => {
-  const { open, onOpen, onClose } = useDisclosure();
 
   return (
-    <div onClick={onOpen}>
+    <div>
       <div className="album-container">
 
         <div className="album-image-container">
