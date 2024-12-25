@@ -32,8 +32,8 @@
     overflow: hidden;
     display: flex; /* Ensures the image is centered within the container */
     justify-content: center;
+    background-color: black; /* Set background to black */
   }
-  
   /* Item image styles */
   .item-image {
     width: 100%;
