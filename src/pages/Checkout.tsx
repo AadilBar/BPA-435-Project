@@ -1,6 +1,7 @@
 import React from 'react';
 import { redirect, useLocation } from "react-router-dom";
 import '../CSS/Product.css';
+import Counter from '../components/counter'; 
 
 const ProductDetails: React.FC = () => {
   const location = useLocation();
@@ -74,13 +75,31 @@ const ProductDetails: React.FC = () => {
 
 </div>
 
+<div> 
+  <Counter/>
+</div>
+
 </div>
    
 
    <div className="price_container"> 
-   <p className="product-price">${price}</p>
-    </div>
 
+   <p className="product-price">${price}</p>
+   <p className='sub1'>Price when purchased online</p>
+   <p className='sub2'>Free 90 Day Returns - Sold By Stage Fright TM</p>
+   <button className='add-to-cart-button'>Add to Cart</button>
+   <div style={{ borderTop: '1px solid white', margin: '10px 0' }}></div>
+   <div style={{fontSize: '0.96rem'}} className='sub1'>How do you want your item</div>    
+
+        <div className="delivery_options_container"> 
+        
+        <div className="options">Shipping</div>
+        <div className="options">Pickup</div>
+        <div className="options">Delivery</div>
+        
+        </div>
+
+    </div>
    
     </div>
   );
