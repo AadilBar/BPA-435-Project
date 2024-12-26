@@ -1,3 +1,4 @@
+import Footer from "../components/footer";
 import styles from "./About.module.css";
 
 
@@ -7,6 +8,7 @@ export default function About() {
             <p>
                 gsadf
             </p>
+            <Footer/>
         </div>
     );
 }
