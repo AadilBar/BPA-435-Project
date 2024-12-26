@@ -1,0 +1,14 @@
+.event-container {
+    background-color: #1a1a1a; /* gray */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    @media (hover: hover) {
+        .event-container:hover {
+          transform: scale(1.05); 
+          background-color: #252525; /* Lighter gray */
+          box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.2); 
+        }
+        }

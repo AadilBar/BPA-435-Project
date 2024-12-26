@@ -1,3 +1,4 @@
+import Footer from '../components/footer';
 import Item from '../components/merch_item';
 
 export default function Store() {
@@ -23,6 +24,7 @@ export default function Store() {
             <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Small/Small Black Logo.png`}  price= {49.99} title='Black SF T-Shirt' description='Woven with metallic fibers inspired by the shimmering expanse of the cosmos, this garment is a celestial marvel.' />
             <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Small/Small Logo White.png`}  price= {49.99} title='White SF T-Shirt' description='Made from linens once favored by European royalty, this piece combines noble history with modern flair.' />
             </div>
+            <Footer/>
         </div>
 
 
