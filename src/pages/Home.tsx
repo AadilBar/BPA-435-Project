@@ -1,12 +1,12 @@
 
 
 import { Button } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import Album from '../components/album';
 
 export default function Home() {
     return (
-        <>
+        <div style={{backgroundColor: "black"}}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'black' }}>
                 <div style={{ textAlign: 'center' }}>
                     <h1 style={{ color: '#E9204F', fontSize: '10vw' }}>STAGE FRIGHT TOUR</h1>
@@ -27,7 +27,7 @@ export default function Home() {
             </div>
 
 
-        </>
+        </div>
         
     );
 }
