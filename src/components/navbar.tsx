@@ -67,7 +67,6 @@ function Navbar() {
           <NavLink to="/about-us">ABOUT US</NavLink>
           <NavLink to="/tour">TOUR</NavLink>
           <NavLink to="/store">STORE</NavLink>
-          <NavLink to="/albums">ALBUMS</NavLink>
           <NavLink to="/contact-us">CONTACT US</NavLink>
         </Flex>
 
@@ -132,7 +131,6 @@ function Navbar() {
                 <NavLink to="/about-us">ABOUT US</NavLink>
                 <NavLink to="/tour">TOUR</NavLink>
                 <NavLink to="/store">STORE</NavLink>
-                <NavLink to="/albums">ALBUMS</NavLink>
                 <NavLink to="/contact-us">CONTACT US</NavLink>
                 <Box mt={8} ml={3} display="flex" justifyContent="space-between" width="60%">
                     <Link href="https://spotify.com" mr={4}>

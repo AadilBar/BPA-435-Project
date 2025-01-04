@@ -1,44 +1,62 @@
-import React from 'react';
-import './album.css';
-import { Link, useDisclosure,} from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router';
+import { Card, Flex, Icon, Link } from "@chakra-ui/react"
+import { Image } from "@chakra-ui/react"
+import './event.css';
+import { MdOutlineLocationOn } from "react-icons/md";
 
-interface StoreCardProps {
-  imageUrl: string;
-  releaseText: string;
-  title: string;
-  description: string;
-  
+interface EventProps {
+    imageUrl: string;
+    name: string;
+    releaseDate: Date;
+    
+  }
+
+
+const Album: React.FC<EventProps> = ({ imageUrl, name, releaseDate}) => {
+return (
+    <Card.Root maxW="md" overflow="hidden" p="4" className="event-container">
+        <Image
+            src={imageUrl}
+            alt="Green double couch with wooden legs"
+            borderRadius="md"
+        />
+        <Card.Body gap="2" fontFamily={"Sansation"} fontWeight={700} fontSize={20}>
+            <Flex align="center"></Flex>
+            <Card.Title fontSize={20} fontFamily={"Sansation"} fontWeight={700}>{name}</Card.Title>
+            <Card.Description fontSize={20}  fontFamily={"Sansation"} fontWeight={700}>
+              Released: {releaseDate.toDateString()}
+              <Icon boxSize={6}>
+                    <MdOutlineLocationOn />
+                </Icon>
+            </Card.Description>
+            Listen:
+        </Card.Body>
+        <Card.Footer gap="2">
+          <Flex align="center">
+            <Link href="https://spotify.com" mr={4}>
+              <img
+                src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
+                alt="Spotify"
+                style={{ height: '24px' }}
+              />
+            </Link>
+            <Link href="https://music.apple.com" mr={4}>
+              <img
+                src={`${import.meta.env.BASE_URL}/images/Apple.png`}
+                alt="Apple Music"
+                style={{ height: '24px' }}
+              />
+            </Link>
+            <Link href="https://music.youtube.com">
+              <img
+                src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
+                alt="Youtube"
+                style={{ height: '24px' }}
+              />
+            </Link>
+          </Flex>
+        </Card.Footer>
+    </Card.Root>
+)
 }
-const Album: React.FC<StoreCardProps> = ({ imageUrl, releaseText, title, description }) => {
-  const { open, onOpen, onClose } = useDisclosure();
-
-  return (
-    <div onClick={onOpen}>
-      <div className="album-container">
-
-        <div className="album-image-container">
-          <img src={imageUrl} alt="item picture" className="album-image" />
-        </div>
-
-        <div className="album-price-container">
-          <h2 className="album-price">${releaseText}</h2>  
-        </div>
-
-        <div className="album-title-container">
-          <h3 className="album-title">{title}</h3>
-        </div>
-
-
-        <div className="album-description-container">
-          <p className="album-description">{description}</p>
-        </div>
-
-      </div>
-    </div>
-
-
-  );
-};
 
 export default Album;
