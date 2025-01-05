@@ -5,10 +5,10 @@
   justify-content: flex-start;
   align-items: center;
   width: auto;
-  height: auto;
   background-color: #1a1a1a; /* gray */
   border-radius: 16px;
   padding: 16px;
+ height: 520px;
   font-family: Arial, sans-serif;
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
@@ -25,17 +25,18 @@
   
   /* Image container styles */
   .image-container {
-    width: 350px;
-    height: 400px;
+    
+    width: 300px;
     padding: 16px;
     border-radius: 12px;
     overflow: hidden;
-    display: flex; /* Ensures the image is centered within the container */
+    display: flex;  
     justify-content: center;
-    background-color: black; /* Set background to black */
+    
   }
+  
   /* Item image styles */
-  .item-image {
+    .item-image {
     width: 100%;
     height: auto;
     border-radius: 12px;
@@ -97,3 +98,5 @@
     width: 100%;
     max-width: 350px;
   }
+
+ 

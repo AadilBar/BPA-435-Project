@@ -3,20 +3,22 @@ import { Button } from "./ui/button"
 import { Image, Text } from "@chakra-ui/react"
 import './event.css';
 import { MdOutlineLocationOn } from "react-icons/md";
+import { Link} from 'react-router';
 
 interface EventProps {
     imageUrl: string;
-    location: string;
+    place: string;
     address: String;
     price: number;
     startDate: Date;
     endDate: Date;
-    
+    mapData: string;
   }
 
 
-const EventItem: React.FC<EventProps> = ({ imageUrl, location, address, price, startDate, endDate }) => {
+const EventItem: React.FC<EventProps> = ({ imageUrl, place, address, price, startDate, endDate,mapData }) => {
 return (
+    <Link to="/tour_details" className="item-link" state={{ imageUrl, place, address, price, startDate, endDate, mapData}}>
     <Card.Root maxW="md" overflow="hidden" p="4" className="event-container">
         <Image
             src={imageUrl}
@@ -25,7 +27,7 @@ return (
         />
         <Card.Body gap="2">
             <div style={{height: 3}}></div>
-            <Card.Title fontSize={20} fontFamily={"Sansation"} fontWeight={700}>Stage Fright: {location}</Card.Title>
+            <Card.Title fontSize={20} fontFamily={"Sansation"} fontWeight={700}>Stage Fright: {place}</Card.Title>
             <Card.Description fontSize={20}  fontFamily={"Sansation"} fontWeight={700}>
                 <Icon boxSize={6}>
                     <MdOutlineLocationOn />
@@ -47,6 +49,7 @@ return (
             <Button variant="solid" p={3}>Learn More</Button>
         </Card.Footer>
     </Card.Root>
+    </Link>
 )
 }
 

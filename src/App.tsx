@@ -6,6 +6,7 @@ import Store from './pages/Store.tsx';
 import Tour from './pages/Tour.tsx';
 import Contact from './pages/Contact.tsx';
 import Checkout from './pages/Checkout.tsx';
+import Tour_details from './pages/Tour_details.tsx';
 import { Provider } from './components/ui/provider.tsx';
 import './app.css';
 
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/store" element={<Store />} />
                     <Route path="/contact-us" element={<Contact />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/tour_details" element={<Tour_details />} />
                 </Routes>
             </HashRouter>
         </Provider>

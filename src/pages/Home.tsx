@@ -23,9 +23,9 @@ export default function Home() {
 
                 <div style={{ height: '50px' }}></div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', width: '100%', padding: '0 10%', height: '70%', justifyItems: "Center"}}>
-                <EventItem imageUrl={`${import.meta.env.BASE_URL}/images/Shows/HuntingtonBankPav.png`} location='Huntington Bank Pavilion' address={" 1300 S Linn White Dr, Chicago, IL 60605"} price={500} startDate={new Date('2025-06-01')} endDate={new Date('2025-06-02')}/>
-                    <EventItem imageUrl={`${import.meta.env.BASE_URL}/images/Shows/Credit1Pav.png`} location='Credit Union 1 Arena' address={"525 S Racine Ave, Chicago, IL 60607"} price={500} startDate={new Date('2025-06-01')} endDate={new Date('2025-06-02')}/>
-                    <EventItem imageUrl={`${import.meta.env.BASE_URL}/images/Shows/Credit1Amp.png`} location='Credit Union 1 Amphitheater' address={"19100 Ridgeland Ave, Tinley Park, IL 60477"} price={500} startDate={new Date('2025-06-01')} endDate={new Date('2025-06-02')}/>
+                <EventItem imageUrl={`${import.meta.env.BASE_URL}/images/Shows/HuntingtonBankPav.png`} place='Huntington Bank Pavilion' address={" 1300 S Linn White Dr, Chicago, IL 60605"} price={500} startDate={new Date('2025-06-01')} endDate={new Date('2025-06-02')}/>
+                    <EventItem imageUrl={`${import.meta.env.BASE_URL}/images/Shows/Credit1Pav.png`} place='Credit Union 1 Arena' address={"525 S Racine Ave, Chicago, IL 60607"} price={500} startDate={new Date('2025-06-01')} endDate={new Date('2025-06-02')}/>
+                    <EventItem imageUrl={`${import.meta.env.BASE_URL}/images/Shows/Credit1Amp.png`} place='Credit Union 1 Amphitheater' address={"19100 Ridgeland Ave, Tinley Park, IL 60477"} price={500} startDate={new Date('2025-06-01')} endDate={new Date('2025-06-02')}/>
                 </div>    
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', height: '861px', backgroundColor: '#01010a', paddingTop: '20px' }}>

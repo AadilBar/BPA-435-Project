@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+.product-container {
+  display: flex;
+  gap: 100px;
+  align-items: flex-start; /* Align content to the top */
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 90%; 
+  background-color: black;  /* Light background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.image-container {
+  overflow: hidden;
+  
+}
+
+.product-image {  
+  max-height: 700px;
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add depth to the image */
+  border-radius: 8px;
+  border: 5px solid #23263A
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column; /* Stack title, description, price, and button */
+  justify-content: flex-start; 
+  gap: 1rem; 
+  padding: 1rem;
+  
+}
+
+.product-title {
+  
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: rgb(228, 220, 220); /* Darker text for contrast */
+}
+
+.product-description {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 575px;
+  font-family: 'Copperplate', serif;
+  font-size: 20px;
+  line-height: 1.6;
+  background-color: black;
+  color: rgb(228, 220, 220);
+  margin-bottom: 1rem;
+}
+
+.price_container{
+ flex: 0 0 21%;
+ display: flex; 
+ flex-direction: column;
+ padding: 8px;
+ border-radius: 8px;
+ border: 3px solid #23263A
+}
+
+.product-price {
+  font-family: 'Courier New', monospace;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(228, 220, 220); 
+  margin-bottom: 1rem;
+}
+
+.add-to-cart-button {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #FF0000; 
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.add-to-cart-button:hover {
+  background-color: #CC0000; 
+}
+.horizontal-line {
+  width: 100%;
+  height: 1px;
+  background-color: #ddd; /* Light gray color */
+}
+.circles-container{
+  margin-top: 0.4rem;
+  display: flex;
+  width: 25%;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+.circles{
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  transition: transform 0.3s ease; 
+}
+
+.circles:hover{
+  transform: scale(1.3);
+}
+
+.sizes{
+  display: flex; 
+  width: 30%;
+  justify-content: space-between;
+}
+.size {
+  font-family: 'Poppins';
+  font-weight: bold;
+  width: 20%;
+  border: 2px solid white;
+  text-align: center;
+  color: #e4fbc6;
+  padding: 1px;
+  transition: transform 0.3s ease; 
+}
+
+.size:hover {
+  transform: scale(1.1);
+}
+
+.counter_container{
+  display: flex;
+  margin-top: 25px; 
+  width: 50%;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  background-color: white;
+  padding: 10px;
+/*  border: 1px solid #ccc; */ 
+  border-radius: 5px;
+  border: 4px solid #23263A
+}
+
+.plus, .minus{
+  transition: transform 0.3s ease;
+  font-weight: bold;
+}
+.plus:hover, .minus:hover{
+  transform: scale(1.2);
+}
+.plus{
+  color: green;
+}
+.minus{
+  color: red;
+}
+#counter{
+  background-color: white;
+  color: black;
+}
+
+.sub1{
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: rgb(228, 220, 220); 
+}
+.sub2{  
+  margin-top: 1rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: rgb(228, 220, 220); 
+}
+
+.price_container, .sub1, .sub2, .product-price, .delivery_options_container {
+  background-color: #1A1E30;
+}
+.delivery_options_container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.options{
+  font-family: 'Poppins', sans-serif;
+  padding: 5px;
+  background-color: white;
+  margin-top: 0.8rem;
+  color: black;
+  width: 30%;
+  border: 3px solid rgb(139, 86, 0); 
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in;
+  font-size: 12px;
+}
+
+.options:hover{
+  transform: scale(1.07);
+}
