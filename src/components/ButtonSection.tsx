@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 
-type ButtonSectionProps = {
-  id: string;
-};
-
 const ButtonSection: React.FC = () => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
@@ -54,10 +50,10 @@ const ButtonSection: React.FC = () => {
           Up Close and Personal
         </div>
         <div className='price_description'>
-        Get ready for an unforgettable concert experience with the Up Close and Personal seats! These premium spots
-        provide the best view, placing you right near the stage for an intimate, face-to-face encounter with the artist. 
-        With limited availability, this exclusive option ensures a memorable night with an unmatched perspective. Perfect
-        for passionate fans and those seeking lifelong memories, these seats are a must for true music lovers.
+          Get ready for an unforgettable concert experience with the Up Close and Personal seats! These premium spots
+          provide the best view, placing you right near the stage for an intimate, face-to-face encounter with the artist. 
+          With limited availability, this exclusive option ensures a memorable night with an unmatched perspective. Perfect
+          for passionate fans and those seeking lifelong memories, these seats are a must for true music lovers.
         </div>
         <div className='counter'></div>
       </button>

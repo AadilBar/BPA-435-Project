@@ -1,5 +1,5 @@
 import React from 'react';
-import { redirect, useLocation } from "react-router";
+import {useLocation } from "react-router";
 import '../CSS/Product.css';
 import Counter from '../components/counter'; 
 
