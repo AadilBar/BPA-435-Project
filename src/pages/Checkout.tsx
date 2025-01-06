@@ -5,7 +5,6 @@ import { getDatabase, ref, set } from "firebase/database";
 
 import useLogin from '../Auth/functions';
 import { StepperInput } from '../components/ui/stepper-input';
-import { createPortal } from 'react-dom';
 
 const ProductDetails: React.FC = () => {
   const {
