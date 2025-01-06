@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 function Navbar() {
   const location = useLocation();
-  const [open, setOpen] = useState(false);
+  const [, setOpen] = useState(false);
 
   const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (
     <RouterLink to={to}>
