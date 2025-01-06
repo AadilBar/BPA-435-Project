@@ -1,16 +1,15 @@
 import Footer from "../components/footer";
-import styles from "./About.module.css";
 import '../CSS/AboutMe.css'; 
 import Member from '../components/member_profile';
 
 export default function About() {
     return (
-        <div className={styles.canvas} >
+        <div style={{ marginTop: '20px' }}>
             <div className="image2_container">
-                <img src={`${import.meta.env.BASE_URL}/images/background_aboutme.jpg`} alt="background_image"/>
-                <div className="overlay-text">
-                    About Us
-                </div>
+            <img src={`${import.meta.env.BASE_URL}/images/background_aboutme.jpg`} alt="background_image"/>
+            <div className="overlay-text">
+                About Us
+            </div>
 
             </div>
 

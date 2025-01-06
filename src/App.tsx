@@ -9,8 +9,24 @@ import Checkout from './pages/Checkout.tsx';
 import Tour_details from './pages/Tour_details.tsx';
 import { Provider } from './components/ui/provider.tsx';
 import './app.css';
+import Login from './pages/Login.tsx';
+import SignUp from './pages/SignUp.tsx';
+import { initializeAuth } from 'firebase/auth';
+import { firebaseConfig } from './Firebase/Firebase.ts';
+import Cart from './pages/Cart.tsx';
+import { initializeApp } from 'firebase/app';
+import Payment from './pages/Payment.tsx';
+import useLogin from './Auth/functions.ts';
 
 function App() {
+
+    const app = initializeApp(firebaseConfig);
+    initializeAuth(app);
+
+    const {
+        user
+    } = useLogin();
+
     return (
         <Provider>
             <HashRouter>
@@ -23,7 +39,13 @@ function App() {
                     <Route path="/contact-us" element={<Contact />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/tour_details" element={<Tour_details />} />
+                    <Route path="/login" element={<Login/>} />
+                    <Route path="/signup" element={<SignUp/>} />
+                    <Route path="/cart" element={<Cart/>} />
+                    <Route path="/payment" element={<Payment/>} />
+                    
                 </Routes>
+                <div>{user?.email}</div>
             </HashRouter>
         </Provider>
     );

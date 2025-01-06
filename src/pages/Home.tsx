@@ -6,7 +6,7 @@ import Footer from '../components/footer';
 
 export default function Home() {
     return (
-        <div style={{ backgroundColor: 'black' }}>
+        <div style={{ backgroundColor: 'black', marginTop:"20px"}}>
             {/* Hero Section */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'black' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
