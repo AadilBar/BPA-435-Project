@@ -1,0 +1,149 @@
+.image2_container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.main_image {
+    width: 100%;
+    height: auto;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);  /* Optional - add background overlay for better readability */
+    padding: 10px;
+    border-radius: 5px;
+  }
+/*  <img src={`${import.meta.env.BASE_URL}/images/background_lore.jpg`} alt="background_image" className='lore_image' />*/ 
+.background_lore_background {
+    background-color: rgb(99, 66, 130);
+    background-image: url('/images/membership.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    width: 100%;
+    height: 100vh; /* Set a minimum height for the container */
+    display: grid;
+    grid-template-columns: 1.3fr 1fr; /* Reverse column order for better video placement */
+    grid-template-rows: 0.1fr 3fr 1fr;
+    gap: 2rem;
+    padding: 2rem; /* Add some padding for better spacing */
+    box-sizing: border-box;
+}
+
+.video {
+    width: 100%; /* Make the video responsive */
+    height: auto;
+    border-width: thick;
+    border-style: groove;
+    border-color: rgb(88, 112, 79);
+    border-radius: 14px; /* Add some rounded corners to the video */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+
+}
+.video_container{
+    grid-area: 2 / 1 / 2 / 2; /* Adjust grid area for the reversed order */
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 5rem;
+    padding-bottom:5rem;
+}
+.video_caption{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.background_info {
+    grid-area: 2 / 2 / 2 / 3;
+    font-size: 2rem;
+    color: #fff; /* Set text color to white */
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+.background_title{
+    font-weight: bold;
+}
+.background_description1, .background_description2, .background_description3{
+    font-size: large;
+}
+
+.background_description2, .background_description3{
+    margin-top: 30px;
+}
+.background_description1{
+    margin-top: 30px;
+}
+
+/*
+MEMBERS PAGE
+*/
+
+.members_page{  
+    height: 100vh;
+    
+}
+.member_title{
+    text-align: center;
+    color: black;
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 4rem;
+    background-color: #F5F5F5; 
+}
+.members_page_sub{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: #F5F5F5; /*Orginally: #F5F5F5*/
+    height: calc(100% - 100px);
+    column-gap: 3rem;
+    row-gap: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
+}
+.member_container{
+    
+    display: grid; 
+    grid-template-columns: 5% 50% 5% 40% 5% ;
+    grid-template-rows: 10% 15% 15% 40% 5%;
+    background-color: white; /* Originally White*/ 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding-right: 0.6rem;
+}
+.member_image{
+    width: auto;
+    height: auto;
+    grid-area: 2 / 2 / 5 / 3;
+}
+.member_description{
+    grid-area: 4 / 4 / 5 / 5;
+    line-height: 1.5;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.member_name{
+    grid-area: 2 / 4 / 3 / 5;
+}
+.member_position{
+    grid-area: 3 / 4 / 4 / 5;
+
+}
+.member_position, .member_description, .member_name{
+    color: black;
+}
+/*
+for each item: 
+grid-area: row-start / col-start / row-end / col-end;
+*/
