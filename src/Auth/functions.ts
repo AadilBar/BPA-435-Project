@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+import { browserLocalPersistence, browserSessionPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { getDatabase, set } from "firebase/database";
 
 const useLogin = () => {
   const [email, setEmail] = useState<string>("");
@@ -26,35 +26,30 @@ const useLogin = () => {
 
   // Handle login button click
   const handleLogin = async (): Promise<void> => {
-
     try {
-      // Sign in with Firebase Authentication
+      await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
-
-      // User is signed in, update the login status
+      setEmail("");
+      setPassword("");
+      setName("");
+      setPhone("");
+      setDateOfBirth("");
       setLoginStatus("Logged in successfully.");
     } catch (error: any) {
-      // Update the login status with the error message
       setLoginStatus(`Error signing in: ${error.message}`);
     }
   };
 
   const handleCreateAccount = async (): Promise<void> => {
     try {
-      // Sign in with Firebase Authentication
       await createUserWithEmailAndPassword(auth, email, password);
-
       setEmail("");
       setPassword("");
       setName("");
       setPhone("");
       setDateOfBirth("");
-
-
-      // User is signed in, update the login status
       setCreateAccountStatus("Account Created successfully.");
     } catch (error: any) {
-      // Update the login status with the error message
       setCreateAccountStatus(`Error Creating Account: ${error.message}`);
     }
   };
@@ -62,10 +57,7 @@ const useLogin = () => {
   // Handle signout button click
   const handleSignout = async (): Promise<void> => {
     try {
-      // Sign out the user
       await signOut(auth);
-
-      // Clear user data and update login status
       setUser(null);
       setLoginStatus("Logged out successfully.");
     } catch (error: any) {
@@ -73,19 +65,14 @@ const useLogin = () => {
     }
   };
 
-  // Use Firebase Auth's onAuthStateChanged to check the user's login status
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
       if (user) {
-        // User is logged in, set the user data
         setUser(user);
       } else {
-        // User is logged out, clear user data
         setUser(null);
       }
     });
-
-    // Clean up the listener when the component unmounts
     return () => unsubscribe();
   }, [auth]);
 

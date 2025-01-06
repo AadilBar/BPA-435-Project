@@ -155,27 +155,28 @@ function Navbar() {
                 <NavLink to="/store">STORE</NavLink>
                 <NavLink to="/contact-us">CONTACT US</NavLink>
                 <Box mt={8} ml={3} display="flex" justifyContent="space-between" width="60%">
-                    <Link href="https://spotify.com" mr={4}>
-                        <img
-                            src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
-                            alt="Spotify"
-                            style={{ height: '24px' }}
-                        />
-                    </Link>
-                    <Link href="https://music.apple.com" mr={4}>
-                        <img
-                            src={`${import.meta.env.BASE_URL}/images/Apple.png`}
-                            alt="Apple Music"
-                            style={{ height: '24px' }}
-                        />
-                    </Link>
-                    <Link href="https://music.youtube.com">
-                        <img
-                            src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
-                            alt="Youtube"
-                            style={{ height: '24px' }}
-                        />
-                    </Link>
+                <Flex align="center">
+            {!user ? (
+              <>
+                <RouterLink to="/signup">
+                  <Button p={5}>Sign Up</Button>
+                </RouterLink>
+                <Box width="10px" />
+                <RouterLink to="/login">
+                  <Button p={5} backgroundColor={"#E9204F"}>Login</Button>
+                </RouterLink>
+              </>
+            ) : (
+              <>
+              <RouterLink to="/cart">
+                <Button p={5} backgroundColor={"#E9204F"}>Cart</Button>
+              </RouterLink>
+              <RouterLink to="/cart">
+                <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
+              </RouterLink>
+              </>
+            )}
+          </Flex>
                 </Box>
             </VStack>
           </DrawerBody>

@@ -5,7 +5,6 @@ import { IconButton } from "@chakra-ui/react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import { getDatabase, ref, set } from "firebase/database";
-import { confirmPasswordReset } from "firebase/auth";
 
 export default function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState("");

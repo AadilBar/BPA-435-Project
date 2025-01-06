@@ -15,11 +15,17 @@ import { initializeAuth } from 'firebase/auth';
 import { firebaseConfig } from './Firebase/Firebase.ts';
 import Cart from './pages/Cart.tsx';
 import { initializeApp } from 'firebase/app';
+import Payment from './pages/Payment.tsx';
+import useLogin from './Auth/functions.ts';
 
 function App() {
 
     const app = initializeApp(firebaseConfig);
     const auth = initializeAuth(app);
+
+    const {
+        user
+    } = useLogin();
 
     return (
         <Provider>
@@ -36,7 +42,10 @@ function App() {
                     <Route path="/login" element={<Login/>} />
                     <Route path="/signup" element={<SignUp/>} />
                     <Route path="/cart" element={<Cart/>} />
+                    <Route path="/payment" element={<Payment/>} />
+                    
                 </Routes>
+                <div>{user?.email}</div>
             </HashRouter>
         </Provider>
     );
