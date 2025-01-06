@@ -1,47 +1,108 @@
-import { Link } from "@chakra-ui/react";
+import { Link, Box, Flex, Image, Text } from "@chakra-ui/react";
 
 export default function Footer() {
-    return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', height: '400px', backgroundColor: 'Black', paddingTop: '20px', fontFamily: 'Sansation', fontWeight: 700, fontSize: 20}}>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '100%', padding: '20px 20px 20px 0' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-                <img src={`${import.meta.env.BASE_URL}/images/Full Logo.png`} alt="Full Logo" style={{ marginBottom: '20px', width: '150px', height: 'auto' }} />
-                <div style={{ marginBottom: '10px', color: 'white' }}>
-                    <p>Email: stagefrightbpa435@gmail.com</p>
-                    <p>Phone: (331)-280-0810</p>
-                </div>
-                <div style={{ marginBottom: '10px', color: 'white' }}>
-                    <p>Address: 2590 Ogden Ave, Aurora, IL 60504</p>
-                </div>
-                <a href="/contact" style={{ marginBottom: '20px', color: 'white' }}>Contact Us</a>
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-            <Link href="https://spotify.com" mr={4}>
-              <img
-                src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
-                alt="Spotify"
-                style={{ height: '24px' }}
-              />
-            </Link>
-            <Link href="https://music.apple.com" mr={4}>
-              <img
-                src={`${import.meta.env.BASE_URL}/images/Apple.png`}
-                alt="Apple Music"
-                style={{ height: '24px' }}
-              />
-            </Link>
-            <Link href="https://music.youtube.com">
-              <img
-                src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
-                alt="Youtube"
-                style={{ height: '24px' }}
-              />
-            </Link>
-                </div>
-                <div style={{ color: 'white' }}>
-                    <p>&copy; 2023 Stage Fright. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    );
+  return (
+    <Box
+      bg="#333333" // Dark gray background
+      py={4} // Reduced padding for a smaller footer
+      fontFamily="Sansation"
+      fontWeight="700"
+      fontSize="14px"
+      position="relative"
+      bottom="0"
+      width="100%"
+      height="auto" // Footer height adjusted for simplicity
+      pt={8} // Added padding above to prevent content from being on top of the footer
+    >
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        maxW="1200px"
+        mx="auto"
+        px={6}
+        gap={4} // Added spacing between elements
+        height="auto"
+      >
+        {/* Social Icons Section - Listed above the text */}
+        <Flex justify="center" gap={6} mb={4}>
+          <Link href="https://spotify.com">
+            <Image
+              src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
+              alt="Spotify"
+              height="24px"
+            />
+          </Link>
+          <Link href="https://music.apple.com">
+            <Image
+              src={`${import.meta.env.BASE_URL}/images/Apple.png`}
+              alt="Apple Music"
+              height="24px"
+            />
+          </Link>
+          <Link href="https://music.youtube.com">
+            <Image
+              src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
+              alt="Youtube"
+              height="24px"
+            />
+          </Link>
+        </Flex>
+
+        {/* Text Section - Centered content with spacing */}
+        <Text color="white" mb={2}>
+          &copy; 2023 Stage Fright
+        </Text>
+        <Flex gap={4} justify="center" align="center" direction="row">
+          <Link
+            href="/contact"
+            color="white"
+            _hover={{
+              textDecoration: "underline",
+              color: "red",
+              transition: "color 0.3s ease",
+            }}
+          >
+            Contact Us
+          </Link>
+          <Text color="white">|</Text>
+          <Link
+            href="/terms"
+            color="white"
+            _hover={{
+              textDecoration: "underline",
+              color: "red",
+              transition: "color 0.3s ease",
+            }}
+          >
+            Terms
+          </Link>
+          <Text color="white">|</Text>
+          <Link
+            href="/privacy"
+            color="white"
+            _hover={{
+              textDecoration: "underline",
+              color: "red",
+              transition: "color 0.3s ease",
+            }}
+          >
+            Privacy
+          </Link>
+          <Text color="white">|</Text>
+          <Link
+            href="/cookie-choices"
+            color="white"
+            _hover={{
+              textDecoration: "underline",
+              color: "red",
+              transition: "color 0.3s ease",
+            }}
+          >
+            Cookie Choices
+          </Link>
+        </Flex>
+      </Flex>
+    </Box>
+  );
 }
