@@ -21,7 +21,7 @@ import useLogin from './Auth/functions.ts';
 function App() {
 
     const app = initializeApp(firebaseConfig);
-    const auth = initializeAuth(app);
+    initializeAuth(app);
 
     const {
         user

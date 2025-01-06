@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { browserLocalPersistence, browserSessionPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-import { getDatabase, set } from "firebase/database";
+import { browserLocalPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
 
 const useLogin = () => {
   const [email, setEmail] = useState<string>("");
@@ -11,8 +10,6 @@ const useLogin = () => {
   const [Name, setName] = useState<string>("");
   const [Phone, setPhone] = useState<string>("");
   const [DateOfBirth, setDateOfBirth] = useState<string>("");
-
-  const database = getDatabase();
   const auth = getAuth();
 
   // Update state variables as the user types

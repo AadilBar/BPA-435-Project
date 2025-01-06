@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router';
-import { Link, Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
+import { Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
 import {
   DrawerBackdrop,
   DrawerBody,
@@ -17,14 +17,10 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   const {
-    email,
-    password,
+
     user,
-    loginStatus,
     handleSignout,
-    handleEmailChange,
-    handlePasswordChange,
-    handleLogin,
+
   } = useLogin();
 
   const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (

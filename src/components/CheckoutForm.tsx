@@ -1,7 +1,6 @@
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
-import { Navigate } from "react-router";
 
 export default function CheckoutForm() {
     const stripe = useStripe();
@@ -24,8 +23,7 @@ export default function CheckoutForm() {
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                // Make sure to change this to your payment completion page
-                return_url: `/`,
+                return_url: `${window.location.origin}BPA-435-Project/#/`,
             },
         });
 
@@ -36,12 +34,14 @@ export default function CheckoutForm() {
         }
 
         setIsProcessing(false);
-
-        <Navigate to="/" />;
     };
 
     return (
-        <form id="payment-form" onSubmit={handleSubmit}>
+        <form id="payment-form" onSubmit={() =>
+        {
+            handleSubmit;
+        }
+        }>
             <PaymentElement id="payment-element"  />
             <button 
             disabled={isProcessing || !stripe || !elements} 

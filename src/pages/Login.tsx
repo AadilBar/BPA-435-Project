@@ -1,7 +1,5 @@
 import { Link, Navigate } from "react-router";
-import Footer from "../components/footer";
 import useLogin from "../Auth/functions";
-import Home from "./Home";
 import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -13,8 +11,6 @@ export default function Login() {
     
 
     const {
-        email,
-        password,
         user,
         loginStatus,
         handleEmailChange,
@@ -54,7 +50,12 @@ export default function Login() {
                         </IconButton>
                     </div>
                     </div>
-                    <button onClick={handleLogin} type="submit" style={{ padding: '15px', backgroundColor: '#E9204F', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '1em' }}>Login</button>
+                    <button onClick={(e) =>
+                        {
+                            e.preventDefault();
+                            handleLogin();
+                        }
+                    } type="submit" style={{ padding: '15px', backgroundColor: '#E9204F', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '1em' }}>Login</button>
                 </form>
                 <button style={{ marginTop: '30px', padding: '8px', backgroundColor: '#fff', color: '#000', border: '1px solid #ccc', borderRadius: '5px', cursor: 'pointer', fontSize: '1em', display: 'flex', alignItems: 'center' }}>
                     <img src={`${import.meta.env.BASE_URL}/images/Google.png`} alt="Google" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
