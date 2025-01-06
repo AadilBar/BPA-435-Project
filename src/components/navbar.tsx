@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router';
-import { Link, Flex, Box, Image, VStack, IconButton } from '@chakra-ui/react';
+import { Link, Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
 import {
   DrawerBackdrop,
   DrawerBody,
@@ -10,24 +10,39 @@ import {
   DrawerRoot,
 } from "../components/ui/drawer"
 import { GiHamburgerMenu } from "react-icons/gi";
+import useLogin from '../Auth/functions';
 
 function Navbar() {
   const location = useLocation();
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+
+  const {
+    email,
+    password,
+    user,
+    loginStatus,
+    handleSignout,
+    handleEmailChange,
+    handlePasswordChange,
+    handleLogin,
+  } = useLogin();
 
   const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (
-    <RouterLink
-      to={to}
-    >
-      <Box      fontFamily="Sansation"
-      fontSize={16} 
-      fontWeight="300"
-      bg={location.pathname === to ? 'white' : 'transparent'}
-      color={location.pathname === to ? 'black' : 'white'}
-      p="6px 12px"
-      mr={4}
-      textAlign="center"
-      onClick={() => setOpen(false)}>
+    <RouterLink to={to}>
+      <Box
+        fontFamily="Sansation"
+        fontSize={16}
+        fontWeight="300"
+        bg={location.pathname === to ? 'white' : 'transparent'}
+        color={location.pathname === to ? 'black' : 'white'}
+        p="6px 12px"
+        textAlign="center"
+        onClick={() => setOpen(false)}
+        transition="color 0.3s ease"
+        _hover={{
+          color: '#E9204F', // Red hover effect
+        }}
+      >
         {children}
       </Box>
     </RouterLink>
@@ -40,13 +55,25 @@ function Navbar() {
         pt={{ base: '16', md: '16' }} // Smaller padding for mobile
         pb={{ base: '4', md: '4' }} // Smaller padding for mobile
         align="center"
+        justify={"center"}
         position="relative"
         w="100%"
-        h={{ base: '64px', md: '64px' }} // Smaller height for mobile
+        h={{ base: '72px', md: '80px' }} // Smaller height for mobile
         px={4}
       >
-        {/* Logo aligned to the left */}
-        <Box position="absolute" left="0" ml={{ base: 0, md: 5 }} top={5}>
+
+        {/* Desktop Navigation */}
+        <Flex
+          flex="1"
+          justify="right"
+          align="center"
+          display={{ base: 'none', md: 'flex' }}
+        >
+          <NavLink to="/about-us">ABOUT US</NavLink>
+          <NavLink to="/tour">TOUR</NavLink>
+        </Flex>
+
+        <Box mx={{ base: 0, md: 2 }}>
           <RouterLink to="/">
             <Image
               src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
@@ -55,17 +82,13 @@ function Navbar() {
             /> 
           </RouterLink>
         </Box>
-
-        {/* Desktop Navigation */}
+        
         <Flex
           flex="1"
-          justify="center"
+          justify="left"
           align="center"
-          top={10}
           display={{ base: 'none', md: 'flex' }}
         >
-          <NavLink to="/about-us">ABOUT US</NavLink>
-          <NavLink to="/tour">TOUR</NavLink>
           <NavLink to="/store">STORE</NavLink>
           <NavLink to="/contact-us">CONTACT US</NavLink>
         </Flex>
@@ -73,27 +96,26 @@ function Navbar() {
         {/* External Links aligned to the right */}
         <Box position="absolute" right="0" mr={5} display={{ base: 'none', md: 'flex' }}>
           <Flex align="center">
-            <Link href="https://spotify.com" mr={4}>
-              <img
-                src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
-                alt="Spotify"
-                style={{ height: '24px' }}
-              />
-            </Link>
-            <Link href="https://music.apple.com" mr={4}>
-              <img
-                src={`${import.meta.env.BASE_URL}/images/Apple.png`}
-                alt="Apple Music"
-                style={{ height: '24px' }}
-              />
-            </Link>
-            <Link href="https://music.youtube.com">
-              <img
-                src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
-                alt="Youtube"
-                style={{ height: '24px' }}
-              />
-            </Link>
+            {!user ? (
+              <>
+                <RouterLink to="/signup">
+                  <Button p={5}>Sign Up</Button>
+                </RouterLink>
+                <Box width="10px" />
+                <RouterLink to="/login">
+                  <Button p={5} backgroundColor={"#E9204F"}>Login</Button>
+                </RouterLink>
+              </>
+            ) : (
+              <>
+              <RouterLink to="/cart">
+                <Button p={5} backgroundColor={"#E9204F"}>Cart</Button>
+              </RouterLink>
+              <RouterLink to="/cart">
+                <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
+              </RouterLink>
+              </>
+            )}
           </Flex>
         </Box>
 
