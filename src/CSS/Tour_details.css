@@ -157,7 +157,7 @@ margin-right: 0.2rem;
     font-weight: bold;
 }
 .membership_button:hover {
-    background-color: #CB4154; /* Slightly darker red on hover */
+    background-color: #CB4154; 
   }
 
  .left-top, .left-bottom, .left-top-sub{
@@ -212,12 +212,8 @@ margin-right: 0.2rem;
         margin-top: 1rem;
    }
    .checkout:hover {
-    background-color: #218838;  /* Slightly darker green on hover */
+    background-color: #218838;  
 }
 .map{
     border-radius: 8px;
 }
-/*
-for each item: 
-grid-area: row-start / col-start / row-end / col-end;
-*/

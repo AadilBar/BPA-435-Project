@@ -94,7 +94,7 @@
 .horizontal-line {
   width: 100%;
   height: 1px;
-  background-color: #ddd; /* Light gray color */
+  background-color: #ddd; 
 }
 .circles-container{
   margin-top: 0.4rem;

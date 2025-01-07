@@ -17,8 +17,7 @@ export default function CheckoutForm() {
         e.preventDefault();
 
         if (!stripe || !elements) {
-            // Stripe.js has not yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
+
             return;
         }
 
@@ -53,8 +52,8 @@ export default function CheckoutForm() {
                     draggable: true,
                     progress: undefined,
                     style: {
-                        color: '#E9204F', // Text color (same for both success and error)
-                        backgroundColor: '#2C2C2C', // Dark gray background
+                        color: '#E9204F',
+                        backgroundColor: '#2C2C2C',
                     }
                     });
 

@@ -20,6 +20,7 @@ export default function Tour() {
 
             </div>
         </div>
+        <br></br>
         <Footer/>
 
 
@@ -29,10 +30,10 @@ export default function Tour() {
 }
 const styles: { [key: string]: React.CSSProperties } = {
     itemsContainer: {
-        display: 'flex', // align horiz
+        display: 'flex', 
         flexWrap: 'wrap', 
         gap: '16px', 
-        justifyContent: 'center', // centers items horizontally
+        justifyContent: 'center', 
     }
 };
 

@@ -7,7 +7,7 @@ export default function Store() {
        
         
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#000000', paddingTop: '20px' }}>
-            <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Shop Stage Fright's Acessories</h1>
+            <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Shop Stage Fright</h1>
     
         
             <div style={styles.itemsContainer}>
@@ -28,6 +28,7 @@ export default function Store() {
             <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Small/Small Black Logo.png`}  price= {29.99} title='Black SF T-Shirt' description='Woven with metallic fibers inspired by the shimmering expanse of the cosmos, this garment is a celestial marvel.' />
             {/*<Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Small/Small Logo White.png`}  price= {49.99} title='White SF T-Shirt' description='Made from linens once favored by European royalty, this piece combines noble history with modern flair.' />*/}
             </div>
+            <br></br>
             <Footer/>
         </div>
 
