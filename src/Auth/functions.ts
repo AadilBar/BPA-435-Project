@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { browserLocalPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { browserLocalPersistence, createUserWithEmailAndPassword, setPersistence, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { auth} from "../Firebase/Firebase.ts";
 
 const useLogin = () => {
   const [email, setEmail] = useState<string>("");
@@ -10,7 +11,6 @@ const useLogin = () => {
   const [Name, setName] = useState<string>("");
   const [Phone, setPhone] = useState<string>("");
   const [DateOfBirth, setDateOfBirth] = useState<string>("");
-  const auth = getAuth();
 
   // Update state variables as the user types
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

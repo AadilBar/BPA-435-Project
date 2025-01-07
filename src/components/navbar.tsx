@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router';
 import { Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
 import {
@@ -11,16 +11,15 @@ import {
 } from "../components/ui/drawer"
 import { GiHamburgerMenu } from "react-icons/gi";
 import useLogin from '../Auth/functions';
+import { UserContext } from '../App';
 
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const {user} = useContext(UserContext);
 
   const {
-
-    user,
     handleSignout,
-
   } = useLogin();
 
   const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (
