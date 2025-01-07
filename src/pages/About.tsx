@@ -55,9 +55,10 @@ export default function About() {
             <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/BassistImage.jpg`} name= 'Emily Hayes' position='Bassist' description='Emily Hayes, a bassist renowned for her powerful and driving grooves, provides the solid foundation that anchors the bands sound.' />
             <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/DrummerImage.jpg`} name= 'Liam Carter' position='Drummer' description='Liam Carter, a dynamic drummer with impeccable timing and explosive energy, provides the driving force behind the bands powerful sound.' />
             </div>
+            <Footer></Footer>
 
         </div>
-            <Footer></Footer>
+
         </div>
     );
 }

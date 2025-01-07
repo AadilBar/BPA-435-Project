@@ -1,4 +1,5 @@
 import { Link, Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router";
 
 export default function Footer() {
   return (
@@ -54,17 +55,17 @@ export default function Footer() {
           &copy; 2023 Stage Fright
         </Text>
         <Flex gap={4} justify="center" align="center" direction="row">
-          <Link
-            href="/contact"
-            color="white"
-            _hover={{
-              textDecoration: "underline",
-              color: "red",
-              transition: "color 0.3s ease",
-            }}
-          >
-            Contact Us
-          </Link>
+          <RouterLink to="/contact-us" color="white" onClick={() => window.scrollTo(0, 0)}>
+            <Link
+              _hover={{
+                textDecoration: "underline",
+                color: "red",
+                transition: "color 0.3s ease",
+              }}
+            >
+              Contact Us
+            </Link>
+          </RouterLink>
           <Text color="white">|</Text>
           <Link
             href="/terms"
