@@ -3,16 +3,16 @@ import { Link, Box, Flex, Image, Text } from "@chakra-ui/react";
 export default function Footer() {
   return (
     <Box
-      bg="#333333" // Dark gray background
-      py={4} // Reduced padding for a smaller footer
+      bg="#333333" 
+      py={4} 
       fontFamily="Sansation"
       fontWeight="700"
       fontSize="14px"
       position="relative"
       bottom="0"
       width="100%"
-      height="auto" // Footer height adjusted for simplicity
-      pt={8} // Added padding above to prevent content from being on top of the footer
+      height="auto" 
+      pt={8} 
     >
       <Flex
         direction="column"
@@ -21,10 +21,10 @@ export default function Footer() {
         maxW="1200px"
         mx="auto"
         px={6}
-        gap={4} // Added spacing between elements
+        gap={4} 
         height="auto"
       >
-        {/* Social Icons Section - Listed above the text */}
+
         <Flex justify="center" gap={6} mb={4}>
           <Link href="https://spotify.com">
             <Image
@@ -49,7 +49,7 @@ export default function Footer() {
           </Link>
         </Flex>
 
-        {/* Text Section - Centered content with spacing */}
+
         <Text color="white" mb={2}>
           &copy; 2023 Stage Fright
         </Text>

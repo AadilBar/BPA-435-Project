@@ -1,12 +1,40 @@
+import { useState } from "react";
 import Footer from "../components/footer";
 import '../CSS/ContactUs.css';
 import { LuPhoneCall } from "react-icons/lu";
 import { LuMail } from "react-icons/lu";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Contact() {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+
+    const reset = () =>{
+        setName('');
+        setNumber('');
+        setEmail('');
+        setMessage('');
+        toast.success(`Your message has been sent to our team, We will get back to you as soon as possible!`, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                style: {
+                  color: '#E9204F', 
+                  backgroundColor: '#2C2C2C', 
+                }
+              });
+    }
+
     return (
         <div>
-            
+                  <ToastContainer />
             
             <div className="video_container2">
                 <h1>Contact Us</h1>
@@ -119,44 +147,47 @@ export default function Contact() {
                     <div className="contact_info_message"> 
 
                             <h2 className="message_title">Send a Message </h2>
-
                             <div className="message_sub">
-                             
-                                <form className="name_field">
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            placeholder="Enter your name" 
-                                
-                                        />
-                                </form>
+                        <form className="name_field">
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </form>
 
-                                <form className="number_field">
-                                        <input
-                                            type="tel"
-                                            id="number"
-                                            placeholder="Enter your phone number"
-                                        />
-                                </form>
+                        <form className="number_field">
+                            <input
+                                type="tel"
+                                id="number"
+                                placeholder="Enter your phone number"
+                                value={number}
+                                onChange={(e) => setNumber(e.target.value)}
+                            />
+                        </form>
 
-                                <form className="email_field">
-                                        <input
-                                            type="text"
-                                            id="email"
-                                            placeholder="Enter your email"
-                                        />
-                                </form>
+                        <form className="email_field">
+                            <input
+                                type="text"
+                                id="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </form>
 
-                                <form className="message_field">
-                                        <input
-                                            type="text"
-                                            id="message"
-                                            placeholder="Enter your message"
-                                        />
-                                </form>
-                               
-                               
-                                <button className="send_button">Send</button>
+                        <form className="message_field">
+                            <input
+                                type="text"
+                                id="message"
+                                placeholder="Enter your message"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                            />
+                        </form>
+                                <button className="send_button" onClick={reset}>Send</button>
                             </div>
 
                     </div>
@@ -167,6 +198,7 @@ export default function Contact() {
 
 
             <Footer/>
+
         </div>
     );
 }

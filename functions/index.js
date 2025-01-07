@@ -1,11 +1,11 @@
 const functions = require("firebase-functions");
 const stripe = require("stripe")(functions.config().stripe.testkey);
 const admin = require('firebase-admin');
-const cors = require('cors'); // Import the CORS module
+const cors = require('cors'); 
 admin.initializeApp();
 
-// Initialize the CORS middleware
-const corsHandler = cors({ origin: true }); // This allows all origins. You can restrict it to specific domains like 'http://localhost:5173'
+
+const corsHandler = cors({ origin: true }); 
 
 // Stripe payment intent request function with CORS
 exports.stripePaymentIntentRequest = functions.https.onRequest((req, res) => {
@@ -13,13 +13,13 @@ exports.stripePaymentIntentRequest = functions.https.onRequest((req, res) => {
         try {
             let customerId;
 
-            // Get the customer who's email matches the one sent by the client
+
             const customerList = await stripe.customers.list({
                 email: req.body.email,
                 limit: 1
             });
                     
-            // Check if the customer exists, if not create a new customer
+
             if (customerList.data.length !== 0) {
                 customerId = customerList.data[0].id;
             } else {
@@ -29,20 +29,20 @@ exports.stripePaymentIntentRequest = functions.https.onRequest((req, res) => {
                 customerId = customer.id;
             }
 
-            // Create a temporary secret key linked with the customer
+
             const ephemeralKey = await stripe.ephemeralKeys.create(
                 { customer: customerId },
                 { apiVersion: '2022-11-15' }
             );
 
-            // Create a new payment intent with the amount passed in from the client
+
             const paymentIntent = await stripe.paymentIntents.create({
                 amount: parseInt(req.body.amount),
                 currency: 'usd',
                 customer: customerId,
             });
 
-            // Send the response with the necessary data
+
             res.status(200).send({
                 paymentIntent: paymentIntent.client_secret,
                 paymentIntentId: paymentIntent.id,
@@ -56,7 +56,6 @@ exports.stripePaymentIntentRequest = functions.https.onRequest((req, res) => {
     });
 });
 
-// Stripe refund request function with CORS
 exports.stripeRefundRequest = functions.https.onRequest((req, res) => {
     corsHandler(req, res, async () => {
         try {

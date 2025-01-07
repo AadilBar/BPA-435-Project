@@ -1,18 +1,24 @@
 import Footer from "../components/footer";
 import '../CSS/AboutMe.css'; 
+import styles from "./About.module.css";
 import Member from '../components/member_profile';
 
 export default function About() {
     return (
-        <div style={{ marginTop: '20px' }}>
-            <div className="image2_container">
-            <img src={`${import.meta.env.BASE_URL}/images/background_aboutme.jpg`} alt="background_image"/>
-            <div className="overlay-text">
-                About Us
+        <div className={styles.canvas} >
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'black', marginTop: '20px' }}>
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <img
+                        src={`${import.meta.env.BASE_URL}/images/background_aboutme.png`}
+                        alt="Stage Fright Tour"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                        }}
+                    />
+                </div>
             </div>
-
-            </div>
-
 
             <div className="background_lore_background">
                
@@ -44,14 +50,13 @@ export default function About() {
 
 
             <div className="members_page_sub"> 
-            <Member imageUrl={`${import.meta.env.BASE_URL}/images/woman1sub.jpg`} name= 'Sophia Reed' position='Vocalist' description='Sophia Reed, a captivating vocalist, possesses a powerful and soulful voice that effortlessly blends raw emotion with technical precision.' />
-            <Member imageUrl={`${import.meta.env.BASE_URL}/images/man1.avif`} name= 'Ryan Blake' position='Guitarist' description='Ryan Blake, a gifted guitarist with a fiery stage presence, delivers electrifying solos and intricate riffs that ignite the energy of every performance.' />
-            <Member imageUrl={`${import.meta.env.BASE_URL}/images/woman2.jpg`} name= 'Emily Hayes' position='Bassist' description='Emily Hayes, a bassist renowned for her powerful and driving grooves, provides the solid foundation that anchors the bands sound.' />
-            <Member imageUrl={`${import.meta.env.BASE_URL}/images/man2.avif`} name= 'Liam Carter' position='Drummer' description='Liam Carter, a dynamic drummer with impeccable timing and explosive energy, provides the driving force behind the bands powerful sound.' />
+            <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/VocalistImage.jpg`} name= 'Sophia Reed' position='Vocalist' description='Sophia Reed, a captivating vocalist, possesses a powerful and soulful voice that effortlessly blends raw emotion with technical precision.' />
+            <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/GuitaristImage.jpg`} name= 'Ryan Blake' position='Guitarist' description='Ryan Blake, a gifted guitarist with a fiery stage presence, delivers electrifying solos and intricate riffs that ignite the energy of every performance.' />
+            <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/BassistImage.jpg`} name= 'Emily Hayes' position='Bassist' description='Emily Hayes, a bassist renowned for her powerful and driving grooves, provides the solid foundation that anchors the bands sound.' />
+            <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/DrummerImage.jpg`} name= 'Liam Carter' position='Drummer' description='Liam Carter, a dynamic drummer with impeccable timing and explosive energy, provides the driving force behind the bands powerful sound.' />
             </div>
 
         </div>
-
             <Footer></Footer>
         </div>
     );
