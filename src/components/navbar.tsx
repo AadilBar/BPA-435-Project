@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router';
 import { Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
 import {
@@ -11,16 +11,16 @@ import {
 } from "../components/ui/drawer"
 import { GiHamburgerMenu } from "react-icons/gi";
 import useLogin from '../Auth/functions';
+import { UserContext } from '../App';
+import { FaShoppingCart } from "react-icons/fa";
 
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const {user} = useContext(UserContext);
 
   const {
-
-    user,
     handleSignout,
-
   } = useLogin();
 
   const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (
@@ -104,9 +104,12 @@ function Navbar() {
               </>
             ) : (
               <>
-              <RouterLink to="/cart">
-                <Button p={5} backgroundColor={"#E9204F"}>Cart</Button>
-              </RouterLink>
+                <RouterLink to="/cart">
+                    <IconButton bg="#000000" color="white" size={"2xl"}>
+                    <FaShoppingCart />
+                    </IconButton>
+                </RouterLink>
+              <Box width="10px" />
               <RouterLink to="/cart">
                 <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
               </RouterLink>
