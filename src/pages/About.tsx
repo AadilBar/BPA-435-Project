@@ -1,5 +1,4 @@
 import Footer from "../components/footer";
-import styles from "./About.module.css";
 import '../CSS/AboutMe.css'; 
 import Member from '../components/member_profile';
 

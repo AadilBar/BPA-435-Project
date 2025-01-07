@@ -197,16 +197,19 @@ margin-right: 0.2rem;
     align-items: center;
    }
    .checkout{
-    margin-top: 50px;
-    background-color: #29be4c;  /* Green background */
-    color: rgb(0, 0, 0);              /* White text */
-    border: none;               /* Remove default border */
-    padding: 10px 20px;         /* Add padding for better click area */
-    border-radius: 5px;         /* Rounded corners */
-    font-size: 1rem;            /* Font size */
-    cursor: pointer;            /* Pointer cursor on hover */
-    transition: background-color 0.3s ease;
-    font-weight: bold;
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        background-color: #E9204F; 
+        border: none;
+        border-radius: 8px;
+        text-align: center;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 1rem;
    }
    .checkout:hover {
     background-color: #218838;  /* Slightly darker green on hover */
