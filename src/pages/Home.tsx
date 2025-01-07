@@ -43,9 +43,11 @@ export default function Home() {
             {/* Upcoming Shows Section */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', height: '861px', backgroundColor: '#01010a', paddingTop: '20px' }}>
                 <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Upcoming Shows</h1>
+                <Link to={'/tour'} onClick={() => window.scrollTo(0, 0)}>
                 <Button variant="solid" p={2} fontFamily={'Sansation'} fontWeight={'700'} fontSize={15}>
                     View All
                 </Button>
+                </Link>
 
                 <div style={{ height: '50px' }}></div>
                 <div
@@ -97,7 +99,7 @@ export default function Home() {
             {/* Popular Albums Section */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', height: '861px', backgroundColor: '#01010a', paddingTop: '20px' }}>
                 <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Popular Albums</h1>
-                <Link to="/store">
+                <Link to="/store" onClick={() => window.scrollTo(0, 0)}>
                     <h1 style={{ fontFamily: 'Sansation', color: '#E9204F', fontSize: '20px', fontWeight: '700' }}>Purchase</h1>
                 </Link>
                 <div style={{ height: '50px' }}></div>

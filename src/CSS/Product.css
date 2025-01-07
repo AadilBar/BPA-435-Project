@@ -116,7 +116,7 @@
 
 .sizes{
   display: flex; 
-  width: 35%;
+  width: 45%;
   justify-content: space-between;
   gap: 0.5rem;
 }

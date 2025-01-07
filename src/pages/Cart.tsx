@@ -289,12 +289,16 @@ const CartPage = () => {
                                         {item.title}
                                     </Text>
                                     <Text>{item.description}</Text>
-                                    <Text>
-                                        <strong>Size:</strong> {item.Size}
-                                    </Text>
-                                    <Text>
-                                        <strong>Color:</strong> {item.color}
-                                    </Text>
+                                    {!item.title.toLowerCase().includes('vinyl') && (
+                                        <>
+                                            <Text>
+                                                <strong>Size:</strong> {item.Size}
+                                            </Text>
+                                            <Text>
+                                                <strong>Color:</strong> {item.color}
+                                            </Text>
+                                        </>
+                                    )}
                                     <Text>
                                         <strong>Quantity:</strong> {item.quantity}
                                     </Text>
