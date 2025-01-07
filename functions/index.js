@@ -1,5 +1,5 @@
 const functions = require("firebase-functions");
-const stripe = require("stripe")("sk_test_51Qe5S5CO8wO6DXWdCdcRDDzJmlFvzU6M296ScXmvhcC6ujZOOBJokJGVBGZWc9B85kC3PYBD2TvWoHXJDNvn1JRF00DMZjUwE6");
+const stripe = require("stripe")(functions.config().stripe.testkey);
 const admin = require('firebase-admin');
 const cors = require('cors'); // Import the CORS module
 admin.initializeApp();
