@@ -13,25 +13,6 @@ import { toast, ToastContainer } from "react-toastify";
 const Stripe = loadStripe("pk_test_51Qe5S5CO8wO6DXWdN3KxfnZkuMPBmDe7InvPf6S3IqFSCipI8osSsz2KDm3b8stNDa7jub7Jxw3hyrwIVmCwUzRv00jhdmhbtX")
 
 const CartPage = () => {
-    // Sample data for demonstration
-    // const [cartItems, setCartItems] = useState([
-    //     {
-    //         image: 'https://via.placeholder.com/100',
-    //         name: 'Item 1',
-    //         description: 'Description of item 1',
-    //         size: 'M',
-    //         color: 'Red',
-    //         price: 29.99,
-    //     },
-    //     {
-    //         image: 'https://via.placeholder.com/100',
-    //         name: 'Item 2',
-    //         description: 'Description of item 2',
-    //         size: 'L',
-    //         color: 'Black',
-    //         price: 49.99,
-    //     },
-    // ]);
     interface CartItem {
         imageUrl: string;
         title: string;
@@ -308,12 +289,16 @@ const CartPage = () => {
                                         {item.title}
                                     </Text>
                                     <Text>{item.description}</Text>
-                                    <Text>
-                                        <strong>Size:</strong> {item.Size}
-                                    </Text>
-                                    <Text>
-                                        <strong>Color:</strong> {item.color}
-                                    </Text>
+                                    {!item.title.toLowerCase().includes('vinyl') && (
+                                        <>
+                                            <Text>
+                                                <strong>Size:</strong> {item.Size}
+                                            </Text>
+                                            <Text>
+                                                <strong>Color:</strong> {item.color}
+                                            </Text>
+                                        </>
+                                    )}
                                     <Text>
                                         <strong>Quantity:</strong> {item.quantity}
                                     </Text>

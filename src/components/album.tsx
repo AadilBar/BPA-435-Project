@@ -1,7 +1,6 @@
-import { Card, Flex, Icon, Link } from "@chakra-ui/react"
+import { Card, Flex, Link } from "@chakra-ui/react"
 import { Image } from "@chakra-ui/react"
 import './event.css';
-import { MdOutlineLocationOn } from "react-icons/md";
 
 interface EventProps {
     imageUrl: string;
@@ -24,9 +23,6 @@ return (
             <Card.Title fontSize={20} fontFamily={"Sansation"} fontWeight={700}>{name}</Card.Title>
             <Card.Description fontSize={20}  fontFamily={"Sansation"} fontWeight={700}>
               Released: {releaseDate.toDateString()}
-              <Icon boxSize={6}>
-                    <MdOutlineLocationOn />
-                </Icon>
             </Card.Description>
             Listen:
         </Card.Body>

@@ -19,6 +19,7 @@ export default function Home() {
                             objectFit: 'cover',
                         }}
                     />
+                                            <Link to="/tour" style={{ textDecoration: 'none', color: 'white'}}>
                     <Button
                         size="lg"
                         variant="solid"
@@ -29,21 +30,24 @@ export default function Home() {
                             transform: 'translateX(-50%)',
                             backgroundColor: '#E9204F',
                             color: 'white',
+                            paddingRight: '5px', paddingLeft: '5px' 
                         }}
                     >
-                        <Link to="/tour" style={{ textDecoration: 'none', color: 'white' }}>
+
                             Buy Tickets
-                        </Link>
-                    </Button>
+
+                    </Button>                        </Link>
                 </div>
             </div>
 
             {/* Upcoming Shows Section */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', height: '861px', backgroundColor: '#01010a', paddingTop: '20px' }}>
                 <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Upcoming Shows</h1>
+                <Link to={'/tour'} onClick={() => window.scrollTo(0, 0)}>
                 <Button variant="solid" p={2} fontFamily={'Sansation'} fontWeight={'700'} fontSize={15}>
                     View All
                 </Button>
+                </Link>
 
                 <div style={{ height: '50px' }}></div>
                 <div
@@ -95,7 +99,9 @@ export default function Home() {
             {/* Popular Albums Section */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', height: '861px', backgroundColor: '#01010a', paddingTop: '20px' }}>
                 <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Popular Albums</h1>
-                <h1 style={{ fontFamily: 'Sansation', color: '#E9204F', fontSize: '20px', fontWeight: '700' }}>Click to View Songs</h1>
+                <Link to="/store" onClick={() => window.scrollTo(0, 0)}>
+                    <h1 style={{ fontFamily: 'Sansation', color: '#E9204F', fontSize: '20px', fontWeight: '700' }}>Purchase</h1>
+                </Link>
                 <div style={{ height: '50px' }}></div>
                 <div
                     style={{
@@ -107,9 +113,9 @@ export default function Home() {
                         justifyItems: 'Center',
                     }}
                 >
-                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/albums/album.png`} name="Lights Out, Fear On" releaseDate={new Date('2024-06-08')} />
-                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/albums/album.png`} name="Curtain Call" releaseDate={new Date('2024-02-15')} />
-                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/albums/album.png`} name="Curtain Call" releaseDate={new Date('2024-02-15')} />
+                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/albums/album1.png`} name="Kinematics" releaseDate={new Date('2024-06-08')} />
+                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/albums/album2.png`} name="Resounding" releaseDate={new Date('2024-02-15')} />
+                    <Album imageUrl={`${import.meta.env.BASE_URL}/images/albums/album3.png`} name="Soaring" releaseDate={new Date('2024-12-18')} />
                 </div>
             </div>
 

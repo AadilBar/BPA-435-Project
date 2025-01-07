@@ -94,7 +94,7 @@
 .horizontal-line {
   width: 100%;
   height: 1px;
-  background-color: #ddd; /* Light gray color */
+  background-color: #ddd; 
 }
 .circles-container{
   margin-top: 0.4rem;
@@ -116,7 +116,7 @@
 
 .sizes{
   display: flex; 
-  width: 35%;
+  width: 45%;
   justify-content: space-between;
   gap: 0.5rem;
 }

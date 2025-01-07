@@ -48,17 +48,17 @@ function Navbar() {
     <>
       <Flex
         bg="#000000"
-        pt={{ base: '16', md: '16' }} // Smaller padding for mobile
-        pb={{ base: '4', md: '4' }} // Smaller padding for mobile
+        pt={{ base: '16', md: '16' }}
+        pb={{ base: '4', md: '4' }}
         align="center"
         justify={"center"}
         position="relative"
         w="100%"
-        h={{ base: '72px', md: '80px' }} // Smaller height for mobile
+        h={{ base: '72px', md: '80px' }} 
         px={4}
       >
 
-        {/* Desktop Navigation */}
+
         <Flex
           flex="1"
           justify="right"
@@ -89,7 +89,7 @@ function Navbar() {
           <NavLink to="/contact-us">CONTACT US</NavLink>
         </Flex>
 
-        {/* External Links aligned to the right */}
+
         <Box position="absolute" right="0" mr={5} display={{ base: 'none', md: 'flex' }}>
           <Flex align="center">
             {!user ? (
@@ -118,7 +118,7 @@ function Navbar() {
           </Flex>
         </Box>
 
-        {/* Hamburger Menu for Mobile */}
+
         <Box
           position="absolute"
           mt={-8}
