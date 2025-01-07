@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router';
-import { Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
+import { Flex, Box, Image, VStack, IconButton, Button, Icon } from '@chakra-ui/react';
 import {
   DrawerBackdrop,
   DrawerBody,
@@ -12,6 +12,7 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import useLogin from '../Auth/functions';
 import { UserContext } from '../App';
+import { FaShoppingCart } from "react-icons/fa";
 
 function Navbar() {
   const location = useLocation();
@@ -103,9 +104,12 @@ function Navbar() {
               </>
             ) : (
               <>
-              <RouterLink to="/cart">
-                <Button p={5} backgroundColor={"#E9204F"}>Cart</Button>
-              </RouterLink>
+                <RouterLink to="/cart">
+                    <IconButton bg="#000000" color="white" size={"2xl"}>
+                    <FaShoppingCart />
+                    </IconButton>
+                </RouterLink>
+              <Box width="10px" />
               <RouterLink to="/cart">
                 <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
               </RouterLink>

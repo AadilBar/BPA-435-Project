@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Box, Text, Image, Flex, Button, VStack } from '@chakra-ui/react';
-import { getDatabase, ref, child, get } from "firebase/database";
+import { Box, Text, Image, Flex, Button, VStack, IconButton } from '@chakra-ui/react';
+import { getDatabase, ref, child, get, remove } from "firebase/database";
 import useLogin from '../Auth/functions';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from '../components/CheckoutForm';
+import { MdDeleteForever } from "react-icons/md";
 
 const Stripe = loadStripe("pk_test_51Qe5S5CO8wO6DXWdN3KxfnZkuMPBmDe7InvPf6S3IqFSCipI8osSsz2KDm3b8stNDa7jub7Jxw3hyrwIVmCwUzRv00jhdmhbtX")
 
@@ -33,13 +34,23 @@ const CartPage = () => {
         imageUrl: string;
         title: string;
         description: string;
-        size: string;
+        Size: string;
         color: string;
         price: number;
         quantity: number;
     }
+    interface TourItem {
+        imageUrl: string;
+        place: string;
+        quantity: number;
+        realPrice: number;
+        address: string;
+        startDate: string;
+        endDate: string;
+    }
     
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [tourItems, setTourItems] = useState<TourItem[]>([]);
     const [clientSecret, setClientSecret] = useState("");
     const [showCheckoutForm, setShowCheckoutForm] = useState(false);
 
@@ -57,7 +68,7 @@ const CartPage = () => {
                     const items = (Object.values(data) as CartItem[]).map((item: CartItem) => ({
                         title: item.title,
                         description: item.description,
-                        size: item.size,
+                        Size: item.Size,
                         color: item.color,
                         price: item.price,
                         quantity: item.quantity,
@@ -68,6 +79,24 @@ const CartPage = () => {
             }).catch((error) => {
                 console.error(error);
             });
+            get(child(cartRef, "/tours/")).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const tItems = (Object.values(data) as TourItem[]).map((item: TourItem) => ({
+                        place: item.place,
+                        address: item.address,
+                        startDate: item.startDate,
+                        endDate: item.endDate,
+                        realPrice: item.realPrice,
+                        quantity: item.quantity,
+                        imageUrl: item.imageUrl
+                    }));
+                    setTourItems(tItems);
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+            
         }
     }, [user]);
 
@@ -76,10 +105,50 @@ const CartPage = () => {
     const [priceCents, setPriceCents] = useState(0);
 
     useEffect(() => {
-        const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+        const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice * item.quantity, 0);
+        const total = cartTotal + tourTotal;
         setTotalPrice(total);
         setPriceCents(total * 100);
-    }, [cartItems]);
+    }, [cartItems, tourItems]);
+
+    const calculatePrice = () => {
+        const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice * item.quantity, 0);
+        const total = cartTotal + tourTotal;
+        setTotalPrice(total);
+        setPriceCents(total * 100);
+    }
+
+
+
+    function handleRemoveItem(index: number, type: 'cart' | 'tour') {
+        const database = getDatabase();
+        if (user && user.email) {
+            if (type === 'cart') {
+                const updatedCartItems = [...cartItems];
+                updatedCartItems.splice(index, 1);
+                const cartItemRef = ref(database, `users/${user.email.replace('.', ',')}/cart/${cartItems[index].title} ${cartItems[index].color} ${cartItems[index].Size}`);
+                console.log(`users/${user.email.replace('.', ',')}/cart/${cartItems[index].title} ${cartItems[index].color} ${cartItems[index].Size}`)
+                remove(cartItemRef).catch((error) => {
+                    console.error("Error removing item from Firebase:", error);
+                });
+                setCartItems(updatedCartItems);
+
+
+            } else {
+                const updatedTourItems = [...tourItems];
+                updatedTourItems.splice(index, 1);
+                setTourItems(updatedTourItems);
+
+                const tourItemRef = ref(database, `users/${user.email.replace('.', ',')}/tours/${tourItems[index].place}`);
+                remove(tourItemRef).catch((error) => {
+                    console.error("Error removing item from Firebase:", error);
+                });
+            }
+            calculatePrice();
+        }
+    }
 
 
     function handleCheckout() {
@@ -105,12 +174,12 @@ const CartPage = () => {
             </Box>
 
             <Flex alignItems="flex-start" gap={8}>
-                <VStack align="stretch" flex="2">
-                    {cartItems.length === 0 ? (
+                    {(cartItems.length === 0 && tourItems.length === 0)? (
                         <Text fontSize="xl" color="white" textAlign="center">
                             Your cart is empty.
                         </Text>
-                    ) : (
+                    ) : (<VStack align="stretch" flex="2">
+                        {
                         cartItems.map((item, index) => (
                             <Flex
                                 key={index}
@@ -119,6 +188,7 @@ const CartPage = () => {
                                 borderRadius="md"
                                 alignItems="flex-start"
                                 gap={4}
+                                w="full"
                             >
                                 <Image
                                     src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
@@ -133,19 +203,75 @@ const CartPage = () => {
                                     </Text>
                                     <Text>{item.description}</Text>
                                     <Text>
-                                        <strong>Size:</strong> {item.size}
+                                        <strong>Size:</strong> {item.Size}
                                     </Text>
                                     <Text>
                                         <strong>Color:</strong> {item.color}
+                                    </Text>
+                                    <Text>
+                                        <strong>Quantity:</strong> {item.quantity}
                                     </Text>
                                 </Box>
                                 <Text fontSize="lg" fontWeight="bold" color="white">
                                     ${item.price.toFixed(2)}
                                 </Text>
+                                <IconButton  onClick={() => { handleRemoveItem(index,'cart')}}>
+                                    <MdDeleteForever />
+                                </IconButton>
+                            </Flex>
+                        ))
+                    }
+                    {tourItems.length === 0 ? (
+                        <Text fontSize="xl" color="white" textAlign="center">
+                            You have no tours booked.
+                        </Text>
+                    ) : (
+                        tourItems.map((item, index) => (
+                            <Flex
+                                key={index}
+                                bg="gray.800"
+                                p={4}
+                                borderRadius="md"
+                                alignItems="flex-start"
+                                gap={4}
+                                w="full"
+                            >
+                                <Image
+                                    src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
+                                    alt={item.place}
+                                    boxSize="200px"
+                                    objectFit="cover"
+                                    borderRadius="md"
+                                />
+                                <Box flex="1">
+                                    <Text fontSize="lg" fontWeight="bold" color="#E9204F">
+                                        {item.place}
+                                    </Text>
+                                    <Text>{item.address}</Text>
+                                    <Text>
+                                        <strong>Start Date:</strong> {item.startDate}
+                                    </Text>
+                                    <Text>
+                                        <strong>End Date:</strong> {item.endDate}
+                                    </Text>
+                                    <Text>
+                                        <strong>Quantity:</strong> {item.quantity}
+                                    </Text>
+                                </Box>
+                                <Text fontSize="lg" fontWeight="bold" color="white">
+                                    ${item.realPrice.toFixed(2)}
+                                </Text>
+                                <IconButton  onClick={() => { handleRemoveItem(index,'tour')}}>
+                                    <MdDeleteForever />
+                                </IconButton>
+                                
+                                
                             </Flex>
                         ))
                     )}
-                </VStack>
+                </VStack>)}
+
+                
 
                 <Box flex="1" textAlign="right" bg="gray.900" p={4} borderRadius="md" maxW="400px" ml="auto">
                     <Text fontSize="2xl" fontWeight="bold" mb={4}>

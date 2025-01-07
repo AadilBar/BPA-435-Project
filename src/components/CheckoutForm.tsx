@@ -23,7 +23,7 @@ export default function CheckoutForm() {
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: `${window.location.origin}BPA-435-Project/#/`,
+                return_url: `${window.location.origin}/BPA-435-Project/#/`,
             },
         });
 
@@ -37,11 +37,7 @@ export default function CheckoutForm() {
     };
 
     return (
-        <form id="payment-form" onSubmit={() =>
-        {
-            handleSubmit;
-        }
-        }>
+        <form id="payment-form" onSubmit={handleSubmit}>
             <PaymentElement id="payment-element"  />
             <button 
             disabled={isProcessing || !stripe || !elements} 

@@ -11,10 +11,9 @@ import { Provider } from './components/ui/provider.tsx';
 import './app.css';
 import Login from './pages/Login.tsx';
 import SignUp from './pages/SignUp.tsx';
-import { initializeAuth, User } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import { auth } from './Firebase/Firebase.ts';
 import Cart from './pages/Cart.tsx';
-import { initializeApp } from 'firebase/app';
 import Payment from './pages/Payment.tsx';
 import { createContext, useEffect, useState } from 'react';
 import React from 'react';
@@ -34,8 +33,6 @@ function App() {
         return () => unsubscribe();
       }, [auth]);
 
-
-
     return (
         <UserContext.Provider value={{ user, setUser }}>
             <Provider>
@@ -52,10 +49,8 @@ function App() {
                         <Route path="/login" element={<Login/>} />
                         <Route path="/signup" element={<SignUp/>} />
                         <Route path="/cart" element={<Cart/>} />
-                        <Route path="/payment" element={<Payment/>} />
-                        
+                        <Route path="/payment" element={<Payment/>} />     
                     </Routes>
-                    <div>{user?.email}</div>
                 </HashRouter>
             </Provider>
     </UserContext.Provider>

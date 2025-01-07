@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation } from "react-router";
 import '../CSS/Product.css';
 import { getDatabase, ref, set } from "firebase/database";
 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import useLogin from '../Auth/functions';
 import { StepperInput } from '../components/ui/stepper-input';
+import { UserContext } from '../App';
 
 const ProductDetails: React.FC = () => {
-  const {
-    user,
-  } = useLogin();
+  const { user } = useContext(UserContext);
 
   const location = useLocation();
   const { imageUrl, price, title, description } = location.state || {};
@@ -20,6 +22,7 @@ const ProductDetails: React.FC = () => {
 
   return (
     <div className="product-container">
+      <ToastContainer />
       <div className="image_container">
         <img src={imageUrl} alt={title} className="product-image" />
       </div>
@@ -83,7 +86,7 @@ const ProductDetails: React.FC = () => {
               key={size}
               className='size'
               style={{
-          outline: Size === size ? '2px solid white' : 'none'
+                outline: Size === size ? '2px solid white' : 'none'
               }}
               onClick={() => setSize(size)}
             >
@@ -121,9 +124,36 @@ const ProductDetails: React.FC = () => {
         description,
         quantity: quantity
       });
-    } else {
-    alert("User is not logged in or email is missing");
-    }
+      toast.success(`${title} has been added to your cart!`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          color: '#E9204F', // Text color (same for both success and error)
+          backgroundColor: '#2C2C2C', // Dark gray background
+        }
+      });
+      } else {
+        toast.error('Please login to add items to your cart!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: {
+            color: '#E9204F', // Text color (same for both success and error)
+            backgroundColor: '#2C2C2C', // Dark gray background
+          }
+        });
+      
+      }
+      
   }
 };
 
