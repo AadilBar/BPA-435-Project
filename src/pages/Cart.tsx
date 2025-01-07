@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Box, Text, Image, Flex, Button, VStack, IconButton } from '@chakra-ui/react';
 import { getDatabase, ref, child, get, remove } from "firebase/database";
-import useLogin from '../Auth/functions';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from '../components/CheckoutForm';
 import { MdDeleteForever } from "react-icons/md";
+import { PaymentElement } from "@stripe/react-stripe-js";
+import { useStripe, useElements } from "@stripe/react-stripe-js";
+import { UserContext } from "../App";
+import { toast, ToastContainer } from "react-toastify";
 
 const Stripe = loadStripe("pk_test_51Qe5S5CO8wO6DXWdN3KxfnZkuMPBmDe7InvPf6S3IqFSCipI8osSsz2KDm3b8stNDa7jub7Jxw3hyrwIVmCwUzRv00jhdmhbtX")
 
@@ -53,10 +55,8 @@ const CartPage = () => {
     const [tourItems, setTourItems] = useState<TourItem[]>([]);
     const [clientSecret, setClientSecret] = useState("");
     const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+    const { user } = useContext(UserContext);
 
-    const {
-        user,
-      } = useLogin();
 
     useEffect(() => {
         const database = getDatabase();
@@ -99,6 +99,7 @@ const CartPage = () => {
             
         }
     }, [user]);
+
 
 
     const [totalPrice, setTotalPrice] = useState(0);
@@ -167,8 +168,113 @@ const CartPage = () => {
         setShowCheckoutForm(true);
     }
 
+
+
+    function CheckoutForm() {
+        const stripe = useStripe();
+        const elements = useElements();
+    
+        const [message, setMessage] = useState<string | null>(null);
+        const [isProcessing, setIsProcessing] = useState(false);
+        const { user } = useContext(UserContext);
+    
+        const handleSubmit = async (e: { preventDefault: () => void; }) => {
+            e.preventDefault();
+    
+            if (!stripe || !elements) {
+                // Stripe.js has not yet loaded.
+                // Make sure to disable form submission until Stripe.js has loaded.
+                return;
+            }
+    
+            setIsProcessing(true);
+    
+            await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                return_url: `${window.location.origin}/BPA-435-Project/#/`,
+                },
+                redirect: "if_required",
+            })
+            .then(function(result){
+    
+                if(result.error){
+                    setMessage(`Payment failed: ${result.error.message}`);
+                }
+                else if(result.paymentIntent){
+                    setMessage("Payment succeeded!");
+                    const database = getDatabase();
+                    if (user && user.email) {
+                        const cartRef = ref(database, `users/${user.email.replace('.', ',')}/cart`);
+                        remove(cartRef).catch((error) => {
+                            console.error("Error removing item from Firebase:", error);
+                        });
+                        const tourRef = ref(database, `users/${user.email.replace('.', ',')}/tours`);
+                        remove(tourRef).catch((error) => {
+                            console.error("Error removing item from Firebase:", error);
+                        });
+                        setCartItems([]);
+                        setTourItems([]);
+                        setShowCheckoutForm(false);
+                        toast.success(`Payment Successful, expect a email soon containing shipping information/tour tickets`, {
+                            position: "top-center",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: {
+                                color: '#E9204F', // Text color (same for both success and error)
+                                backgroundColor: '#2C2C2C', // Dark gray background
+                            }
+                        });
+
+
+    
+    
+                    } else {
+                        setMessage("User information is missing.");
+                    }
+    
+                }
+                else{
+                    setMessage("Payment failed for an unknown reason.");
+                }
+            });
+    
+            setIsProcessing(false);
+        };
+    
+        return (
+            <form id="payment-form" onSubmit={handleSubmit}>
+                <PaymentElement id="payment-element"  />
+                <button 
+                disabled={isProcessing || !stripe || !elements} 
+                id="submit" 
+                style={{ 
+                    display: 'block', 
+                    margin: '20px 0 0px 0', 
+                    backgroundColor: '#E9204F', 
+                    color: 'white', 
+                    padding: '10px 20px', 
+                    borderRadius: '5px' 
+                }}
+                >
+                <span id="button-text">
+                    {isProcessing ? "Processing ... " : "Pay now"}
+                </span>
+                </button>
+                {/* Show any error or success messages */}
+                {message && <div id="payment-message">{message}</div>}
+            </form>
+        );
+    }
+
+
     return (
         <Box bg="#000000" color="white" minH="100vh" py={8} px={4}>
+                  <ToastContainer />
             <Box textAlign="center" mb={6}>
                 <Text fontSize="3xl" color="#E9204F" fontWeight="bold">Your Cart</Text>
             </Box>
@@ -277,7 +383,7 @@ const CartPage = () => {
                     <Text fontSize="2xl" fontWeight="bold" mb={4}>
                         Total: ${totalPrice.toFixed(2)}
                     </Text>
-                    {!showCheckoutForm && cartItems.length > 0 && (
+                    {!showCheckoutForm && (cartItems.length > 0 || tourItems.length>0) && (
                         <Button
                             as="a"
                             size="lg"
