@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Box, Text, Image, Flex, Button, VStack, IconButton } from '@chakra-ui/react';
 import { getDatabase, ref, child, get, remove } from "firebase/database";
-import useLogin from '../Auth/functions';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
