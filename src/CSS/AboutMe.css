@@ -17,40 +17,40 @@
     color: white;
     font-size: 24px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);  /* Optional - add background overlay for better readability */
+    background-color: rgba(0, 0, 0, 0.5);  
     padding: 10px;
     border-radius: 5px;
   }
 /*  <img src={`${import.meta.env.BASE_URL}/images/background_lore.jpg`} alt="background_image" className='lore_image' />*/ 
 .background_lore_background {
     background-color: rgb(99, 66, 130);
-    background-image: url('/images/membership.jpg');
+    background-image: url('/images/membership2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: multiply;
     width: 100%;
-    height: 100vh; /* Set a minimum height for the container */
+    height: 100vh; 
     display: grid;
-    grid-template-columns: 1.3fr 1fr; /* Reverse column order for better video placement */
+    grid-template-columns: 1.3fr 1fr; 
     grid-template-rows: 0.1fr 3fr 1fr;
     gap: 2rem;
-    padding: 2rem; /* Add some padding for better spacing */
+    padding: 2rem; 
     box-sizing: border-box;
 }
 
 .video {
-    width: 100%; /* Make the video responsive */
+    width: 100%; 
     height: auto;
     border-width: thick;
     border-style: groove;
     border-color: rgb(88, 112, 79);
-    border-radius: 14px; /* Add some rounded corners to the video */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    border-radius: 14px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 
 }
 .video_container{
-    grid-area: 2 / 1 / 2 / 2; /* Adjust grid area for the reversed order */
+    grid-area: 2 / 1 / 2 / 2; 
     padding-left: 3rem;
     padding-right: 3rem;
     padding-top: 5rem;
@@ -66,7 +66,7 @@
 .background_info {
     grid-area: 2 / 2 / 2 / 3;
     font-size: 2rem;
-    color: #fff; /* Set text color to white */
+    color: #fff; 
     text-align: center;
     padding-top: 5rem;
     padding-bottom: 5rem;

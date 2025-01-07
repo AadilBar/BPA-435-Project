@@ -98,10 +98,10 @@ export default function Contact() {
                     <div className="contact_info_phone"> 
                             <h2 className="contact_info_phone_title"><LuPhoneCall className="phone_icon" />Phone:</h2>
 
-                            <h2>N. America: 123-456-7890</h2>
-                            <h2>Europe: 987-654-3210 </h2>
-                            <h2>Asia: 246-810-1214</h2>
-                            <h2>Australia: 369-121-5182</h2>
+                            <h2>Chicago: 123-456-7890</h2>
+                            <h2>Naperville: 987-654-3210 </h2>
+                            <h2>Springfield: 246-810-1214</h2>
+                            <h2>Elgin: 369-121-5182</h2>
                            
 
                     </div>
@@ -109,10 +109,10 @@ export default function Contact() {
                     <div className="contact_info_email"> 
                         <h2 className="contact_info_email_title"><LuMail className="email_icon"/>Email:</h2>
 
-                        <h2>N. America: stagefri_na@gmail.com</h2>
-                        <h2>Europe: stagefri_eu@gmail.com</h2>
-                        <h2>Asia: stagefri.asia@gmail.com</h2>
-                        <h2>Australia: stagefright.aus@gmail.com</h2>
+                        <h2>Chicago: stagefri_chic@gmail.com</h2>
+                        <h2>Naperville: stagefri_np@gmail.com</h2>
+                        <h2>Springfield: stagefri.sf@gmail.com</h2>
+                        <h2>Elgin: stagefright.elgin@gmail.com</h2>
                         
                     </div>
 
