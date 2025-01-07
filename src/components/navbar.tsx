@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router';
-import { Flex, Box, Image, VStack, IconButton, Button, Icon } from '@chakra-ui/react';
+import { Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
 import {
   DrawerBackdrop,
   DrawerBody,

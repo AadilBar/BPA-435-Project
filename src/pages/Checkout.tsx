@@ -5,8 +5,6 @@ import { getDatabase, ref, set } from "firebase/database";
 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import useLogin from '../Auth/functions';
 import { StepperInput } from '../components/ui/stepper-input';
 import { UserContext } from '../App';
 
