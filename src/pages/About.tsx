@@ -1,5 +1,6 @@
 import Footer from "../components/footer";
 import '../CSS/AboutMe.css'; 
+import styles from "./About.module.css";
 import Member from '../components/member_profile';
 
 export default function About() {
