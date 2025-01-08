@@ -17,6 +17,8 @@ import Cart from './pages/Cart.tsx';
 import Payment from './pages/Payment.tsx';
 import { createContext, useEffect, useState } from 'react';
 import React from 'react';
+import Terms from './pages/Terms.tsx';
+import Privacy from './pages/Privacy.tsx';
 
 const UserContext = createContext<{ user: User | null, setUser: React.Dispatch<React.SetStateAction<User | null>> }>({ user: null, setUser: () => {} });
 
@@ -49,7 +51,10 @@ function App() {
                         <Route path="/login" element={<Login/>} />
                         <Route path="/signup" element={<SignUp/>} />
                         <Route path="/cart" element={<Cart/>} />
-                        <Route path="/payment" element={<Payment/>} />     
+                        <Route path="/payment" element={<Payment/>} />    
+                        <Route path="/terms" element={<Terms/>} />    
+                        <Route path="/privacy" element={<Privacy/>} />    
+
                     </Routes>
                 </HashRouter>
             </Provider>

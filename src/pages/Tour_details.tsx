@@ -4,7 +4,7 @@ import '../CSS/Tour_details.css';
 import { UserContext } from '../App';
 import { getDatabase, ref, set } from 'firebase/database';
 import { StepperInput } from '../components/ui/stepper-input';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 const ProductDetails: React.FC = () => {
@@ -42,6 +42,7 @@ const ProductDetails: React.FC = () => {
     return (
 
         <div className='overall_container'>
+          <ToastContainer/>
 
             <div className='left_container'> 
     
