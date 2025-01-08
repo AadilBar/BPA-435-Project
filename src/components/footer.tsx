@@ -52,7 +52,7 @@ export default function Footer() {
 
 
         <Text color="white" mb={2}>
-          &copy; 2023 Stage Fright
+          &copy; 2025 Stage Fright
         </Text>
         <Flex gap={4} justify="center" align="center" direction="row">
           <RouterLink to="/contact-us" color="white" onClick={() => window.scrollTo(0, 0)}>
@@ -67,41 +67,29 @@ export default function Footer() {
             </Link>
           </RouterLink>
           <Text color="white">|</Text>
-          <Link
-            href="/terms"
-            color="white"
-            _hover={{
+            <RouterLink to="/terms" color="white" onClick={() => window.scrollTo(0, 0)}>
+            <Link
+              _hover={{
               textDecoration: "underline",
               color: "red",
               transition: "color 0.3s ease",
-            }}
-          >
-            Terms
-          </Link>
+              }}
+            >
+              Terms
+            </Link>
+            </RouterLink>
           <Text color="white">|</Text>
-          <Link
-            href="/privacy"
-            color="white"
-            _hover={{
+            <RouterLink to="/privacy" color="white" onClick={() => window.scrollTo(0, 0)}>
+            <Link
+              _hover={{
               textDecoration: "underline",
               color: "red",
               transition: "color 0.3s ease",
-            }}
-          >
-            Privacy
-          </Link>
-          <Text color="white">|</Text>
-          <Link
-            href="/cookie-choices"
-            color="white"
-            _hover={{
-              textDecoration: "underline",
-              color: "red",
-              transition: "color 0.3s ease",
-            }}
-          >
-            Cookie Choices
-          </Link>
+              }}
+            >
+              Privacy
+            </Link>
+            </RouterLink>
         </Flex>
       </Flex>
     </Box>

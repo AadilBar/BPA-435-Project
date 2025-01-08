@@ -125,17 +125,19 @@ export default function Home() {
                     <img src={`${import.meta.env.BASE_URL}/images/guitar.png`} alt="Description" style={{ width: '46%', height: 'auto' }} />
                     <div style={{ width: '40%', color: 'white', textAlign: 'left', paddingLeft: '20px' }}>
                         <h1 style={{ fontFamily: 'Sansation', fontSize: '70px', fontWeight: '700' }}>Want your event to be loud? Have a crazy night with us</h1>
-                        <Button
-                            variant="solid"
-                            p={8}
-                            fontFamily={'Sansation'}
-                            fontWeight={'700'}
-                            fontSize={30}
-                            background={'#E9204F'}
-                            color={'white'}
-                        >
-                            Contact Us
-                        </Button>
+                        <Link to="/contact-us" style={{ textDecoration: 'none' }}>
+                            <Button
+                                variant="solid"
+                                p={8}
+                                fontFamily={'Sansation'}
+                                fontWeight={'700'}
+                                fontSize={30}
+                                background={'#E9204F'}
+                                color={'white'}
+                            >
+                                Contact Us
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>
