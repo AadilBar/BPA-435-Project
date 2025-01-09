@@ -163,8 +163,6 @@ const CartPage = () => {
             e.preventDefault();
     
             if (!stripe || !elements) {
-                // Stripe.js has not yet loaded.
-                // Make sure to disable form submission until Stripe.js has loaded.
                 return;
             }
     
@@ -206,8 +204,8 @@ const CartPage = () => {
                             draggable: true,
                             progress: undefined,
                             style: {
-                                color: '#E9204F', // Text color (same for both success and error)
-                                backgroundColor: '#2C2C2C', // Dark gray background
+                                color: '#E9204F',
+                                backgroundColor: '#2C2C2C', 
                             }
                         });
 
@@ -246,7 +244,6 @@ const CartPage = () => {
                     {isProcessing ? "Processing ... " : "Pay now"}
                 </span>
                 </button>
-                {/* Show any error or success messages */}
                 {message && <div id="payment-message">{message}</div>}
             </form>
         );
@@ -255,120 +252,27 @@ const CartPage = () => {
 
     return (
         <Box bg="#000000" color="white" minH="100vh" py={8} px={4}>
-                  <ToastContainer />
+            <ToastContainer />
             <Box textAlign="center" mb={6}>
                 <Text fontSize="3xl" color="#E9204F" fontWeight="bold">Your Cart</Text>
             </Box>
 
-            <Flex alignItems="flex-start" gap={8}>
-                    {(cartItems.length === 0 && tourItems.length === 0)? (
-                        <Text fontSize="xl" color="white" textAlign="center">
-                            Your cart is empty.
-                        </Text>
-                    ) : (<VStack align="stretch" flex="2">
-                        {
-                        cartItems.map((item, index) => (
-                            <Flex
-                                key={index}
-                                bg="gray.800"
-                                p={4}
-                                borderRadius="md"
-                                alignItems="flex-start"
-                                gap={4}
-                                w="full"
-                            >
-                                <Image
-                                    src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
-                                    alt={item.title}
-                                    boxSize="200px"
-                                    objectFit="cover"
-                                    borderRadius="md"
-                                />
-                                <Box flex="1">
-                                    <Text fontSize="lg" fontWeight="bold" color="#E9204F">
-                                        {item.title}
-                                    </Text>
-                                    <Text>{item.description}</Text>
-                                    {!item.title.toLowerCase().includes('vinyl') && (
-                                        <>
-                                            <Text>
-                                                <strong>Size:</strong> {item.Size}
-                                            </Text>
-                                            <Text>
-                                                <strong>Color:</strong> {item.color}
-                                            </Text>
-                                        </>
-                                    )}
-                                    <Text>
-                                        <strong>Quantity:</strong> {item.quantity}
-                                    </Text>
-                                </Box>
-                                <Text fontSize="lg" fontWeight="bold" color="white">
-                                    ${item.price.toFixed(2)}
-                                </Text>
-                                <IconButton  onClick={() => { handleRemoveItem(index,'cart')}}>
-                                    <MdDeleteForever />
-                                </IconButton>
-                            </Flex>
-                        ))
-                    }
-                    {tourItems.length === 0 ? (
-                        <Text fontSize="xl" color="white" textAlign="center">
-                            You have no tours booked.
-                        </Text>
-                    ) : (
-                        tourItems.map((item, index) => (
-                            <Flex
-                                key={index}
-                                bg="gray.800"
-                                p={4}
-                                borderRadius="md"
-                                alignItems="flex-start"
-                                gap={4}
-                                w="full"
-                            >
-                                <Image
-                                    src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
-                                    alt={item.place}
-                                    boxSize="200px"
-                                    objectFit="cover"
-                                    borderRadius="md"
-                                />
-                                <Box flex="1">
-                                    <Text fontSize="lg" fontWeight="bold" color="#E9204F">
-                                        {item.place}
-                                    </Text>
-                                    <Text>{item.address}</Text>
-                                    <Text>
-                                        <strong>Start Date:</strong> {item.startDate}
-                                    </Text>
-                                    <Text>
-                                        <strong>End Date:</strong> {item.endDate}
-                                    </Text>
-                                    <Text>
-                                        <strong>Quantity:</strong> {item.quantity}
-                                    </Text>
-                                </Box>
-                                <Text fontSize="lg" fontWeight="bold" color="white">
-                                    ${item.realPrice.toFixed(2)}
-                                </Text>
-                                <IconButton  onClick={() => { handleRemoveItem(index,'tour')}}>
-                                    <MdDeleteForever />
-                                </IconButton>
-                                
-                                
-                            </Flex>
-                        ))
-                    )}
-                </VStack>)}
-
-                
-
-                <Box flex="1" textAlign="right" bg="gray.900" p={4} borderRadius="md" maxW="400px" ml="auto">
+            <Flex alignItems="flex-start" gap={8} flexDirection={{ base: "column", md: "row" }}>
+                <Box 
+                    textAlign="center" 
+                    bg="gray.900" 
+                    p={4} 
+                    borderRadius="md" 
+                    w={{ base: "100%", md: "400px" }} 
+                    mb={{ base: 4, md: 0 }}
+                    maxW={{ base: "100%", md: "500px" }} 
+                    ml={{ base: "0", md: "auto" }}
+                    order={{ base: 1, md: 2 }}
+                >
                     <Text fontSize="2xl" fontWeight="bold" mb={4}>
                         Total: ${totalPrice.toFixed(2)}
                     </Text>
-                    {!showCheckoutForm && (cartItems.length > 0 || tourItems.length>0) && (
+                    {!showCheckoutForm && (cartItems.length > 0 || tourItems.length > 0) && (
                         <Button
                             as="a"
                             size="lg"
@@ -383,19 +287,121 @@ const CartPage = () => {
                     )}
                     {showCheckoutForm && clientSecret && Stripe && (
                         <div style={{ width: "100%", maxWidth: "600px", padding: "30px", backgroundColor: "#000000", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", borderRadius: "8px" }}>
-                        <Elements stripe={Stripe} options={{
-                            clientSecret: clientSecret,
-                            appearance: {
-                                theme: "night"
-                            }
-                        }}>
+                            <Elements stripe={Stripe} options={{
+                                clientSecret: clientSecret,
+                                appearance: {
+                                    theme: "night"
+                                }
+                            }}>
                                 <CheckoutForm />
-                        </Elements>
+                            </Elements>
                         </div>
                     )}
                 </Box>
-            </Flex>
 
+                <VStack align="stretch" flex="2" gap={4} order={{ base: 2, md: 1 }}>
+                    {(cartItems.length === 0 && tourItems.length === 0) ? (
+                        <Text fontSize="xl" color="white" textAlign="center">
+                            Your cart is empty.
+                        </Text>
+                    ) : (
+                        <>
+                            {cartItems.map((item, index) => (
+                                <Flex
+                                    key={index}
+                                    bg="gray.800"
+                                    p={4}
+                                    borderRadius="md"
+                                    alignItems="flex-start"
+                                    gap={4}
+                                    w="full"
+                                    flexDirection={{ base: "column", md: "row" }}
+                                >
+                                    <Image
+                                        src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
+                                        alt={item.title}
+                                        boxSize={{ base: "100%", md: "200px" }}
+                                        objectFit="cover"
+                                        borderRadius="md"
+                                    />
+                                    <Box flex="1">
+                                        <Text fontSize="lg" fontWeight="bold" color="#E9204F">
+                                            {item.title}
+                                        </Text>
+                                        <Text>{item.description}</Text>
+                                        {!item.title.toLowerCase().includes('vinyl') && (
+                                            <>
+                                                <Text>
+                                                    <strong>Size:</strong> {item.Size}
+                                                </Text>
+                                                <Text>
+                                                    <strong>Color:</strong> {item.color}
+                                                </Text>
+                                            </>
+                                        )}
+                                        <Text>
+                                            <strong>Quantity:</strong> {item.quantity}
+                                        </Text>
+                                    </Box>
+                                    <Text fontSize="lg" fontWeight="bold" color="white">
+                                        ${item.price.toFixed(2)}
+                                    </Text>
+                                    <IconButton onClick={() => { handleRemoveItem(index, 'cart') }}>
+                                        <MdDeleteForever />
+                                    </IconButton>
+                                </Flex>
+                            ))}
+                            {tourItems.length === 0 ? (
+                                <Text fontSize="xl" color="white" textAlign="center">
+                                    You have no tours booked.
+                                </Text>
+                            ) : (
+                                tourItems.map((item, index) => (
+                                    <Flex
+                                        key={index}
+                                        bg="gray.800"
+                                        p={4}
+                                        borderRadius="md"
+                                        alignItems="flex-start"
+                                        gap={4}
+                                        w="full"
+                                        flexDirection={{ base: "column", md: "row" }}
+                                    >
+                                        <Image
+                                            src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
+                                            alt={item.place}
+                                            boxSize={{ base: "100%", md: "200px" }}
+                                            objectFit="cover"
+                                            borderRadius="md"
+                                        />
+                                        <Box flex="1">
+                                            <Text fontSize="lg" fontWeight="bold" color="#E9204F">
+                                                {item.place}
+                                            </Text>
+                                            <Text>{item.address}</Text>
+                                            <Text>
+                                                <strong>Start Date:</strong> {item.startDate}
+                                            </Text>
+                                            <Text>
+                                                <strong>End Date:</strong> {item.endDate}
+                                            </Text>
+                                            <Text>
+                                                <strong>Quantity:</strong> {item.quantity}
+                                            </Text>
+                                        </Box>
+                                        <Text fontSize="lg" fontWeight="bold" color="white">
+                                            ${item.realPrice.toFixed(2)}
+                                        </Text>
+                                        <IconButton onClick={() => { handleRemoveItem(index, 'tour') }}>
+                                            <MdDeleteForever />
+                                        </IconButton>
+                                    </Flex>
+                                ))
+                            )}
+                        </>
+                    )}
+                </VStack>
+            </Flex>
         </Box>
     );
 };

@@ -207,3 +207,40 @@
 .options:hover{
   transform: scale(1.07);
 }
+
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 1rem;
+  }
+
+  .image-container, .details-container, .price_container {
+    width: 100%;
+  }
+
+  .product-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .circles-container, .sizes, .delivery_options_container {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .size {
+    width: auto;
+    flex: 1;
+  }
+
+  .counter_container {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .options {
+    width: 45%;
+    margin-top: 0.5rem;
+  }
+}

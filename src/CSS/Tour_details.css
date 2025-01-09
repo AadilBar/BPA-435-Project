@@ -217,3 +217,41 @@ margin-right: 0.2rem;
 .map{
     border-radius: 8px;
 }
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .overall_container {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .left_container {
+        margin-left: 0;
+        padding: 0.5rem;
+        height: auto;
+    }
+
+    .left-top-sub {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .left-bottom-sub {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .right_container {
+        margin-right: 0;
+        padding: 0.5rem;
+        height: auto;
+    }
+
+    .checkout {
+        width: 100%;
+        padding: 0.5rem;
+    }
+}

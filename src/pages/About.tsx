@@ -5,7 +5,7 @@ import Member from '../components/member_profile';
 
 export default function About() {
     return (
-        <div className={styles.canvas} >
+        <div className={`${styles.canvas} responsive-container`}>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'black', marginTop: '20px' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                     <img

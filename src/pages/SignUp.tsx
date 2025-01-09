@@ -115,10 +115,6 @@ export default function SignUp() {
                     e.preventDefault();
                 }}>Sign Up</button>}
             </form>
-            <button style={{ marginTop: '30px', padding: '8px', backgroundColor: '#fff', color: '#000', border: '1px solid #ccc', borderRadius: '5px', cursor: 'pointer', fontSize: '1em', display: 'flex', alignItems: 'center' }}>
-                <img src={`${import.meta.env.BASE_URL}/images/Google.png`} alt="Google" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
-                Sign Up with Google
-            </button>
             {user && <Navigate to="/"/>}
             <p style={{ marginTop: '30px', fontSize: '1em' }}>
                 Already have an account? <Link to="/login" style={{ color: '#007BFF' }}>Login</Link>
