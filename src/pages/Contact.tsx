@@ -179,16 +179,16 @@ export default function Contact() {
                         </form>
 
                         <form className="message_field">
-                            <input
-                                type="text"
+                            <textarea
                                 id="message"
                                 placeholder="Enter your message"
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
+                                style={{ whiteSpace: 'pre-wrap' }}
                             />
                         </form>
-                                <button className="send_button" onClick={reset}>Send</button>
-                            </div>
+                        <button className="send_button" onClick={reset}>Send</button>
+                    </div>
 
                     </div>
 

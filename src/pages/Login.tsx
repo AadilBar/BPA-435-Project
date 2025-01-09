@@ -28,8 +28,8 @@ export default function Login() {
                     </div>
                     <div style={{ marginBottom: '20px' }}>
                         <label htmlFor="password" style={{ display: 'block', marginBottom: '10px' }}>Password:</label>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <input type="password" id="password" name="password" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={handlePasswordChange}/>
+                    <div style={{ position: 'relative', marginBottom: '20px' }}>
+                        <input type="password" id="password" name="password" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box', paddingRight: '40px' }} onChange={handlePasswordChange}/>
                         <IconButton
                         onClick={
                             () => {
@@ -41,11 +41,11 @@ export default function Login() {
                                     passwordField.type = 'password';
                                     setPassVisible(false);
                                 }
-                            }
-                        }
-                        backgroundColor="#000000"
-                        color="white"
-                        >
+                            }}
+                            backgroundColor="transparent"
+                            color="white"
+                            style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
+                            >
                             {(passVisible) ? <FaEyeSlash /> : <FaEye />}
                         </IconButton>
                     </div>
