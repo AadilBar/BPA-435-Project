@@ -60,7 +60,7 @@ export default function SignUp() {
                 )}
                 <div style={{ marginBottom: '20px' }}>
                     <label htmlFor="password" style={{ display: 'block', marginBottom: '10px' }}>Password:</label>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                         <input type="password" id="password" name="password" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={handlePasswordChange}/>
                         <IconButton
                         onClick={
@@ -75,8 +75,9 @@ export default function SignUp() {
                                 }
                             }
                         }
-                        backgroundColor="#000000"
-                        color="white"
+                        backgroundColor="transparent"
+                        color="White"
+                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
                         >
                             {(passVisible) ? <FaEyeSlash /> : <FaEye />}
                         </IconButton>
@@ -85,7 +86,7 @@ export default function SignUp() {
                 <div style={{ marginBottom: '20px' }}>
                     <label htmlFor="confirmPassword" style={{ display: 'block', marginBottom: '10px' }}>Confirm Password:</label>
 
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                         <input type="password" id="confirmPassword" name="confirmPassword" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setConfirmPassword(e.target.value)}/>
                         <IconButton
                         onClick={
@@ -100,8 +101,9 @@ export default function SignUp() {
                                 }
                             }
                         }
-                        backgroundColor="#000000"
-                        color="white"
+                        backgroundColor="transparent"
+                        color="White"
+                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
                         >
                             {(confirmPassVisible) ? <FaEyeSlash /> : <FaEye />}
                         </IconButton>
