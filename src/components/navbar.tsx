@@ -167,9 +167,11 @@ function Navbar() {
               </>
             ) : (
               <>
-              <RouterLink to="/cart">
-                <Button p={5} backgroundColor={"#E9204F"}>Cart</Button>
-              </RouterLink>
+                <RouterLink to="/cart">
+                    <IconButton bg="#000000" color="white" size={"2xl"}>
+                    <FaShoppingCart />
+                    </IconButton>
+                </RouterLink>
               <RouterLink to="/cart">
                 <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
               </RouterLink>
