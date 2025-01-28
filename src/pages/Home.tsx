@@ -2,13 +2,14 @@ import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router';
 import EventItem from '../components/event';
 import Footer from '../components/footer';
-import GuitarScene from '../components/3dStage';
 import ThreeDAlbums from '../components/3dAlbums';
 
 export default function Home() {
     return (
         <div>
-                <GuitarScene />
+                <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
+                    <img src={`${import.meta.env.BASE_URL}/images/Stage_Fright_Main_Page_Image.png`} alt="Full Screen" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
                 <div style={{ height: '100vh', backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <ThreeDAlbums />
                 </div>
