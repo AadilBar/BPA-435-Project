@@ -119,42 +119,18 @@ export default function GuitarScene() {
         );
     }
     function GLTFStage() {
-        const { scene } = useGLTF(`${import.meta.env.BASE_URL}/models/stage.glb`);
-        scene.scale.set(0.005, 0.005, 0.005); // Scale down by 10x
-        scene.position.y = -2.5;
+        const { scene } = useGLTF(`${import.meta.env.BASE_URL}/models/stage2.glb`);
+        scene.scale.set(1,1,1); // Scale down by 10x
+        scene.position.y = -3.2;
         scene.position.x = -0.03;
-        scene.position.z = 1.8;
+        scene.position.z = -1;
 
-        const model1 = useGLTF(`${import.meta.env.BASE_URL}/models/Acc_Guitar.glb`);
-        model1.scene.scale.set(300, 300, 300);
-        model1.scene.rotation.y = (Math.PI / 2) + 0.5;
-        model1.scene.position.set(-700, -40, -400);
-        scene.add(model1.scene);
-
-        const model2 = useGLTF(`${import.meta.env.BASE_URL}/models/drums.glb`);
-        model2.scene.scale.set(300, 300, 300);
-        model2.scene.rotation.y = -0.5;
-        model2.scene.position.set(560, -40, -390);
-        scene.add(model2.scene);
-
-        const model3 = useGLTF(`${import.meta.env.BASE_URL}/models/mic.glb`);
-        model3.scene.scale.set(200, 200, 200);
-        model3.scene.rotation.y = Math.PI;
-        model3.scene.position.set(-12, 30, -450);
-        scene.add(model3.scene);
-
-        const model4 = useGLTF(`${import.meta.env.BASE_URL}/models/Guitar.glb`);
-        model4.scene.scale.set(300, 300, 300);
-        model4.scene.rotation.y = 0.4;
-        model4.scene.position.set(-400, -40, -450);
-        scene.add(model4.scene);
-
-        useFrame(() => {
-            model1.scene.visible = scroll.offset > 0.01;
-            model2.scene.visible = scroll.offset > 0.01;
-            model3.scene.visible = scroll.offset > 0.01;
-            model4.scene.visible = scroll.offset > 0.01;
-        });
+        // useFrame(() => {
+        //     model1.scene.visible = scroll.offset > 0.01;
+        //     model2.scene.visible = scroll.offset > 0.01;
+        //     model3.scene.visible = scroll.offset > 0.01;
+        //     model4.scene.visible = scroll.offset > 0.01;
+        // });
 
         const ref = useRef<THREE.Mesh>(null);
         const scroll = useScroll();
@@ -305,7 +281,8 @@ export default function GuitarScene() {
                 </mesh>
                 {/* <SpinningCylinder /> */}
             </ScrollControls>
-            {/* <OrbitControls/> */}
+            {/* <ambientLight intensity={1} />
+            <OrbitControls/> */}
             </Canvas>
             </div>
             </div>
@@ -313,9 +290,5 @@ export default function GuitarScene() {
 
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/stage.glb`);
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/Acc_Guitar.glb`);
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/drums.glb`);
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/mic.glb`);
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/Guitar.glb`);
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/stage2.glb`);
 
