@@ -39,7 +39,10 @@ function App() {
         <UserContext.Provider value={{ user, setUser }}>
             <Provider>
                 <HashRouter>
-                    <Navbar />
+                    <div style={{ position: "fixed", top: 0, width: '100%', zIndex: 1000 }}>
+                        <Navbar />
+                    </div>
+
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about-us" element={<About />} />
@@ -54,12 +57,13 @@ function App() {
                         <Route path="/payment" element={<Payment/>} />    
                         <Route path="/terms" element={<Terms/>} />    
                         <Route path="/privacy" element={<Privacy/>} />    
-
                     </Routes>
+
                 </HashRouter>
             </Provider>
-    </UserContext.Provider>
+        </UserContext.Provider>
     );
+
 }
 
 export {UserContext};

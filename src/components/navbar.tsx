@@ -18,6 +18,8 @@ function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const {user} = useContext(UserContext);
+  
+
 
   const {
     handleSignout,
@@ -35,9 +37,25 @@ function Navbar() {
         textAlign="center"
         onClick={() => setOpen(false)}
         transition="color 0.3s ease"
-        _hover={{
-          color: '#E9204F', // Red hover effect
+        _after={{
+          content: '""',
+          display: 'block',
+          width: '0',
+          height: location.pathname !== to ? '2px' : '0',
+          bg: '#E9204F',
+          transition: 'width 0.3s ease',
+          marginTop: location.pathname !== to ? '4px' : '0',
         }}
+        _hover={
+          location.pathname !== to
+        ? {
+        color: '#E9204F',
+        _after: {
+          width: '100%',
+        },
+          }
+        : {}
+        }
       >
         {children}
       </Box>
@@ -47,9 +65,9 @@ function Navbar() {
   return (
     <>
       <Flex
-        bg="#000000"
-        pt={{ base: '16', md: '16' }}
-        pb={{ base: '4', md: '4' }}
+        bg={'black'} 
+        pt={{ base: '3', md: '3' }} // Further reduced padding-top
+        pb={{ base: '2', md: '2' }} // Further reduced padding-bottom
         align="center"
         justify={"center"}
         position="relative"
@@ -68,17 +86,17 @@ function Navbar() {
           <NavLink to="/about-us">ABOUT US</NavLink>
           <NavLink to="/tour">TOUR</NavLink>
         </Flex>
-
-        <Box mx={{ base: 0, md: 2 }}>
+        <Box mx={{ base: 0, md: 1 }}>
           <RouterLink to="/">
             <Image
               src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
               alt="Home"
-              height="50px"
+              height="30px" // Further reduced logo height
+              transition="transform 0.3s ease"
+              _hover={{ transform: 'scale(1.1)' }}
             /> 
           </RouterLink>
         </Box>
-        
         <Flex
           flex="1"
           justify="left"
@@ -105,12 +123,12 @@ function Navbar() {
             ) : (
               <>
                 <RouterLink to="/cart">
-                    <IconButton bg="#000000" color="white" size={"2xl"}>
+                <IconButton color="white" size={"2xl"} variant={"ghost"}>
                     <FaShoppingCart />
                     </IconButton>
                 </RouterLink>
               <Box width="10px" />
-              <RouterLink to="/cart">
+              <RouterLink to="/signup">
                 <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
               </RouterLink>
               </>
@@ -121,7 +139,7 @@ function Navbar() {
 
         <Box
           position="absolute"
-          mt={-8}
+          mt={0}
           right="0"
           mr={5}
           display={{ base: 'flex', md: 'none' }}
@@ -168,7 +186,7 @@ function Navbar() {
             ) : (
               <>
                 <RouterLink to="/cart">
-                    <IconButton bg="#000000" color="white" size={"2xl"}>
+                    <IconButton color="white" size={"2xl"} variant={"ghost"}>
                     <FaShoppingCart />
                     </IconButton>
                 </RouterLink>

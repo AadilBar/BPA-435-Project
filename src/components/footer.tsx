@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router";
 export default function Footer() {
   return (
     <Box
-      bg="#333333" 
+      bg="#09090b" 
       py={4} 
       fontFamily="Sansation"
       fontWeight="700"
