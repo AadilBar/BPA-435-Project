@@ -93,13 +93,13 @@ const ProductDetails: React.FC = () => {
             <section className='card'>
               <h2>Location:</h2>
               <iframe
-            src={mapData}
-            width="100%"
-            height="100%"
-            className="map"
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
+                src={mapData}
+                width="100%"
+                height="100%"
+                className="map"
+                allowFullScreen
+                loading="lazy"
+                ></iframe>
             </section>
 
           </main>
@@ -189,7 +189,7 @@ const ProductDetails: React.FC = () => {
                 <div className="price_tour">
                     <div className="total">
                         <span>
-                            <span className='count'>{bookedSeats.filter(seat => seat).length}</span> Tickets
+                            <span>{bookedSeats.filter(seat => seat.status === 'selected').length}</span> Tickets
                         </span>
                         <div className="amount">${totalPrice}</div>
                     </div>
@@ -206,6 +206,24 @@ const ProductDetails: React.FC = () => {
         const db = getDatabase();
         if (user && user.email) {
             const usersRef = ref(db, "users/" + user.email.replace('.', ',') + "/tours/");
+            const selectedSeats = bookedSeats.filter(seat => seat.status === 'selected');
+            if (selectedSeats.length === 0) {
+                toast.error('You must select at least one seat!', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    style: {
+                        color: '#E9204F', // Text color (same for both success and error)
+                        backgroundColor: '#2C2C2C', // Dark gray background
+                    }
+                });
+                return;
+            }
+
             push(usersRef, {
                 place,
                 startDate: startDate instanceof Date ? startDate.toISOString().split('T')[0] : startDate,
@@ -213,9 +231,8 @@ const ProductDetails: React.FC = () => {
                 address,
                 realPrice: totalPrice,
                 quantity: 1,
-                selectedSeats: bookedSeats
-                    .map((seat, index) => seat.status === 'selected' ? index : null)
-                    .filter(seat => seat !== null),
+                selectedSeats: selectedSeats
+                    .map((seat) => bookedSeats.indexOf(seat)),
                 backstage,
                 lounge,
                 meet,

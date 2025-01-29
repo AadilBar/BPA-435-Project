@@ -10,7 +10,7 @@ export default function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passVisible, setPassVisible] = useState(false);
     const [confirmPassVisible, setConfirmPassVisible] = useState(false);
-
+    const [address, setAddress] = useState("");
 
     const {
         email,
@@ -30,7 +30,7 @@ export default function SignUp() {
       } = useLogin();
       
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', fontSize: '1.2em', marginTop: '150px', fontFamily: 'Sansation', fontWeight: 700 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', fontSize: '1.2em', marginTop: '230px', fontFamily: 'Sansation', fontWeight: 700 }}>
             <form style={{ display: 'flex', flexDirection: 'column', width: '400px', padding: '30px', border: '1px solid #ccc', borderRadius: '10px', boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)' }}>
                 <div style={{ marginBottom: '20px' }}>
                     <label htmlFor="name" style={{ display: 'block', marginBottom: '10px' }}>Name:</label>
@@ -47,6 +47,10 @@ export default function SignUp() {
                 <div style={{ marginBottom: '20px' }}>
                     <label htmlFor="phone" style={{ display: 'block', marginBottom: '10px' }}>Phone (optional):</label>
                     <input type="tel" id="phone" name="phone" style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setPhone(e.target.value)}/>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                    <label htmlFor="address" style={{ display: 'block', marginBottom: '10px' }}>Address:</label>
+                    <input type="text" id="address" name="address" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setAddress(e.target.value)}/>
                 </div>
                 {password.length < 8 && (
                     <div style={{ marginBottom: '20px', color: 'red', fontSize: '0.9em' }}>
@@ -139,6 +143,7 @@ export default function SignUp() {
         Name: Name,
         Phone: Phone,
         DateOfBirth: DateOfBirth,
+        Address: address, 
         Cart: {}
     });
 

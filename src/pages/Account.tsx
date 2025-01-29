@@ -61,10 +61,12 @@ const Account: React.FC = () => {
         name: string | null;
         email: string | null;
         phone: string | null;
+        address: string | null;
     }>({
         name: null,
         email: null,
         phone: null,
+        address: null,
     });
 
     const [name, setName] = useState<string>("");
@@ -97,6 +99,7 @@ const Account: React.FC = () => {
                         name: data.Name,
                         email: user.email,
                         phone: data.Phone,
+                        address: data.Address,
                     });
                     setName(data.Name);
                     setEmail(data.email);
@@ -148,12 +151,14 @@ const Account: React.FC = () => {
                 Name: name,
                 Email: email,
                 Phone: phone,
+                Address: userData.address,
             }).then(() => {
                 console.log("User data updated successfully.");
                 setUserData({
                     name: name,
                     email: email,
                     phone: phone,
+                    address: userData.address,
                 });
             }).catch((error: any) => {
                 console.error("Error updating user data: ", error);
@@ -291,6 +296,18 @@ const Account: React.FC = () => {
                                 />
                             </div>
                             </div>
+                            <div style={infoCardStyle}>
+                                <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                                <div>
+                                    <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
+                                    <input
+                                    type="text"
+                                    value={userData.address || ''}
+                                    onChange={(e) => setUserData({ ...userData, address: e.target.value })}
+                                    style={inputStyle}
+                                    />
+                                </div>
+                            </div>
                             <button style={buttonStyle} onClick={() =>{ setEditing(false)
                             updateUserData()
                             }}>
@@ -322,6 +339,13 @@ const Account: React.FC = () => {
                                 <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Phone Number</p>
                                 <p style={{ margin: 0, fontWeight: 500 }}>{userData.phone ? formatPhoneNumber(userData.phone) : 'Not set'}</p>
                             </div>
+                            </div>
+                            <div style={infoCardStyle}>
+                                <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                                <div>
+                                    <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
+                                    <p style={{ margin: 0, fontWeight: 500 }}>{userData.address || 'Not set'}</p>
+                                </div>
                             </div>
                             <button style={buttonStyle} onClick={() => setEditing(true)}>
                             Edit Profile

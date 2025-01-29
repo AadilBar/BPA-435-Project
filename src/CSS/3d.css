@@ -18,7 +18,7 @@
 .album-info {
     display: flex;
     flex-direction: column;
-    text-align: center;  /* Centers all text inside the album info */
+    text-align: center; 
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
@@ -27,7 +27,7 @@
     font-weight: 900;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    text-align: center;  /* Centers the album title */
+    text-align: center; 
 }
 
 .album-artist-section {
@@ -59,8 +59,8 @@
 .album-navigation {
     display: flex;
     gap: 1rem;
-    justify-content: center;  /* Centers the navigation buttons */
-    margin-top: 2rem;  /* Ensures proper spacing between carousel and buttons */
+    justify-content: center;  
+    margin-top: 2rem; 
 }
 
 .nav-button {
@@ -211,29 +211,24 @@
     aspect-ratio: 1;
     position: relative;
     overflow: hidden;
-    border-radius: 1rem;  /* Round the corners more for a smooth effect */
+    border-radius: 1rem;  
     width: 100%;
-    margin-bottom: 2rem;  /* Keep the margin for separation */
+    margin-bottom: 2rem;  
     background-color: black;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Add shadow for depth */
-    transition: all 0.3s ease;  /* Smooth transition for hover effects */
+    transition: all 0.3s ease;  
 }
 
-.canvas-container:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);  /* Increase shadow on hover */
-    transform: scale(1.03);  /* Slight scale up on hover */
-}
 
 .canvas {
     width: 100%;
-    transition: transform 0.5s ease-in-out; /* Smooth sliding animation for carousel items */
-    object-fit: cover;  /* Ensures images scale properly without distortion */
+    transition: transform 0.5s ease-in-out;
+    object-fit: cover;  
     border-radius: 1rem;
     background-color: black;
 }
 
 .canvas img {
-    transition: transform 0.3s ease-in-out; /* Smooth transition for images */
+    transition: transform 0.3s ease-in-out; 
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -299,7 +294,7 @@
 }
 
 .carousel-pagination-dot.active {
-    background-color: #ffd700;  /* Gold active dot */
+    background-color: #ffd700;  
 }
 
 .carousel-pagination-dot:hover {
@@ -309,67 +304,67 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .album-content {
-        grid-template-columns: 1fr;  /* Stack the content in one column */
+        grid-template-columns: 1fr;  
         gap: 2rem;
     }
 
     .album-title {
-        font-size: 2rem;  /* Reduce the size of the title */
+        font-size: 2rem;  
     }
 
     .album-artist {
-        font-size: 1.25rem;  /* Slightly smaller artist name */
+        font-size: 1.25rem;  
     }
 
     .tracklist-title {
-        font-size: 1.5rem;  /* Reduce the font size for mobile */
+        font-size: 1.5rem; 
     }
 
     .track-item {
-        font-size: 1rem;  /* Smaller font for track items */
+        font-size: 1rem; 
         padding: 0.75rem 1rem;
-        height: 3rem;  /* Reduce the height */
+        height: 3rem; 
     }
 
     .track-item .track-title {
-        font-size: 1rem;  /* Make track titles smaller */
+        font-size: 1rem; 
     }
 
     .tracklist-container {
-        max-height: 300px;  /* Reduce the tracklist height for mobile */
+        max-height: 300px;  
     }
 
     .social-links {
-        flex-direction: column;  /* Stack social icons vertically */
+        flex-direction: column; 
         gap: 1rem;
     }
 
     .album-navigation {
-        flex-direction: column;  /* Stack navigation buttons vertically */
+        flex-direction: column; 
     }
 
     .carousel-nav-button {
-        padding: 0.75rem;  /* Smaller buttons for mobile */
+        padding: 0.75rem;  
     }
 
     .canvas-container {
         width: 100%;
-        height: 200px;  /* Reduce height for mobile */
+        height: 200px; 
         margin-bottom: 1rem;
     }
 }
 @media (max-width: 768px) {
     .logo {
-        font-size: 1.5rem; /* Smaller font size for mobile */
-        text-align: center; /* Center-align the logo on small screens */
-        padding: 10px; /* Add some padding to make it look more balanced */
+        font-size: 1.5rem; 
+        text-align: center; 
+        padding: 10px; 
     }
 }
 
 /* For Very Small Mobile Devices */
 @media (max-width: 480px) {
     .logo {
-        font-size: 1.25rem; /* Further reduce font size on smaller devices */
-        padding: 5px; /* Less padding for very small screens */
+        font-size: 1.25rem; 
+        padding: 5px; 
     }
 }

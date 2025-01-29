@@ -84,7 +84,7 @@ const ProductDetails: React.FC = () => {
 
           <div className="divider"></div>
 
-            {title && !title.toLowerCase().includes('vinyl') && (
+            {title &&  !title.toLowerCase().includes('vinyl') &&!title.toLowerCase().includes('candle') && !title.toLowerCase().includes('sticker') && !title.toLowerCase().includes('bag') && !title.toLowerCase().includes('socks') && (
               <>
           <h3 className="product-color-title">Color</h3>
             <div className="color-options">
@@ -110,7 +110,7 @@ const ProductDetails: React.FC = () => {
               ></button>
             </div></>
             )}
-            {title && !title.toLowerCase().includes('vinyl') && (
+            {title &&  !title.toLowerCase().includes('vinyl') &&!title.toLowerCase().includes('candle') && !title.toLowerCase().includes('sticker') && !title.toLowerCase().includes('bag') && !title.toLowerCase().includes('phone')&& (
               <>
               <h3 className="product-size-title">Size</h3>
               <div className="size-options">
