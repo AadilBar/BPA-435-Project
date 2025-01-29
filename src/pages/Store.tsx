@@ -1,50 +1,207 @@
+import React, { useState } from 'react';
 import Footer from '../components/footer';
 import Item from '../components/merch_item';
 
-export default function Store() {
-    return (
-        <>
-       
-        
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#000000', paddingTop: '70px' }}>
-            <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Shop Stage Fright</h1>
-    
-        
-            <div style={styles.itemsContainer}>
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Vinyls/Soaring Vinyl.png`} price= {37.99} title='Soaring Vinyl' description='Physical Vinyl of the album Soaring crafted by the Stage Fright team' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Vinyls/Resounding Vinyl.png`} price= {40.99} title='Resounding Vinyl' description='Physical Vinyl of the album Resounding crafted by the Stage Fright team' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Vinyls/Kinematics Vinyl.png`} price= {35.99} title='Kinematics Vinyl' description='Physical Vinyl of the album Kinematics crafted by the Stage Fright team' />
+const allItems = [
+  { imageUrl: '/images/Merch/Vinyls/Soaring Vinyl.png', price: 37.99, title: 'Soaring Vinyl', description: 'Physical Vinyl of the album Soaring crafted by the Stage Fright team', category: 'Vinyl' },
+  { imageUrl: '/images/Merch/Vinyls/Resounding Vinyl.png', price: 40.99, title: 'Resounding Vinyl', description: 'Physical Vinyl of the album Resounding crafted by the Stage Fright team', category: 'Vinyl' },
+  { imageUrl: '/images/Merch/Vinyls/Kinematics Vinyl.png', price: 35.99, title: 'Kinematics Vinyl', description: 'Physical Vinyl of the album Kinematics crafted by the Stage Fright team', category: 'Vinyl' },
+  {
+    imageUrl: '/images/Merch/Hoodies/Black/Main.png',
+    price: 29.99,
+    title: 'Black Stage Fright Hoodie',
+    description: 'Every stitch in this garment tells the story of a master craftsperson’s dedication to perfection.',
+    category: 'Hoodies',
+    orange: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Orange/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Orange/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Orange/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Orange/Female.png`,
+    ],
+    blue: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Blue/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Blue/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Blue/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Blue/Female.png`,
+    ],
+    black: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Black/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Black/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Black/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Black/Female.png`,
+    ],
+    grey: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Gray/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Gray/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Gray/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Gray/Female.png`,
+    ],
+  },
+];
 
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Beanies/White Beanie.png`} price= {15.99} title='White Stage Fright Beanie' description='Crafted by master artisans using age-old techniques, this piece embodies the essence of timeless sophistication.' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Beanies/Color Beanie.png`} price= {15.99} title='Red Stage Fright Beanie' description='Designed with luxurious fabrics sourced from the lush Scottish Highlands, this garment offers unparalleled comfort and charm.' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Beanies/Black Beanie.png`} price= {15.99} title='Black Stage Fright Beanie' description='Made with sustainably sourced organic fibers, this piece is a tribute to both style and the planet.' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Hoodie/Big Logo/Big Black.png`} price= {49.99} title='Black Stage Fright Hoodie' description='Meticulously tailored in a Parisian atelier, this garment captures the spirit of haute couture.' />
-            {/*<Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Hoodie/Big Logo/Big Red.png`} price= {49.99} title='Red Stage Fright Hoodie' description='Inspired by the serene beauty of desert blooms, this piece is crafted from fabrics as rare and resilient as nature itself.' />*/}
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Hoodie/Big Logo/Big White.png`} price= {59.99} title='White Stage Fright Hoodie' description='Infused with the breezy charm of Mediterranean shores, this piece is your escape to eternal summer.' />
-            {/*<Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Hoodie/Small Logo/Red Image from Photopea.png`} price= {49.99} title='Red SF Hoodie' description='Intricately designed with threads spun from the golden looms of Asia, this garment is a masterpiece of tradition and modernity.' />*/}
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Hoodie/Small Logo/White Image from Photopea.png`} price= {49.99} title='White SF Hoodie' description='Spun from fibers harvested in the pristine Arctic wilderness, this piece offers unmatched warmth and refinement.' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Big/Big Black Logo.png`} price= {29.99} title='Black Stage Fright T-Shirt' description='Every stitch in this garment tells the story of a master craftsperson’s dedication to perfection.' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Big/Big Logo White.png`} price= {29.99} title='White Stage Fright T-Shirt' description='Crafted with velvets dyed using grapes from the lush vineyards of Tuscany, this piece is truly one of a kind.' />
-            <Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Small/Small Black Logo.png`}  price= {29.99} title='Black SF T-Shirt' description='Woven with metallic fibers inspired by the shimmering expanse of the cosmos, this garment is a celestial marvel.' />
-            {/*<Item imageUrl={`${import.meta.env.BASE_URL}/images/Merch/Shirts/Small/Small Logo White.png`}  price= {49.99} title='White SF T-Shirt' description='Made from linens once favored by European royalty, this piece combines noble history with modern flair.' />*/}
+const Store = () => {
+  const [filters, setFilters] = useState({
+    category: 'All',
+    minPrice: 10,
+    maxPrice: 100,
+  });
+
+  const [showFilters, setShowFilters] = useState(false);
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters((prev) => ({ ...prev, category: event.target.value }));
+    
+  };
+
+  const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const minPrice = parseFloat(event.target.value);
+    if (minPrice < filters.maxPrice) {
+      setFilters((prev) => ({ ...prev, minPrice }));
+    }
+  };
+
+  const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const maxPrice = parseFloat(event.target.value);
+    if (maxPrice > filters.minPrice) {
+      setFilters((prev) => ({ ...prev, maxPrice }));
+    }
+  };
+
+  const filteredItems = allItems.filter((item) => {
+    return (
+      (filters.category === 'All' || item.category === filters.category) &&
+      item.price >= filters.minPrice &&
+      item.price <= filters.maxPrice
+    );
+  });
+
+  return (
+    <>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#000000', paddingTop: '20px', width: '100%' }}>
+        <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Shop Stage Fright</h1>
+
+        {/* Filter Button */}
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          style={{
+            backgroundColor: '#333',
+            color: 'white',
+            fontSize: '18px',
+            padding: '10px 20px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            marginTop: '40px',
+            alignSelf: 'center',
+            width: 'auto',
+            transform: showFilters ? 'translateY(-40px)' : 'translateY(0)',
+            transition: 'transform 0.3s ease',
+          }}
+        >
+          {showFilters ? 'Hide Filters' : 'Show Filters'}
+        </button>
+
+        {/* Filter Section */}
+        <div
+         style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '15px',
+          marginTop: '15px',
+          borderRadius: '8px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+          overflow: 'hidden',
+          height: showFilters ? '250px' : '0px', 
+          opacity: showFilters ? '1' : '0',
+          transition: 'height 0.5s ease, opacity 0.3s ease',
+          width: showFilters ? '82%' : '0%',
+          backgroundColor: showFilters ? '#1a1a1a' : 'black',
+        }}
+        >
+          {showFilters && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              {/* Category Filter */}
+              <div style={{ marginBottom: '15px' }}>
+                <label style={{ fontSize: '16px', color: 'white', marginRight: '10px' }}>Category</label>
+                <select
+                  onChange={handleCategoryChange}
+                  style={{
+                    padding: '8px',
+                    fontSize: '16px',
+                    borderRadius: '5px',
+                    border: '1px solid #444',
+                    backgroundColor: '#222',
+                    color: 'white',
+                  }}
+                >
+                  <option value="All">All</option>
+                  <option value="Vinyl">Albums</option>
+                  <option value="Beanies">Beanies</option>
+                  <option value="Hoodies">Hoodies</option>
+                  <option value="T-Shirts">T-Shirts</option>
+                </select>
+              </div>
+
+              {/* Price Range Slider */}
+              <div style={{ width: '100%', marginBottom: '15px' }}>
+                <label style={{ fontSize: '16px', color: 'white', marginRight: '10px' }}>Price Range</label>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={filters.minPrice}
+                    onChange={handleMinPriceChange}
+                    style={{
+                      flex: 1,
+                      background: '#555',
+                      borderRadius: '5px',
+                    }}
+                  />
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={filters.maxPrice}
+                    onChange={handleMaxPriceChange}
+                    style={{
+                      flex: 1,
+                      background: '#555',
+                      borderRadius: '5px',
+                    }}
+                  />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'white' }}>Min: ${filters.minPrice.toFixed(2)}</span>
+                  <span style={{ color: 'white' }}>Max: ${filters.maxPrice.toFixed(2)}</span>
+                </div>
+              </div>
             </div>
-            <br></br>
-            <Footer/>
+          )}
         </div>
 
+        {/* Items Grid */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', width: '100%', marginTop: '20px' }}>
+          {filteredItems.map((item, index) => (
+            <Item
+              key={index}
+              imageUrl={`${import.meta.env.BASE_URL}${item.imageUrl}`}
+              price={item.price}
+              title={item.title}
+              description={item.description}
+              orange={item.orange}
+              blue={item.blue}
+              black={item.black}
+              grey={item.grey}
+            />
+          ))}
+        </div>
 
+        <Footer />
+      </div>
     </>
-    );
-
-}
-const styles: { [key: string]: React.CSSProperties } = {
-    itemsContainer: {
-        display: 'flex', // align horiz
-        flexWrap: 'wrap', 
-        gap: '16px', 
-        justifyContent: 'center', // centers items horizontally
-    }
+  );
 };
 
-
-
+export default Store;
