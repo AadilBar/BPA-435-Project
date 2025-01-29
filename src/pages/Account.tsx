@@ -467,45 +467,28 @@ const containerStyle: React.CSSProperties = {
     backgroundColor: '#121212',
     color: '#ffffff',
     padding: '32px',
-    marginTop: '72px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    marginTop: '72px'
 };
 
 const cardStyle: React.CSSProperties = {
     backgroundColor: '#1E1E1E',
     borderRadius: '8px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    maxWidth: '1200px',
-    minHeight: '600px',
-    overflow: 'hidden'
+    display: 'grid',
+    gridTemplateColumns: '1fr 3fr',
+    minHeight: '600px'
 };
 
 const sidebarStyle: React.CSSProperties = {
     borderRight: '1px solid #333',
-    padding: '24px',
-    flex: '1 1 100%',
-    maxWidth: '300px',
-    boxSizing: 'border-box'
-};
-
-const contentStyle: React.CSSProperties = {
-    padding: '32px',
-    flex: '3 1 100%',
-    boxSizing: 'border-box'
+    padding: '24px'
 };
 
 const profileHeaderStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
-    marginBottom: '32px',
-    flexDirection: 'column',
-    textAlign: 'center'
+    marginBottom: '32px'
 };
 
 const tabStyle = (isActive: boolean): React.CSSProperties => ({
@@ -521,9 +504,12 @@ const tabStyle = (isActive: boolean): React.CSSProperties => ({
     cursor: 'pointer',
     marginBottom: '8px',
     transition: 'all 0.2s ease',
-    textAlign: 'left',
-    justifyContent: 'center'
+    textAlign: 'left'
 });
+
+const contentStyle: React.CSSProperties = {
+    padding: '32px'
+};
 
 const infoCardStyle: React.CSSProperties = {
     backgroundColor: '#2D2D2D',
@@ -532,9 +518,7 @@ const infoCardStyle: React.CSSProperties = {
     marginBottom: '16px',
     display: 'flex',
     alignItems: 'center',
-    gap: '16px',
-    flexDirection: 'column',
-    textAlign: 'center'
+    gap: '16px'
 };
 
 const buttonStyle: React.CSSProperties = {
@@ -569,8 +553,7 @@ const signOutButtonStyle: React.CSSProperties = {
     borderRadius: '6px',
     cursor: 'pointer',
     marginTop: '16px',
-    textAlign: 'center',
-    justifyContent: 'center'
+    textAlign: 'left'
 };
 
 export default Account;
