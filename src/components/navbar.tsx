@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router';
 import { Flex, Box, Image, VStack, IconButton, Button } from '@chakra-ui/react';
 import {
@@ -13,12 +13,31 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import useLogin from '../Auth/functions';
 import { UserContext } from '../App';
 import { FaShoppingCart, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { get, getDatabase, ref } from 'firebase/database';
 
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
+  const [Name, setName] = useState<string>("");
   const {user} = useContext(UserContext);
+
+      useEffect(() => {
+          if (user) {
+              const database = getDatabase();
+              const userRef = ref(database, "users/" + (user.email ? user.email.replace('.', ',') : ''));
+              get(userRef).then((snapshot) => {
+                  if (snapshot.exists()) {
+                      const data = snapshot.val();
+                      setName(data.Name);
+                      
+  
+                  }
+              }).catch((error) => {
+                  console.error(error);
+              });
+          }
+      });
   
 
 
@@ -92,7 +111,7 @@ function Navbar() {
             <Image
               src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
               alt="Home"
-              height="30px" // Further reduced logo height
+              height="40px" // Further reduced logo height
               transition="transform 0.3s ease"
               _hover={{ transform: 'scale(1.1)' }}
             /> 
@@ -135,7 +154,7 @@ function Navbar() {
                   backgroundColor={"#E9204F"}
                   onClick={() => setDropOpen(!dropOpen)}
                   >
-                  Hi, {user.email} ▼
+                  Hi, {Name.split(' ')[0] + "  "}▼
                   </Button>
                   {dropOpen && (
                     <Box
@@ -149,10 +168,10 @@ function Navbar() {
                     borderRadius="md"
                     overflow="hidden"
                     >
-                    <RouterLink to="/account">
+                    <RouterLink to="/account" onClick={() => setDropOpen(false)}>
                       <Box p={2} _hover={{ bg: "gray.700" }} display="flex" alignItems="center">
                       <FaUserCircle style={{ marginRight: '8px' }} />
-                      Account
+                        Account
                       </Box>
                     </RouterLink>
                     <Box
@@ -223,14 +242,53 @@ function Navbar() {
             ) : (
               <>
                 <RouterLink to="/cart">
-                    <IconButton color="white" size={"2xl"} variant={"ghost"}>
-                    <FaShoppingCart />
-                    </IconButton>
+                  <IconButton color="white" size={"2xl"} variant={"ghost"}>
+                  <FaShoppingCart />
+                  </IconButton>
                 </RouterLink>
-              <RouterLink to="/cart">
-                <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
-              </RouterLink>
-              </>
+                <Box width="10px" />
+                <Box position="relative">
+                  <Box>
+                  <Button position={'relative'}
+                    p={5}
+                    backgroundColor={"#E9204F"}
+                    onClick={() => setDropOpen(!dropOpen)}
+                    >
+                  Hi, {Name.split(' ')[0] + "  "}▼
+                    </Button>
+                  </Box>
+                  {dropOpen && (
+                    <Box
+                    position="absolute"
+                    top="100%"
+                    right="0"
+                    mt={2}
+                    bg="gray.800"
+                    color="white"
+                    boxShadow="md"
+                    borderRadius="md"
+                    overflow="hidden"
+                    >
+                    <RouterLink to="/account" onClick={() => setDropOpen(false)}>
+                      <Box p={2} _hover={{ bg: "gray.700" }} display="flex" alignItems="center">
+                      <FaUserCircle style={{ marginRight: '8px' }} />
+                        Account
+                      </Box>
+                    </RouterLink>
+                    <Box
+                      p={2}
+                      _hover={{ bg: "gray.700" }}
+                      display="flex"
+                      alignItems="center"
+                      onClick={handleSignout}
+                    >
+                      <FaSignOutAlt style={{ marginRight: '8px' }} />
+                      Logout
+                    </Box>
+                    </Box>
+                  )}
+                </Box>
+                </>
             )}
           </Flex>
                 </Box>

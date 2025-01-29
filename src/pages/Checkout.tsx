@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation } from 'react-router';
 import '../CSS/Product.css';
 
 
 import 'react-toastify/dist/ReactToastify.css';
-import Counter from '../components/package_counter';
 import ReviewCarousel from '../components/review';
+import { StepperInput } from '../components/ui/stepper-input';
+import { getDatabase, push, ref } from 'firebase/database';
+import { UserContext } from '../App';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ProductDetails: React.FC = () => {
+  const { user } = useContext(UserContext);
   const location = useLocation();
   const { imageUrl, price, title, description, orange, blue, black, grey } = location.state || {};
 
@@ -15,12 +19,14 @@ const ProductDetails: React.FC = () => {
   const [mainImage, setMainImage] = useState<string>(selectedColor[0] || imageUrl);
 
 
-  const [selectedColorButton, setSelectedColorButton] = useState<string>('');
+  const [color, setcolor] = useState<string>('black');
+  const [Size, setSize] = useState('S');
+  const [quantity, setQuantity] = useState(1);
 
   const handleColor = (color: string[], colorName: string) => {
     setSelectedColor(color);
     setMainImage(color[0]); // Set the first image of the selected color as the main image
-    setSelectedColorButton(colorName); // Track the selected color button
+    setcolor(colorName); // Track the selected color button
   };
 
   const reviews = [
@@ -45,7 +51,8 @@ const ProductDetails: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div style={{paddingTop: '100px'}}>
+            <ToastContainer />
       <div className="product-container">
         <div className="product-images-container">
           {/* Additional Images */}
@@ -77,37 +84,83 @@ const ProductDetails: React.FC = () => {
 
           <div className="divider"></div>
 
+            {title && !title.toLowerCase().includes('vinyl') && (
+              <>
           <h3 className="product-color-title">Color</h3>
-          <div className="color-options">
-            <button 
-              className={`color-btn ${selectedColorButton === 'black' ? 'selected' : ''}`} 
+            <div className="color-options">
+              <button 
+              className={`color-btn ${color === 'black' ? 'selected' : ''}`} 
               style={{ backgroundColor: '#010B13' }} 
               onClick={() => handleColor(black, 'black')}
-            ></button>
-            <button 
-              className={`color-btn ${selectedColorButton === 'grey' ? 'selected' : ''}`} 
+              ></button>
+              <button 
+              className={`color-btn ${color === 'grey' ? 'selected' : ''}`} 
               style={{ backgroundColor: '#bac2bc' }} 
               onClick={() => handleColor(grey, 'grey')}
-            ></button>
-            <button 
-              className={`color-btn ${selectedColorButton === 'orange' ? 'selected' : ''}`} 
+              ></button>
+              <button 
+              className={`color-btn ${color === 'orange' ? 'selected' : ''}`} 
               style={{ backgroundColor: '#bf6b3d' }} 
               onClick={() => handleColor(orange, 'orange')}
-            ></button>
-            <button 
-              className={`color-btn ${selectedColorButton === 'blue' ? 'selected' : ''}`} 
+              ></button>
+              <button 
+              className={`color-btn ${color === 'blue' ? 'selected' : ''}`} 
               style={{ backgroundColor: '#225b9c' }} 
               onClick={() => handleColor(blue, 'blue')}
-            ></button>
-          </div>
-
-          <h3 className="product-size-title">Size</h3>
-          <div className="size-options">
-            <button className="size-btn">S</button>
-            <button className="size-btn">M</button>
-            <button className="size-btn">L</button>
-            <button className="size-btn">XL</button>
-          </div>
+              ></button>
+            </div></>
+            )}
+            {title && !title.toLowerCase().includes('vinyl') && (
+              <>
+              <h3 className="product-size-title">Size</h3>
+              <div className="size-options">
+                <button 
+                className="size-btn" 
+                style={{ 
+                  fontWeight: Size === 'S' ? 'bold' : 'normal',
+                  outline: Size === 'S' ? 'none' : '',
+                  boxShadow: Size === 'S' ? '0 0 0 2px #FF6B6B' : ''
+                }}
+                onClick={() => setSize('S')}
+                >
+                S
+                </button>
+                <button 
+                className="size-btn" 
+                style={{ 
+                  fontWeight: Size === 'M' ? 'bold' : 'normal',
+                  outline: Size === 'M' ? 'none' : '',
+                  boxShadow: Size === 'M' ? '0 0 0 2px #FF6B6B' : ''
+                }}
+                onClick={() => setSize('M')}
+                >
+                M
+                </button>
+                <button 
+                className="size-btn" 
+                style={{ 
+                  fontWeight: Size === 'L' ? 'bold' : 'normal',
+                  outline: Size === 'L' ? 'none' : '',
+                  boxShadow: Size === 'L' ? '0 0 0 2px #FF6B6B' : ''
+                }}
+                onClick={() => setSize('L')}
+                >
+                L
+                </button>
+                <button 
+                className="size-btn" 
+                style={{ 
+                  fontWeight: Size === 'XL' ? 'bold' : 'normal',
+                  outline: Size === 'XL' ? 'none' : '',
+                  boxShadow: Size === 'XL' ? '0 0 0 2px #FF6B6B' : ''
+                }}
+                onClick={() => setSize('XL')}
+                >
+                XL
+                </button>
+              </div>
+              </>
+            )}
         </div>
 
         <div className="checkout-container">
@@ -117,9 +170,12 @@ const ProductDetails: React.FC = () => {
           <p className="product-seller">Sold by Stage Fright TM</p>
 
           <h3 className="quantity-title">Quantity:</h3>
-          <Counter />
+          <div>
+          <span className='sub2'>Quantity:</span>
+          <StepperInput defaultValue={'1'} onValueChange={({ value }: { value: string }) => setQuantity(Math.max(1, Number(value)))} value={quantity.toString()}/>
+        </div>
 
-          <button className="add-to-cart-btn">Add to Cart</button>
+          <button className="add-to-cart-btn" onClick={addToCart}>Add to Cart</button>
         </div>
       </div>
 
@@ -141,6 +197,53 @@ const ProductDetails: React.FC = () => {
       </div>
     </div>
   );
+
+
+  function addToCart() {
+    const db = getDatabase();
+    if (user && user.email) {
+      const usersRef = ref(db, "users/" + user.email.replace('.', ',') + "/cart/");
+      const modifiedImageUrl = mainImage.split('/').slice(2).join('/');
+      push(usersRef, {
+        title,
+        Size,
+        color,
+        imageUrl: modifiedImageUrl,
+        price,
+        description,
+        quantity: quantity
+      });
+      toast.success(`${title} has been added to your cart!`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          color: '#E9204F', // Text color (same for both success and error)
+          backgroundColor: '#2C2C2C', // Dark gray background
+        }
+      });
+      } else {
+        toast.error('Please login to add items to your cart!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: {
+            color: '#E9204F', // Text color (same for both success and error)
+            backgroundColor: '#2C2C2C', // Dark gray background
+          }
+        });
+      
+      }
+      
+  }
 };
 
 export default ProductDetails;

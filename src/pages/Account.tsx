@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import useLogin from '../Auth/functions';
-import { User, Mail, Phone, CreditCard, Bell, Shield, LogOut, Package, Guitar } from 'lucide-react';
-import { get, getDatabase, push, ref, set, update } from 'firebase/database';
+import { User, Mail, Phone, Shield, LogOut, Package, Guitar } from 'lucide-react';
+import { get, getDatabase, ref, update } from 'firebase/database';
+import { toast, ToastContainer } from 'react-toastify';
+import QRCode from "react-qr-code";
+import Footer from '../components/footer';
 
 type Tab = {
     id: string;
@@ -11,8 +14,47 @@ type Tab = {
   };
 
 const Account: React.FC = () => {
+
+    interface CartItem {
+        key: string;
+        imageUrl: string;
+        title: string;
+        description: string;
+        Size: string;
+        color: string;
+        price: number;
+        quantity: number;
+    }
+    interface TourItem {
+        key: string;
+        place: string;
+        quantity: number;
+        realPrice: number;
+        address: string;
+        startDate: string;
+        endDate: string;
+        backstage: boolean;
+        meet: boolean;
+        lounge: boolean;
+        selectedSeats: number[];
+    }
+
+    interface Orders {
+        date: string;
+        items: CartItem[];
+        total: number;
+    }
+
+
+    interface tourOrders {
+        date: string;
+        items: TourItem[];
+    }
+    
     const [activeTab, setActiveTab] = useState('profile');
     const {user} = useContext(UserContext);
+    const [orders, setOrders] = useState<Orders[]>([]);
+    const [tourOrders, setTourOrders] = useState<tourOrders[]>([]);
 
     const [editing, setEditing] = useState(false);
     const [userData, setUserData] = useState<{
@@ -28,6 +70,9 @@ const Account: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [phone, setPhone] = useState<string>("");
+    const [currentPassword, setCurrentPassword] = useState<string>("");
+    const [newPassword, setNewPassword] = useState<string>("");
+    const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
     
 
     const {
@@ -61,6 +106,37 @@ const Account: React.FC = () => {
             }).catch((error) => {
                 console.error(error);
             });
+
+            const ordersRef = ref(database, "users/" + (user.email ? user.email.replace('.', ',') + "/orders" : ''));
+            get(ordersRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const ordersItems = (Object.values(data) as Orders[]).map((item: Orders) => ({
+                        date: item.date,
+                        items: item.items,
+                        total: item.total,
+                    }));
+                    console.log(ordersItems);
+                    console.log(orders)
+                    setOrders(ordersItems);
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+
+            const toursRef = ref(database, "users/" + (user.email ? user.email.replace('.', ',') + "/tourOrders" : ''));
+            get(toursRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const toursItems = (Object.values(data) as tourOrders[]).map((item: tourOrders) => ({
+                        date: item.date,
+                        items: item.items,
+                    }));
+                    setTourOrders(toursItems);
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
         }
     }, [user]);
 
@@ -84,6 +160,7 @@ const Account: React.FC = () => {
             });
         }
     };
+    
 
     const formatPhoneNumber = (phoneNumber: string) => {
         const cleaned = ('' + phoneNumber).replace(/\D/g, '');
@@ -93,12 +170,53 @@ const Account: React.FC = () => {
         }
         return phoneNumber;
     };
+
+    
+    const getSeatLabel = (index: number) => {
+        const rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+        const row = rows[Math.floor((index) / 10)]; 
+        const seatNumber = ((index) % 10) + 1;      
+        return `${row}${seatNumber}`;
+    };
     
 
     
+    const {
+        handlePasswordChange,
+        handleUpdatePassword
+    } = useLogin();
+
+    const updatePassword = () => {
+        if (newPassword === confirmNewPassword) {
+            handleUpdatePassword().then(() => {
+                setCurrentPassword("");
+                setNewPassword("");
+                setConfirmNewPassword("");
+                toast.success(`Password Change Successful!`, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    style: {
+                        color: '#E9204F',
+                        backgroundColor: '#2C2C2C', 
+                    }
+                })
+            }).catch((error) => {
+                console.error("Error updating password: ", error);
+            });
+        } else {
+            console.error("Passwords do not match.");
+        }
+    };
 
     return (
+        <>
         <div style={containerStyle}>
+            <ToastContainer />
             {user ? (
             <div style={cardStyle}>
                 {/* Sidebar Navigation */}
@@ -214,21 +332,120 @@ const Account: React.FC = () => {
                     </div>
                 )}
                 {activeTab === 'Orders' && (
-                    <div>
-                    <h1 style={{ fontSize: '24px', marginBottom: '24px' }}>Billing & Payments</h1>
-                    <p style={{ color: '#A0A0A0' }}>Manage your billing information and view payment history.</p>
-                    </div>
+                    <>
+                        {orders.length > 0 ? (
+                            orders.map((order, orderIndex) => (
+                                <div key={orderIndex} style={{ marginBottom: '24px' }}>
+                                    <h2 style={{ fontSize: '20px', marginBottom: '16px' }}>Order Date: {order.date}</h2>
+                                    <p style={{ fontSize: '16px', color: '#A0A0A0' }}>Awaiting shipping info</p>
+                                    {order.items.map((item, itemIndex) => (
+                                        <div key={itemIndex} style={infoCardStyle}>
+                                            <img
+                                                src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
+                                                alt={item.title}
+                                                style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
+                                            />
+                                            <div style={{ flex: 1 }}>
+                                                <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#E9204F' }}>{item.title}</p>
+                                                <p>{item.description}</p>
+                                                {!item.title.toLowerCase().includes('vinyl') && (
+                                                    <>
+                                                        <p><strong>Size:</strong> {item.Size}</p>
+                                                        <p><strong>Color:</strong> {item.color}</p>
+                                                    </>
+                                                )}
+                                                <p><strong>Quantity:</strong> {item.quantity}</p>
+                                            </div>
+                                            <p style={{ fontSize: '16px', fontWeight: 'bold', color: 'white' }}>${item.price.toFixed(2)}</p>
+                                        </div>
+                                    ))}
+                                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: 'white', marginTop: '16px' }}>Total: ${order.total.toFixed(2)}</h3>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No orders found.</p>
+                        )}
+                    </>
                 )}
+
                 {activeTab === 'Tour' && (
-                    <div>
-                    <h1 style={{ fontSize: '24px', marginBottom: '24px' }}>Notification Settings</h1>
-                    <p style={{ color: '#A0A0A0' }}>Control how you receive notifications.</p>
-                    </div>
+                    <>                                    <h2 style={{ fontSize: '20px', marginBottom: '16px' }}>Tour Dates:</h2>
+                        {tourOrders.length > 0 ? (
+                            tourOrders.map((tourOrder, tourOrderIndex) => (
+                                <div key={tourOrderIndex} style={{ marginBottom: '24px' }}>
+
+                                    {tourOrder.items.map((item, itemIndex) => (
+                                        <div key={itemIndex} style={infoCardStyle}>
+                                            <div style={{ flex: 1 }}>
+                                                <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#E9204F' }}>{item.place}</p>
+                                                <p><strong>Address:</strong> {item.address}</p>
+                                                <p><strong>Start Date:</strong> {item.startDate}</p>
+                                                <p><strong>End Date:</strong> {item.endDate}</p>
+                                                <p><strong>Seats:</strong> {item.selectedSeats.map(getSeatLabel).join(', ')}</p>
+                                                <p style={{ fontSize: '12px', color: '#A0A0A0', marginTop: '8px' }}>Scan this code at the venue for admission</p>
+                                            </div>
+
+                                            <QRCode 
+                                                value={`Email: ${userData.email}, Place: ${item.place}, Start Date: ${item.startDate}, End Date: ${item.endDate}, Seats: ${item.selectedSeats.join(', ')}`} 
+                                                size={128} 
+                                                bgColor="#ffffff" 
+                                                fgColor="#000000" 
+                                                level="Q" 
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            ))
+                        ) : (
+                            <p>No tour orders found.</p>
+                        )}
+                    </>
                 )}
                 {activeTab === 'security' && (
                     <div>
                     <h1 style={{ fontSize: '24px', marginBottom: '24px' }}>Security Settings</h1>
                     <p style={{ color: '#A0A0A0' }}>Manage your account security and privacy settings.</p>
+                    <div style={{ marginTop: '16px' }}>
+                        <div style={infoCardStyle}>
+                        <Shield style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                        <div>
+                            <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Current Password</p>
+                            <input
+                            type="password"
+                            value={currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                            style={inputStyle}
+                            />
+                        </div>
+                        </div>
+                        <div style={infoCardStyle}>
+                        <Shield style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                        <div>
+                            <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>New Password</p>
+                            <input
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => {setNewPassword(e.target.value); handlePasswordChange(e)}}
+                            style={inputStyle}
+                            />
+                        </div>
+                        </div>
+                        <div style={infoCardStyle}>
+                        <Shield style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                        <div>
+                            <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Confirm New Password</p>
+                            <input
+                            type="password"
+                            value={confirmNewPassword}
+                            onChange={(e) => setConfirmNewPassword(e.target.value)}
+                            style={inputStyle}
+                            />
+                        </div>
+                        </div>
+                        <button style={buttonStyle} onClick={updatePassword}>
+                        Update Password
+                        </button>
+                    </div>
                     </div>
                 )}
                 </div>
@@ -238,37 +455,57 @@ const Account: React.FC = () => {
                 <h1>Please login to view your account information.</h1>
             </div>
             )}
+            
         </div>
+        <Footer/>
+        </>
     );
 }
 
 const containerStyle: React.CSSProperties = {
-    minHeight: '100vh',
+    minHeight: '80vh',
     backgroundColor: '#121212',
     color: '#ffffff',
     padding: '32px',
-    marginTop: '72px'
+    marginTop: '72px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
 };
 
 const cardStyle: React.CSSProperties = {
     backgroundColor: '#1E1E1E',
     borderRadius: '8px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-    display: 'grid',
-    gridTemplateColumns: '1fr 3fr',
-    minHeight: '600px'
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    maxWidth: '1200px',
+    minHeight: '600px',
+    overflow: 'hidden'
 };
 
 const sidebarStyle: React.CSSProperties = {
     borderRight: '1px solid #333',
-    padding: '24px'
+    padding: '24px',
+    flex: '1 1 100%',
+    maxWidth: '300px',
+    boxSizing: 'border-box'
+};
+
+const contentStyle: React.CSSProperties = {
+    padding: '32px',
+    flex: '3 1 100%',
+    boxSizing: 'border-box'
 };
 
 const profileHeaderStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
-    marginBottom: '32px'
+    marginBottom: '32px',
+    flexDirection: 'column',
+    textAlign: 'center'
 };
 
 const tabStyle = (isActive: boolean): React.CSSProperties => ({
@@ -284,12 +521,9 @@ const tabStyle = (isActive: boolean): React.CSSProperties => ({
     cursor: 'pointer',
     marginBottom: '8px',
     transition: 'all 0.2s ease',
-    textAlign: 'left'
+    textAlign: 'left',
+    justifyContent: 'center'
 });
-
-const contentStyle: React.CSSProperties = {
-    padding: '32px'
-};
 
 const infoCardStyle: React.CSSProperties = {
     backgroundColor: '#2D2D2D',
@@ -298,7 +532,9 @@ const infoCardStyle: React.CSSProperties = {
     marginBottom: '16px',
     display: 'flex',
     alignItems: 'center',
-    gap: '16px'
+    gap: '16px',
+    flexDirection: 'column',
+    textAlign: 'center'
 };
 
 const buttonStyle: React.CSSProperties = {
@@ -333,7 +569,8 @@ const signOutButtonStyle: React.CSSProperties = {
     borderRadius: '6px',
     cursor: 'pointer',
     marginTop: '16px',
-    textAlign: 'left'
+    textAlign: 'center',
+    justifyContent: 'center'
 };
 
 export default Account;
