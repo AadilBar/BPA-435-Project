@@ -8,13 +8,15 @@ interface StoreCardProps {
   price: number;
   title: string;
   description: string;
-  
+  orange?: string[];
+  blue?: string[];
+  black?: string[];
+  grey?: string[];
 }
 
-const Item: React.FC<StoreCardProps> = ({ imageUrl, price, title, description}) => {
+const Item: React.FC<StoreCardProps> = ({ imageUrl, price, title, description, orange, blue, black, grey }) => {
   return (
-    <Link to="/checkout" className="item-link" state={{ imageUrl, price, title, description }}>
-       
+    <Link to="/checkout" className="item-link" state={{ imageUrl, price, title, description, orange, blue, black, grey }}>
     <div className="item-container">
 
       <div className="image-container">
