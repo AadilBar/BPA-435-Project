@@ -111,7 +111,7 @@ function Navbar() {
             <Image
               src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
               alt="Home"
-              height="40px" // Further reduced logo height
+              height="50px" // Further reduced logo height
               transition="transform 0.3s ease"
               _hover={{ transform: 'scale(1.1)' }}
             /> 

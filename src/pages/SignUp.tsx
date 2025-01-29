@@ -114,10 +114,12 @@ export default function SignUp() {
                     </div>
                 </div>
                 {<button type="submit" style={{ padding: '15px', backgroundColor: '#E9204F', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '1em' }}  onClick={(e) => {
-                    pushUserInfo();
-                    handleCreateAccount();
-                    handleLogin();
-                    setConfirmPassword("");
+                    if (password === confirmPassword) {
+                        pushUserInfo();
+                        handleCreateAccount();
+                        handleLogin();
+                        setConfirmPassword("");
+                    }
                     e.preventDefault();
                 }}>Sign Up</button>}
             </form>
@@ -125,10 +127,6 @@ export default function SignUp() {
             <p style={{ marginTop: '30px', fontSize: '1em' }}>
                 Already have an account? <Link to="/login" style={{ color: '#007BFF' }}>Login</Link>
             </p>
-            <p style={{ marginTop: '30px', fontSize: '1em' }}>{createAccountStatus}</p>
-            <p style={{ marginTop: '30px', fontSize: '1em' }}>{email}</p>
-            <p style={{ marginTop: '30px', fontSize: '1em' }}>{password}</p>
-            <p style={{ marginTop: '30px', fontSize: '1em' }}>{createAccountStatus}</p>
             <p style={{ marginTop: '30px', fontSize: '1em' }}>{createAccountStatus}</p>
         </div>
     );

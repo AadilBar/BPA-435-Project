@@ -324,4 +324,10 @@ grid-area: row-start / col-start / row-end / col-end;
     #name, #number, #email, #message {
         font-size: 0.9rem;
     }
+
+    
+}
+
+.email-text, .phone-text {
+    font-size: clamp(0.5rem, 1vw, 1.2rem);
 }

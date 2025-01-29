@@ -154,7 +154,7 @@ export default function Contact() {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="contact_info_phone_title">
+        <h2 className="phone-text">
           <LuPhoneCall className="phone_icon" />
           Phone:
         </h2>
@@ -172,7 +172,7 @@ export default function Contact() {
         transition={{ duration: 1, delay: 0.3 }}
         viewport={{ once: true }}
       >
-        <h2 className="contact_info_email_title">
+        <h2 className="email-text">
           <LuMail className="email_icon" />
           Email:
         </h2>
