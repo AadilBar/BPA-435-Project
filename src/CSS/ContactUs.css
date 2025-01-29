@@ -1,43 +1,79 @@
-/*Intro page */
-.video_container2{
-    height: 75vh;
-    position: relative;
-    overflow: hidden;
+/* Intro page */
+/* Hero section styles */
+@import url('https://fonts.googleapis.com/css2?family=Sansation&display=swap');
+.hero-contact {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: black; /* Fallback background color */
+    opacity: 0; /* Start as invisible */
+    animation: fadeInHero 3s ease-in-out forwards; /* Apply fade-in animation */
+    background: url('/images/contact-cover.jpg') center/cover no-repeat;
+    position: relative; /* Ensure the pseudo-element is positioned relative to the container */
+  }
+  
+  /* Pseudo-element for dimming the background image */
+  .hero-contact::before {
+    content: ''; /* No text content */
+    position: absolute; /* Absolute positioning */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+    z-index: -1; /* Place the overlay behind the content */
+  }
+  
+  /* Overlay for the text */
+  .hero-contact-overlay {
+    text-align: center;
+    opacity: 0; /* Start as invisible */
+    animation: fadeInTextHero 3s ease-in-out forwards 1s; /* Add delay for the text */
+  }
+  
+  .hero-contact h1 {
     color: white;
-    font-weight: bold;
-    font-size: 50px;
-    background: rgba(0, 0, 0, 0.6);
-}
-.video-bg{
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-
-/*FAQ*/
-}
-.faq_container{
-    background-color: rgba(107, 83, 83, 0.6); 
-    background-blend-mode: multiply;
+    margin: 0;
+    font-family: 'Sansation', sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+  }
+  
+  /* Keyframe animation for fading in the whole hero section */
+  @keyframes fadeInHero {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Keyframe animation for fading in the text in hero section */
+  @keyframes fadeInTextHero {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .faq_container {
+    background-color: rgba(0, 0, 0, 0.4);
     margin-top: 0px;
-    display: grid; 
+    display: grid;
     grid-template-rows: 0.3fr 2fr;
     grid-template-columns: auto;
     justify-items: center;
-    align-items: center; 
-    background-image: url('/images/hands2.jpg');
-    background-blend-mode: multiply;
+    align-items: center;
+    background-image: url('/images/Contact2.jpg');
     background-position: center;
-    background-repeat: no-repeat; 
+    background-size: cover;
+    background-blend-mode: color;
     height: 90vh;
     padding-left: 25px;
-    padding-right: 25px; 
+    padding-right: 25px;
     position: relative;
 }
 .faq_title{
@@ -63,7 +99,7 @@
     padding: 15px;
 }
 .faq_content{
-    background-color: rgba(145, 134, 134, 0.6);
+    background-color: rgba(91, 91, 91, 0.6);
     padding-top: 25px;
     padding-bottom: 25px;
 }
@@ -77,16 +113,18 @@
 
 /*Contact Stage Fright*/
 
-.contact_info_container{
+.contact_info_container {
     margin-top: 100px;
     height: 100vh;
     display: grid; 
     grid-template-rows: 14.285% 14.285% 17.285% 21.285% 10.285% 14.285% 14.285%;
     grid-template-columns: 20% 20% 40% 20%;
-    background-image: url('/images/contact_info.jpg');
+    background-image: url('/images/contact3.jpg');
+    background-blend-mode: color;
     background-position: center;
     background-repeat: no-repeat; 
     background-size: cover;
+    background-color: rgba(0, 0, 0, 0.4); 
 }
 .contact_info_title{
     background-color: rgba(41, 36, 36, 0.6);

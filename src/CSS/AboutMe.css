@@ -1,3 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansation&display=swap');
+
+.hero2-overlay {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 25px;
+    padding: 50px 25px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards, scaleIn 1.5s ease-out forwards;
+    transform: scale(1.1);
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.7);
+}
+
+.hero2-overlay h1 {
+    font-family: 'Sansation', sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    margin-bottom: 20px;
+}
+
+.hero2-overlay p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: #dcdcdc;
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .image2_container {
     position: relative;
     width: 100%;
@@ -17,11 +86,11 @@
     color: white;
     font-size: 24px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);  
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     border-radius: 5px;
-  }
-/*  <img src={`${import.meta.env.BASE_URL}/images/background_lore.jpg`} alt="background_image" className='lore_image' />*/ 
+}
+
 .background_lore_background {
     background-color: rgb(99, 66, 130);
     background-image: url('/images/membership2.jpg');
@@ -30,33 +99,34 @@
     background-repeat: no-repeat;
     background-blend-mode: multiply;
     width: 100%;
-    height: 100vh; 
+    height: 100vh;
     display: grid;
-    grid-template-columns: 1.3fr 1fr; 
+    grid-template-columns: 1.3fr 1fr;
     grid-template-rows: 0.1fr 3fr 1fr;
     gap: 2rem;
-    padding: 2rem; 
+    padding: 2rem;
     box-sizing: border-box;
 }
 
 .video {
-    width: 100%; 
+    width: 100%;
     height: auto;
     border-width: thick;
     border-style: groove;
     border-color: rgb(88, 112, 79);
-    border-radius: 14px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-
+    border-radius: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-.video_container{
-    grid-area: 2 / 1 / 2 / 2; 
+
+.video_container {
+    grid-area: 2 / 1 / 2 / 2;
     padding-left: 3rem;
     padding-right: 3rem;
     padding-top: 5rem;
-    padding-bottom:5rem;
+    padding-bottom: 5rem;
 }
-.video_caption{
+
+.video_caption {
     text-align: center;
     font-size: larger;
     font-weight: bold;
@@ -66,47 +136,49 @@
 .background_info {
     grid-area: 2 / 2 / 2 / 3;
     font-size: 2rem;
-    color: #fff; 
+    color: #fff;
     text-align: center;
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
-.background_title{
+
+.background_title {
     font-weight: bold;
 }
-.background_description1, .background_description2, .background_description3{
+
+.background_description1, .background_description2, .background_description3 {
     font-size: large;
 }
 
-.background_description2, .background_description3{
-    margin-top: 30px;
-}
-.background_description1{
+.background_description2, .background_description3 {
     margin-top: 30px;
 }
 
-/*
-MEMBERS PAGE
-*/
+.background_description1 {
+    margin-top: 30px;
+}
 
-.members_page{  
+/* MEMBERS PAGE */
+.members_page {
     height: 100vh;
-    background-color: #1a1a1a; /* Dark background */
-    color: #f5f5f5; /* Light text color */
+    background-color: #1a1a1a;
+    color: #f5f5f5;
 }
-.member_title{
+
+.member_title {
     text-align: center;
-    color: #f5f5f5; /* Light text color */
+    color: #f5f5f5;
     margin-top: 40px;
     font-weight: bold;
     font-size: 4rem;
-    background-color: #333; /* Darker background */
+    background-color: #333;
 }
-.members_page_sub{
+
+.members_page_sub {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    background-color: #333; /* Darker background */
+    background-color: #333;
     height: calc(100% - 100px);
     column-gap: 3rem;
     row-gap: 2rem;
@@ -114,46 +186,49 @@ MEMBERS PAGE
     padding-right: 3rem;
     padding-bottom: 3rem;
 }
-.member_container{
-    display: grid; 
-    grid-template-columns: 5% 50% 5% 40% 5% ;
+
+.member_container {
+    display: grid;
+    grid-template-columns: 5% 50% 5% 40% 5%;
     grid-template-rows: 10% 15% 15% 40% 5%;
-    background-color: #444; /* Darker background */
+    background-color: #444;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     padding-right: 0.6rem;
 }
-.member_image{
+
+.member_image {
     width: auto;
     height: auto;
     grid-area: 2 / 2 / 5 / 3;
 }
-.member_description{
+
+.member_description {
     grid-area: 4 / 4 / 5 / 5;
     line-height: 1.5;
     word-wrap: break-word;
     overflow: hidden;
 }
-.member_name{
+
+.member_name {
     grid-area: 2 / 4 / 3 / 5;
 }
-.member_position{
-    grid-area: 3 / 4 / 4 / 5;
 
+.member_position {
+    grid-area: 3 / 4 / 4 / 5;
 }
-.member_position, .member_description, .member_name{
-    color: #f5f5f5; /* Light text color */
+
+.member_position, .member_description, .member_name {
+    color: #f5f5f5;
 }
-/*
-for each item: 
-grid-area: row-start / col-start / row-end / col-end;
-*/
 
 @media (max-width: 768px) {
+    /* Adjusting the background layout */
     .background_lore_background {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
         gap: 1rem;
         padding: 1rem;
+        
     }
 
     .video_container {
@@ -162,38 +237,82 @@ grid-area: row-start / col-start / row-end / col-end;
 
     .background_info {
         padding: 1rem;
-        font-size: 1.5rem;
+        font-size: 1.1rem;  /* Slightly smaller font */
     }
 
+    /* Adjusting the members page layout */
     .members_page {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-    }
-
-    .members_page_sub {
-        flex-grow: 1;
-    }
-
-    .members_page_sub {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
         padding: 1rem;
-        column-gap: 1rem;
-        row-gap: 1rem;
+    }
+
+    .member_title {
+        font-size: 2.5rem; /* Smaller font size for mobile */
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .members_page_sub {
+        display: flex;
+        flex-direction: column; /* Stack member containers vertically */
+        gap: 2rem;
+        padding: 0;
     }
 
     .member_container {
-        grid-template-columns: 10% 80% 10%;
-        grid-template-rows: auto auto auto auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #444;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         padding: 1rem;
+        border-radius: 8px;
     }
 
     .member_image {
-        grid-area: 1 / 2 / 2 / 3;
+        width: 80%;
+        height: auto;
+        margin-bottom: 1rem;
     }
 
     .member_name, .member_position, .member_description {
-        grid-area: auto / 2 / auto / 3;
+        text-align: center;
+        color: #f5f5f5;
+        margin-bottom: 1rem;
     }
+
+    .member_name {
+        font-size: 1.3rem;  /* Slightly smaller font */
+        font-weight: bold;
+    }
+
+    .member_position {
+        font-size: 1.1rem;  /* Slightly smaller font */
+        color: #ccc;
+    }
+    .background_description1, .background_description2, .background_description3 {
+        font-size: 0.8rem;  /* Slightly smaller font for mobile */
+        line-height: 1.6;
+    }
+
+
+    .member_description {
+        font-size: 0.95rem;  /* Slightly smaller font */
+        color: #dcdcdc;
+        line-height: 1.6;
+    }
+}
+
+/* Fade-in effect for mobile or dynamic sections */
+.fade-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
