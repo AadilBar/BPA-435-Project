@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Footer from '../components/footer';
 import Item from '../components/merch_item';
-
+import '../CSS/Store.css'; 
 const allItems = [
   { imageUrl: '/images/Merch/Vinyls/Soaring Vinyl.png', price: 37.99, title: 'Soaring Vinyl', description: 'Physical Vinyl of the album Soaring crafted by the Stage Fright team', category: 'Vinyl' },
   { imageUrl: '/images/Merch/Vinyls/Resounding Vinyl.png', price: 40.99, title: 'Resounding Vinyl', description: 'Physical Vinyl of the album Resounding crafted by the Stage Fright team', category: 'Vinyl' },
@@ -9,7 +9,7 @@ const allItems = [
   {
     imageUrl: '/images/Merch/Hoodies/Black/Main.png',
     price: 29.99,
-    title: 'Black Stage Fright Hoodie',
+    title: 'Stage Fright Hoodie',
     description: 'Every stitch in this garment tells the story of a master craftsperson’s dedication to perfection.',
     category: 'Hoodies',
     orange: [
@@ -37,12 +37,141 @@ const allItems = [
       `${import.meta.env.BASE_URL}/images/Merch/Hoodies/Gray/Female.png`,
     ],
   },
+
+  {
+    imageUrl: '/images/Merch/Shirts/Black/Main.png',
+    price: 19.99,
+    title: 'Stage Fright T-Shirt',
+    description: 'Every stitch in this garment tells the story of a master craftsperson’s dedication to perfection.',
+    category: 'T-Shirts',
+    orange: [
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Orange/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Orange/Folded.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Orange/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Orange/Female.png`,
+    ],
+    blue: [
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Blue/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Blue/Folded.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Blue/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Blue/Female.png`,
+    ],
+    black: [
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Black/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Black/Folded.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Black/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/Black/Female.png`,
+    ],
+    grey: [
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/White/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/White/Folded.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/White/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Shirts/White/Female.png`,
+    ],
+  },
+  {
+    imageUrl: '/images/Merch/TankTop/Black/Main.png',
+    price: 19.99,
+    title: 'Stage Fright Tank Top',
+    description: 'Every stitch in this garment tells the story of a master craftsperson’s dedication to perfection.',
+    category: 'Tank Top',
+    orange: [
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Orange/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Orange/Female1.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Orange/Female2.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Orange/closeup.png`,
+    ],
+    blue: [
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Blue/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Blue/Female1.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Blue/Female2.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Blue/closeup.png`,
+    ],
+    black: [
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Black/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Black/Female1.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Black/Female2.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Black/closeup.png`,
+    ],
+    grey: [
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Grey/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Grey/Female1.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Grey/Female2.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/TankTop/Grey/closeup.png`,
+    ],
+  },
+  { imageUrl: '/images/Merch/Stickers/sticker.png', price: 35.99, title: 'White Stage Fright Sticker', description: 'Show off Your Stage Fright Pride with a sticker that can be placed on any surface', category: 'Stickers' },
+  { imageUrl: '/images/Merch/Candle/Candle.png', price: 5.99, title: 'Stage Fright Candle', description: 'This hand-poured candle fills your space with a soothing, long-lasting fragrance, creating a warm and inviting atmosphere.', category: 'Candle' },
+  {
+    imageUrl: '/images/Merch/PhoneCase/Black/Main.png',
+    price: 29.99,
+    title: 'iPhone 15 Phone Case',
+    description: 'Protect your phone in style with this durable, sleek case that offers a perfect fit and a modern design.',
+    category: 'Phone Case',
+    orange: [
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Orange/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Orange/Dual.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Orange/Table.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Orange/Outline.png`,
+    ],
+    blue: [
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Blue/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Blue/Dual.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Blue/Table.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Blue/Outline.png`,
+    ],
+    black: [
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Black/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Black/Dual.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Black/Table.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/Black/Outline.png`,
+    ],
+    grey: [
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/White/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/White/Dual.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/White/Table.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/PhoneCase/White/Outline.png`,
+    ],
+  },
+  {
+    imageUrl: '/images/Merch/Hat/Black/Main.png',
+    price: 9.99,
+    title: 'Stage Fright Hat',
+    description: 'Elevate your look with this comfortable and stylish hat, designed to keep you cool and fashionable all day long.',
+    category: 'Hat',
+    orange: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Orange/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Orange/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Orange/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Orange/Female.png`,
+    ],
+    blue: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Blue/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Blue/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Blue/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Blue/Female.png`,
+    ],
+    black: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Black/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Black/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Black/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/Black/Female.png`,
+    ],
+    grey: [
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/White/Main.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/White/Back.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/White/Male.png`,
+      `${import.meta.env.BASE_URL}/images/Merch/Hat/White/Female.png`,
+    ],
+  },
+  { imageUrl: '/images/Merch/Bag/Bag.png', price: 24.99, title: 'Stage Fright Tote Bag', description: 'Carry your essentials in style with this durable and spacious tote bag, perfect for any occasion.', category: 'Bag' },
+  { imageUrl: '/images/Merch/Socks/Socks.png', price: 8.99, title: 'Stage Fright Socks', description: 'Step into comfort with these soft, breathable socks that provide all-day support and warmth.', category: 'Socks' },
 ];
 
 const Store = () => {
   const [filters, setFilters] = useState({
     category: 'All',
-    minPrice: 10,
+    minPrice: 4.99,
     maxPrice: 100,
   });
 
@@ -78,7 +207,13 @@ const Store = () => {
   return (
     <>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#000000', paddingTop: '20px', width: '100%' }}>
-        <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Shop Stage Fright</h1>
+
+      <div style={{marginTop: '7%'}} className='hero-store'>
+        <div className='hero-store-overlay'>
+          <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '80px', fontWeight: '700',}}>Shop Stage Fright</h1>
+        </div>
+      </div>
+      
 
         {/* Filter Button */}
         <button
@@ -140,6 +275,13 @@ const Store = () => {
                   <option value="Beanies">Beanies</option>
                   <option value="Hoodies">Hoodies</option>
                   <option value="T-Shirts">T-Shirts</option>
+                  <option value="Stickers">Stickers</option>
+                  <option value="Tank Top">Tank Top</option>
+                  <option value="Candle">Candle</option>
+                  <option value="Phone Case">Phone Case</option>
+                  <option value="Hat">Hat</option>
+                  <option value="Bag">Bag</option>
+                  <option value="Socks">Socks</option>
                 </select>
               </div>
 
