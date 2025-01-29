@@ -10,20 +10,19 @@ export default function Footer() {
       fontWeight="700"
       fontSize="14px"
       position="relative"
-      bottom="0"
       width="100%"
       height="auto" 
       pt={8} 
     >
       <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        maxW="1200px"
-        mx="auto"
-        px={6}
-        gap={4} 
-        height="auto"
+      direction="column"
+      align="center"
+      justify="center"
+      maxW="1200px"
+      mx="auto"
+      px={6}
+      gap={4} 
+      height="auto"
       >
 
         <Flex justify="center" gap={6} mb={4}>

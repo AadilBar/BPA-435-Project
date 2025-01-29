@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { browserLocalPersistence, createUserWithEmailAndPassword, setPersistence, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { browserLocalPersistence, createUserWithEmailAndPassword, setPersistence, signInWithEmailAndPassword, signOut, updatePassword, User } from "firebase/auth";
 import { auth} from "../Firebase/Firebase.ts";
 
 const useLogin = () => {
@@ -51,6 +51,18 @@ const useLogin = () => {
     }
   };
 
+  const handleUpdatePassword = async (): Promise<void> => {
+    try {
+      if (auth.currentUser) {
+        await updatePassword(auth.currentUser, password);
+        setCreateAccountStatus("Password updated successfully.");
+      } else {
+        setCreateAccountStatus("No user is currently signed in.");
+      }
+    } catch (error: any) {
+    }
+  };
+
   // Handle signout button click
   const handleSignout = async (): Promise<void> => {
     try {
@@ -87,6 +99,7 @@ const useLogin = () => {
     createAccountStatus,
     handleEmailChange,
     handlePasswordChange,
+    handleUpdatePassword,
     handleLogin,
     handleCreateAccount,
     handleSignout,

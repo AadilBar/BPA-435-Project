@@ -77,7 +77,7 @@ const Store = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#000000', paddingTop: '20px', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#000000', paddingTop: '100px', width: '100%', paddingBottom: '50px' }}>
         <h1 style={{ fontFamily: 'Sansation', color: 'white', fontSize: '50px', fontWeight: '700' }}>Shop Stage Fright</h1>
 
         {/* Filter Button */}
@@ -198,8 +198,9 @@ const Store = () => {
           ))}
         </div>
 
-        <Footer />
       </div>
+      
+      <Footer />
     </>
   );
 };
