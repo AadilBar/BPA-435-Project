@@ -1,6 +1,5 @@
 /*Intro page */
 .video_container2{
-    margin-top: 20px;
     height: 75vh;
     position: relative;
     overflow: hidden;
@@ -26,7 +25,7 @@
 .faq_container{
     background-color: rgba(107, 83, 83, 0.6); 
     background-blend-mode: multiply;
-   margin-top: 100px;
+    margin-top: 0px;
     display: grid; 
     grid-template-rows: 0.3fr 2fr;
     grid-template-columns: auto;
