@@ -206,7 +206,7 @@ const Store = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#000000', paddingTop: '20px', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#000000', paddingTop: '100px', width: '100%', paddingBottom: '50px' }}>
 
       <div style={{marginTop: '7%'}} className='hero-store'>
         <div className='hero-store-overlay'>
@@ -340,8 +340,9 @@ const Store = () => {
           ))}
         </div>
 
-        <Footer />
       </div>
+      
+      <Footer />
     </>
   );
 };

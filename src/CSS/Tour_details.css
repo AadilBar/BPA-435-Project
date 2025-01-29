@@ -162,6 +162,7 @@
   background: linear-gradient(to bottom, #763030, #271717);
   overflow: hidden;
   padding: 16px;
+  
 }
 
 /* Ticket Container */
@@ -241,7 +242,7 @@
 }
 
 .status .item:nth-child(3)::before {
-  background: #28B57A;
+  background: #ae4a4a;
 }
 
 .all-seats {
@@ -270,16 +271,17 @@
 }
 
 .seat.selected {
-  background: #28B57A;
+  background: #ae4a4a;
 }
 
+
 .seat:hover {
-  background-color: #28B57A; 
+  background-color: #ae4a4a; 
   transform: scale(1.1);
 }
 
 .seat.booked {
-  background: #444;
+  background: #666;
   cursor: not-allowed;
 }
 
@@ -314,7 +316,7 @@
 }
 
 .vip-item:hover {
-  background-color: #28B57A;
+  background-color: #ae4a4a;
   transform: scale(1.05);
 }
 
@@ -340,7 +342,7 @@
 }
 
 .price_tour button {
-  background: #28B57A;
+  background: #ae4a4a;
   color: white;
   font-size: 18px;
   padding: 12px 20px;
@@ -368,7 +370,7 @@
 }
 
 .dates-item:hover {
-  background: #28B57A;
+  background: #ae4a4a;
   transform: scale(1.05);
 }
 
@@ -382,7 +384,7 @@
 }
 
 .times .time:hover {
-  background: #28B57A;
+  background: #ae4a4a;
   transform: scale(1.05);
 }
 
@@ -428,12 +430,12 @@
 }
 
 .seat:hover {
-  background-color: #28B57A;
+  background-color: #ae4a4a;
   transform: scale(1.1);
 }
 
 .seat.booked {
-  background: #444;
+  background: #666;
   cursor: not-allowed;
 }
 
@@ -474,7 +476,7 @@
 }
 
 .status .item:nth-child(3)::before {
-  background: #28B57A;
+  background: #ae4a4a;
 }
 
 
@@ -513,7 +515,7 @@
 }
 
 .price_tour button {
-  background: #28B57A;
+  background: #ae4a4a;
   color: white;
   font-size: 18px;
   padding: 12px 20px;
