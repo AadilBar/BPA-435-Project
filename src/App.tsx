@@ -19,6 +19,7 @@ import { createContext, useEffect, useState } from 'react';
 import React from 'react';
 import Terms from './pages/Terms.tsx';
 import Privacy from './pages/Privacy.tsx';
+import Account from './pages/Account.tsx';
 
 const UserContext = createContext<{ user: User | null, setUser: React.Dispatch<React.SetStateAction<User | null>> }>({ user: null, setUser: () => {} });
 
@@ -56,7 +57,9 @@ function App() {
                         <Route path="/cart" element={<Cart/>} />
                         <Route path="/payment" element={<Payment/>} />    
                         <Route path="/terms" element={<Terms/>} />    
-                        <Route path="/privacy" element={<Privacy/>} />    
+                        <Route path="/privacy" element={<Privacy/>} />
+                        <Route path="/account" element={<Account/>} />        
+
                     </Routes>
 
                 </HashRouter>

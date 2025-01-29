@@ -12,11 +12,12 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import useLogin from '../Auth/functions';
 import { UserContext } from '../App';
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [dropOpen, setDropOpen] = useState(false);
   const {user} = useContext(UserContext);
   
 
@@ -121,17 +122,53 @@ function Navbar() {
                 </RouterLink>
               </>
             ) : (
-              <>
+                <>
                 <RouterLink to="/cart">
-                <IconButton color="white" size={"2xl"} variant={"ghost"}>
-                    <FaShoppingCart />
-                    </IconButton>
+                  <IconButton color="white" size={"2xl"} variant={"ghost"}>
+                  <FaShoppingCart />
+                  </IconButton>
                 </RouterLink>
-              <Box width="10px" />
-              <RouterLink to="/signup">
-                <Button p={5} backgroundColor={"#E9204F"} onClick={handleSignout}>Logout</Button>
-              </RouterLink>
-              </>
+                <Box width="10px" />
+                <Box position="relative">
+                  <Button
+                  p={5}
+                  backgroundColor={"#E9204F"}
+                  onClick={() => setDropOpen(!dropOpen)}
+                  >
+                  Hi, {user.email} ▼
+                  </Button>
+                  {dropOpen && (
+                    <Box
+                    position="absolute"
+                    top="100%"
+                    right="0"
+                    mt={2}
+                    bg="gray.800"
+                    color="white"
+                    boxShadow="md"
+                    borderRadius="md"
+                    overflow="hidden"
+                    >
+                    <RouterLink to="/account">
+                      <Box p={2} _hover={{ bg: "gray.700" }} display="flex" alignItems="center">
+                      <FaUserCircle style={{ marginRight: '8px' }} />
+                      Account
+                      </Box>
+                    </RouterLink>
+                    <Box
+                      p={2}
+                      _hover={{ bg: "gray.700" }}
+                      display="flex"
+                      alignItems="center"
+                      onClick={handleSignout}
+                    >
+                      <FaSignOutAlt style={{ marginRight: '8px' }} />
+                      Logout
+                    </Box>
+                    </Box>
+                  )}
+                </Box>
+                </>
             )}
           </Flex>
         </Box>
