@@ -5,7 +5,7 @@ import { Image } from '@react-three/drei';
 import { easing } from 'maath';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { albums } from './albums';
-import { Color, IconButton } from '@chakra-ui/react';
+import {IconButton } from '@chakra-ui/react';
 import { FaPlay } from "react-icons/fa";
 import '../CSS/3d.css'; 
 
