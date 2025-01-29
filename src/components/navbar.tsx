@@ -46,7 +46,7 @@ function Navbar() {
   } = useLogin();
 
   const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (
-    <RouterLink to={to}>
+    <RouterLink to={to} onClick={() => window.scrollTo(0, 0)}>
       <Box
         fontFamily="Sansation"
         fontSize={16}

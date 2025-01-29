@@ -61,10 +61,12 @@ const Account: React.FC = () => {
         name: string | null;
         email: string | null;
         phone: string | null;
+        address: string | null;
     }>({
         name: null,
         email: null,
         phone: null,
+        address: null,
     });
 
     const [name, setName] = useState<string>("");
@@ -97,6 +99,7 @@ const Account: React.FC = () => {
                         name: data.Name,
                         email: user.email,
                         phone: data.Phone,
+                        address: data.Address,
                     });
                     setName(data.Name);
                     setEmail(data.email);
@@ -148,12 +151,14 @@ const Account: React.FC = () => {
                 Name: name,
                 Email: email,
                 Phone: phone,
+                Address: userData.address,
             }).then(() => {
                 console.log("User data updated successfully.");
                 setUserData({
                     name: name,
                     email: email,
                     phone: phone,
+                    address: userData.address,
                 });
             }).catch((error: any) => {
                 console.error("Error updating user data: ", error);
@@ -291,6 +296,18 @@ const Account: React.FC = () => {
                                 />
                             </div>
                             </div>
+                            <div style={infoCardStyle}>
+                                <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                                <div>
+                                    <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
+                                    <input
+                                    type="text"
+                                    value={userData.address || ''}
+                                    onChange={(e) => setUserData({ ...userData, address: e.target.value })}
+                                    style={inputStyle}
+                                    />
+                                </div>
+                            </div>
                             <button style={buttonStyle} onClick={() =>{ setEditing(false)
                             updateUserData()
                             }}>
@@ -322,6 +339,13 @@ const Account: React.FC = () => {
                                 <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Phone Number</p>
                                 <p style={{ margin: 0, fontWeight: 500 }}>{userData.phone ? formatPhoneNumber(userData.phone) : 'Not set'}</p>
                             </div>
+                            </div>
+                            <div style={infoCardStyle}>
+                                <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                                <div>
+                                    <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
+                                    <p style={{ margin: 0, fontWeight: 500 }}>{userData.address || 'Not set'}</p>
+                                </div>
                             </div>
                             <button style={buttonStyle} onClick={() => setEditing(true)}>
                             Edit Profile
@@ -467,45 +491,28 @@ const containerStyle: React.CSSProperties = {
     backgroundColor: '#121212',
     color: '#ffffff',
     padding: '32px',
-    marginTop: '72px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    marginTop: '72px'
 };
 
 const cardStyle: React.CSSProperties = {
     backgroundColor: '#1E1E1E',
     borderRadius: '8px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    maxWidth: '1200px',
-    minHeight: '600px',
-    overflow: 'hidden'
+    display: 'grid',
+    gridTemplateColumns: '1fr 3fr',
+    minHeight: '600px'
 };
 
 const sidebarStyle: React.CSSProperties = {
     borderRight: '1px solid #333',
-    padding: '24px',
-    flex: '1 1 100%',
-    maxWidth: '300px',
-    boxSizing: 'border-box'
-};
-
-const contentStyle: React.CSSProperties = {
-    padding: '32px',
-    flex: '3 1 100%',
-    boxSizing: 'border-box'
+    padding: '24px'
 };
 
 const profileHeaderStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
-    marginBottom: '32px',
-    flexDirection: 'column',
-    textAlign: 'center'
+    marginBottom: '32px'
 };
 
 const tabStyle = (isActive: boolean): React.CSSProperties => ({
@@ -521,9 +528,12 @@ const tabStyle = (isActive: boolean): React.CSSProperties => ({
     cursor: 'pointer',
     marginBottom: '8px',
     transition: 'all 0.2s ease',
-    textAlign: 'left',
-    justifyContent: 'center'
+    textAlign: 'left'
 });
+
+const contentStyle: React.CSSProperties = {
+    padding: '32px'
+};
 
 const infoCardStyle: React.CSSProperties = {
     backgroundColor: '#2D2D2D',
@@ -532,9 +542,7 @@ const infoCardStyle: React.CSSProperties = {
     marginBottom: '16px',
     display: 'flex',
     alignItems: 'center',
-    gap: '16px',
-    flexDirection: 'column',
-    textAlign: 'center'
+    gap: '16px'
 };
 
 const buttonStyle: React.CSSProperties = {
@@ -569,8 +577,7 @@ const signOutButtonStyle: React.CSSProperties = {
     borderRadius: '6px',
     cursor: 'pointer',
     marginTop: '16px',
-    textAlign: 'center',
-    justifyContent: 'center'
+    textAlign: 'left'
 };
 
 export default Account;

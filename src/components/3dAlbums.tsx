@@ -6,7 +6,7 @@ import { easing } from 'maath';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { albums } from './albums';
 import {IconButton } from '@chakra-ui/react';
-import { FaPlay } from "react-icons/fa";
+import { FaPause, FaPlay } from "react-icons/fa";
 import '../CSS/3d.css'; 
 
 
@@ -24,9 +24,9 @@ function Carousel({ radius = 1.4, count = 8 }) {
     return Array.from({ length: count }, (_, i) => (
         <Card
             key={i}
-            url={`${import.meta.env.BASE_URL}/img${Math.floor(i % 10) + 1}_.jpg`}
+            url={`${import.meta.env.BASE_URL}/img${(i % 3) + 1}_.png`}
             position={[Math.sin((i / count) * Math.PI * 2) * radius, 0, Math.cos((i / count) * Math.PI * 2) * radius]}
-            rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
+            rotation={[0, (i / count) * Math.PI * 2, 0]}
         />
     ));
 }
@@ -55,6 +55,7 @@ function Card({ url, ...props }: { url: string; [key: string]: any }) {
 const ThreeDAlbums: React.FC = () => {
     const [selectedAlbum, setSelectedAlbum] = useState(0);
     const [rotationY, setRotationY] = useState(0);
+    const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     
     const currentAlbum = albums[selectedAlbum];
 
@@ -66,6 +67,15 @@ const ThreeDAlbums: React.FC = () => {
     const handlePreviousAlbum = () => {
         setSelectedAlbum((prev) => (prev - 1 + albums.length) % albums.length);
         setRotationY((prev) => prev + Math.PI / 4); // Rotate backward
+    };
+
+    const handlePlaySong = (songUrl: string) => {
+        if (audio) {
+            audio.pause();
+        }
+        const newAudio = new Audio(songUrl);
+        setAudio(newAudio);
+        newAudio.play();
     };
 
     const [opacity, setOpacity] = useState(0);
@@ -93,9 +103,9 @@ const ThreeDAlbums: React.FC = () => {
     return (
         <div style={{
             minHeight: '100vh',
-            backgroundImage: 'linear-gradient(to top, #000000, #330000, #000000)',
             color: '#ffffff',
             paddingTop: "100px",
+            backgroundColor: '#09090b',
             opacity,
             transition: 'opacity 0.5s',
             width: '100%',
@@ -154,10 +164,17 @@ const ThreeDAlbums: React.FC = () => {
                                 <div className="track-actions">
                                     <span className="track-duration">{song.duration}</span>
                                     <IconButton
-                                        aria-label="Play"
+                                        aria-label={audio && !audio.paused ? "Pause" : "Play"}
                                         className="play-button"
+                                        onClick={() => {
+                                            if (audio && !audio.paused) {
+                                                audio.pause();
+                                            } else {
+                                                handlePlaySong(`${import.meta.env.BASE_URL}/music/music.mp3`);
+                                            }
+                                        }}
                                     >
-                                        <FaPlay />
+                                        {audio && !audio.paused ? <FaPause /> : <FaPlay />}
                                     </IconButton>
                                 </div>
                             </div>
@@ -166,8 +183,8 @@ const ThreeDAlbums: React.FC = () => {
                 </div>
         
                 {/* Right side - Album Cover and Carousel */}
-                <div className="canvas-container">
-                    <Canvas className="canvas">
+                <div className="canvas-container" >
+                    <Canvas className="canvas" style={{  backgroundColor: '#09090b', }}>
                         <ambientLight />
                         <Rig scale={[2.04, 2.04, 2.04]} rotationY={rotationY}>
                             <Carousel />
