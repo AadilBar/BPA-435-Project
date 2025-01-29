@@ -20,7 +20,7 @@ function Rig({ rotationY, ...props }: { rotationY: number; [key: string]: any })
     return <group ref={ref} {...props} />;
 }
 
-function Carousel({ radius = 1.4, count = 8 }) {
+function Carousel({ radius = 1.5, count = 9 }) {
     return Array.from({ length: count }, (_, i) => (
         <Card
             key={i}
@@ -41,8 +41,8 @@ function Card({ url, ...props }: { url: string; [key: string]: any }) {
         state.clock.getElapsedTime();
         if (ref.current) {
             easing.damp3(ref.current.scale, hovered ? 1.15 : 1, 0.1, delta);
-            easing.damp(ref.current.material, 'radius', hovered ? 0.25 : 0.1, 0.2, delta);
-            easing.damp(ref.current.material, 'zoom', hovered ? 1 : 1.5, 0.2, delta);
+            easing.damp(ref.current.material, 'radius', hovered ? 0.25 : 0.03, 0.2, delta);
+            easing.damp(ref.current.material, 'zoom', hovered ? 1 : 1.1, 0.2, delta);
         }
     });
     return (
@@ -61,12 +61,12 @@ const ThreeDAlbums: React.FC = () => {
 
     const handleNextAlbum = () => {
         setSelectedAlbum((prev) => (prev + 1) % albums.length);
-        setRotationY((prev) => prev - Math.PI / 4); // Rotate forward
+        setRotationY((prev) => prev - Math.PI / 4.5); // Rotate forward
     };
 
     const handlePreviousAlbum = () => {
         setSelectedAlbum((prev) => (prev - 1 + albums.length) % albums.length);
-        setRotationY((prev) => prev + Math.PI / 4); // Rotate backward
+        setRotationY((prev) => prev + Math.PI / 4.5); // Rotate backward
     };
 
     const handlePlaySong = (songUrl: string) => {

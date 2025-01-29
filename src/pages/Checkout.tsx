@@ -51,8 +51,8 @@ const ProductDetails: React.FC = () => {
   ];
 
   return (
-    <div style={{paddingTop: '100px'}}>
-            <ToastContainer />
+    <div style={{ paddingTop: '100px' }}>
+      <ToastContainer />
       <div className="product-container">
         <div className="product-images-container">
           {/* Additional Images */}
@@ -84,83 +84,84 @@ const ProductDetails: React.FC = () => {
 
           <div className="divider"></div>
 
-            {title &&  !title.toLowerCase().includes('vinyl') &&!title.toLowerCase().includes('candle') && !title.toLowerCase().includes('sticker') && !title.toLowerCase().includes('bag') && !title.toLowerCase().includes('socks') && (
-              <>
-          <h3 className="product-color-title">Color</h3>
-            <div className="color-options">
-              <button 
-              className={`color-btn ${color === 'black' ? 'selected' : ''}`} 
-              style={{ backgroundColor: '#010B13' }} 
-              onClick={() => handleColor(black, 'black')}
-              ></button>
-              <button 
-              className={`color-btn ${color === 'grey' ? 'selected' : ''}`} 
-              style={{ backgroundColor: '#bac2bc' }} 
-              onClick={() => handleColor(grey, 'grey')}
-              ></button>
-              <button 
-              className={`color-btn ${color === 'orange' ? 'selected' : ''}`} 
-              style={{ backgroundColor: '#FF4500' }} 
-              onClick={() => handleColor(orange, 'orange')}
-              ></button>
-              <button 
-              className={`color-btn ${color === 'blue' ? 'selected' : ''}`} 
-              style={{ backgroundColor: '#225b9c' }} 
-              onClick={() => handleColor(blue, 'blue')}
-              ></button>
-            </div></>
-            )}
-            {title &&  !title.toLowerCase().includes('vinyl') &&!title.toLowerCase().includes('candle') && !title.toLowerCase().includes('sticker') && !title.toLowerCase().includes('bag') && !title.toLowerCase().includes('phone')&& (
-              <>
+          {title && !title.toLowerCase().includes('vinyl') && !title.toLowerCase().includes('candle') && !title.toLowerCase().includes('sticker') && !title.toLowerCase().includes('bag') && !title.toLowerCase().includes('socks') && (
+            <>
+              <h3 className="product-color-title">Color</h3>
+              <div className="color-options">
+                <button 
+                  className={`color-btn ${color === 'black' ? 'selected' : ''}`} 
+                  style={{ backgroundColor: '#010B13' }} 
+                  onClick={() => handleColor(black, 'black')}
+                ></button>
+                <button 
+                  className={`color-btn ${color === 'grey' ? 'selected' : ''}`} 
+                  style={{ backgroundColor: '#bac2bc' }} 
+                  onClick={() => handleColor(grey, 'grey')}
+                ></button>
+                <button 
+                  className={`color-btn ${color === 'orange' ? 'selected' : ''}`} 
+                  style={{ backgroundColor: '#FF4500' }} 
+                  onClick={() => handleColor(orange, 'orange')}
+                ></button>
+                <button 
+                  className={`color-btn ${color === 'blue' ? 'selected' : ''}`} 
+                  style={{ backgroundColor: '#225b9c' }} 
+                  onClick={() => handleColor(blue, 'blue')}
+                ></button>
+              </div>
+            </>
+          )}
+          {title && !title.toLowerCase().includes('vinyl') && !title.toLowerCase().includes('candle') && !title.toLowerCase().includes('sticker') && !title.toLowerCase().includes('bag') && !title.toLowerCase().includes('phone') && (
+            <>
               <h3 className="product-size-title">Size</h3>
               <div className="size-options">
                 <button 
-                className="size-btn" 
-                style={{ 
-                  fontWeight: Size === 'S' ? 'bold' : 'normal',
-                  outline: Size === 'S' ? 'none' : '',
-                  boxShadow: Size === 'S' ? '0 0 0 2px #FF6B6B' : ''
-                }}
-                onClick={() => setSize('S')}
+                  className="size-btn" 
+                  style={{ 
+                    fontWeight: Size === 'S' ? 'bold' : 'normal',
+                    outline: Size === 'S' ? 'none' : '',
+                    boxShadow: Size === 'S' ? '0 0 0 2px #FF6B6B' : ''
+                  }}
+                  onClick={() => setSize('S')}
                 >
-                S
+                  S
                 </button>
                 <button 
-                className="size-btn" 
-                style={{ 
-                  fontWeight: Size === 'M' ? 'bold' : 'normal',
-                  outline: Size === 'M' ? 'none' : '',
-                  boxShadow: Size === 'M' ? '0 0 0 2px #FF6B6B' : ''
-                }}
-                onClick={() => setSize('M')}
+                  className="size-btn" 
+                  style={{ 
+                    fontWeight: Size === 'M' ? 'bold' : 'normal',
+                    outline: Size === 'M' ? 'none' : '',
+                    boxShadow: Size === 'M' ? '0 0 0 2px #FF6B6B' : ''
+                  }}
+                  onClick={() => setSize('M')}
                 >
-                M
+                  M
                 </button>
                 <button 
-                className="size-btn" 
-                style={{ 
-                  fontWeight: Size === 'L' ? 'bold' : 'normal',
-                  outline: Size === 'L' ? 'none' : '',
-                  boxShadow: Size === 'L' ? '0 0 0 2px #FF6B6B' : ''
-                }}
-                onClick={() => setSize('L')}
+                  className="size-btn" 
+                  style={{ 
+                    fontWeight: Size === 'L' ? 'bold' : 'normal',
+                    outline: Size === 'L' ? 'none' : '',
+                    boxShadow: Size === 'L' ? '0 0 0 2px #FF6B6B' : ''
+                  }}
+                  onClick={() => setSize('L')}
                 >
-                L
+                  L
                 </button>
                 <button 
-                className="size-btn" 
-                style={{ 
-                  fontWeight: Size === 'XL' ? 'bold' : 'normal',
-                  outline: Size === 'XL' ? 'none' : '',
-                  boxShadow: Size === 'XL' ? '0 0 0 2px #FF6B6B' : ''
-                }}
-                onClick={() => setSize('XL')}
+                  className="size-btn" 
+                  style={{ 
+                    fontWeight: Size === 'XL' ? 'bold' : 'normal',
+                    outline: Size === 'XL' ? 'none' : '',
+                    boxShadow: Size === 'XL' ? '0 0 0 2px #FF6B6B' : ''
+                  }}
+                  onClick={() => setSize('XL')}
                 >
-                XL
+                  XL
                 </button>
               </div>
-              </>
-            )}
+            </>
+          )}
         </div>
 
         <div className="checkout-container">
@@ -171,9 +172,8 @@ const ProductDetails: React.FC = () => {
 
           <h3 className="quantity-title">Quantity:</h3>
           <div>
-          <span className='sub2'>Quantity:</span>
-          <StepperInput defaultValue={'1'} onValueChange={({ value }: { value: string }) => setQuantity(Math.max(1, Number(value)))} value={quantity.toString()}/>
-        </div>
+            <StepperInput defaultValue={'1'} onValueChange={({ value }: { value: string }) => setQuantity(Math.max(1, Number(value)))} value={quantity.toString()}/>
+          </div>
 
           <button className="add-to-cart-btn" onClick={addToCart}>Add to Cart</button>
         </div>

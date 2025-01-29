@@ -180,7 +180,7 @@ const Store = () => {
     maxPrice: 100,
   });
 
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilters((prev) => ({ ...prev, category: event.target.value }));

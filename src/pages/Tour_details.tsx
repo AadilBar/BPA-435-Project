@@ -109,7 +109,7 @@ const ProductDetails: React.FC = () => {
 
 
         <div className='center'>
-            <div className='tickets' style={{overflowX: 'hidden'}}>
+            <div className='tickets' style={{overflowX: 'hidden', width: '40%'}}>
                 <div className='ticket-selector'>
                     <div className='head'>
                         <div className='title_tour'>Seating at {place}</div>
@@ -127,7 +127,7 @@ const ProductDetails: React.FC = () => {
                             <div className="item">Booked</div>
                             <div className="item">Selected</div>
                         </div>
-                        <div className="all-seats">
+                        <div className="all-seats" >
                             {bookedSeats.map((seat, index) => (
                                 <div key={index} className="seat-container">
                                     <div 

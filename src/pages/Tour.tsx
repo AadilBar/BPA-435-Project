@@ -68,8 +68,8 @@ export default function Tour() {
     },
     tourTitle: {
       fontSize: '80px',
-      fontWeight: 'bold',
-      fontFamily: 'Rock Salt, sans-serif',  // Unique, cool font
+      fontWeight: 700,
+      fontFamily: 'Sansation, sans-serif',  // Unique, cool font
       textTransform: 'uppercase',
       letterSpacing: '15px',  // Increased letter spacing
       animation: 'textZoom 2s ease-out',
@@ -77,8 +77,8 @@ export default function Tour() {
     },
     slogan: {
       fontSize: '24px',
-      fontWeight: '400',
-      fontFamily: 'Arial, sans-serif',
+      fontWeight: 700,
+      fontFamily: 'Sansation, sans-serif',
       marginTop: '10px',
       fontStyle: 'italic',
       animation: 'fadeIn 3s ease-in-out',
@@ -94,8 +94,8 @@ export default function Tour() {
     },
     tourDatesTitle: {
       fontSize: '50px',
-      fontWeight: '700',
-      fontFamily: 'Helvetica, sans-serif',
+      fontWeight: 700,
+      fontFamily: 'Sansation, sans-serif',
       textTransform: 'uppercase',
       letterSpacing: '5px',
       animation: 'fadeIn 3s ease-in-out',

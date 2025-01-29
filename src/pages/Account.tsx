@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import useLogin from '../Auth/functions';
-import { User, Mail, Phone, Shield, LogOut, Package, Guitar } from 'lucide-react';
+import { User, Mail, Phone, Shield, LogOut, Package, Guitar, Home } from 'lucide-react';
 import { get, getDatabase, ref, update } from 'firebase/database';
 import { toast, ToastContainer } from 'react-toastify';
 import QRCode from "react-qr-code";
@@ -297,7 +297,7 @@ const Account: React.FC = () => {
                             </div>
                             </div>
                             <div style={infoCardStyle}>
-                                <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                                <Home style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                                 <div>
                                     <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
                                     <input
@@ -341,7 +341,7 @@ const Account: React.FC = () => {
                             </div>
                             </div>
                             <div style={infoCardStyle}>
-                                <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
+                                <Home style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                                 <div>
                                     <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
                                     <p style={{ margin: 0, fontWeight: 500 }}>{userData.address || 'Not set'}</p>
@@ -372,12 +372,16 @@ const Account: React.FC = () => {
                                             <div style={{ flex: 1 }}>
                                                 <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#E9204F' }}>{item.title}</p>
                                                 <p>{item.description}</p>
-                                                {!item.title.toLowerCase().includes('vinyl') && (
-                                                    <>
-                                                        <p><strong>Size:</strong> {item.Size}</p>
-                                                        <p><strong>Color:</strong> {item.color}</p>
-                                                    </>
-                                                )}
+                                           {!item.title.toLowerCase().includes('vinyl') && !item.title.toLowerCase().includes('candle') && !item.title.toLowerCase().includes('sticker') && !item.title.toLowerCase().includes('bag') && (
+                                                   <>
+                                                       {!item.title.toLowerCase().includes('phone') && <p>
+                                                           <strong>Size:</strong> {item.Size}
+                                                       </p>}
+                                                       {!item.title.toLowerCase().includes('socks') && <p>
+                                                           <strong>Color:</strong> {item.color}
+                                                       </p>}
+                                                   </>
+                                               )}
                                                 <p><strong>Quantity:</strong> {item.quantity}</p>
                                             </div>
                                             <p style={{ fontSize: '16px', fontWeight: 'bold', color: 'white' }}>${item.price.toFixed(2)}</p>
