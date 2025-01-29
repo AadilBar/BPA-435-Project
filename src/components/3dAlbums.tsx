@@ -56,26 +56,28 @@ const ThreeDAlbums: React.FC = () => {
     const [selectedAlbum, setSelectedAlbum] = useState(0);
     const [rotationY, setRotationY] = useState(0);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+    const [playingIndex, setPlayingIndex] = useState<number | null>(null);
     
     const currentAlbum = albums[selectedAlbum];
 
     const handleNextAlbum = () => {
         setSelectedAlbum((prev) => (prev + 1) % albums.length);
-        setRotationY((prev) => prev - Math.PI / 4.5); // Rotate forward
+        setRotationY((prev) => prev - Math.PI / 4.5); 
     };
 
     const handlePreviousAlbum = () => {
         setSelectedAlbum((prev) => (prev - 1 + albums.length) % albums.length);
-        setRotationY((prev) => prev + Math.PI / 4.5); // Rotate backward
+        setRotationY((prev) => prev + Math.PI / 4.5); 
     };
 
-    const handlePlaySong = (songUrl: string) => {
+    const handlePlaySong = (songUrl: string, index: number) => {
         if (audio) {
             audio.pause();
         }
         const newAudio = new Audio(songUrl);
         setAudio(newAudio);
         newAudio.play();
+        setPlayingIndex(index);
     };
 
     const [opacity, setOpacity] = useState(0);
@@ -91,7 +93,7 @@ const ThreeDAlbums: React.FC = () => {
                 setOpacity(progress);
             } else if (scrollY >= fadeInEnd) {
                 setOpacity(1);
-                window.removeEventListener('scroll', handleScroll); // Remove event listener once opacity is 1
+                window.removeEventListener('scroll', handleScroll); 
             } else {
                 setOpacity(0);
             }
@@ -118,7 +120,6 @@ const ThreeDAlbums: React.FC = () => {
                 gridTemplateColumns: window.innerWidth >= 768 ? '1fr 1fr' : '1fr',
                 gap: '4rem'
             }}>
-                {/* Left side - Album Info */}
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column'
@@ -128,7 +129,7 @@ const ThreeDAlbums: React.FC = () => {
                         <div className="album-artist-section">
                             <h2 className="album-artist">{currentAlbum.artist}</h2>
                             <div className="social-links">
-                                <a href="https://spotify.com" target="_blank" rel="noopener noreferrer">
+                                <a href="https://open.spotify.com/user/3134f72ql3dn4z6gbrvcrgcs4vqa" target="_blank" rel="noopener noreferrer">
                                     <img
                                         src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
                                         alt="Spotify"
@@ -142,7 +143,7 @@ const ThreeDAlbums: React.FC = () => {
                                         className="social-icon"
                                     />
                                 </a>
-                                <a href="https://music.youtube.com" target="_blank" rel="noopener noreferrer">
+                                <a href="https://music.youtube.com/channel/UC_-Opt2taZLj_xpxP1utQxw?feature=shared" target="_blank" rel="noopener noreferrer">
                                     <img
                                         src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
                                         alt="YouTube"
@@ -164,17 +165,18 @@ const ThreeDAlbums: React.FC = () => {
                                 <div className="track-actions">
                                     <span className="track-duration">{song.duration}</span>
                                     <IconButton
-                                        aria-label={audio && !audio.paused ? "Pause" : "Play"}
+                                        aria-label={playingIndex === index && audio && !audio.paused ? "Pause" : "Play"}
                                         className="play-button"
                                         onClick={() => {
-                                            if (audio && !audio.paused) {
+                                            if (playingIndex === index && audio && !audio.paused) {
                                                 audio.pause();
+                                                setPlayingIndex(null);
                                             } else {
-                                                handlePlaySong(`${import.meta.env.BASE_URL}/music/music.mp3`);
+                                                handlePlaySong(song.link, index);
                                             }
                                         }}
                                     >
-                                        {audio && !audio.paused ? <FaPause /> : <FaPlay />}
+                                        {playingIndex === index && audio && !audio.paused ? <FaPause /> : <FaPlay />}
                                     </IconButton>
                                 </div>
                             </div>
@@ -182,7 +184,7 @@ const ThreeDAlbums: React.FC = () => {
                     </div>
                 </div>
         
-                {/* Right side - Album Cover and Carousel */}
+
                 <div className="canvas-container" >
                     <Canvas className="canvas" style={{  backgroundColor: '#09090b', }}>
                         <ambientLight />
@@ -193,7 +195,7 @@ const ThreeDAlbums: React.FC = () => {
                 </div>
             </div>
         
-            {/* Album Navigation - Previous/Next buttons below the carousel */}
+
             <div className="album-navigation">
                 <button
                     onClick={handlePreviousAlbum}

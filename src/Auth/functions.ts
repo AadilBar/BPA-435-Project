@@ -12,7 +12,7 @@ const useLogin = () => {
   const [Phone, setPhone] = useState<string>("");
   const [DateOfBirth, setDateOfBirth] = useState<string>("");
 
-  // Update state variables as the user types
+
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(event.target.value);
   };
@@ -21,7 +21,7 @@ const useLogin = () => {
     setPassword(event.target.value);
   };
 
-  // Handle login button click
+
   const handleLogin = async (): Promise<void> => {
     try {
       await setPersistence(auth, browserLocalPersistence);
@@ -63,7 +63,7 @@ const useLogin = () => {
     }
   };
 
-  // Handle signout button click
+ 
   const handleSignout = async (): Promise<void> => {
     try {
       await signOut(auth);

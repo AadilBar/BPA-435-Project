@@ -22,9 +22,9 @@ function Rig(
     
         }
         if (state.events && typeof state.events.update === 'function') {
-            state.events.update(); // Raycasts every frame rather than on pointer-move // Move camera
+            state.events.update();
         }
-        state.camera.lookAt(0, 0, 0); // Look at center
+        state.camera.lookAt(0, 0, 0); 
     });
     return <group ref={ref} {...props} />;
 }

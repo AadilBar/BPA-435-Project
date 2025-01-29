@@ -1,35 +1,32 @@
-/* Intro page */
-/* Hero section styles */
+
 @import url('https://fonts.googleapis.com/css2?family=Sansation&display=swap');
 .hero-contact {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: black; /* Fallback background color */
-    opacity: 0; /* Start as invisible */
-    animation: fadeInHero 3s ease-in-out forwards; /* Apply fade-in animation */
+    background-color: black; 
+    opacity: 0; 
+    animation: fadeInHero 3s ease-in-out forwards; 
     background: url('/images/contact-cover.jpg') center/cover no-repeat;
-    position: relative; /* Ensure the pseudo-element is positioned relative to the container */
+    position: relative; 
   }
   
-  /* Pseudo-element for dimming the background image */
+
   .hero-contact::before {
-    content: ''; /* No text content */
-    position: absolute; /* Absolute positioning */
+    content: ''; 
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
-    z-index: -1; /* Place the overlay behind the content */
+    background: rgba(0, 0, 0, 0.6); 
   }
   
-  /* Overlay for the text */
   .hero-contact-overlay {
     text-align: center;
-    opacity: 0; /* Start as invisible */
-    animation: fadeInTextHero 3s ease-in-out forwards 1s; /* Add delay for the text */
+    opacity: 0; 
+    animation: fadeInTextHero 3s ease-in-out forwards 1s; 
   }
   
   .hero-contact h1 {
@@ -40,7 +37,7 @@
     font-weight: 700;
   }
   
-  /* Keyframe animation for fading in the whole hero section */
+
   @keyframes fadeInHero {
     0% {
       opacity: 0;
@@ -50,7 +47,7 @@
     }
   }
   
-  /* Keyframe animation for fading in the text in hero section */
+
   @keyframes fadeInTextHero {
     0% {
       opacity: 0;
@@ -111,7 +108,6 @@
     font-size: large;
 }
 
-/*Contact Stage Fright*/
 
 .contact_info_container {
     margin-top: 100px;
@@ -268,23 +264,20 @@ padding: 6px;
 }
 
 .send_button:hover {
-    background-color: #e53935;  /* darker than prev */
-    border-color: #c62828;  /*  darker than prev border */
+    background-color: #e53935; 
+    border-color: #c62828;  
 }
 
 .send_button:focus {
     outline: none; 
-    box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);  /* used for glow */
+    box-shadow: 0 0 8px rgba(244, 67, 54, 0.5); 
 }
 
 .send_button:active {
-    background-color: #c62828;  /* darker */
-    border-color: #b71c1c;  /* darker */
+    background-color: #c62828; 
+    border-color: #b71c1c; 
 }
-/*
-for each item: 
-grid-area: row-start / col-start / row-end / col-end;
-*/
+
 
 @media (max-width: 768px) {
     .faq_container {
@@ -324,4 +317,10 @@ grid-area: row-start / col-start / row-end / col-end;
     #name, #number, #email, #message {
         font-size: 0.9rem;
     }
+
+    
+}
+
+.email-text, .phone-text {
+    font-size: clamp(0.6rem, 0.8vw, 1.2rem);
 }

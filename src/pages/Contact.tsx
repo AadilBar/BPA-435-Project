@@ -135,7 +135,7 @@ export default function Contact() {
 
 
         <div className="contact_info_container">
-      {/* Contact Title */}
+
       <motion.div
         className="contact_info_title"
         initial={{ opacity: 0, y: -50 }}
@@ -146,7 +146,6 @@ export default function Contact() {
         Contact Stage Fright
       </motion.div>
 
-      {/* Phone Section */}
       <motion.div
         className="contact_info_phone"
         initial={{ opacity: 0, x: -100 }}
@@ -154,7 +153,7 @@ export default function Contact() {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="contact_info_phone_title">
+        <h2 className="phone-text">
           <LuPhoneCall className="phone_icon" />
           Phone:
         </h2>
@@ -164,7 +163,7 @@ export default function Contact() {
         <h2>Elgin: 369-121-5182</h2>
       </motion.div>
 
-      {/* Email Section */}
+
       <motion.div
         className="contact_info_email"
         initial={{ opacity: 0, x: -100 }}
@@ -172,7 +171,7 @@ export default function Contact() {
         transition={{ duration: 1, delay: 0.3 }}
         viewport={{ once: true }}
       >
-        <h2 className="contact_info_email_title">
+        <h2 className="email-text">
           <LuMail className="email_icon" />
           Email:
         </h2>
@@ -182,7 +181,6 @@ export default function Contact() {
         <h2>Elgin: stagefright.elgin@gmail.com</h2>
       </motion.div>
 
-      {/* Message Form Section */}
       <motion.div
         className="contact_info_message"
         initial={{ opacity: 0, y: 50 }}

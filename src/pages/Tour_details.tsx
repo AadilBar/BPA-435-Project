@@ -217,8 +217,8 @@ const ProductDetails: React.FC = () => {
                     draggable: true,
                     progress: undefined,
                     style: {
-                        color: '#E9204F', // Text color (same for both success and error)
-                        backgroundColor: '#2C2C2C', // Dark gray background
+                        color: '#E9204F',
+                        backgroundColor: '#2C2C2C', 
                     }
                 });
                 return;
@@ -246,8 +246,8 @@ const ProductDetails: React.FC = () => {
             draggable: true,
             progress: undefined,
             style: {
-                color: '#E9204F', // Text color (same for both success and error)
-                backgroundColor: '#2C2C2C', // Dark gray background
+                color: '#E9204F', 
+                backgroundColor: '#2C2C2C', 
             }
             });
             } else {
@@ -260,8 +260,8 @@ const ProductDetails: React.FC = () => {
                 draggable: true,
                 progress: undefined,
                 style: {
-                color: '#E9204F', // Text color (same for both success and error)
-                backgroundColor: '#2C2C2C', // Dark gray background
+                color: '#E9204F', 
+                backgroundColor: '#2C2C2C', 
                 }
             });
             

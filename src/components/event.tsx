@@ -24,13 +24,13 @@ const EventItem: React.FC<EventProps> = ({ imageUrl, place, address, price, star
       state={{ imageUrl, place, address, price, startDate, endDate, mapData}} 
       onClick={() => window.scrollTo(0, 0)}
     >
-      {/* Wrap Card.Root in motion.div for scroll animations */}
+
       <motion.div
-        className="event-container" // Ensure className is maintained for other styles
-        initial={{ opacity: 0 }} // Initial state: fully transparent
-        whileInView={{ opacity: 1 }} // Fade in when in view
-        viewport={{ once: true, amount: 0.5 }} // Triggers when 50% of the component is visible
-        transition={{ duration: 0.8 }} // Smooth animation duration
+        className="event-container" 
+        initial={{ opacity: 0 }} 
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.5 }} 
+        transition={{ duration: 0.8 }}
       >
         <Card.Root maxW="md" overflow="hidden" p="4">
           <Image

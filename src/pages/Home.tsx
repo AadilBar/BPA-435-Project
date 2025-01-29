@@ -7,7 +7,7 @@ import ThreeDAlbums from '../components/3dAlbums';
 export default function Home() {
     return (
       <div>
-      {/* Hero Section */}
+
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <img
           src={`${import.meta.env.BASE_URL}/images/Stage_Fright_Main_Page_Image.png`}
@@ -16,7 +16,6 @@ export default function Home() {
         />
       </div>
 
-      {/* 3D Albums Section */}
       <div
         style={{
           height: '100vh',
@@ -29,7 +28,6 @@ export default function Home() {
         <ThreeDAlbums />
       </div>
 
-      {/* Upcoming Shows Section */}
       <div
         style={{
           display: 'flex',
@@ -66,7 +64,7 @@ export default function Home() {
 
         <div style={{ height: '50px' }}></div>
 
-        {/* Event Item Grid */}
+
         <div
           style={{
             display: 'grid',
@@ -114,7 +112,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Contact Us Section */}
+
       <div
         style={{
           display: 'flex',
@@ -171,7 +169,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Footer Section */}
       <Footer />
     </div>
                 

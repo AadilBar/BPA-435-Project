@@ -7,8 +7,7 @@ import { motion } from "framer-motion";
 export default function About() {
     return (
         <div className={`${styles.canvas} responsive-container`} style={{overflow: 'hidden'}}>
-            
-            {/* Hero Section */}
+
             <motion.div 
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -31,10 +30,9 @@ export default function About() {
                 </div>
             </motion.div>
 
-            {/* Background Section */}
             <div className="background_lore_background">
                 
-                {/* Video Section */}
+
                 <motion.div 
                     className="video_container"
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -48,7 +46,6 @@ export default function About() {
                     <h3 className="video_caption">What it's like to Experience a Stage Fright Concert</h3>
                 </motion.div>
 
-                {/* Band History Section */}
                 <div className="background_info">
                     <motion.h2 
                         className="background_title"
@@ -92,7 +89,7 @@ export default function About() {
                 </div>
             </div>
             
-            {/* Band Members Section */}
+
             <div className="members_page">
                 <h2 className="member_title">Meet the Band</h2>
 

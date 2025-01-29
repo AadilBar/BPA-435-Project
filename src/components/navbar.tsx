@@ -86,8 +86,8 @@ function Navbar() {
     <>
       <Flex
         bg={'black'} 
-        pt={{ base: '3', md: '3' }} // Further reduced padding-top
-        pb={{ base: '2', md: '2' }} // Further reduced padding-bottom
+        pt={{ base: '3', md: '3' }} 
+        pb={{ base: '2', md: '2' }} 
         align="center"
         justify={"center"}
         position="relative"
@@ -111,7 +111,7 @@ function Navbar() {
             <Image
               src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
               alt="Home"
-              height="40px" // Further reduced logo height
+              height="50px"
               transition="transform 0.3s ease"
               _hover={{ transform: 'scale(1.1)' }}
             /> 
