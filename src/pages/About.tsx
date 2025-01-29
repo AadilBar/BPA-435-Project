@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
     return (
-        <div className={`${styles.canvas} responsive-container`}>
+        <div className={`${styles.canvas} responsive-container`} style={{overflow: 'hidden'}}>
             
             {/* Hero Section */}
             <motion.div 

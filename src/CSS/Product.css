@@ -68,7 +68,8 @@
 }
 
 .product-title {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 15px;
@@ -77,7 +78,8 @@
 }
 
 .product-description {
-  font-family: 'Copperplate', serif;
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
   font-size: 1.3rem;
   line-height: 1.7;
   color: #ccc;
@@ -92,7 +94,8 @@
 
 .product-color-title,
 .product-size-title {
-  font-family: 'Copperplate', serif;
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
   font-size: 1.4rem;
   color: #FF6B6B;
   margin-top: 15px;
@@ -171,12 +174,15 @@
 .product-price-note,
 .product-return-policy,
 .product-seller {
-  font-family: 'Copperplate', serif;
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
   font-size: 1.1rem;
   margin-top: 15px;
 }
 
 .quantity-title {
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
   font-size: 1.3rem;
   font-weight: bold;
   margin-top: 25px;
@@ -220,6 +226,57 @@
 
   .main-image-img {
       max-height: 50vh; /* Reduce max height on smaller screens */
+  }
+
+  .product-details-container {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .product-title {
+    font-size: 2rem; /* Adjust font size for smaller screens */
+  }
+
+  .product-description {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .product-color-title,
+  .product-size-title {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+  }
+
+  .color-btn {
+    width: 40px; /* Adjust size for smaller screens */
+    height: 40px; /* Adjust size for smaller screens */
+  }
+
+  .size-btn {
+    width: 60px; /* Adjust size for smaller screens */
+    height: 60px; /* Adjust size for smaller screens */
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .checkout-container {
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .product-price {
+    font-size: 2rem; /* Adjust font size for smaller screens */
+  }
+
+  .product-price-note,
+  .product-return-policy,
+  .product-seller {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .quantity-title {
+    font-size: 1.1rem; /* Adjust font size for smaller screens */
+  }
+
+  .add-to-cart-btn {
+    padding: 10px; /* Adjust padding for smaller screens */
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
   }
 }
 
@@ -294,6 +351,8 @@
 
 /* Styling for the reviewer's name */
 .review-name {
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
   font-size: 1.2rem;
   font-weight: 600;
   color: #fff;
@@ -310,6 +369,8 @@
 
 /* Styling for the review description */
 .review-description {
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
   font-size: 1rem;
   font-weight: bold;
   color: #ccc;
@@ -332,5 +393,22 @@
 
   .review-card {
     flex-direction: column;
+  }
+
+  .review-card-content {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .review-name {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .review-rating {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+  }
+
+  .review-description {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    max-width: 100%; /* Allow full width for smaller screens */
   }
 }

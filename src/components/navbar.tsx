@@ -107,7 +107,7 @@ function Navbar() {
           <NavLink to="/tour">TOUR</NavLink>
         </Flex>
         <Box mx={{ base: 0, md: 1 }}>
-          <RouterLink to="/">
+          <RouterLink to="/" onClick={() => window.scrollTo(0, 0)}>
             <Image
               src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
               alt="Home"
