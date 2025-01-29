@@ -224,7 +224,7 @@ const Account: React.FC = () => {
             <ToastContainer />
             {user ? (
             <div style={cardStyle}>
-                {/* Sidebar Navigation */}
+
                 <div style={sidebarStyle}>
                 <div style={profileHeaderStyle}>
                     <div>
@@ -256,7 +256,7 @@ const Account: React.FC = () => {
                 </nav>
                 </div>
 
-                {/* Main Content */}
+
                 <div style={contentStyle}>
                 {activeTab === 'profile' && (
                     <div>

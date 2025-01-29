@@ -232,7 +232,7 @@ const Store = () => {
           {showFilters ? 'Hide Filters' : 'Show Filters'}
         </button>
 
-        {/* Filter Section */}
+
         <div
          style={{
           display: 'flex',
@@ -264,7 +264,7 @@ const Store = () => {
               boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
             }}
           >
-            {/* Category Filter */}
+
             <div style={{ flex: 1, marginRight: '20px' }}>
               <label
                 style={{
@@ -304,7 +304,6 @@ const Store = () => {
               </select>
             </div>
 
-            {/* Price Range Slider */}
             <div style={{ flex: 1 }}>
               <label
                 style={{
@@ -349,7 +348,6 @@ const Store = () => {
 
         </div>
 
-        {/* Items Grid */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', width: '100%', marginTop: '20px' }}>
           {filteredItems.map((item, index) => (
             <Item

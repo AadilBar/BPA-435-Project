@@ -25,8 +25,8 @@ const ProductDetails: React.FC = () => {
 
   const handleColor = (color: string[], colorName: string) => {
     setSelectedColor(color);
-    setMainImage(color[0]); // Set the first image of the selected color as the main image
-    setcolor(colorName); // Track the selected color button
+    setMainImage(color[0]); 
+    setcolor(colorName); 
   };
 
   const reviews = [
@@ -55,7 +55,7 @@ const ProductDetails: React.FC = () => {
       <ToastContainer />
       <div className="product-container">
         <div className="product-images-container">
-          {/* Additional Images */}
+
           <div className="add-images">
             {selectedColor.map((image, index) => (
               <button 
@@ -72,7 +72,6 @@ const ProductDetails: React.FC = () => {
             ))}
           </div>
 
-          {/* Main Image */}
           <div className="main-image">
             <img src={mainImage} alt={title} className="main-image-img" />
           </div>
@@ -222,8 +221,8 @@ const ProductDetails: React.FC = () => {
         draggable: true,
         progress: undefined,
         style: {
-          color: '#E9204F', // Text color (same for both success and error)
-          backgroundColor: '#2C2C2C', // Dark gray background
+          color: '#E9204F',
+          backgroundColor: '#2C2C2C', 
         }
       });
       } else {
@@ -236,8 +235,8 @@ const ProductDetails: React.FC = () => {
           draggable: true,
           progress: undefined,
           style: {
-            color: '#E9204F', // Text color (same for both success and error)
-            backgroundColor: '#2C2C2C', // Dark gray background
+            color: '#E9204F', 
+            backgroundColor: '#2C2C2C', 
           }
         });
       

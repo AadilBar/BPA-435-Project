@@ -20,7 +20,7 @@ const Member: React.FC<StoreCardProps> = ({ imageUrl, name, position, descriptio
                     }
                 });
             },
-            { threshold: 0.2 } // Adjust sensitivity
+            { threshold: 0.2 }
         );
 
         if (memberRef.current) {

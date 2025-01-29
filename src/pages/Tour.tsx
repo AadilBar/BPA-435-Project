@@ -4,16 +4,16 @@ import Footer from '../components/footer';
 export default function Tour() {
     return (
       <>
-        {/* Tour Animation Section */}
+
         <div style={styles.tourIntroContainer}>
-          <div style={styles.overlay}></div> {/* Dim the background */}
+          <div style={styles.overlay}></div>
           <div style={styles.overlayTextContainer}>
             <h1 style={styles.tourTitle}>Stage Fright on Tour</h1>
             <p style={styles.slogan}>Get ready to rock with Stage Fright. The adventure begins now!</p>
           </div>
         </div>
   
-        {/* Tour Dates Section */}
+
         <div style={styles.tourDatesContainer}>
           <h1 style={styles.tourDatesTitle}>Tour Dates</h1>
   
@@ -45,7 +45,7 @@ export default function Tour() {
       height: '100vh',
       position: 'relative',
       overflow: 'hidden',
-      animation: 'fadeIn 3s ease-in-out',  // Fade-in animation for the background
+      animation: 'fadeIn 3s ease-in-out',  
     },
     overlay: {
       position: 'absolute',
@@ -53,8 +53,8 @@ export default function Tour() {
       left: '0',
       width: '100%',
       height: '100%',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dark overlay for dimming effect
-      zIndex: 1,  // Ensure the overlay is above the image but below the text
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+      zIndex: 1, 
     },
     overlayTextContainer: {
       position: 'absolute',
@@ -63,17 +63,17 @@ export default function Tour() {
       transform: 'translate(-50%, -50%)',
       textAlign: 'center',
       color: 'white',
-      zIndex: 2,  // Text should be above the overlay
-      width: '90%',  // Make the text container take up more width
+      zIndex: 2,  
+      width: '90%',  
     },
     tourTitle: {
       fontSize: '80px',
       fontWeight: 700,
-      fontFamily: 'Sansation, sans-serif',  // Unique, cool font
+      fontFamily: 'Sansation, sans-serif',  
       textTransform: 'uppercase',
-      letterSpacing: '15px',  // Increased letter spacing
+      letterSpacing: '15px',  
       animation: 'textZoom 2s ease-out',
-      textShadow: '2px 2px 10px rgba(0, 0, 0, 0.7)', // Adding shadow to text for better visibility
+      textShadow: '2px 2px 10px rgba(0, 0, 0, 0.7)', 
     },
     slogan: {
       fontSize: '24px',
@@ -82,7 +82,7 @@ export default function Tour() {
       marginTop: '10px',
       fontStyle: 'italic',
       animation: 'fadeIn 3s ease-in-out',
-      textShadow: '1px 1px 5px rgba(0, 0, 0, 0.7)', // Shadow for better legibility
+      textShadow: '1px 1px 5px rgba(0, 0, 0, 0.7)', 
     },
     tourDatesContainer: {
       backgroundColor: '#000',
@@ -109,7 +109,7 @@ export default function Tour() {
     },
   };
   
-  // Animation Styles
+
   const globalStyles = `
     @keyframes fadeIn {
       from {

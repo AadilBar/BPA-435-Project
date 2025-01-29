@@ -1,6 +1,6 @@
 import React from 'react';
 import '../CSS/Item.css';
-import { motion } from "framer-motion"; // Import motion
+import { motion } from "framer-motion"; 
 import { Link } from 'react-router';
 
 interface StoreCardProps {
@@ -23,18 +23,18 @@ const Item: React.FC<StoreCardProps> = ({ imageUrl, price, title, description, o
       onClick={() => window.scrollTo(0, 0)}
     >
       <motion.div
-        className="item-container" // Motion wrapper around the container
-        initial={{ opacity: 0 }} // Start with invisible
-        whileInView={{ opacity: 1 }} // Fade in when in view
-        viewport={{ once: true, amount: 0.5 }} // Trigger when 50% of the item is visible
-        transition={{ duration: 0.8 }} // Smooth animation transition duration
+        className="item-container"
+        initial={{ opacity: 0 }} 
+        whileInView={{ opacity: 1 }} 
+        viewport={{ once: true, amount: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <div className="image-container">
           <img src={imageUrl} alt="item picture" className="item-image" />
         </div>
 
         <div className="price-container">
-          <h2 className="price">${price}</h2>  
+          <h2 className="price">${price}</h2>
         </div>
 
         <div className="title-container">
