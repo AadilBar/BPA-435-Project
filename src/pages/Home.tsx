@@ -6,6 +6,7 @@ import ThreeDAlbums from '../components/3dAlbums';
 import { FaQuestion } from "react-icons/fa";
 import { FaTshirt } from "react-icons/fa";
 import { GiGuitar } from "react-icons/gi";
+import { motion } from "framer-motion"; 
 export default function Home() {
     return (
       <div>
@@ -79,32 +80,54 @@ export default function Home() {
           }}
         >
           
-<FlipCard
-  frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
-  icon={FaQuestion}  
-  frontside_title="Rock Fact"
-  inside_title="Did you Know?"
-  inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
-  inside_description="Our first jam session was in a garage!"
-/>
-          
-<FlipCard
-  frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
-  icon={FaTshirt}  
-  frontside_title="Exciting News"
-  inside_title="New Merch!"
-  inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
-  inside_description="Shop Stage Fright by checking out our new hoodies in the Store Page!"
-/>
-          
-<FlipCard
-  frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
-  icon={GiGuitar}  
-  frontside_title="Feel the Energy"
-  inside_title="Concert Crowd"
-  inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
-  inside_description="We bring the heat with electrifying riffs, pulsating drums, and raw energy that keeps the crowd rocking all night long."
-/>
+          <motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5, ease: 'easeOut' }}
+  viewport={{ once: true }}
+>
+  <FlipCard
+    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+    icon={FaQuestion}  
+    frontside_title="Rock Fact"
+    inside_title="Did you Know?"
+    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+    inside_description="Our first jam session was in a garage!"
+  />
+</motion.div>
+
+<motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+  viewport={{ once: true }}
+>
+  <FlipCard
+    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+    icon={FaTshirt}  
+    frontside_title="Exciting News"
+    inside_title="New Merch!"
+    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+    inside_description="Shop Stage Fright by checking out our new hoodies in the Store Page!"
+  />
+</motion.div>
+
+<motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+  viewport={{ once: true }}
+>
+  <FlipCard
+    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+    icon={GiGuitar}  
+    frontside_title="Feel the Energy"
+    inside_title="Concert Crowd"
+    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+    inside_description="We bring the heat with electrifying riffs, pulsating drums, and raw energy that keeps the crowd rocking all night long."
+  />
+</motion.div>
+
         </div>
       </div>
 
