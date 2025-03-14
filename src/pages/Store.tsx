@@ -8,9 +8,9 @@ import { FaFilterCircleXmark } from "react-icons/fa6";
 
 
 const allItems = [
-  { imageUrl: '/images/Merch/Vinyls/Soaring Vinyl.png', price: 37.99, title: 'Soaring Vinyl', description: 'Physical Vinyl of the album Soaring crafted by the Stage Fright team', category: 'Vinyl' },
-  { imageUrl: '/images/Merch/Vinyls/Resounding Vinyl.png', price: 40.99, title: 'Resounding Vinyl', description: 'Physical Vinyl of the album Resounding crafted by the Stage Fright team', category: 'Vinyl' },
-  { imageUrl: '/images/Merch/Vinyls/Kinematics Vinyl.png', price: 35.99, title: 'Kinematics Vinyl', description: 'Physical Vinyl of the album Kinematics crafted by the Stage Fright team', category: 'Vinyl' },
+  { imageUrl: '/images/Merch/Vinyls/Soaring.png', price: 37.99, title: 'Soaring Vinyl', description: 'Physical Vinyl of the album Soaring crafted by the Stage Fright team', category: 'Vinyl' },
+  { imageUrl: '/images/Merch/Vinyls/Resounding.png', price: 40.99, title: 'Resounding Vinyl', description: 'Physical Vinyl of the album Resounding crafted by the Stage Fright team', category: 'Vinyl' },
+  { imageUrl: '/images/Merch/Vinyls/Kinematics.png', price: 35.99, title: 'Kinematics Vinyl', description: 'Physical Vinyl of the album Kinematics crafted by the Stage Fright team', category: 'Vinyl' },
   {
     imageUrl: '/images/Merch/Hoodies/Black/Main.png',
     price: 29.99,

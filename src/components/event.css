@@ -1,14 +1,148 @@
-.event-container {
-    background-color: #1a1a1a; /* gray */
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    }
+.card_outline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  background: #1c1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-family: "Roboto", sans-serif; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
 
-    @media (hover: hover) {
-        .event-container:hover {
-          transform: scale(1.05); 
-          background-color: #252525; /* Lighter gray */
-          box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
-          border: 1px solid rgba(255, 255, 255, 0.2); 
-        }
-        }
+
+@media (hover: hover) {
+  .card_outline:hover {
+    transform: scale(1.05) translateY(-8px); 
+    background: linear-gradient(to bottom, #361818 0%, #b52828 100%); 
+    box-shadow: 0 8px 30px rgba(186, 186, 186, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    filter: brightness(1.2);
+  }
+}
+.card_outline:hover .tour_date, 
+.card_outline:hover .tour_address{
+  color: black; 
+  transition: color 0.3s ease;
+}
+.card_outline:hover .tour_price {
+  color: white; /* Changes to a brighter red on hover */
+  transition: color 0.3s ease;
+}
+
+.tour_img {
+  position: relative;
+}
+
+.tour_img img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  filter: brightness(85%);
+  transition: transform 0.3s ease-in-out, filter 0.3s ease;
+}
+
+.tour_img:hover img {
+  transform: scale(1.03);
+  filter: brightness(100%);
+}
+
+.tour_overlay {
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 1;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.card_outline:hover .tour_overlay {
+  opacity: 1;
+}
+
+.tour_details {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 10px;
+}
+/*Need this to keep the Calender Icon inlined with the Date DO NOT REMOVE*/ 
+.tour_date svg, .tour_address svg {
+  display: inline-block; 
+}
+.tour_date,
+.tour_address {
+  font-size: 1rem;
+  color: #cbbebe;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tour_price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #b44343; /* Muted red */
+  font-family: Sansation;
+}
+
+.tour_button {
+  background: linear-gradient(45deg, #1f1f1f, #333333);
+  color: white;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.tour_button:hover {
+  background: linear-gradient(45deg, #444444, #1a1a1a);
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.4);
+}
+
+.card_outline:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(25, 24, 24, 0.2);
+  border-radius: 16px;
+  z-index: 0;
+  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 400px) {
+  .card_outline {
+    width: 90%;
+  }
+
+  .tour_date,
+  .tour_address,
+  .tour_price {
+    font-size: 0.9rem;
+  }
+
+  .tour_button {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+}
