@@ -7,6 +7,7 @@ import { FaQuestion } from "react-icons/fa";
 import { FaTshirt } from "react-icons/fa";
 import { GiGuitar } from "react-icons/gi";
 import { motion } from "framer-motion"; 
+import '../CSS/3d.css';
 export default function Home() {
     return (
       <div>
@@ -14,20 +15,21 @@ export default function Home() {
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <img
           src={`${import.meta.env.BASE_URL}/images/Stage_Fright_Main_Page_Image.png`}
-          alt="Full Screen"
+          alt="Home Screen Image"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>
+      
+      <motion.div
+  className="threed-intro-title"
+  initial={{ opacity: 0, x: -50 }}  
+  whileInView={{ opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } }} 
+  viewport={{ once: true, amount: 0.5 }}
+>
+  Newest Stage Fright Albums
+</motion.div>
 
-      <div
-        style={{
-          height: '100vh',
-          backgroundColor: 'black',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div>
         <ThreeDAlbums />
       </div>
 

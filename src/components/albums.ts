@@ -31,9 +31,7 @@ export const albums: Album[] = [
             { title: "Torque", duration: "3:45", link: `${import.meta.env.BASE_URL}/music/music5.mp3`},
             { title: "Centrifugal Dreams", duration: "4:30", link: `${import.meta.env.BASE_URL}/music/music6.mp3`},
             { title: "Gravity's Call", duration: "3:33" ,link: `${import.meta.env.BASE_URL}/music/music7.mp3`},
-            { title: "Inertia", duration: "4:05" ,link: `${import.meta.env.BASE_URL}/music/music8.mp3`},
-            { title: "Harmonic Swings", duration: "3:55", link: `${import.meta.env.BASE_URL}/music/music9.mp3`},
-            { title: "Kinetic Bliss", duration: "3:28" ,link: `${import.meta.env.BASE_URL}/music/music10.mp3`},
+     
         ],
     },
     {
@@ -49,9 +47,7 @@ export const albums: Album[] = [
             { title: "Thermal Currents", duration: "3:22", link: `${import.meta.env.BASE_URL}/music/music5.mp3` },
             { title: "High Altitude", duration: "4:15", link: `${import.meta.env.BASE_URL}/music/music6.mp3` },
             { title: "Featherlight", duration: "3:48", link: `${import.meta.env.BASE_URL}/music/music7.mp3`},
-            { title: "Wings of Gold", duration: "4:02", link: `${import.meta.env.BASE_URL}/music/music8.mp3` },
-            { title: "Ascending Thoughts", duration: "4:18", link: `${import.meta.env.BASE_URL}/music/music9.mp3` },
-            { title: "Echoes Above", duration: "3:45", link: `${import.meta.env.BASE_URL}/music/music10.mp3` },
+
         ],
     },
     {
@@ -67,9 +63,7 @@ export const albums: Album[] = [
             { title: "Resonant Chords", duration: "4:20" , link: `${import.meta.env.BASE_URL}/music/music5.mp3` },
             { title: "Vibrations", duration: "3:50" , link: `${import.meta.env.BASE_URL}/music/music6.mp3` },
             { title: "Frequency Shift", duration: "4:18", link: `${import.meta.env.BASE_URL}/music/music7.mp3`  },
-            { title: "Acoustic Reflections", duration: "4:10" , link: `${import.meta.env.BASE_URL}/music/music8.mp3` },
-            { title: "Timbre Trails", duration: "4:01" , link: `${import.meta.env.BASE_URL}/music/music9.mp3` },
-            { title: "Soundscape", duration: "3:59" , link: `${import.meta.env.BASE_URL}/music/music10.mp3` },
+    
         ],
     }
 ];
