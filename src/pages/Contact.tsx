@@ -17,7 +17,7 @@ export default function Contact() {
         setNumber('');
         setEmail('');
         setMessage('');
-        toast.success(`Your message has been sent to our team, We will get back to you as soon as possible!`, {
+        toast.success(`Your message has been sent to our team. We will get back to you as soon as possible!`, {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
