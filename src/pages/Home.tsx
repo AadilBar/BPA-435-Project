@@ -53,7 +53,7 @@ export default function Home() {
             textAlign: 'center',
           }}
         >
-          Our Concerts
+          Experience Stage Fright
         </h1>
         <Link to={'/tour'} onClick={() => window.scrollTo(0, 0)}>
           <Button
