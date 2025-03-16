@@ -1,9 +1,13 @@
 import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router';
-import EventItem from '../components/event';
+import FlipCard from '../components/flipcard';
 import Footer from '../components/footer';
 import ThreeDAlbums from '../components/3dAlbums';
-
+import { FaQuestion } from "react-icons/fa";
+import { FaTshirt } from "react-icons/fa";
+import { GiGuitar } from "react-icons/gi";
+import { motion } from "framer-motion"; 
+import '../CSS/3d.css';
 export default function Home() {
     return (
       <div>
@@ -11,20 +15,21 @@ export default function Home() {
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <img
           src={`${import.meta.env.BASE_URL}/images/Stage_Fright_Main_Page_Image.png`}
-          alt="Full Screen"
+          alt="Home Screen Image"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>
+      
+      <motion.div
+  className="threed-intro-title"
+  initial={{ opacity: 0, x: -50 }}  
+  whileInView={{ opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } }} 
+  viewport={{ once: true, amount: 0.5 }}
+>
+  Newest Stage Fright Albums
+</motion.div>
 
-      <div
-        style={{
-          height: '100vh',
-          backgroundColor: 'black',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div>
         <ThreeDAlbums />
       </div>
 
@@ -48,7 +53,7 @@ export default function Home() {
             textAlign: 'center',
           }}
         >
-          Upcoming Shows
+          Experience Stage Fright
         </h1>
         <Link to={'/tour'} onClick={() => window.scrollTo(0, 0)}>
           <Button
@@ -76,39 +81,55 @@ export default function Home() {
             marginBottom: '20px',
           }}
         >
-          <EventItem
-            imageUrl={`${import.meta.env.BASE_URL}/images/Shows/HuntingtonBankPav.png`}
-            place="Huntington Bank Pavilion"
-            address={'1300 S Linn White Dr, Chicago, IL 60605'}
-            price={500}
-            startDate={new Date('2025-06-01')}
-            endDate={new Date('2025-06-02')}
-            mapData={
-              'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7420.551380478309!2d-87.61154152339903!3d41.86455426626153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2b7aa5e5a88b%3A0x2b1be8f520a766ba!2s1300%20S%20Linn%20White%20Dr%2C%20Chicago%2C%20IL%2060605!5e1!3m2!1sen!2sus!4v1735970585409!5m2!1sen!2sus'
-            }
-          />
-          <EventItem
-            imageUrl={`${import.meta.env.BASE_URL}/images/Shows/Credit1Pav.png`}
-            place="Credit Union 1 Arena"
-            address={'525 S Racine Ave, Chicago, IL 60607'}
-            price={500}
-            startDate={new Date('2025-06-01')}
-            endDate={new Date('2025-06-02')}
-            mapData={
-              'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3477.591274925742!2d-87.65885062357913!3d41.87467056562848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2ce067db1ecd%3A0x73faf6b37b26e279!2s525%20S%20Racine%20Ave%2C%20Chicago%2C%20IL%2060607!5e1!3m2!1sen!2sus!4v1736049280628!5m2!1sen!2sus'
-            }
-          />
-          <EventItem
-            imageUrl={`${import.meta.env.BASE_URL}/images/Shows/Credit1Amp.png`}
-            place="Credit Union 1 Amphitheater"
-            address={'19100 Ridgeland Ave, Tinley Park, IL 60477'}
-            price={500}
-            startDate={new Date('2025-06-01')}
-            endDate={new Date('2025-06-02')}
-            mapData={
-              'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3495.5194221513725!2d-87.77817272359236!3d41.544106886258966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e167c293f99b1%3A0x49ae1068b1696c7e!2sCredit%20Union%201%20Amphitheatre!5e1!3m2!1sen!2sus!4v1736049372248!5m2!1sen!2sus'
-            }
-          />
+          
+          <motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5, ease: 'easeOut' }}
+  viewport={{ once: true }}
+>
+  <FlipCard
+    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+    icon={FaQuestion}  
+    frontside_title="Rock Fact"
+    inside_title="Did you Know?"
+    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+    inside_description="Our first jam session was in a garage!"
+  />
+</motion.div>
+
+<motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+  viewport={{ once: true }}
+>
+  <FlipCard
+    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+    icon={FaTshirt}  
+    frontside_title="Exciting News"
+    inside_title="New Merch!"
+    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+    inside_description="Shop Stage Fright by checking out our new hoodies in the Store Page!"
+  />
+</motion.div>
+
+<motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+  viewport={{ once: true }}
+>
+  <FlipCard
+    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+    icon={GiGuitar}  
+    frontside_title="Feel the Energy"
+    inside_title="Concert Crowd"
+    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+    inside_description="We bring the heat with electrifying riffs, pulsating drums, and raw energy that keeps the crowd rocking all night long."
+  />
+</motion.div>
+
         </div>
       </div>
 
