@@ -1,17 +1,48 @@
 import { Button } from '@chakra-ui/react';
-import { Link } from 'react-router';
+import { Link } from 'react-router'; 
 import FlipCard from '../components/flipcard';
+import AlbumCard from '../components/albumCard';
 import Footer from '../components/footer';
 import ThreeDAlbums from '../components/3dAlbums';
 import { FaQuestion } from "react-icons/fa";
 import { FaTshirt } from "react-icons/fa";
 import { GiGuitar } from "react-icons/gi";
-import { motion } from "framer-motion"; 
-import '../CSS/3d.css';
+import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import '../CSS/albumCard.css'; 
 export default function Home() {
-    return (
-      <div>
+ 
+  const albums = [
+    {
+      imageUrl: `${import.meta.env.BASE_URL}/images/Merch/Vinyls/upcoming1.png`,
+      title: 'Reverberation',
+      date: 'May 15, 2024',
+      duration: 42,
+      tracks: 12,
+    },
+    {
+      imageUrl: `${import.meta.env.BASE_URL}/images/Merch/Vinyls/upcoming2.jpg`,
+      title: 'Midnight Echoes',
+      date: 'June 16, 2024',
+      duration: 45,
+      tracks: 12,
+    },
+    {
+      imageUrl: `${import.meta.env.BASE_URL}/images/Merch/Vinyls/upcoming3.jpg`,
+      title: 'Echoes of Silence',
+      date: 'July 17, 2024',
+      duration: 38,
+      tracks: 10,
+    },
+  ];
 
+  return (
+    <div>
+      {/* Hero Image Section */}
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <img
           src={`${import.meta.env.BASE_URL}/images/Stage_Fright_Main_Page_Image.png`}
@@ -19,20 +50,22 @@ export default function Home() {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>
-      
+
+      {/* 3D Albums Intro */}
       <motion.div
-  className="threed-intro-title"
-  initial={{ opacity: 0, x: -50 }}  
-  whileInView={{ opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } }} 
-  viewport={{ once: true, amount: 0.5 }}
->
-  Newest Stage Fright Albums
-</motion.div>
+        className="threed-intro-title"
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        Newest Stage Fright Albums
+      </motion.div>
 
       <div>
         <ThreeDAlbums />
       </div>
 
+      {/* Experience Section with Flip Cards */}
       <div
         style={{
           display: 'flex',
@@ -44,7 +77,7 @@ export default function Home() {
           paddingBottom: '20px',
         }}
       >
-        <h1
+        <motion.h1
           style={{
             fontFamily: 'Sansation',
             color: 'white',
@@ -52,9 +85,14 @@ export default function Home() {
             fontWeight: '700',
             textAlign: 'center',
           }}
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           Experience Stage Fright
-        </h1>
+        </motion.h1>
+
         <Link to={'/tour'} onClick={() => window.scrollTo(0, 0)}>
           <Button
             variant="solid"
@@ -69,7 +107,6 @@ export default function Home() {
 
         <div style={{ height: '50px' }}></div>
 
-
         <div
           style={{
             display: 'grid',
@@ -81,56 +118,88 @@ export default function Home() {
             marginBottom: '20px',
           }}
         >
-          
           <motion.div
-  initial={{ opacity: 0, x: -100 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.5, ease: 'easeOut' }}
-  viewport={{ once: true }}
->
-  <FlipCard
-    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
-    icon={FaQuestion}  
-    frontside_title="Rock Fact"
-    inside_title="Did you Know?"
-    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
-    inside_description="Our first jam session was in a garage!"
-  />
-</motion.div>
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          >
+            <FlipCard
+              frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+              icon={FaQuestion}
+              frontside_title="Rock Fact"
+              inside_title="Did you Know?"
+              inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+              inside_description="Our first jam session was in a garage!"
+            />
+          </motion.div>
 
-<motion.div
-  initial={{ opacity: 0, x: -100 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
-  viewport={{ once: true }}
->
-  <FlipCard
-    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
-    icon={FaTshirt}  
-    frontside_title="Exciting News"
-    inside_title="New Merch!"
-    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
-    inside_description="Shop Stage Fright by checking out our new hoodies in the Store Page!"
-  />
-</motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <FlipCard
+              frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+              icon={FaTshirt}
+              frontside_title="Exciting News"
+              inside_title="New Merch!"
+              inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+              inside_description="Shop Stage Fright by checking out our new hoodies in the Store Page!"
+            />
+          </motion.div>
 
-<motion.div
-  initial={{ opacity: 0, x: -100 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
-  viewport={{ once: true }}
->
-  <FlipCard
-    frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
-    icon={GiGuitar}  
-    frontside_title="Feel the Energy"
-    inside_title="Concert Crowd"
-    inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
-    inside_description="We bring the heat with electrifying riffs, pulsating drums, and raw energy that keeps the crowd rocking all night long."
-  />
-</motion.div>
-
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <FlipCard
+              frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+              icon={GiGuitar}
+              frontside_title="Feel the Energy"
+              inside_title="Concert Crowd"
+              inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+              inside_description="We bring the heat with electrifying riffs, pulsating drums, and raw energy that keeps the crowd rocking all night long."
+            />
+          </motion.div>
         </div>
+      </div>
+
+      {/* Upcoming Albums Section with Swiper Carousel */}
+      <div>
+        <h1 className="upcoming-albums">Upcoming Albums</h1>
+        <motion.div
+      className="carousel-container"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true, amount: 0.3 }} 
+    >
+      <Swiper
+        modules={[Pagination, Autoplay]}
+        spaceBetween={30}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        loop
+        className="album-swiper"
+      >
+        {albums.map((album, index) => (
+          <SwiperSlide key={index}>
+            <AlbumCard
+              imageUrl={album.imageUrl}
+              title={album.title}
+              date={album.date}
+              duration={album.duration}
+              tracks={album.tracks}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </motion.div>
       </div>
 
 
@@ -192,7 +261,5 @@ export default function Home() {
 
       <Footer />
     </div>
-                
-
-    );
+  );
 }
