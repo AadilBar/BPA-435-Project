@@ -381,7 +381,7 @@ const CartPage = () => {
                                     flexDirection={{ base: "column", md: "row" }}
                                 >
                                     <Image
-                                        src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
+                                        src={item.imageUrl}
                                         alt={item.title}
                                         boxSize={{ base: "100%", md: "200px" }}
                                         objectFit="cover"

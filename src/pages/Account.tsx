@@ -365,7 +365,7 @@ const Account: React.FC = () => {
                                     {order.items.map((item, itemIndex) => (
                                         <div key={itemIndex} style={infoCardStyle}>
                                             <img
-                                                src={`${import.meta.env.BASE_URL}/${item.imageUrl}`}
+                                                src={item.imageUrl}
                                                 alt={item.title}
                                                 style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
                                             />
