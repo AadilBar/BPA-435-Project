@@ -83,12 +83,11 @@ const ProductDetails: React.FC = () => {
     const db = getDatabase();
     if (user && user.email) {
       const usersRef = ref(db, "users/" + user.email.replace('.', ',') + "/cart/");
-      const modifiedImageUrl = mainImage.split('/').slice(2).join('/');
       push(usersRef, {
         title,
         Size,
         color,
-        imageUrl: modifiedImageUrl,
+        imageUrl: mainImage,
         price,
         description,
         quantity: quantity,
