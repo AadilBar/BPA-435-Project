@@ -175,7 +175,7 @@
     margin-top: 25px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .album-card {
         flex-direction: column;
         height: auto;
@@ -218,5 +218,11 @@
     .swiper-button-prev::after,
     .swiper-button-next::after {
         font-size: 22px; 
+    }
+    .upcoming-albums{
+        font-size: 3rem;
+    }
+    .carousel-container{
+        padding: 0 20px;
     }
 }
