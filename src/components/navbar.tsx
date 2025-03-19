@@ -57,6 +57,7 @@ function Navbar() {
         textAlign="center"
         onClick={() => setOpen(false)}
         transition="color 0.3s ease"
+        borderRadius="8px"
         _after={{
           content: '""',
           display: 'block',
@@ -153,40 +154,52 @@ function Navbar() {
                   p={5}
                   backgroundColor={"#E9204F"}
                   onClick={() => setDropOpen(!dropOpen)}
+                  _hover={{ bg: "#c5173e" }}
+                  _active={{ bg: "#a31332" }}
                   >
                   Hi, {Name.split(' ')[0] + "  "}▼
                   </Button>
                   {dropOpen && (
-                    <Box
+                  <Box
                     position="absolute"
                     top="100%"
                     right="0"
                     mt={2}
                     bg="gray.800"
                     color="white"
-                    boxShadow="md"
+                    boxShadow="lg"
                     borderRadius="md"
                     overflow="hidden"
-                    >
+                    zIndex={10}
+                  >
                     <RouterLink to="/account" onClick={() => setDropOpen(false)}>
-                      <Box p={2} _hover={{ bg: "gray.700" }} display="flex" alignItems="center">
-                      <FaUserCircle style={{ marginRight: '8px' }} />
-                        Account
-                      </Box>
-                    </RouterLink>
                     <Box
-                      p={2}
+                      p={3}
                       _hover={{ bg: "gray.700" }}
                       display="flex"
                       alignItems="center"
-                      onClick={handleSignout}
                     >
-                      <FaSignOutAlt style={{ marginRight: '8px' }} />
-                      Logout
+                      <FaUserCircle style={{ marginRight: '8px' }} />
+                      Account
                     </Box>
+                    </RouterLink>
+                    <Box
+                    p={3}
+                    _hover={{ bg: "gray.700" }}
+                    display="flex"
+                    alignItems="center"
+                    onClick={() => {
+                      setDropOpen(false);
+                      handleSignout();
+                    }}
+                    >
+                    <FaSignOutAlt style={{ marginRight: '8px' }} />
+                    Logout
                     </Box>
+                  </Box>
                   )}
                 </Box>
+
                 </>
             )}
           </Flex>
@@ -215,7 +228,7 @@ function Navbar() {
 
     <DrawerRoot open={open} placement="end" onOpenChange={(e) => setOpen(e.open)} size="xs">
         <DrawerBackdrop />
-        <DrawerContent bg="#000000" color="white" maxWidth="240px">
+        <DrawerContent bg="#09090b" color="white" maxWidth="240px">
           <DrawerCloseTrigger />
           <Box height="20px" />
             <DrawerHeader fontSize="xl" fontWeight="300" fontFamily="Sansation" pl={3}>Menu</DrawerHeader>

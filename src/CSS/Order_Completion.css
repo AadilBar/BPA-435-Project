@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansation:wght@700&display=swap');
+
+.order-completion-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #09090b;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.order-completion-content {
+  text-align: center;
+  background: #1c1c1e;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.5s ease-in-out;
+  border: 2px solid #E9204F;
+}
+
+.order-completion-title {
+  font-size: 2.5rem;
+  color: #E9204F;
+  margin-bottom: 1rem;
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
+}
+
+.order-completion-message {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
+}
+
+.order-completion-link {
+  font-size: 1rem;
+  color: white;
+  background: #E9204F;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  font-family: 'Sansation', sans-serif;
+  font-weight: 700;
+}
+
+.order-completion-link:hover {
+  background: #d81b45;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

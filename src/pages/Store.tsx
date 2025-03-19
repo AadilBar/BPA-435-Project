@@ -81,7 +81,7 @@ const Store = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#000000', paddingTop: '0px', width: '100%', paddingBottom: '50px', marginTop: '-51px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#09090b', paddingTop: '0px', width: '100%', paddingBottom: '50px', marginTop: '-51px' }}>
 
       <div style={{marginTop: '7%'}} className='hero-store'>
         <div className='hero-store-overlay'>
