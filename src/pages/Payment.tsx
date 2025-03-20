@@ -231,33 +231,21 @@ function Payment() {
                       }
                   })
                 }
-                else if(result.paymentIntent){
+                else if(result.paymentIntent && result.paymentIntent.status === "succeeded"){
                     setMessage("Payment succeeded!");
                     const database = getDatabase();
                     if (user && user.email) {
 
                         setShowCheckoutForm(false);
-                        toast.success(`Payment Successful! You can view your order, shipping info, and tour tickets in the account page`, {
-                            position: "top-center",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            style: {
-                                color: '#E9204F',
-                                backgroundColor: '#2C2C2C', 
-                            }
-                        })
 
                         const orderRef = ref(database, `users/${user.email.replace('.', ',')}/orders`);
                         
                         if (cartItems.length > 0) {
                             push(orderRef, {
                                 date: new Date().toLocaleDateString(),
-                                total: total-ticketsTotal,
-                                items: [...cartItems]
+                                total: total,
+                                items: [...cartItems],
+                                tours: [...tourItems]
                             }).catch((error: any) => {
                                 console.error("Error adding item to Firebase:", error);
                             });
@@ -267,7 +255,7 @@ function Payment() {
                         if (tourItems.length > 0) {
                             push(toursRef, {
                                 date: new Date().toLocaleDateString(),
-                                total: total-subtotal-tax,
+                                total: total,
                                 items: [...tourItems]
                             }).catch((error: any) => {
                                 console.error("Error adding item to Firebase:", error);
@@ -336,43 +324,43 @@ function Payment() {
   }
 
   return (
-    <div className="container">
+    <div className="payment-container">
       <ToastContainer />
-      <div className="content">
-        <h1 className="title">Checkout</h1>
+      <div className="payment-content">
+        <h1 className="payment-title">Checkout</h1>
         
-        <div className="grid">
+        <div className="payment-grid">
           {/* Order Summary */}
-          <div className="section order-summary">
-            <div className="section-header">
-              <CreditCard className="icon" />
-              <h2 className="section-title">Order Summary</h2>
+          <div className="payment-section payment-order-summary">
+            <div className="payment-section-header">
+              <CreditCard className="payment-icon" />
+              <h2 className="payment-section-title">Order Summary</h2>
             </div>
             
-            <div className="summary">
-              <div className="summary-row">
+            <div className="payment-summary">
+              <div className="payment-summary-row">
                 <span>Merchandise Subtotal</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
-              <div className="summary-row">
+              <div className="payment-summary-row">
                 <span>Shipping ({selectedShippingOption.name})</span>
                 <span>${selectedShippingOption.price.toFixed(2)}</span>
               </div>
-              <div className="summary-row">
+              <div className="payment-summary-row">
                 <span>Tickets Subtotal</span>
                 <span>${ticketsTotal.toFixed(2)}</span>
               </div>
-              <div className="summary-row">
+              <div className="payment-summary-row">
                 <span>Tax</span>
                 <span>${tax.toFixed(2)}</span>
               </div>
-              <div className="summary-row total">
+              <div className="payment-summary-row payment-summary-row-total">
                 <span>Total</span>
-                <span className="total-amount">${total.toFixed(2)}</span>
+                <span className="payment-total-amount">${total.toFixed(2)}</span>
               </div>
 
                 {!showCheckoutForm && (cartItems.length > 0 || tourItems.length > 0) && (
-                  <button className="button" onClick={handleCheckout}>
+                  <button className="payment-button" onClick={handleCheckout}>
                     Complete Purchase
                   </button>
                 )}
@@ -389,56 +377,59 @@ function Payment() {
                 </div>
                 )}
                 {showCheckoutForm && !clientSecret && (
-                <div className="loading-icon">
-                  <div className="spinner"></div>
+                <div className="payment-loading-icon">
+                  <div className="payment-spinner"></div>
                 </div>
                 )}
             </div>
           </div>
 
-          <div className="sections-container">
+          <div className="payment-sections-container">
             {/* Merch Items Section */}
             {displayCartItems.length > 0 && (
-              <div className="section">
-                <div className="section-header">
-                  <Package2 className="icon" />
-                  <h2 className="section-title">Store Items</h2>
+              <div className="payment-section">
+                <div className="payment-section-header">
+                  <Package2 className="payment-icon" />
+                  <h2 className="payment-section-title">Store Items</h2>
                 </div>
                 
                 <div>
                   {displayCartItems.map((item) => (
-                    <div key={item.key} className="item">
-                      <img src={item.imageUrl} alt={item.title} className="item-image" />
-                      <div className="item-details">
-                        <h3 className="item-title">{item.title}</h3>
-                        <p className="item-description">{item.description}</p>
-                        <p className="item-meta">Size: {item.Size} | Color: {item.color}</p>
-                        <p className="item-meta">Quantity: {item.quantity}</p>
-                        <p className="item-price">${item.price}</p>
+                    <div key={item.key} className="payment-item">
+                      <img src={item.imageUrl} alt={item.title} className="payment-item-image" />
+                      <div className="payment-item-details">
+                        <h3 className="payment-item-title">{item.title}</h3>
+                        <p className="payment-item-description">{item.description}</p>
+                        <p className="payment-item-meta">Size: {item.Size} | Color: {item.color}</p>
+                        <p className="payment-item-meta">Quantity: {item.quantity}</p>
+                        <p className="payment-item-price">${item.price}</p>
                       </div>
                     </div>
                   ))}
                   
-                  <div className="shipping-options">
-                    <div className="shipping-header">
-                      <Truck size={20} className="icon" />
-                      <h3 className="shipping-title">Shipping Options</h3>
+                  <div className="payment-shipping-options">
+                    <div className="payment-shipping-header">
+                      <Truck size={20} className="payment-icon" />
+                      <h3 className="payment-shipping-title">Shipping Options</h3>
                     </div>
                     {shippingOptions.map((option) => (
-                      <label key={option.id} className="shipping-option">
+                      <label key={option.id} className="payment-shipping-option">
                         <input
                           type="radio"
                           name="shipping"
                           value={option.id}
                           checked={selectedShipping === option.id}
-                          onChange={(e) => setSelectedShipping(e.target.value)}
+                          onChange={(e) => {
+                            setSelectedShipping(e.target.value);
+                            setShowCheckoutForm(false); // Set showCheckoutForm to false when shipping method is changed
+                          }}
                         />
-                        <div className="shipping-option-details">
-                          <div className="shipping-option-main">
-                            <span className="shipping-name">{option.name}</span>
-                            <span className="shipping-price">${option.price.toFixed(2)}</span>
+                        <div className="payment-shipping-option-details">
+                          <div className="payment-shipping-option-main">
+                            <span className="payment-shipping-name">{option.name}</span>
+                            <span className="payment-shipping-price">${option.price.toFixed(2)}</span>
                           </div>
-                          <span className="shipping-estimate">Estimated delivery: {option.estimatedDays}</span>
+                          <span className="payment-shipping-estimate">Estimated delivery: {option.estimatedDays}</span>
                         </div>
                       </label>
                     ))}
@@ -449,31 +440,31 @@ function Payment() {
 
             {/* Tickets Section */}
             {displayTourItems.length > 0 && (
-            <div className="section">
-              <div className="section-header">
-                <Ticket className="icon" />
-                <h2 className="section-title">Tour Tickets</h2>
+            <div className="payment-section">
+              <div className="payment-section-header">
+                <Ticket className="payment-icon" />
+                <h2 className="payment-section-title">Tour Tickets</h2>
               </div>
               
               {displayTourItems.map((ticket) => {
                 const addOnTotal = (ticket.meet ? 50 : 0) + (ticket.backstage ? 100 : 0) + (ticket.lounge ? 75 : 0);
                 const ticketPrice = (ticket.realPrice - addOnTotal) / ticket.selectedSeats.length;
                 return (
-                  <div key={ticket.key} className="ticket">
-                    <h3 className="ticket-venue">{ticket.place}</h3>
-                    <p className="ticket-date">{ticket.startDate}</p>
-                    <p className="ticket-address">{ticket.address}</p>
-                    <div className="ticket-seats">
+                  <div key={ticket.key} className="payment-ticket">
+                    <h3 className="payment-ticket-venue">{ticket.place}</h3>
+                    <p className="payment-ticket-date">{ticket.startDate}</p>
+                    <p className="payment-ticket-address">{ticket.address}</p>
+                    <div className="payment-ticket-seats">
                       {ticket.selectedSeats.map((seat, index) => (
                         <p key={index}>{getSeatLabel(seat)}</p>
                       ))}
                     </div>
-                    <div className="ticket-extras">
-                      {ticket.backstage && <span className="extra-tag">Backstage Pass ($100)</span>}
-                      {ticket.meet && <span className="extra-tag">Meet & Greet ($50)</span>}
-                      {ticket.lounge && <span className="extra-tag">Lounge Access ($75)</span>}
+                    <div className="payment-ticket-extras">
+                      {ticket.backstage && <span className="payment-extra-tag">Backstage Pass ($100)</span>}
+                      {ticket.meet && <span className="payment-extra-tag">Meet & Greet ($50)</span>}
+                      {ticket.lounge && <span className="payment-extra-tag">Lounge Access ($75)</span>}
                     </div>
-                    <p className="ticket-price">
+                    <p className="payment-ticket-price">
                       ${ticketPrice.toFixed(2)} per seat × {ticket.quantity} tickets
                     </p>
                   </div>
