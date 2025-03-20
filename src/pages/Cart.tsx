@@ -101,14 +101,14 @@ const CartPage = () => {
 
     useEffect(() => {
         const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice * item.quantity, 0);
+        const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice, 0);
         const total = cartTotal + tourTotal;
         setTotalPrice(total);
     }, [cartItems, tourItems]);
 
     const calculatePrice = () => {
         const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice * item.quantity, 0);
+        const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice, 0);
         const total = cartTotal + tourTotal;
         setTotalPrice(total);
     }

@@ -1,94 +1,93 @@
-/* Global styles */
-body {
+.payment-body {
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
-  .container {
+  .payment-container {
     min-height: 100vh;
     background-color: #09090b;
     color: white;
   }
   
-  .content {
+  .payment-content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 32px 16px;
   }
   
-  .title {
+  .payment-title {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 32px;
     color: #E9204F;
   }
   
-  .grid {
+  .payment-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 32px;
   }
   
   @media (min-width: 1024px) {
-    .grid {
+    .payment-grid {
       grid-template-columns: 2fr 1fr;
     }
 
-    .order-summary {
+    .payment-order-summary {
       order: 2;
     }
   }
   
-  .order-summary {
+  .payment-order-summary {
     order: 1;
   }
   
-  .sections-container {
+  .payment-sections-container {
     display: flex;
     flex-direction: column;
     gap: 32px;
   }
   
-  .section {
+  .payment-section {
     background-color: rgb(24, 24, 27);
     border-radius: 8px;
     padding: 24px;
   }
   
-  .section-header {
+  .payment-section-header {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 24px;
   }
   
-  .section-header {
+  .payment-section-header {
     display: flex;
     align-items: center;
   }
 
-  .section-title {
+  .payment-section-title {
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0;
   }
   
-  .section-title {
+  .payment-section-title {
     display: flex;
     align-items: center;
     margin-left: 8px;
   }
 
-  .icon {
+  .payment-icon {
     color: #E9204F;
   }
   
-  .icon {
+  .payment-icon {
     margin-right: 8px;
   }
 
-  .item {
+  .payment-item {
     display: flex;
     gap: 16px;
     padding-bottom: 16px;
@@ -96,59 +95,59 @@ body {
     margin-bottom: 16px;
   }
   
-  .item-image {
+  .payment-item-image {
     width: 96px;
     height: 96px;
     object-fit: cover;
     border-radius: 4px;
   }
   
-  .item-details {
+  .payment-item-details {
     flex: 1;
   }
   
-  .item-title {
+  .payment-item-title {
     font-weight: 500;
     margin: 0 0 4px 0;
   }
   
-  .item-description {
+  .payment-item-description {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.875rem;
     margin: 0 0 8px 0;
   }
   
-  .item-meta {
+  .payment-item-meta {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.875rem;
   }
   
-  .item-price {
+  .payment-item-price {
     color: #E9204F;
     font-weight: 600;
     margin-top: 8px;
   }
   
-  .shipping-options {
+  .payment-shipping-options {
     margin-top: 24px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 24px;
   }
   
-  .shipping-header {
+  .payment-shipping-header {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 16px;
   }
   
-  .shipping-title {
+  .payment-shipping-title {
     font-size: 1.1rem;
     font-weight: 500;
     margin: 0;
   }
   
-  .shipping-option {
+  .payment-shipping-option {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -160,82 +159,82 @@ body {
     transition: border-color 0.2s;
   }
   
-  .shipping-option:hover {
+  .payment-shipping-option:hover {
     border-color: #E9204F;
   }
   
-  .shipping-option input[type="radio"] {
+  .payment-shipping-option input[type="radio"] {
     margin-top: 4px;
     accent-color: #E9204F;
   }
   
-  .shipping-option-details {
+  .payment-shipping-option-details {
     flex: 1;
   }
   
-  .shipping-option-main {
+  .payment-shipping-option-main {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 4px;
   }
   
-  .shipping-name {
+  .payment-shipping-name {
     font-weight: 500;
   }
   
-  .shipping-price {
+  .payment-shipping-price {
     color: #E9204F;
     font-weight: 500;
   }
   
-  .shipping-estimate {
+  .payment-shipping-estimate {
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.7);
   }
   
-  .ticket {
+  .payment-ticket {
     padding-bottom: 24px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 24px;
   }
   
-  .ticket:last-child {
+  .payment-ticket:last-child {
     border-bottom: none;
     padding-bottom: 0;
     margin-bottom: 0;
   }
   
-  .ticket-venue {
+  .payment-ticket-venue {
     font-weight: 500;
     margin: 0 0 4px 0;
   }
   
-  .ticket-date {
+  .payment-ticket-date {
     color: rgba(255, 255, 255, 0.7);
     margin: 0 0 8px 0;
   }
   
-  .ticket-address {
+  .payment-ticket-address {
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.7);
     margin: 0 0 12px 0;
   }
   
-  .ticket-seats {
+  .payment-ticket-seats {
     margin: 8px 0;
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.7);
   }
   
-  .ticket-extras {
+  .payment-ticket-extras {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin: 12px 0;
   }
   
-  .extra-tag {
+  .payment-extra-tag {
     background-color: rgba(233, 32, 79, 0.1);
     color: #E9204F;
     padding: 4px 8px;
@@ -244,40 +243,49 @@ body {
     font-weight: 500;
   }
   
-  .ticket-price {
+  .payment-ticket-price {
     color: #E9204F;
     font-weight: 600;
     margin-top: 8px;
   }
   
-  .summary {
+  .payment-summary {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
   
-  .summary-row {
+  .payment-summary-row {
     display: flex;
     justify-content: space-between;
     color: rgba(255, 255, 255, 0.7);
   }
   
-  .summary-row.total {
+  .payment-summary-row.total {
     font-size: 1.25rem;
     color: #E9204F;
   }
   
-  .total {
+  .payment-summary-row-total {
+    font-size: 1.25rem;
+    color: #E9204F;
+    font-style: normal;
+  }
+  
+  .payment-total {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 16px;
-    font-weight: 600;
+    font-family: 'Sansation', sans-serif;
+    font-weight: 700;
   }
   
-  .total-amount {
+  .payment-total-amount {
     color: #E9204F;
+    font-family: 'Sansation', sans-serif;
+    font-weight: 700;
   }
   
-  .button {
+  .payment-button {
     width: 100%;
     background-color: #E9204F;
     color: white;
@@ -289,18 +297,18 @@ body {
     transition: background-color 0.2s;
   }
   
-  .button:hover {
+  .payment-button:hover {
     background-color: #c91b42;
   }
 
-  .loading-icon {
+  .payment-loading-icon {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100px;
   }
   
-  .spinner {
+  .payment-spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
     border-left-color: #E9204F;
     border-radius: 50%;
