@@ -1,6 +1,6 @@
 import './event.css';
 import { Link } from 'react-router';
-import { motion } from "framer-motion"; // Import motion
+import { motion } from "framer-motion"; 
 import { FaCalendar } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 
@@ -23,13 +23,13 @@ const EventItem: React.FC<EventProps> = ({ imageUrl, place, address, price, star
       onClick={() => window.scrollTo(0, 0)}
     >
 
-      {/* Motion wrapper around the card outline with a fade-in effect */}
+    
       <motion.div
         className="card_outline"
         initial={{ opacity: 0 }} 
-        whileInView={{ opacity: 1 }} // Fade to full opacity when in view
-        transition={{ duration: 0.5 }} // Set animation duration to 0.5 seconds
-        viewport={{ once: true, amount: 0.2 }} // Trigger the animation only once when the element comes into view
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }} 
+        viewport={{ once: true, amount: 0.2 }}
        
       >
         <div className="tour_img">

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from "react-router";
+import { motion } from "framer-motion"; 
 import '../CSS/Tour_details.css'; 
 import Footer from "../components/footer";
 import { FaCalendar } from "react-icons/fa";
@@ -7,14 +8,12 @@ import { IoLocationSharp } from "react-icons/io5";
 import { get, getDatabase, push, ref } from 'firebase/database';
 import { UserContext } from '../App';
 import { toast, ToastContainer } from 'react-toastify';
+
 const ProductDetails: React.FC = () => {
-    const {user} = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const location = useLocation();
-    const { address, place, price, startDate, endDate, mapData } = location.state || {}; 
+    const { address, place, price, startDate, endDate, mapData } = location.state || {};
 
-
-
-    
     interface SeatStatus {
         status: 'booked' | 'selected' | 'none';
     }
@@ -28,10 +27,10 @@ const ProductDetails: React.FC = () => {
     useEffect(() => {
         updatePrice();
     }, [bookedSeats, meet, backstage, lounge]);
+
     useEffect(() => {
         const db = getDatabase();
         const seatsRef = ref(db, `/${place}/`);
-
         get(seatsRef).then((snapshot: any) => {
             if (snapshot.exists()) {
                 const seatsData = snapshot.val();
@@ -56,151 +55,16 @@ const ProductDetails: React.FC = () => {
     };
 
     const getSeatLabel = (index: number) => {
-        const rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
-        const row = rows[Math.floor((index) / 10)]; 
-        const seatNumber = ((index) % 10) + 1;      
+        const rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const row = rows[Math.floor((index) / 10)];
+        const seatNumber = ((index) % 10) + 1;
         return `${row}${seatNumber}`;
     };
 
-    const updatePrice = () => { 
+    const updatePrice = () => {
         const selectedSeats = bookedSeats.filter(seat => seat.status === 'selected');
         setTotalPrice((selectedSeats.length * price) + (meet ? 50 : 0) + (backstage ? 100 : 0) + (lounge ? 75 : 0));
-
-    }
-    
-    return (
-      <div>
-        <ToastContainer />
-        
-        <div className="tour-opener-container">
-
-          <div className="hero">
-            <div className="hero-overlay">
-              <h1>Stage Fright Tour</h1>
-              <p>Experience an unforgettable night of music at {place}</p>
-              
-            </div>
-          </div>
-
-          <main className='tour-main'>
-            <section className='card'>
-              <h2>Event Details:</h2>
-              <h3 className='event-det'><strong><FaCalendar />Start Date:</strong> {startDate instanceof Date ? startDate.toLocaleDateString() : startDate}</h3>
-              <h3 className='event-det'><strong> <FaCalendar />End Date:</strong> {endDate instanceof Date ? endDate.toLocaleDateString() : endDate}</h3>
-              <h3 className='event-det'><strong><IoLocationSharp />Address:</strong> {address}</h3>
-
-            </section>
-            <section className='card'>
-              <h2>Location:</h2>
-              <iframe
-                src={mapData}
-                width="100%"
-                height="100%"
-                className="map"
-                allowFullScreen
-                loading="lazy"
-                ></iframe>
-            </section>
-
-          </main>
-          
-        </div>
-
-
-
-        <div className='center'>
-            <div className='tickets' style={{overflowX: 'hidden', width: '40%'}}>
-                <div className='ticket-selector'>
-                    <div className='head'>
-                        <div className='title_tour'>Seating at {place}</div>
-                    </div>
-
-                    
-                    <div className="screen">
-                        <div className="screen-text">Concert Stage</div>
-                    </div>
-
-            
-                    <div className="seats">
-                        <div className="status">
-                            <div className="item">Available</div>
-                            <div className="item">Booked</div>
-                            <div className="item">Selected</div>
-                        </div>
-                        <div className="all-seats" >
-                            {bookedSeats.map((seat, index) => (
-                                <div key={index} className="seat-container">
-                                    <div 
-                                        className={`seat ${seat.status}`} 
-                                        onClick={() => {handleSeatChange(index)
-                                            updatePrice();
-                                        }} 
-                                    >
-                                        {getSeatLabel(index)} 
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-              
-                    <div className="vip-options">
-                        <h3>VIP Pass Options</h3>
-                        <div className="vip-item" onClick={() => {
-                            const checkbox = document.getElementById('vip1') as HTMLInputElement;
-                            checkbox.checked = !checkbox.checked;
-                            setMeet(checkbox.checked);
-                            updatePrice();
-                        }}>
-                            <input type="checkbox" id="vip1" onChange={(e) => {
-                                setMeet(e.target.checked);
-                                updatePrice();
-                            }} />
-                            <label htmlFor="vip1">VIP Meet and Greet</label>
-                        </div>
-                        <div className="vip-item" onClick={() => {
-                            const checkbox = document.getElementById('vip2') as HTMLInputElement;
-                            checkbox.checked = !checkbox.checked;
-                            setBackstage(checkbox.checked);
-                            updatePrice();
-                        }}>
-                            <input type="checkbox" id="vip2" onChange={(e) => {
-                                setBackstage(e.target.checked);
-                                updatePrice();
-                            }} />
-                            <label htmlFor="vip2">VIP Backstage Access</label>
-                        </div>
-                        <div className="vip-item" onClick={() => {
-                            const checkbox = document.getElementById('vip3') as HTMLInputElement;
-                            checkbox.checked = !checkbox.checked;
-                            setLounge(checkbox.checked);
-                            updatePrice();
-                        }}>
-                            <input type="checkbox" id="vip3" onChange={(e) => {
-                                setLounge(e.target.checked);
-                                updatePrice();
-                            }} />
-                            <label htmlFor="vip3">VIP Lounge Access</label>
-                        </div>
-                    </div>
-                </div>
-
-               
-                <div className="price_tour">
-                    <div className="total">
-                        <span>
-                            <span>{bookedSeats.filter(seat => seat.status === 'selected').length}</span> Tickets
-                        </span>
-                        <div className="amount">${totalPrice}</div>
-                    </div>
-                    <button type='button' onClick={addToCart}>Book</button>
-                </div>
-            </div>
-        </div>
-        <Footer></Footer>
-      </div>
-    );
-
+    };
 
     function addToCart() {
         const db = getDatabase();
@@ -216,14 +80,10 @@ const ProductDetails: React.FC = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    style: {
-                        color: '#E9204F',
-                        backgroundColor: '#2C2C2C', 
-                    }
+                    style: { color: '#E9204F', backgroundColor: '#2C2C2C' }
                 });
                 return;
             }
-
             push(usersRef, {
                 place,
                 startDate: startDate instanceof Date ? startDate.toISOString().split('T')[0] : startDate,
@@ -238,19 +98,16 @@ const ProductDetails: React.FC = () => {
                 meet,
             });
             toast.success(`${place} has been added to your cart!`, {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            style: {
-                color: '#E9204F', 
-                backgroundColor: '#2C2C2C', 
-            }
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                style: { color: '#E9204F', backgroundColor: '#2C2C2C' }
             });
-            } else {
+        } else {
             toast.error('Please login to add items to your cart!', {
                 position: "top-center",
                 autoClose: 3000,
@@ -259,15 +116,209 @@ const ProductDetails: React.FC = () => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                style: {
-                color: '#E9204F', 
-                backgroundColor: '#2C2C2C', 
-                }
+                style: { color: '#E9204F', backgroundColor: '#2C2C2C' }
             });
-            
-            }
-            
         }
+    }
+
+    const fadeIn = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    };
+
+    
+
+    return (
+        <div>
+            <ToastContainer />
+            <motion.div
+                className="hero"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+            >
+                <div className="hero-overlay">
+                    <motion.h1 initial={{ y: -50 }} animate={{ y: 0 }} transition={{ duration: 0.8 }}>
+                        Stage Fright Tour
+                    </motion.h1>
+                    <motion.p initial={{ y: 50 }} animate={{ y: 0 }} transition={{ duration: 0.8 }}>
+                        Experience an unforgettable night of music at {place}
+                    </motion.p>
+                </div>
+            </motion.div>
+            <main>
+                <motion.div
+                    className="tour-main"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    <div className="left-container">
+                        <motion.section className='card' variants={fadeIn}>
+                            <h2>Event Details</h2>
+                            <p className='event-det'><strong><FaCalendar /> Start Date:</strong> {startDate instanceof Date ? startDate.toLocaleDateString() : startDate}</p>
+                            <p className='event-det'><strong><FaCalendar /> End Date:</strong> {endDate instanceof Date ? endDate.toLocaleDateString() : endDate}</p>
+                            <p className='event-det'><strong><IoLocationSharp /> Address:</strong> {address}</p>
+                        </motion.section>
+                        <motion.section className='card' variants={fadeIn}>
+                            <h2>Location</h2>
+                            <iframe
+                                src={mapData}
+                                width="100%"
+                                height="300"
+                                className="map"
+                                allowFullScreen
+                                loading="lazy"
+                            ></iframe>
+                        </motion.section>
+                    </div>
+                    <div className="right-container">
+                        <motion.section className='card' variants={fadeIn}>
+                            <h2>Ticketing</h2> 
+                            <div className='tickets'>
+                                <div className='ticket-selector'>
+                                    <div className='head'>
+                                        <div className='title_tour'>Seating at {place}</div>
+                                    </div>
+                                    <div className="screen">
+                                        <div className="screen-text">Concert Stage</div>
+                                    </div>
+                                    <motion.div
+                                       className="seats"
+                                       variants={staggerContainer}
+                                       initial="hidden"
+                                       whileInView="visible"
+                                       viewport={{ once: true, amount: 0.2 }}
+                                    >
+                                        <div className="status">
+                                            <div className="item">Available</div>
+                                            <div className="item">Booked</div>
+                                            <div className="item">Selected</div>
+                                        </div>
+                                        <div className="all-seats">
+                                            {bookedSeats.map((seat, index) => (
+                                                <motion.div
+                                                    key={index}
+                                                    className="seat-container"
+                                                    variants={fadeIn}
+                                                >
+                                                    <div
+                                                        className={`seat ${seat.status}`}
+                                                        onClick={() => {
+                                                            handleSeatChange(index);
+                                                            updatePrice();
+                                                        }}
+                                                    >
+                                                        {getSeatLabel(index)}
+                                                    </div>
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                    <div className="vip-options">
+                                        <h3>VIP Pass Options</h3>
+                                        <div className="vip-item" onClick={() => {
+                                            const checkbox = document.getElementById('vip1') as HTMLInputElement;
+                                            checkbox.checked = !checkbox.checked;
+                                            setMeet(checkbox.checked);
+                                            updatePrice();
+                                        }}>
+                                            <input type="checkbox" id="vip1" onChange={(e) => {
+                                                setMeet(e.target.checked);
+                                                updatePrice();
+                                            }} />
+                                            <label htmlFor="vip1">VIP Meet and Greet - $50</label>
+                                        </div>
+                                        <div className="vip-item" onClick={() => {
+                                            const checkbox = document.getElementById('vip2') as HTMLInputElement;
+                                            checkbox.checked = !checkbox.checked;
+                                            setBackstage(checkbox.checked);
+                                            updatePrice();
+                                        }}>
+                                            <input type="checkbox" id="vip2" onChange={(e) => {
+                                                setBackstage(e.target.checked);
+                                                updatePrice();
+                                            }} />
+                                            <label htmlFor="vip2">VIP Backstage Access - $100</label>
+                                        </div>
+                                        <div className="vip-item" onClick={() => {
+                                            const checkbox = document.getElementById('vip3') as HTMLInputElement;
+                                            checkbox.checked = !checkbox.checked;
+                                            setLounge(checkbox.checked);
+                                            updatePrice();
+                                        }}>
+                                            <input type="checkbox" id="vip3" onChange={(e) => {
+                                                setLounge(e.target.checked);
+                                                updatePrice();
+                                            }} />
+                                            <label htmlFor="vip3">VIP Lounge Access - $75</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="price_tour">
+                                    <div className="total">
+                                        <span>
+                                            <span>{bookedSeats.filter(seat => seat.status === 'selected').length}</span> Tickets
+                                        </span>
+                                        <div className="amount">${totalPrice}</div>
+                                    </div>
+                                    <button type='button' onClick={addToCart}>Book</button>
+                                </div>
+                            </div>
+                        </motion.section>
+                    </div>
+                </motion.div>
+                <motion.section className='card' variants={fadeIn}>
+                    <h2>Event Rules / FAQ</h2>
+                    <div className="faq-list">
+                        <div className="faq-item">
+                            <h3>What time do the doors open?</h3>
+                            <p>Doors open at 6:00 PM.</p>
+                        </div>
+                        <div className="faq-item">
+                            <h3>Are there any age restrictions?</h3>
+                            <p>This event is open to all ages.</p>
+                        </div>
+                        <div className="faq-item">
+                            <h3>Can I bring my own food and drinks?</h3>
+                            <p>Outside food and drinks are not permitted. Concessions will be available inside the venue.</p>
+                        </div>
+                        <div className="faq-item">
+                            <h3>What is the refund policy?</h3>
+                            <p>All sales are final. No refunds or exchanges unless the event is canceled.</p>
+                        </div>
+                    </div>
+                </motion.section>
+                <motion.section className='card' variants={fadeIn}>
+                    <h2 style={{ color: '#ff6347'}}>Accessibility Information</h2>
+                    <div style={{ backgroundColor: '#222222', borderRadius: '8px', padding: '16px' }}>
+                        <p style={{fontSize: "1.3rem", fontWeight: 'bolder'}}>We strive to make our events accessible to everyone. Available features include:</p>
+                        <ul>
+                            <li>  - Wheelchair accessible seating and restrooms</li>
+                            <li>  - Sign language interpreters available upon request</li>
+                            <li>  - Assistive listening devices</li>
+                            <li>  - Service animals welcome</li>
+                        </ul>
+                    </div>
+                </motion.section>
+                <motion.section className='card' variants={fadeIn}>
+                    <h2 style={{ color: '#ff6347' }}>Event Sponsors</h2>
+                    <div className="sponsor-logos">
+                        <img src="/images/sponsor1.png" alt="Sponsor 1" />
+                        <img src="/images/sponsor2.png" alt="Sponsor 2" />
+                        <img src="/images/sponsor3.png" alt="Sponsor 3" />
+                    </div>
+                </motion.section>
+               
+            </main>
+            <Footer />
+        </div>
+    );
 };
 
 export default ProductDetails;
