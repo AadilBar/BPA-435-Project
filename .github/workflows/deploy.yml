@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "16" # Specify the node version if needed
+          node-version: "18"
 
       - name: Create .env file
         run: |
@@ -30,10 +30,12 @@ jobs:
           echo "VITE_FIREBASE_MEASUREMENT_ID=${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}" >> .env
 
       - name: Install dependencies
-        run: npm ci # Faster and safer for CI environments
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Build project
-        run: npm run build
+        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
