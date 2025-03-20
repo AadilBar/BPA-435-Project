@@ -30,21 +30,21 @@ return (
           <Flex align="center">
             <Link href="https://spotify.com" mr={4}>
               <img
-                src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
+                src={` /images/Spotify.png`}
                 alt="Spotify"
                 style={{ height: '24px' }}
               />
             </Link>
             <Link href="https://music.apple.com" mr={4}>
               <img
-                src={`${import.meta.env.BASE_URL}/images/Apple.png`}
+                src={` /images/Apple.png`}
                 alt="Apple Music"
                 style={{ height: '24px' }}
               />
             </Link>
             <Link href="https://music.youtube.com">
               <img
-                src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
+                src={` /images/Youtube.png`}
                 alt="Youtube"
                 style={{ height: '24px' }}
               />

@@ -16,5 +16,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/BPA-435-Project"
+  base: "/"
 })

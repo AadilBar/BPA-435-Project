@@ -28,21 +28,21 @@ export default function Footer() {
         <Flex justify="center" gap={6} mb={4}>
           <Link href="https://open.spotify.com/user/3134f72ql3dn4z6gbrvcrgcs4vqa">
             <Image
-              src={`${import.meta.env.BASE_URL}/images/Spotify.png`}
+              src={` /images/Spotify.png`}
               alt="Spotify"
               height="24px"
             />
           </Link>
           <Link href="https://music.apple.com">
             <Image
-              src={`${import.meta.env.BASE_URL}/images/Apple.png`}
+              src={` /images/Apple.png`}
               alt="Apple Music"
               height="24px"
             />
           </Link>
           <Link href="https://music.youtube.com/channel/UC_-Opt2taZLj_xpxP1utQxw?feature=shared">
             <Image
-              src={`${import.meta.env.BASE_URL}/images/Youtube.png`}
+              src={` /images/Youtube.png`}
               alt="Youtube"
               height="24px"
             />
