@@ -90,8 +90,9 @@ const ProductDetails: React.FC = () => {
                 endDate: endDate instanceof Date ? endDate.toISOString().split('T')[0] : endDate,
                 address,
                 realPrice: totalPrice,
-                quantity: 1,
-                selectedSeats: selectedSeats.map((seat) => bookedSeats.indexOf(seat)),
+                quantity: bookedSeats.filter(seat => seat.status === 'selected').length,
+                selectedSeats: selectedSeats
+                    .map((seat) => bookedSeats.indexOf(seat)),
                 backstage,
                 lounge,
                 meet,

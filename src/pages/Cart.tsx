@@ -1,16 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { Box, Text, Image, Flex, Button, VStack, IconButton } from '@chakra-ui/react';
-import { getDatabase, ref, child, get, remove, push, update } from "firebase/database";
-import axios from 'axios';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
+import { getDatabase, ref, child, get, remove } from "firebase/database";
 import { MdDeleteForever } from "react-icons/md";
-import { PaymentElement } from "@stripe/react-stripe-js";
-import { useStripe, useElements } from "@stripe/react-stripe-js";
-import { UserContext } from "../App";
-import { toast, ToastContainer } from "react-toastify";
 
-const Stripe = loadStripe("pk_test_51Qe5S5CO8wO6DXWdN3KxfnZkuMPBmDe7InvPf6S3IqFSCipI8osSsz2KDm3b8stNDa7jub7Jxw3hyrwIVmCwUzRv00jhdmhbtX")
+import { UserContext } from "../App";
+import { ToastContainer } from "react-toastify";
+import { Link } from 'react-router';
+
 
 const CartPage = () => {
     interface CartItem {
@@ -39,8 +35,6 @@ const CartPage = () => {
     
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [tourItems, setTourItems] = useState<TourItem[]>([]);
-    const [clientSecret, setClientSecret] = useState("");
-    const [showCheckoutForm, setShowCheckoutForm] = useState(false);
     const [selectedSeatsLabels, setSelectedSeatsLabels] = useState<string[]>([]);
     const { user } = useContext(UserContext);
 
@@ -104,14 +98,12 @@ const CartPage = () => {
 
 
     const [totalPrice, setTotalPrice] = useState(0);
-    const [priceCents, setPriceCents] = useState(0);
 
     useEffect(() => {
         const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
         const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice * item.quantity, 0);
         const total = cartTotal + tourTotal;
         setTotalPrice(total);
-        setPriceCents(total * 100);
     }, [cartItems, tourItems]);
 
     const calculatePrice = () => {
@@ -119,7 +111,6 @@ const CartPage = () => {
         const tourTotal = tourItems.reduce((sum, item) => sum + item.realPrice * item.quantity, 0);
         const total = cartTotal + tourTotal;
         setTotalPrice(total);
-        setPriceCents(total * 100);
     }
 
 
@@ -152,158 +143,6 @@ const CartPage = () => {
     }
 
 
-    function handleCheckout() {
-        axios.post("https://stripepaymentintentrequest-n7ggeoi6nq-uc.a.run.app", {
-            email: user?.email,
-            amount: priceCents
-            }).then((result) => {
-            if (result.status === 200) {
-                setClientSecret(result.data.paymentIntent);
-            } else {
-                console.error("Failed to fetch payment intent");
-            }
-            }).catch((error) => {
-            console.error("Error:", error);
-            });
-        setShowCheckoutForm(true);
-    }
-
-
-
-    function CheckoutForm() {
-        const stripe = useStripe();
-        const elements = useElements();
-    
-        const [message, setMessage] = useState<string | null>(null);
-        const [isProcessing, setIsProcessing] = useState(false);
-        const { user } = useContext(UserContext);
-    
-        const handleSubmit = async (e: { preventDefault: () => void; }) => {
-            e.preventDefault();
-    
-            if (!stripe || !elements) {
-                return;
-            }
-    
-            setIsProcessing(true);
-    
-            await stripe.confirmPayment({
-                elements,
-                confirmParams: {
-                return_url: `${window.location.origin}/BPA-435-Project/#/`,
-                },
-                redirect: "if_required",
-            })
-            .then(function(result){
-    
-                if(result.error){
-                    setMessage(`Payment failed: ${result.error.message}`);
-                }
-                else if(result.paymentIntent){
-                    setMessage("Payment succeeded!");
-                    const database = getDatabase();
-                    if (user && user.email) {
-
-                        setShowCheckoutForm(false);
-                        toast.success(`Payment Successful! You can view your order, shipping info, and tour tickets in the account page`, {
-                            position: "top-center",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            style: {
-                                color: '#E9204F',
-                                backgroundColor: '#2C2C2C', 
-                            }
-                        })
-
-                        const orderRef = ref(database, `users/${user.email.replace('.', ',')}/orders`);
-                        
-                        if (cartItems.length > 0) {
-                            push(orderRef, {
-                                date: new Date().toLocaleDateString(),
-                                total: totalPrice,
-                                items: [...cartItems]
-                            }).catch((error: any) => {
-                                console.error("Error adding item to Firebase:", error);
-                            });
-                        }
-
-                        const toursRef = ref(database, `users/${user.email.replace('.', ',')}/tourOrders`);
-                        push(toursRef, {
-                            items: [...tourItems]
-                        }).catch((error: any) => {
-                            console.error("Error adding item to Firebase:", error);
-                        });
-
-                        tourItems.forEach((tourItem) => {
-                            const tourSeatsRef = ref(database, `${tourItem.place}`);
-                            tourItem.selectedSeats.forEach((seat) => {
-                                update(tourSeatsRef, {[seat]: true}).catch((error) => {
-                                    console.error("Error updating seat reservation in Firebase:", error);
-                                });
-                            });
-                        });
-
-
-                        
-
-
-
-                        const cartRef = ref(database, `users/${user.email.replace('.', ',')}/cart`);
-                        remove(cartRef).catch((error) => {
-                            console.error("Error removing item from Firebase:", error);
-                        });
-                        const tourRef = ref(database, `users/${user.email.replace('.', ',')}/tours`);
-                        remove(tourRef).catch((error) => {
-                            console.error("Error removing item from Firebase:", error);
-                        });
-                        setCartItems([]);
-                        setTourItems([]);
-      
-
-
-    
-    
-                    } else {
-                        setMessage("User information is missing.");
-                    }
-    
-                }
-                else{
-                    setMessage("Payment failed for an unknown reason.");
-                }
-            });
-    
-            setIsProcessing(false);
-        };
-    
-        return (
-            <form id="payment-form" onSubmit={handleSubmit}>
-                <PaymentElement id="payment-element"  />
-                <button 
-                disabled={isProcessing || !stripe || !elements} 
-                id="submit" 
-                style={{ 
-                    display: 'block', 
-                    margin: '20px 0 0px 0', 
-                    backgroundColor: '#E9204F', 
-                    color: 'white', 
-                    padding: '10px 20px', 
-                    borderRadius: '5px' 
-                }}
-                >
-                <span id="button-text">
-                    {isProcessing ? "Processing ... " : "Pay now"}
-                </span>
-                </button>
-                {message && <div id="payment-message">{message}</div>}
-            </form>
-        );
-    }
-
 
     
     const getSeatLabel = (index: number) => {
@@ -314,7 +153,7 @@ const CartPage = () => {
     };
 
     return (
-        <Box bg="#000000" color="white" minH="100vh" py={8} px={4} style={{paddingTop: '100px'}}>
+        <Box bg="#09090b" color="white" minH="100vh" py={8} px={4} style={{paddingTop: '100px'}}>
             <ToastContainer />
             <Box textAlign="center" mb={6}>
                 <Text fontSize="3xl" color="#E9204F" fontWeight="bold">Your Cart</Text>
@@ -335,7 +174,9 @@ const CartPage = () => {
                     <Text fontSize="2xl" fontWeight="bold" mb={4}>
                         Total: ${totalPrice.toFixed(2)}
                     </Text>
-                    {!showCheckoutForm && (cartItems.length > 0 || tourItems.length > 0) && (
+                    {(cartItems.length > 0 || tourItems.length > 0) && (
+                        <Link
+                            to="/payment">
                         <Button
                             as="a"
                             size="lg"
@@ -343,22 +184,11 @@ const CartPage = () => {
                             color="white"
                             _hover={{ bg: 'red.600' }}
                             w="full"
-                            onClick={handleCheckout}
+
                         >
                             Checkout
                         </Button>
-                    )}
-                    {showCheckoutForm && clientSecret && Stripe && (
-                        <div style={{ width: "100%", maxWidth: "600px", padding: "30px", backgroundColor: "#000000", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", borderRadius: "8px" }}>
-                            <Elements stripe={Stripe} options={{
-                                clientSecret: clientSecret,
-                                appearance: {
-                                    theme: "night"
-                                }
-                            }}>
-                                <CheckoutForm />
-                            </Elements>
-                        </div>
+                        </Link>
                     )}
                 </Box>
 
