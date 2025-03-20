@@ -282,7 +282,7 @@ function Payment() {
                         setCartItems([]);
                         setTourItems([]);
 
-                        window.location.href = `${window.location.origin}/BPA-435-Project/#/completion`;
+                        window.location.href = `${window.location.origin}/#/completion`;
 
 
     

@@ -60,7 +60,8 @@ function App() {
                         <Route path="/terms" element={<Terms/>} />    
                         <Route path="/privacy" element={<Privacy/>} />
                         <Route path="/account" element={<Account/>} />
-                        <Route path="/completion" element={<OrderCompletion/>} />             
+                        <Route path="/completion" element={<OrderCompletion/>} />   
+                        <Route path="*" element={<NotFound />} />          
 
                     </Routes>
 
@@ -71,5 +72,13 @@ function App() {
 
 }
 
+const NotFound = () => {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '200px' }}>
+        <h1 style={{ fontSize: '3rem', color: '#ff0000' }}>404 Page Not Found</h1>
+        <p style={{ fontSize: '1.5rem' }}>The page you're looking for doesn't exist.</p>
+      </div>
+    );
+};
 export {UserContext};
 export default App;

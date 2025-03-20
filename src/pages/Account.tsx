@@ -246,7 +246,7 @@ const Account: React.FC = () => {
                     <button
                     onClick={() => {
                         handleSignout();
-                        window.location.href = ` /signin`;
+                        window.location.href = `#/signin`;
                     }}
                     style={signOutButtonStyle}
                     >
