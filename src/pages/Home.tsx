@@ -19,7 +19,7 @@ export default function Home() {
   const albums = [
     {
       imageUrl: `${import.meta.env.BASE_URL}/images/Merch/Vinyls/upcoming1.png`,
-      title: 'Reverberation',
+      title: 'Harmonic Ghosts',
       date: 'May 15, 2024',
       duration: 42,
       tracks: 12,
@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero Image Section */}
+   
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <img
           src={`${import.meta.env.BASE_URL}/images/Stage_Fright_Main_Page_Image.png`}
@@ -51,7 +51,7 @@ export default function Home() {
         />
       </div>
 
-      {/* 3D Albums Intro */}
+  
       <motion.div
         className="threed-intro-title"
         initial={{ opacity: 0, x: -50 }}
@@ -65,7 +65,7 @@ export default function Home() {
         <ThreeDAlbums />
       </div>
 
-      {/* Experience Section with Flip Cards */}
+      
       <div
         style={{
           display: 'flex',
@@ -168,7 +168,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Upcoming Albums Section with Swiper Carousel */}
+     
       <div>
         <h1 className="upcoming-albums">Upcoming Albums</h1>
         <motion.div
