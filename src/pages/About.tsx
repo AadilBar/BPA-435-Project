@@ -16,7 +16,7 @@ export default function About() {
             >
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                     <img
-                        src={`${import.meta.env.BASE_URL}/images/aboutus.jpg`}
+                        src={` /images/aboutus.jpg`}
                         alt="Stage Fright Tour"
                         style={{
                             width: '100%',
@@ -40,7 +40,7 @@ export default function About() {
                     transition={{ duration: 1 }}
                     viewport={{ once: true }}
                 > 
-                    <video src={`${import.meta.env.BASE_URL}/images/OutofFocus.mp4`} controls poster={`${import.meta.env.BASE_URL}/images/concertThumbnail.jpeg`} className="video">
+                    <video src={` /images/OutofFocus.mp4`} controls poster={` /images/concertThumbnail.jpeg`} className="video">
                         Your browser does not support the video tag.
                     </video>
                     <h3 className="video_caption">What it's like to Experience a Stage Fright Concert</h3>
@@ -94,10 +94,10 @@ export default function About() {
                 <h2 className="member_title">Meet the Band</h2>
 
                 <div className="members_page_sub">
-                    <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/VocalistImage.jpg`} name= 'Sophia Reed' position='Vocalist' description='Sophia Reed, a captivating vocalist, possesses a powerful and soulful voice that effortlessly blends raw emotion with technical precision.' />
-                    <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/GuitaristImage.jpg`} name= 'Ryan Blake' position='Guitarist' description='Ryan Blake, a gifted guitarist with a fiery stage presence, delivers electrifying solos and intricate riffs that ignite the energy of every performance.' />
-                    <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/BassistImage.jpg`} name= 'Emily Hayes' position='Bassist' description='Emily Hayes, a bassist renowned for her powerful and driving grooves, provides the solid foundation that anchors the band’s sound.' />
-                    <Member imageUrl={`${import.meta.env.BASE_URL}/images/People/DrummerImage.jpg`} name= 'Liam Carter' position='Drummer' description='Liam Carter, a dynamic drummer with impeccable timing and explosive energy, provides the driving force behind the band’s powerful sound.' />
+                    <Member imageUrl={` /images/People/VocalistImage.jpg`} name= 'Sophia Reed' position='Vocalist' description='Sophia Reed, a captivating vocalist, possesses a powerful and soulful voice that effortlessly blends raw emotion with technical precision.' />
+                    <Member imageUrl={` /images/People/GuitaristImage.jpg`} name= 'Ryan Blake' position='Guitarist' description='Ryan Blake, a gifted guitarist with a fiery stage presence, delivers electrifying solos and intricate riffs that ignite the energy of every performance.' />
+                    <Member imageUrl={` /images/People/BassistImage.jpg`} name= 'Emily Hayes' position='Bassist' description='Emily Hayes, a bassist renowned for her powerful and driving grooves, provides the solid foundation that anchors the band’s sound.' />
+                    <Member imageUrl={` /images/People/DrummerImage.jpg`} name= 'Liam Carter' position='Drummer' description='Liam Carter, a dynamic drummer with impeccable timing and explosive energy, provides the driving force behind the band’s powerful sound.' />
                 </div>
 
                 <Footer />

@@ -119,7 +119,7 @@ export default function GuitarScene() {
         );
     }
     function GLTFStage() {
-        const { scene } = useGLTF(`${import.meta.env.BASE_URL}/models/stage2.glb`);
+        const { scene } = useGLTF(` /models/stage2.glb`);
         scene.scale.set(1,1,1); // Scale down by 10x
         scene.position.y = -3.2;
         scene.position.x = -0.03;
@@ -178,7 +178,7 @@ export default function GuitarScene() {
             </DialogHeader>
             <DialogBody style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", padding: "20px" }}>
                 <div style={{ width: "50%", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px" }}>
-                <img src={`${import.meta.env.BASE_URL}/images/Apple.png`} alt="Guitar" style={{ maxWidth: "100%", maxHeight: "100%", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }} />
+                <img src={` /images/Apple.png`} alt="Guitar" style={{ maxWidth: "100%", maxHeight: "100%", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }} />
                 </div>
                 <div style={{ width: "50%", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <h2 style={{ textAlign: "center", marginBottom: "20px", fontSize: "1.5rem", color: "#333" }}>Songs List</h2>
@@ -217,4 +217,4 @@ export default function GuitarScene() {
 
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/stage2.glb`);
+useGLTF.preload(` /models/stage2.glb`);

@@ -18,21 +18,21 @@ export default function Home() {
  
   const albums = [
     {
-      imageUrl: `${import.meta.env.BASE_URL}/images/Merch/Vinyls/upcoming1.png`,
+      imageUrl: ` /images/Merch/Vinyls/upcoming1.png`,
       title: 'Harmonic Ghosts',
       date: 'May 15, 2024',
       duration: 42,
       tracks: 12,
     },
     {
-      imageUrl: `${import.meta.env.BASE_URL}/images/Merch/Vinyls/upcoming2.jpg`,
+      imageUrl: ` /images/Merch/Vinyls/upcoming2.jpg`,
       title: 'Midnight Echoes',
       date: 'June 16, 2024',
       duration: 45,
       tracks: 12,
     },
     {
-      imageUrl: `${import.meta.env.BASE_URL}/images/Merch/Vinyls/upcoming3.jpg`,
+      imageUrl: ` /images/Merch/Vinyls/upcoming3.jpg`,
       title: 'Echoes of Silence',
       date: 'July 17, 2024',
       duration: 38,
@@ -45,7 +45,7 @@ export default function Home() {
    
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <img
-          src={`${import.meta.env.BASE_URL}/images/Stage_Fright_Main_Page_Image.png`}
+          src={`/images/Stage_Fright_Main_Page_Image.png`}
           alt="Home Screen Image"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -125,11 +125,11 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <FlipCard
-              frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+              frontside_imageUrl={` /images/flipcards/front1.jpg`}
               icon={FaQuestion}
               frontside_title="Rock Fact"
               inside_title="Did you Know?"
-              inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front1.jpg`}
+              inside_imageUrl={` /images/flipcards/front1.jpg`}
               inside_description="Our first jam session was in a garage!"
             />
           </motion.div>
@@ -141,11 +141,11 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <FlipCard
-              frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+              frontside_imageUrl={` /images/flipcards/front2.jpg`}
               icon={FaTshirt}
               frontside_title="Exciting News"
               inside_title="New Merch!"
-              inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front2.jpg`}
+              inside_imageUrl={` /images/flipcards/front2.jpg`}
               inside_description="Shop Stage Fright by checking out our new hoodies in the Store Page!"
             />
           </motion.div>
@@ -157,11 +157,11 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <FlipCard
-              frontside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+              frontside_imageUrl={` /images/flipcards/front3.jpg`}
               icon={GiGuitar}
               frontside_title="Feel the Energy"
               inside_title="Concert Crowd"
-              inside_imageUrl={`${import.meta.env.BASE_URL}/images/flipcards/front3.jpg`}
+              inside_imageUrl={` /images/flipcards/front3.jpg`}
               inside_description="We bring the heat with electrifying riffs, pulsating drums, and raw energy that keeps the crowd rocking all night long."
             />
           </motion.div>
@@ -216,7 +216,7 @@ export default function Home() {
       >
         <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
           <img
-            src={`${import.meta.env.BASE_URL}/images/contact-home.jpg`}
+            src={` /images/contact-home.jpg`}
             alt="Description"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />

@@ -24,7 +24,7 @@ function Carousel({ radius = 1.5, count = 9 }: { radius?: number; count?: number
   return Array.from({ length: count }, (_, i) => (
     <Card
       key={i}
-      url={`${import.meta.env.BASE_URL}/img${(i % 3) + 1}_.png`}
+      url={` /img${(i % 3) + 1}_.png`}
       position={[Math.sin((i / count) * Math.PI * 2) * radius, 0, Math.cos((i / count) * Math.PI * 2) * radius]}
       rotation={[0, (i / count) * Math.PI * 2, 0]}
     />

@@ -110,7 +110,7 @@ function Navbar() {
         <Box mx={{ base: 0, md: 1 }}>
           <RouterLink to="/" onClick={() => window.scrollTo(0, 0)}>
             <Image
-              src={`${import.meta.env.BASE_URL}/images/Full Logo.png`}
+              src={` /images/Full Logo.png`}
               alt="Home"
               height="50px"
               transition="transform 0.3s ease"

@@ -60,19 +60,19 @@ const ProductDetails: React.FC = () => {
 
   const reviews = [
     {
-      imageUrl: `${import.meta.env.BASE_URL}/images/review1.jpg`,
+      imageUrl: ` /images/review1.jpg`,
       name: 'David Weis',
       rating: 5,
       description: '“I’ve never been more impressed with a product – it works perfectly and looks amazing!”',
     },
     {
-      imageUrl: `${import.meta.env.BASE_URL}/images/review2.jpg`,
+      imageUrl: ` /images/review2.jpg`,
       name: 'John Doe',
       rating: 5,
       description: '“This product has completely exceeded my expectations, offering both quality and great value.”',
     },
     {
-      imageUrl: `${import.meta.env.BASE_URL}/images/review3.jpg`,
+      imageUrl: ` /images/review3.jpg`,
       name: 'Jane Smith',
       rating: 5,
       description: '“I can’t believe how much this has improved my daily routine – truly a game-changer!”',
