@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import useLogin from '../Auth/functions';
-import { User, Mail, Phone, Shield, LogOut, Package, Guitar, Home } from 'lucide-react';
+import { User, Mail, Phone, Shield, LogOut, Package, Home, Ticket } from 'lucide-react';
 import { get, getDatabase, ref, update } from 'firebase/database';
 import { toast, ToastContainer } from 'react-toastify';
 import QRCode from "react-qr-code";
@@ -85,7 +85,7 @@ const Account: React.FC = () => {
         { id: 'profile', label: 'Profile', icon: <User style={{ width: '20px', height: '20px' }} /> },
         { id: 'security', label: 'Security', icon: <Shield style={{ width: '20px', height: '20px' }} /> },
         { id: 'Orders', label: 'Orders', icon: <Package style={{ width: '20px', height: '20px' }} /> },
-        { id: 'Tour', label: 'Tour', icon: <Guitar style={{ width: '20px', height: '20px' }} /> },
+        { id: 'Tour', label: 'Tour', icon: <Ticket style={{ width: '20px', height: '20px' }} /> },
       ];
 
     useEffect(() => {

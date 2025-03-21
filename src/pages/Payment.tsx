@@ -87,7 +87,7 @@ function Payment() {
     const database = getDatabase();
     if (user && user.email) {
       const cartRef = ref(database, "users/" + user.email.replace('.', ','));
-      get(child(cartRef, "/cart/")).then((snapshot) => {
+      get(child(cartRef, "/cart/items/")).then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
           const items = Object.entries(data).map(([key, item]) => {
@@ -109,7 +109,7 @@ function Payment() {
         console.error(error);
       });
 
-      get(child(cartRef, "/tours/")).then((snapshot) => {
+      get(child(cartRef, "/tours/items")).then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
           const items = Object.entries(data).map(([key, item]) => {
