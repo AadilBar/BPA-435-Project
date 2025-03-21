@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=./" />
-  </head>
-  <body>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Not Found</title>
+  <script>
+    // This script redirects to the root with the hash for the desired route
+    const redirectPath = location.pathname; // Get the path the user tried to visit
+    // Strip the /BPA-435-Project/ prefix if it exists and redirect to /# with the path
+    const cleanPath = redirectPath.replace(/^\/BPA-435-Project/, '');
+    location.replace('/#' + cleanPath); // Redirect to root with hash URL
+  </script>
+</head>
+<body>
+</body>
 </html>

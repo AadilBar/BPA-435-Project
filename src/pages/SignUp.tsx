@@ -142,7 +142,13 @@ export default function SignUp() {
         Phone: Phone,
         DateOfBirth: DateOfBirth,
         Address: address, 
-        Cart: {}
+        cart: {
+            totalItems: 0,
+        },
+        tours: {
+            totalItems: 0,
+        }
+
     });
 
 }
