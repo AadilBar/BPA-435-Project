@@ -126,10 +126,6 @@ const ProductDetails: React.FC = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
     };
 
-    const staggerContainer = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-    };
 
     
 
@@ -154,7 +150,7 @@ const ProductDetails: React.FC = () => {
             <main>
                 <motion.div
                     className="tour-main"
-                    variants={staggerContainer}
+                
                     initial="hidden"
                     animate="visible"
                 >
@@ -190,7 +186,7 @@ const ProductDetails: React.FC = () => {
                                     </div>
                                     <motion.div
                                        className="seats"
-                                       variants={staggerContainer}
+                                  
                                        initial="hidden"
                                        whileInView="visible"
                                        viewport={{ once: true, amount: 0.2 }}
