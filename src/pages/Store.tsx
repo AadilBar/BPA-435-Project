@@ -11,7 +11,7 @@ import Fuse from 'fuse.js';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Store = () => {
-  type Item = {
+  type Item2 = {
     imageUrl: string;
     price: number;
     title: string;
@@ -36,7 +36,7 @@ const Store = () => {
   const { user } = useContext(UserContext);
 
   const [showFilters, setShowFilters] = useState(false);
-  const [storeItems, setStoreItems] = useState<Item[]>([]);
+  const [storeItems, setStoreItems] = useState<Item2[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true); // Added loading state
 
@@ -47,7 +47,7 @@ const Store = () => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          const items: Item[] = Object.values(data);
+          const items: Item2[] = Object.values(data);
           setStoreItems(items);
         }
       })

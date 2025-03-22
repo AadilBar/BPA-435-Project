@@ -9,7 +9,7 @@ import { FaTshirt } from "react-icons/fa";
 import { GiGuitar } from "react-icons/gi";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Pagination, Autoplay } from 'swiper/modules';
+import {Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -179,11 +179,11 @@ export default function Home() {
       viewport={{ once: true, amount: 0.3 }} 
     >
       <Swiper
-        modules={[Pagination, Autoplay]}
+        modules={[Pagination, Navigation]}
         spaceBetween={30}
         slidesPerView={1}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        navigation
         loop
         className="album-swiper"
       >
