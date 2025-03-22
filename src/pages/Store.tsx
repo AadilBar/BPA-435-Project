@@ -11,7 +11,7 @@ import Fuse from 'fuse.js';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Store = () => {
-  type Item = {
+  type Item2 = {
     imageUrl: string;
     price: number;
     title: string;
@@ -36,8 +36,9 @@ const Store = () => {
   const { user } = useContext(UserContext);
 
   const [showFilters, setShowFilters] = useState(false);
-  const [storeItems, setStoreItems] = useState<Item[]>([]);
+  const [storeItems, setStoreItems] = useState<Item2[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true); // Added loading state
 
   useEffect(() => {
     const database = getDatabase();
@@ -46,12 +47,15 @@ const Store = () => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          const items: Item[] = Object.values(data);
+          const items: Item2[] = Object.values(data);
           setStoreItems(items);
         }
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setLoading(false); // Set loading to false after data is fetched
       });
   }, [user]);
 
@@ -261,44 +265,46 @@ const Store = () => {
           }}
         >
           <AnimatePresence>
-            {searchResults.length > 0 ? (
-              searchResults.map((item) => (
+            {!loading && ( // Ensure content is displayed only after loading is complete
+              searchResults.length > 0 ? (
+                searchResults.map((item) => (
+                  <motion.div
+                    key={item.title}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                  >
+                    <Item
+                      imageUrl={item.imageUrl}
+                      price={item.price}
+                      title={item.title}
+                      description={item.description}
+                      orange={item.orange}
+                      blue={item.blue}
+                      black={item.black}
+                      grey={item.grey}
+                    />
+                  </motion.div>
+                ))
+              ) : (
                 <motion.div
-                  key={item.title}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    color: 'white',
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    marginTop: '20vh',
+                    marginBottom: '20vh',
+                  }}
                 >
-                  <Item
-                    imageUrl={item.imageUrl}
-                    price={item.price}
-                    title={item.title}
-                    description={item.description}
-                    orange={item.orange}
-                    blue={item.blue}
-                    black={item.black}
-                    grey={item.grey}
-                  />
+                  No results found
                 </motion.div>
-              ))
-            ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                style={{
-                  color: 'white',
-                  fontSize: '24px',
-                  fontWeight: 'bold',
-                  marginTop: '20vh',
-                  marginBottom: '20vh',
-                }}
-              >
-                No results found
-              </motion.div>
+              )
             )}
           </AnimatePresence>
         </motion.div>

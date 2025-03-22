@@ -122,7 +122,7 @@ export default function Tour() {
     useEffect(() => {
         const fuse = new Fuse(events, {
             keys: ['place', 'address'],
-            threshold: 0.35, 
+            threshold: 0.45, 
         });
 
         if (searchQuery.trim() === '') {
