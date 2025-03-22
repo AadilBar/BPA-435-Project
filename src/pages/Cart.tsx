@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Box, Text, Image, Flex, Button, VStack, IconButton } from '@chakra-ui/react';
-import { getDatabase, ref, child, get, remove } from "firebase/database";
+import { getDatabase, ref, child, get, remove, runTransaction } from "firebase/database";
 import { MdDeleteForever } from "react-icons/md";
 
 import { UserContext } from "../App";
@@ -35,7 +35,6 @@ const CartPage = () => {
     
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [tourItems, setTourItems] = useState<TourItem[]>([]);
-    const [selectedSeatsLabels, setSelectedSeatsLabels] = useState<string[]>([]);
     const { user } = useContext(UserContext);
 
 
@@ -43,7 +42,7 @@ const CartPage = () => {
         const database = getDatabase();
         if (user && user.email) {
             const cartRef = ref(database, "users/" + user.email.replace('.', ',') );
-            get(child(cartRef, "/cart/")).then((snapshot) => {
+            get(child(cartRef, "/cart/items/")).then((snapshot) => {
                 if (snapshot.exists()) {
                     const data = snapshot.val();
                     const items = Object.entries(data).map(([key, item]) => {
@@ -64,13 +63,11 @@ const CartPage = () => {
             }).catch((error) => {
                 console.error(error);
             });
-            get(child(cartRef, "/tours/")).then((snapshot) => {
+            get(child(cartRef, "/tours/items")).then((snapshot) => {
                 if (snapshot.exists()) {
                     const data = snapshot.val();
                     const items = Object.entries(data).map(([key, item]) => {
                         const tourItem = item as TourItem;
-                        const selectedSeatsLabels = tourItem.selectedSeats.map(seat => getSeatLabel(seat));
-                        setSelectedSeatsLabels(selectedSeatsLabels);
                         return {
                             key: key,
                             place: tourItem.place,
@@ -121,10 +118,17 @@ const CartPage = () => {
             if (type === 'cart') {
                 const updatedCartItems = [...cartItems];
                 updatedCartItems.splice(index, 1);
-                const cartItemRef = ref(database, `users/${user.email.replace('.', ',')}/cart/${cartItems[index].key}`);
+
+                const cartItemRef = ref(database, `users/${user.email.replace('.', ',')}/cart/items/${cartItems[index].key}`);
                 remove(cartItemRef).catch((error) => {
                     console.error("Error removing item from Firebase:", error);
                 });
+
+                const totalItemsRef = ref(database, `users/${user.email.replace('.', ',')}/cart/totalItems`);
+                runTransaction(totalItemsRef, (currentValue) => {
+                    return (currentValue || 0) - 1;
+                });
+            
                 setCartItems(updatedCartItems);
 
 
@@ -133,9 +137,14 @@ const CartPage = () => {
                 updatedTourItems.splice(index, 1);
                 setTourItems(updatedTourItems);
 
-                const tourItemRef = ref(database, `users/${user.email.replace('.', ',')}/tours/${tourItems[index].key}`);
+                const tourItemRef = ref(database, `users/${user.email.replace('.', ',')}/tours/items/${tourItems[index].key}`);
                 remove(tourItemRef).catch((error) => {
                     console.error("Error removing item from Firebase:", error);
+                });
+
+                const tourTotalItemsRef = ref(database, `users/${user.email.replace('.', ',')}/tours/totalItems`);
+                runTransaction(tourTotalItemsRef, (currentValue) => {
+                    return (currentValue || 0) - 1;
                 });
             }
             calculatePrice();
@@ -146,10 +155,10 @@ const CartPage = () => {
 
     
     const getSeatLabel = (index: number) => {
-        const rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+        const rows = "ABC"; // Only rows A, B, and C
         const row = rows[Math.floor((index) / 10)]; 
         const seatNumber = ((index) % 10) + 1;      
-        return `${row}${seatNumber}`;
+        return `Row ${row}, Seat ${seatNumber}`;
     };
 
     return (
@@ -175,19 +184,17 @@ const CartPage = () => {
                         Total: ${totalPrice.toFixed(2)}
                     </Text>
                     {(cartItems.length > 0 || tourItems.length > 0) && (
-                        <Link
-                            to="/payment">
-                        <Button
-                            as="a"
-                            size="lg"
-                            bg="#E9204F"
-                            color="white"
-                            _hover={{ bg: 'red.600' }}
-                            w="full"
-
-                        >
-                            Checkout
-                        </Button>
+                        <Link to="/payment">
+                            <Button
+                                as="a"
+                                size="lg"
+                                bg="#E9204F"
+                                color="white"
+                                _hover={{ bg: 'red.600' }}
+                                w="full"
+                            >
+                                Checkout
+                            </Button>
                         </Link>
                     )}
                 </Box>
@@ -213,7 +220,7 @@ const CartPage = () => {
                                     <Image
                                         src={item.imageUrl}
                                         alt={item.title}
-                                        boxSize={{ base: "100%", md: "200px" }}
+                                        boxSize={{ base: "100%", md: "150px" }}
                                         objectFit="cover"
                                         borderRadius="md"
                                     />
@@ -222,23 +229,10 @@ const CartPage = () => {
                                             {item.title}
                                         </Text>
                                         <Text>{item.description}</Text>
-                                        {!item.title.toLowerCase().includes('vinyl') && !item.title.toLowerCase().includes('candle') && !item.title.toLowerCase().includes('sticker') && !item.title.toLowerCase().includes('bag') && (
-                                            <>
-                                                {!item.title.toLowerCase().includes('phone') && <Text>
-                                                    <strong>Size:</strong> {item.Size}
-                                                </Text>}
-                                                {!item.title.toLowerCase().includes('socks') && <Text>
-                                                    <strong>Color:</strong> {item.color}
-                                                </Text>}
-                                            </>
-                                        )}
-                                        <Text>
-                                            <strong>Quantity:</strong> {item.quantity}
-                                        </Text>
+                                        <Text className="payment-item-meta">Size: {item.Size} | Color: {item.color}</Text>
+                                        <Text className="payment-item-meta">Quantity: {item.quantity}</Text>
+                                        <Text className="payment-item-price">${item.price.toFixed(2)}</Text>
                                     </Box>
-                                    <Text fontSize="lg" fontWeight="bold" color="white">
-                                        ${item.price.toFixed(2)}
-                                    </Text>
                                     <IconButton onClick={() => { handleRemoveItem(index, 'cart') }}>
                                         <MdDeleteForever />
                                     </IconButton>
@@ -275,19 +269,28 @@ const CartPage = () => {
                                                 <strong>Quantity:</strong> {item.quantity}
                                             </Text>
                                             {item.selectedSeats.length > 0 && (
-                                                <Text>
-                                                    <strong>Selected Seats:</strong> {selectedSeatsLabels.join(", ")}
-                                                </Text>
+                                                <>
+
+                                                    <div className="payment-ticket-seats">
+                                                    <Text><strong>Selected Seats:</strong></Text>
+                                                        {item.selectedSeats.map((seat, index) => (
+                                                            <p key={index}>{getSeatLabel(seat)}</p>
+                                                        ))}
+                                                    </div>
+                                                </>
                                             )}
                                             {(item.backstage || item.meet || item.lounge) && (
-                                                <Text>
-                                                    <strong>Add Ons:</strong> {item.backstage && "Backstage Access"} {item.meet && "Meet & Greet"} {item.lounge && "Lounge Access"}
-                                                </Text>
+                                                <div className="payment-ticket-extras">
+                                                    {item.backstage && <span className="payment-extra-tag">Backstage Pass ($100)</span>}
+                                                    {item.meet && <span className="payment-extra-tag">Meet & Greet ($50)</span>}
+                                                    {item.lounge && <span className="payment-extra-tag">Lounge Access ($75)</span>}
+                                                </div>
                                             )}
+                                            <Text className="payment-ticket-price">
+                                                ${item.realPrice.toFixed(2)}
+                                            </Text>
+
                                         </Box>
-                                        <Text fontSize="lg" fontWeight="bold" color="white">
-                                            ${item.realPrice.toFixed(2)}
-                                        </Text>
                                         <IconButton onClick={() => { handleRemoveItem(index, 'tour') }}>
                                             <MdDeleteForever />
                                         </IconButton>

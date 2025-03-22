@@ -13,7 +13,26 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import useLogin from '../Auth/functions';
 import { UserContext } from '../App';
 import { FaShoppingCart, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
-import { get, getDatabase, ref } from 'firebase/database';
+import { child, get, getDatabase, onValue, ref } from 'firebase/database';
+import { keyframes } from '@emotion/react';
+
+const bounceAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+`;
+
+const scaleBounceAnimation = keyframes`
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.2) translateY(-10px);
+  }
+`;
 
 function Navbar() {
   const location = useLocation();
@@ -21,23 +40,53 @@ function Navbar() {
   const [dropOpen, setDropOpen] = useState(false);
   const [Name, setName] = useState<string>("");
   const {user} = useContext(UserContext);
+  const [cartItems, setCartItems] = useState(0);
+  const [tourItems, setTourItems] = useState(0);
+  const [cartBounce, setCartBounce] = useState(false);
 
-      useEffect(() => {
-          if (user) {
-              const database = getDatabase();
-              const userRef = ref(database, "users/" + (user.email ? user.email.replace('.', ',') : ''));
-              get(userRef).then((snapshot) => {
-                  if (snapshot.exists()) {
-                      const data = snapshot.val();
-                      setName(data.Name);
-                      
-  
-                  }
-              }).catch((error) => {
-                  console.error(error);
-              });
-          }
+
+  useEffect(() => {
+    if (user) {
+      const database = getDatabase();
+      const userRef = ref(database, "users/" + (user.email ? user.email.replace('.', ',') : ''));
+      get(userRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          setName(data.Name);
+          
+
+        }
+      }).catch((error) => {
+        console.error(error);
       });
+
+      const cartRef = child(userRef, "/cart/totalItems");
+      const toursRef = child(userRef, "/tours/totalItems");
+
+      onValue(cartRef, (snapshot) => {
+          if (snapshot.exists()) {
+          const data = snapshot.val();
+          setCartItems(data);
+          setCartBounce(true);
+          setTimeout(() => setCartBounce(false), 500);
+          }
+      }, (error) => {
+          console.error(error);
+      });
+
+      onValue(toursRef, (snapshot) => {
+          if (snapshot.exists()) {
+          const data = snapshot.val();
+          setTourItems(data);
+          setCartBounce(true);
+          setTimeout(() => setCartBounce(false), 500);
+          }
+      }, (error) => {
+          console.error(error);
+      });
+
+    }
+  }, [user]);
   
 
 
@@ -144,9 +193,30 @@ function Navbar() {
             ) : (
                 <>
                 <RouterLink to="/cart">
-                  <IconButton color="white" size={"2xl"} variant={"ghost"}>
-                  <FaShoppingCart />
-                  </IconButton>
+                  <Box position="relative">
+                    <IconButton color="white" size={"2xl"} variant={"ghost"} animation={cartBounce ? `${bounceAnimation} 0.5s` : 'none'}>
+                      <FaShoppingCart />
+                    </IconButton>
+                    {(cartItems > 0 || tourItems > 0) && (
+                      <Box
+                        position="absolute"
+                        top="3"
+                        right="2"
+                        bg="#E9204F"
+                        color="white"
+                        borderRadius="full"
+                        width="20px"
+                        height="20px"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        fontSize="12px"
+                        animation={cartBounce ? `${scaleBounceAnimation} 0.5s` : 'none'}
+                      >
+                        {cartItems + tourItems}
+                      </Box>
+                    )}
+                  </Box>
                 </RouterLink>
                 <Box width="10px" />
                 <Box position="relative">
@@ -255,9 +325,28 @@ function Navbar() {
             ) : (
               <>
                 <RouterLink to="/cart">
-                  <IconButton color="white" size={"2xl"} variant={"ghost"}>
-                  <FaShoppingCart />
+                <Box position="relative">
+                  <IconButton color="white" size={"2xl"} variant={"ghost"} animation={cartBounce ? `${bounceAnimation} 0.5s` : 'none'}>
+                    <FaShoppingCart />
                   </IconButton>
+                  <Box
+                      position="absolute"
+                      top="3"
+                      right="2"
+                      bg="#E9204F"
+                      color="white"
+                      borderRadius="full"
+                      width="20px"
+                      height="20px"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      fontSize="12px"
+                      animation={cartBounce ? `${scaleBounceAnimation} 0.5s` : 'none'}
+                    >
+                      1
+                  </Box>
+                </Box>
                 </RouterLink>
                 <Box width="10px" />
                 <Box position="relative">

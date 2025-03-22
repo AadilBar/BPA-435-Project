@@ -5,7 +5,7 @@ import '../CSS/Tour_details.css';
 import Footer from "../components/footer";
 import { FaCalendar } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
-import { get, getDatabase, push, ref } from 'firebase/database';
+import { get, getDatabase, push, ref, runTransaction } from 'firebase/database';
 import { UserContext } from '../App';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -69,7 +69,7 @@ const ProductDetails: React.FC = () => {
     function addToCart() {
         const db = getDatabase();
         if (user && user.email) {
-            const usersRef = ref(db, "users/" + user.email.replace('.', ',') + "/tours/");
+            const usersRef = ref(db, "users/" + user.email.replace('.', ',') + "/tours/items");
             const selectedSeats = bookedSeats.filter(seat => seat.status === 'selected');
             if (selectedSeats.length === 0) {
                 toast.error('You must select at least one seat!', {
@@ -96,6 +96,11 @@ const ProductDetails: React.FC = () => {
                 backstage,
                 lounge,
                 meet,
+            });
+
+            const totalItemsRef = ref(db, "users/" + user.email.replace('.', ',') + "/tours/totalItems");
+                runTransaction(totalItemsRef, (currentValue) => {
+                return (currentValue || 0) + 1;
             });
             toast.success(`${place} has been added to your cart!`, {
                 position: "top-center",

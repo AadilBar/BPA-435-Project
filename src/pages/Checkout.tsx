@@ -4,7 +4,7 @@ import '../CSS/Product.css';
 import 'react-toastify/dist/ReactToastify.css';
 import ReviewCarousel from '../components/review';
 import { StepperInput } from '../components/ui/stepper-input';
-import { getDatabase, push, ref, get } from 'firebase/database';
+import { getDatabase, push, ref, runTransaction, get } from 'firebase/database';
 import { UserContext } from '../App';
 import { toast, ToastContainer } from 'react-toastify';
 import Item from '../components/merch_item';
@@ -97,7 +97,7 @@ const ProductDetails: React.FC = () => {
   function addToCart() {
     const db = getDatabase();
     if (user && user.email) {
-      const usersRef = ref(db, "users/" + user.email.replace('.', ',') + "/cart/");
+      const usersRef = ref(db, "users/" + user.email.replace('.', ',') + "/cart/items");
       push(usersRef, {
         title,
         Size,
@@ -106,6 +106,11 @@ const ProductDetails: React.FC = () => {
         price,
         description,
         quantity: quantity,
+      });
+
+      const totalItemsRef = ref(db, "users/" + user.email.replace('.', ',') + "/cart/totalItems");
+      runTransaction(totalItemsRef, (currentValue) => {
+        return (currentValue || 0) + 1;
       });
       toast.success(`${title} has been added to your cart!`, {
         position: "top-center",
