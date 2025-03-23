@@ -137,19 +137,22 @@
   max-width: 500px;
   padding: 10px 15px;
   font-size: 16px;
-  border-radius: 5px;
-  border: 2px solid #ff4d4d;
+  border-radius: 12px;
+  border: 2px solid red;
   outline: none;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  background-color: #2b2b2b;
-  color: #ff4d4d;
-  box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #1f1f1f, #333333);
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   font-family: 'Sansation', sans-serif;
   border-radius: 12px;
 }
 
 .search-input:focus {
-  border-color: #ff4d4d;
+  border-radius: 12px;
+    background: linear-gradient(145deg, #1f1f1f, #333333);
+    border: 2px solid red; 
+    box-shadow: 0 0 2px #ff4d4d, inset 0 0 2px #ff4d4d;
 }
 
 @keyframes fadeIn {

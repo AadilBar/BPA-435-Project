@@ -5,6 +5,7 @@ import { LuPhoneCall } from "react-icons/lu";
 import { LuMail } from "react-icons/lu";
 import { toast, ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
+
 export default function Contact() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -229,7 +230,31 @@ export default function Contact() {
               style={{ whiteSpace: 'pre-wrap' }}
             />
           </form>
-          <button className="send_button" onClick={reset}>Send</button>
+          <button
+            className="send_button"
+            onClick={(e) => {
+              e.preventDefault();
+              if (!name || !number || !email || !message) {
+          toast.error("Please fill out all fields before sending.", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            style: {
+              color: '#E9204F',
+              backgroundColor: '#2C2C2C',
+            },
+          });
+          return;
+              }
+              reset();
+            }}
+          >
+            Send
+          </button>
         </div>
       </motion.div>
     </div>
