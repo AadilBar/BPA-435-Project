@@ -21,6 +21,7 @@ import Terms from './pages/Terms.tsx';
 import Privacy from './pages/Privacy.tsx';
 import Account from './pages/Account.tsx';
 import OrderCompletion from './pages/Order_Completion.tsx';
+import GeminiChatComponent from './components/GeminiChat.tsx';
 
 const UserContext = createContext<{ user: User | null, setUser: React.Dispatch<React.SetStateAction<User | null>> }>({ user: null, setUser: () => {} });
 
@@ -43,7 +44,9 @@ function App() {
                 <HashRouter>
                     <div style={{ position: "fixed", top: 0, width: '100%', zIndex: 1000 }}>
                         <Navbar />
+                        <GeminiChatComponent />
                     </div>
+
 
                     <Routes>
                         <Route path="/" element={<Home />} />
@@ -64,6 +67,7 @@ function App() {
                         <Route path="*" element={<NotFound />} />          
 
                     </Routes>
+
 
                 </HashRouter>
             </Provider>
