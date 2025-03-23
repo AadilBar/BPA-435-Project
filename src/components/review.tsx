@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../CSS/Product.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Pagination, Scrollbar, A11y } from 'swiper/modules';
-import { motion, useAnimation } from 'framer-motion'; // Import motion and useAnimation
+import { motion } from 'framer-motion'; // Keep motion for hover animations
 
 interface ReviewCardProps {
   reviews: {
@@ -17,17 +17,10 @@ interface ReviewCardProps {
 }
 
 const ReviewCarousel: React.FC<ReviewCardProps> = ({ reviews }) => {
-  const [scrollY, setScrollY] = useState(0);
-  const controls = useAnimation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const slideInVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   return (
     <Swiper
@@ -38,37 +31,31 @@ const ReviewCarousel: React.FC<ReviewCardProps> = ({ reviews }) => {
       scrollbar={{ draggable: true }}
       className="review-carousel"
     >
-      {reviews.map((review, index) => {
-        const isVisible = scrollY > index * 200; // Adjust visibility threshold based on scroll position
-
-        if (isVisible) {
-          controls.start({ opacity: 1, y: 0 });
-        }
-
-        return (
-          <SwiperSlide key={index} className="review-card">
-            <motion.div
-              className="review-card-content"
-              initial={{ opacity: 0, y: 20 }}
-              animate={controls}
-              transition={{ delay: index * 0.2, duration: 0.2 }}
-            >
-              <motion.img
-                src={review.imageUrl}
-                alt="item picture"
-                className="review-card-picture"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              />
-              <div className="review-info">
-                <h2 className="review-name">{review.name}</h2>
-                <h3 className="review-rating">{'★'.repeat(review.rating)}</h3>
-                <p className="review-description">{review.description}</p>
-              </div>
-            </motion.div>
-          </SwiperSlide>
-        );
-      })}
+      {reviews.map((review, index) => (
+        <SwiperSlide key={index} className="review-card">
+          <motion.div
+            className="review-card-content"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ delay: index * 0.2, duration: 0.5 }}
+            variants={slideInVariants}
+          >
+            <motion.img
+              src={review.imageUrl}
+              alt="item picture"
+              className="review-card-picture"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
+            />
+            <div className="review-info">
+              <h2 className="review-name">{review.name}</h2>
+              <h3 className="review-rating">{'★'.repeat(review.rating)}</h3>
+              <p className="review-description">{review.description}</p>
+            </div>
+          </motion.div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };

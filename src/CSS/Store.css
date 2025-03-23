@@ -80,32 +80,32 @@ html, body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 100%; /* Ensure no overflow beyond the viewport */
+    max-width: 100%; 
     margin-top: 20px;
-    overflow: hidden; /* Prevent horizontal scrollbar during scaling */
-    box-sizing: border-box; /* Ensure padding and borders are included in width/height */
+    overflow: hidden; 
+    box-sizing: border-box; 
   }
   
   .shop-search {
     width: 50%;
-    max-width: 600px; /* Prevent excessive scaling */
-    min-width: 300px; /* Ensure a minimum width to avoid layout shifts */
+    max-width: 600px; 
+    min-width: 300px;
     padding: 10px;
     background: linear-gradient(145deg, #1f1f1f, #333333);
-    color: #f0f0f0;
+
     font-size: 16px;
     border-radius: 12px;
     outline: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
     transition: all 0.3s ease;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-    border-image: linear-gradient(45deg, #ff4d4d, #ff6666, #ff4d4d) 1;
+    border: 2px solid red;
   }
 
   .shop-search:focus {
-    border-image: linear-gradient(45deg, #ff6666, #ff4d4d, #ff3333) 1;
-    box-shadow: 0 0 8px #ff4d4d;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1f1f1f, #333333);
+    border: 2px solid red; 
+    box-shadow: 0 0 8px #ff4d4d, inset 0 0 8px #ff4d4d;
   }
  
   @media (max-width: 768px) {
