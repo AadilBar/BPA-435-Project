@@ -1,67 +1,91 @@
-import { Link, Navigate } from "react-router";
-import useLogin from "../Auth/functions";
-import { IconButton } from "@chakra-ui/react";
-import { useState } from "react";
+import '../CSS/Login.css'; 
+import { MdEmail } from "react-icons/md";
+import { MdOutlineLock } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { Link } from "react-router";
+import { useState } from "react";
+import { motion } from "framer-motion"; 
 
 export default function Login() {
+  const [passVisible, setPassVisible] = useState(false); 
 
-    const [passVisible, setPassVisible] = useState(false);
-    
-
-    const {
-        user,
-        loginStatus,
-        handleEmailChange,
-        handlePasswordChange,
-        handleLogin,
-      } = useLogin();
-
-    return (
-
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', fontSize: '1.2em', fontFamily: 'Sansation', fontWeight: 700 }}>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '400px', padding: '30px', border: '1px solid #ccc', borderRadius: '10px', boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)' }}>
-                    <div style={{ marginBottom: '20px' }}>
-                        <label htmlFor="email" style={{ display: 'block', marginBottom: '10px' }}>Email:</label>
-                        <input type="email" id="email" name="email" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={handleEmailChange}/>
-                    </div>
-                    <div style={{ marginBottom: '20px' }}>
-                        <label htmlFor="password" style={{ display: 'block', marginBottom: '10px' }}>Password:</label>
-                    <div style={{ position: 'relative', marginBottom: '20px' }}>
-                        <input type="password" id="password" name="password" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box', paddingRight: '40px' }} onChange={handlePasswordChange}/>
-                        <IconButton
-                        onClick={
-                            () => {
-                                const passwordField = document.getElementById('password') as HTMLInputElement;
-                                if (passwordField && passwordField.type === 'password') {
-                                    passwordField.type = 'text';
-                                    setPassVisible(true);
-                                } else {
-                                    passwordField.type = 'password';
-                                    setPassVisible(false);
-                                }
-                            }}
-                            backgroundColor="transparent"
-                            color="white"
-                            style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                            {(passVisible) ? <FaEyeSlash /> : <FaEye />}
-                        </IconButton>
-                    </div>
-                    </div>
-                    <button onClick={(e) =>
-                        {
-                            e.preventDefault();
-                            handleLogin();
-                        }
-                    } type="submit" style={{ padding: '15px', backgroundColor: '#E9204F', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '1em' }}>Login</button>
-                </form>
-                {user && <Navigate to="/"/>}
-                <p style={{ marginTop: '30px', fontSize: '1em' }}>
-                    Don't have an account? <Link to="/signup" style={{ color: '#007BFF' }}>Sign up</Link>
-                </p>
-                <p style={{ marginTop: '30px', fontSize: '1em' }}>{loginStatus}</p>
+  return (
+    <div className="login-container-page">
+      <motion.div 
+        className="form-container"
+        initial={{ opacity: 0, y: -50 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.5 }}
+      >
+        <motion.h1 
+          className='login-first-heading'
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Login
+        </motion.h1>
+        <motion.h1 
+          className='login-second-heading'
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          Welcome Back!
+        </motion.h1>
+        <div className="input-container">
+          <form className="email-password-form" style={{marginTop: '10px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '5px' }}> {/*This div is here because I'm doing a flex gap DO NOT DELETE*/}
+              <label htmlFor="email-input" style={{fontSize: '1.1rem'}}>Email:</label>
+              <div className="input-with-icon">{/*Putting DIV because thats how I'm putting the icon and input in same line */}
+                <MdEmail className="input-icon" />
+                <input className="email-input" type="email" placeholder="Enter Your Email" required />
+              </div>
             </div>
-    );
+            <div style={{display: 'flex', flexDirection: 'column', gap: '5px' }}> {/*This div is here because I'm doing a flex gap DO NOT DELETE*/}
+              <label htmlFor="password-input"style={{fontSize: '1.1rem', }}>Password:</label>
+              <div className="input-with-icon"> {/*Putting DIV because thats how I'm putting the icon and input in same line */}
+                <MdOutlineLock className="input-icon" />
+                <input
+                  className="password-input"
+                  type={passVisible ? "text" : "password"} 
+                  placeholder="Enter Your Password"
+                  required
+                />
+                <span
+                  onClick={() => setPassVisible(!passVisible)} 
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    color: '#E9204F',
+                  }}
+                >
+                  {passVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+            </div>
+            <motion.button 
+              type="submit" 
+              className='Login-submit'
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Log In
+            </motion.button>
+          </form>
+          <motion.p 
+            className="signup-text"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            Don't have an account? <Link to="/signup" className="signup-link">Sign up</Link>
+          </motion.p>
+        </div>
+      </motion.div>
+    </div>
+  );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Box, Text, Image, Flex, Button, VStack, IconButton } from '@chakra-ui/react';
 import { getDatabase, ref, child, get, remove, runTransaction } from "firebase/database";
 import { MdDeleteForever } from "react-icons/md";
+import { motion } from "framer-motion"; 
 
 import { UserContext } from "../App";
 import { ToastContainer } from "react-toastify";
@@ -161,6 +162,8 @@ const CartPage = () => {
         return `Row ${row}, Seat ${seatNumber}`;
     };
 
+    const MotionFlex = motion(Flex); 
+
     return (
         <Box bg="#09090b" color="white" minH="100vh" py={8} px={4} style={{paddingTop: '100px'}}>
             <ToastContainer />
@@ -207,7 +210,7 @@ const CartPage = () => {
                     ) : (
                         <>
                             {cartItems.map((item, index) => (
-                                <Flex
+                                <MotionFlex
                                     key={index}
                                     bg="gray.800"
                                     p={4}
@@ -216,6 +219,11 @@ const CartPage = () => {
                                     gap={4}
                                     w="full"
                                     flexDirection={{ base: "column", md: "row" }}
+                                    initial={{ opacity: 0, y: 20 }} 
+                                    animate={{ opacity: 1, y: 0 }} 
+                                    exit={{ opacity: 0, y: -20 }} 
+                                    transition={{ duration: 0.3 }} 
+                                    whileHover={{ scale: 1.02, boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)" }} 
                                 >
                                     <Image
                                         src={item.imageUrl}
@@ -233,10 +241,17 @@ const CartPage = () => {
                                         <Text className="payment-item-meta">Quantity: {item.quantity}</Text>
                                         <Text className="payment-item-price">${item.price.toFixed(2)}</Text>
                                     </Box>
-                                    <IconButton onClick={() => { handleRemoveItem(index, 'cart') }}>
+                                    <IconButton 
+                                        onClick={() => { handleRemoveItem(index, 'cart') }}
+                                        _hover={{
+                                            transform: "scale(1.2)",
+                                            boxShadow: "0px 0px 10px 2px rgba(233, 32, 79, 0.8)",
+                                            color: "#E9204F"
+                                        }}
+                                    >
                                         <MdDeleteForever />
                                     </IconButton>
-                                </Flex>
+                                </MotionFlex>
                             ))}
                             {tourItems.length === 0 ? (
                                 <Text fontSize="xl" color="white" textAlign="center">
@@ -244,7 +259,7 @@ const CartPage = () => {
                                 </Text>
                             ) : (
                                 tourItems.map((item, index) => (
-                                    <Flex
+                                    <MotionFlex
                                         key={index}
                                         bg="gray.800"
                                         p={4}
@@ -253,6 +268,11 @@ const CartPage = () => {
                                         gap={4}
                                         w="full"
                                         flexDirection={{ base: "column", md: "row" }}
+                                        initial={{ opacity: 0, y: 20 }} 
+                                        animate={{ opacity: 1, y: 0 }} 
+                                        exit={{ opacity: 0, y: -20 }} 
+                                        transition={{ duration: 0.3 }} 
+                                        whileHover={{ scale: 1.02, boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)" }} 
                                     >
                                         <Box flex="1">
                                             <Text fontSize="lg" fontWeight="bold" color="#E9204F">
@@ -291,10 +311,17 @@ const CartPage = () => {
                                             </Text>
 
                                         </Box>
-                                        <IconButton onClick={() => { handleRemoveItem(index, 'tour') }}>
+                                        <IconButton 
+                                            onClick={() => { handleRemoveItem(index, 'tour') }}
+                                            _hover={{
+                                                transform: "scale(1.2)",
+                                                boxShadow: "0px 0px 10px 2px rgba(233, 32, 79, 0.8)",
+                                                color: "#E9204F"
+                                            }}
+                                        >
                                             <MdDeleteForever />
                                         </IconButton>
-                                    </Flex>
+                                    </MotionFlex>
                                 ))
                             )}
                         </>

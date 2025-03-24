@@ -1,12 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Link } from 'react-router';
 import { MessageCircle } from 'lucide-react';
-
+import { motion } from 'framer-motion';
 const GeminiChatComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([{ text: "Hello! How can I assist you today?", isBot: true }]);
   const [input, setInput] = useState("");
+
+/*This Stuff is for Scrolling. A scroll top of 0 means the top, so I just set it to the height so it scrolls to the bottom  */
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -149,77 +157,143 @@ const GeminiChatComponent = () => {
 
   return (
     <div>
-      <div 
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          cursor: 'pointer',
-          backgroundColor: '#E9204F',
-          color: 'white',
-          borderRadius: '50%',
-          width: '60px',
-          height: '60px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '24px',
-        }}
-        onClick={toggleChat}
+      {/* This div represents the button that triggers the chat window */}
+      <motion.div
+      style={{
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        cursor: 'pointer',
+        backgroundColor: '#E9204F',
+        color: 'white',
+        borderRadius: '50%',
+        width: '60px',
+        height: '60px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '24px',
+        boxShadow: '0 4px 10px rgba(233, 32, 79, 0.5)',
+      }}
+      onClick={toggleChat}
+      whileHover={{ scale: 1.1 }} 
+      whileTap={{ scale: 0.9 }} 
       >
-        <MessageCircle color="white" size={32} />
-      </div>
+      <MessageCircle color="white" size={32} />
+      </motion.div>
+
+      {/* If the chat window is open, this div will render the chat interface */}
       {isOpen && (
-        <div 
+      <motion.div
+        style={{
+        position: 'fixed',
+        bottom: '80px',
+        right: '20px',
+        width: '90%',
+        maxWidth: '400px',
+        height: '500px',
+        border: '2px solid rgb(17, 9, 11)',
+        borderRadius: '15px',
+        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.5)',
+        backgroundColor: '#1a1a1a',
+        display: 'flex',
+        flexDirection: 'column',
+        }}
+        /*Initial Swoop in effect that happens when you click the button. y of 50 means 50 below.  */
+        initial={{ opacity: 0, y: 50 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        exit={{ opacity: 0, y: 50 }} 
+        transition={{ duration: 0.3 }} 
+      >
+        <div
           style={{
-            position: 'fixed',
-            bottom: '80px',
-            right: '20px',
-            width: '90%', // Adjust width based on screen size
-            maxWidth: '400px', // Default max width
-            height: '500px',
-            border: '1px solid #000',
-            borderRadius: '10px',
-            boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-            backgroundColor: '#09090b',
-            display: 'flex',
-            flexDirection: 'column',
+            padding: '10px',
+            background: 'linear-gradient(90deg, #1a1a1a, #333333)', 
+            color: '#E9204F',
+            textAlign: 'center',
+            fontWeight: 'boldest', 
+            fontSize: '24px', 
+            borderTopLeftRadius: '15px',
+            borderTopRightRadius: '15px',
           }}
         >
-          <div style={{ flex: 1, padding: '10px', overflowY: 'auto', color: 'white' }}>
-            {messages.map((msg, index) => (
-              <div key={index} style={{ textAlign: msg.isBot ? 'left' : 'right', margin: '10px 0' }}>
-                <div 
-                  style={{
-                    display: 'inline-block',
-                    padding: '10px',
-                    borderRadius: '10px',
-                    backgroundColor: msg.isBot ? '#333' : '#E9204F',
-                    color: msg.isBot ? 'white' : 'black',
-                    fontSize: '14px',
-                  }}
-                >
-                  {msg.isBot ? renderMessage(msg) : msg.text}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', borderTop: '1px solid #000' }}>
-            <input 
-              type="text" 
-              value={input} 
-              onChange={(e) => setInput(e.target.value)} 
-              style={{ flex: 1, padding: '10px', border: 'none', borderRadius: '0 0 0 10px', backgroundColor: '#333', color: 'white', fontSize: '14px' }} 
-              placeholder="Type a message..."
-            />
-            <button 
-              onClick={handleSend} 
-              style={{ padding: '10px', border: 'none', backgroundColor: '#E9204F', color: 'black', borderRadius: '0 0 10px 0', fontSize: '14px' }}
-            >
-              Send
-            </button>
-          </div>
+          Stage Fright AI
         </div>
+        <div
+          ref={chatContainerRef}
+          style={{
+            flex: 1,
+            padding: '15px',
+            overflowY: 'auto',
+            background: 'linear-gradient(to bottom,rgb(16, 16, 16),rgb(34, 9, 9))', 
+            color: 'white',
+          }}
+        >
+        {messages.map((msg, index) => (
+          <div key={index} style={{ textAlign: msg.isBot ? 'left' : 'right', margin: '10px 0' }}>
+          <motion.div
+            style={{
+            display: 'inline-block',
+            maxWidth: '80%',
+            padding: '12px 15px',
+            borderRadius: '12px',
+            backgroundColor: msg.isBot ? '#2a2a2a' : '#E9204F',
+            color: msg.isBot ? 'white' : 'black',
+            fontSize: '14px',
+            boxShadow: msg.isBot
+              ? '0 4px 10px rgba(0, 0, 0, 0.3)'
+              : '0 2px 5px rgba(233, 32, 79, 0.3)',
+            }}
+            /*Animation for each bubble. Basically it grows. */
+            initial={{ opacity: 0, scale: 0.9 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            transition={{ duration: 0.2 }} 
+          >
+            {msg.isBot ? renderMessage(msg) : msg.text}
+          </motion.div>
+          </div>
+        ))}
+        </div>
+
+        <div style={{ display: 'flex', borderTop: '1px solid #E9204F' }}>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSend();
+          }}
+          style={{
+          flex: 1,
+          padding: '12px',
+          border: 'none',
+          borderRadius: '0 0 0 15px',
+          background: 'linear-gradient(90deg, #1a1a1a, #333333)',
+          color: 'white',
+          fontSize: '14px',
+          outline: 'none',
+          }}
+          placeholder="Type a message..."
+        />
+        <motion.button
+          onClick={handleSend}
+          style={{
+          padding: '12px 20px',
+          border: 'none',
+          backgroundColor: '#E9204F',
+          color: 'white',
+          borderRadius: '0 0 15px 0',
+          fontSize: '14px',
+          cursor: 'pointer',
+          boxShadow: '0 4px 10px rgba(233, 32, 79, 0.5)',
+          }}
+          whileHover={{ scale: 1.1 }} 
+          whileTap={{ scale: 0.9 }} 
+        >
+          Send
+        </motion.button>
+        </div>
+      </motion.div>
       )}
     </div>
   );

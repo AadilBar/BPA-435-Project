@@ -7,6 +7,7 @@ import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import { loadStripe } from '@stripe/stripe-js';
+import { motion } from 'framer-motion';
 
 interface CartItem {
   key: string;
@@ -170,7 +171,15 @@ function Payment() {
     setTotal(newTotal);
   }, [selectedShipping, displayCartItems, displayTourItems]);
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.2 } },
+  };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  };
 
   function handleCheckout() {
         axios.post("https://stripepaymentintentrequest-n7ggeoi6nq-uc.a.run.app", {
@@ -324,14 +333,22 @@ function Payment() {
   }
 
   return (
-    <div className="payment-container">
+    <motion.div
+      className="payment-container"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
       <ToastContainer />
-      <div className="payment-content">
+      <motion.div className="payment-content" variants={itemVariants}>
         <h1 className="payment-title">Checkout</h1>
         
-        <div className="payment-grid">
+        <motion.div className="payment-grid" variants={containerVariants}>
           {/* Order Summary */}
-          <div className="payment-section payment-order-summary">
+          <motion.div
+            className="payment-section payment-order-summary"
+            variants={itemVariants}
+          >
             <div className="payment-section-header">
               <CreditCard className="payment-icon" />
               <h2 className="payment-section-title">Order Summary</h2>
@@ -382,12 +399,12 @@ function Payment() {
                 </div>
                 )}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="payment-sections-container">
+          <motion.div className="payment-sections-container" variants={containerVariants}>
             {/* Merch Items Section */}
             {displayCartItems.length > 0 && (
-              <div className="payment-section">
+              <motion.div className="payment-section" variants={itemVariants}>
                 <div className="payment-section-header">
                   <Package2 className="payment-icon" />
                   <h2 className="payment-section-title">Store Items</h2>
@@ -395,7 +412,11 @@ function Payment() {
                 
                 <div>
                   {displayCartItems.map((item) => (
-                    <div key={item.key} className="payment-item">
+                    <motion.div
+                      key={item.key}
+                      className="payment-item"
+                      variants={itemVariants}
+                    >
                       <img src={item.imageUrl} alt={item.title} className="payment-item-image" />
                       <div className="payment-item-details">
                         <h3 className="payment-item-title">{item.title}</h3>
@@ -404,7 +425,7 @@ function Payment() {
                         <p className="payment-item-meta">Quantity: {item.quantity}</p>
                         <p className="payment-item-price">${item.price}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                   
                   <div className="payment-shipping-options">
@@ -435,47 +456,51 @@ function Payment() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )}
 
             {/* Tickets Section */}
             {displayTourItems.length > 0 && (
-            <div className="payment-section">
-              <div className="payment-section-header">
-                <Ticket className="payment-icon" />
-                <h2 className="payment-section-title">Tour Tickets</h2>
-              </div>
-              
-              {displayTourItems.map((ticket) => {
-                const addOnTotal = (ticket.meet ? 50 : 0) + (ticket.backstage ? 100 : 0) + (ticket.lounge ? 75 : 0);
-                const ticketPrice = (ticket.realPrice - addOnTotal) / ticket.selectedSeats.length;
-                return (
-                  <div key={ticket.key} className="payment-ticket">
-                    <h3 className="payment-ticket-venue">{ticket.place}</h3>
-                    <p className="payment-ticket-date">{ticket.startDate}</p>
-                    <p className="payment-ticket-address">{ticket.address}</p>
-                    <div className="payment-ticket-seats">
-                      {ticket.selectedSeats.map((seat, index) => (
-                        <p key={index}>{getSeatLabel(seat)}</p>
-                      ))}
-                    </div>
-                    <div className="payment-ticket-extras">
-                      {ticket.backstage && <span className="payment-extra-tag">Backstage Pass ($100)</span>}
-                      {ticket.meet && <span className="payment-extra-tag">Meet & Greet ($50)</span>}
-                      {ticket.lounge && <span className="payment-extra-tag">Lounge Access ($75)</span>}
-                    </div>
-                    <p className="payment-ticket-price">
-                      ${ticketPrice.toFixed(2)} per seat × {ticket.quantity} tickets
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+              <motion.div className="payment-section" variants={itemVariants}>
+                <div className="payment-section-header">
+                  <Ticket className="payment-icon" />
+                  <h2 className="payment-section-title">Tour Tickets</h2>
+                </div>
+                
+                {displayTourItems.map((ticket) => {
+                  const addOnTotal = (ticket.meet ? 50 : 0) + (ticket.backstage ? 100 : 0) + (ticket.lounge ? 75 : 0);
+                  const ticketPrice = (ticket.realPrice - addOnTotal) / ticket.selectedSeats.length;
+                  return (
+                    <motion.div
+                      key={ticket.key}
+                      className="payment-ticket"
+                      variants={itemVariants}
+                    >
+                      <h3 className="payment-ticket-venue">{ticket.place}</h3>
+                      <p className="payment-ticket-date">{ticket.startDate}</p>
+                      <p className="payment-ticket-address">{ticket.address}</p>
+                      <div className="payment-ticket-seats">
+                        {ticket.selectedSeats.map((seat, index) => (
+                          <p key={index}>{getSeatLabel(seat)}</p>
+                        ))}
+                      </div>
+                      <div className="payment-ticket-extras">
+                        {ticket.backstage && <span className="payment-extra-tag">Backstage Pass ($100)</span>}
+                        {ticket.meet && <span className="payment-extra-tag">Meet & Greet ($50)</span>}
+                        {ticket.lounge && <span className="payment-extra-tag">Lounge Access ($75)</span>}
+                      </div>
+                      <p className="payment-ticket-price">
+                        ${ticketPrice.toFixed(2)} per seat × {ticket.quantity} tickets
+                      </p>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
             )}
-          </div>
-        </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
 
