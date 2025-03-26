@@ -1,0 +1,89 @@
+.signup-container-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background: linear-gradient(to right, palevioletred, black); 
+    padding: 65px 0 0 0; 
+    background-image: url("/images/Login.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.signup-heading{
+    font-size: 2rem;
+    text-align: center;
+}
+.signup-subheading{
+    font-size: 1.5rem;
+    text-align: center; 
+}
+.signup-form-container {
+  
+    width: 100%;
+    max-width: 450px; 
+    padding: 20px;
+    border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background-color: rgba(12, 11, 11, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.signup-heading-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signup-input-container{
+    margin-top: 25px;
+}
+.signup-input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; 
+}
+
+.signup-input-icon {
+    position: absolute;
+    left: 10px; 
+    color: #E9204F;
+    font-size: 1.2rem;
+}
+
+.signup-input {
+    width: 100%;
+    padding: 10px 10px 10px 35px; 
+    border: 1px solid #3d1c1c;
+    border-radius: 12px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1a1a1a, #2a1a1a, #3d1c1c);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.signup-input:focus{
+    outline: none;
+    border-color: #E9204F;
+    box-shadow: 0 0 8px rgba(233, 32, 79, 0.5);
+}
+.signup-button{
+display: block;
+margin: 0 auto;
+padding: 10px 20px;
+border: none;
+font-weight: bold;
+border-radius: 8px;
+background: linear-gradient(to right, #E9204F, #FF5733);
+cursor: pointer;
+color:white;
+text-align: center;
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.signup-button:hover{
+    transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(233, 32, 79, 0.5);
+}

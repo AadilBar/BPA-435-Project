@@ -1,157 +1,141 @@
-import { Link, Navigate } from "react-router";
-import useLogin from "../Auth/functions";
+import '../CSS/SignUp.css'; 
+import { IoPerson } from "react-icons/io5";
+import { FaCalendar } from "react-icons/fa";
+import { MdLocalPhone } from "react-icons/md";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdOutlineLock } from "react-icons/md";
+import { motion } from "framer-motion";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import { IconButton } from "@chakra-ui/react";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa6";
-import { getDatabase, ref, set } from "firebase/database";
 
 export default function SignUp() {
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [passVisible, setPassVisible] = useState(false);
     const [confirmPassVisible, setConfirmPassVisible] = useState(false);
-    const [address, setAddress] = useState("");
 
-    const {
-        email,
-        password,
-        user,
-        Name,
-        setName,
-        Phone,
-        setPhone,
-        DateOfBirth,
-        setDateOfBirth,
-        createAccountStatus,
-        handleEmailChange,
-        handlePasswordChange,
-        handleCreateAccount,
-        handleLogin,
-      } = useLogin();
-      
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', fontSize: '1.2em', marginTop: '230px', fontFamily: 'Sansation', fontWeight: 700 }}>
-            <form style={{ display: 'flex', flexDirection: 'column', width: '400px', padding: '30px', border: '1px solid #ccc', borderRadius: '10px', boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)' }}>
-                <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="name" style={{ display: 'block', marginBottom: '10px' }}>Name:</label>
-                    <input type="text" id="name" name="name" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setName(e.target.value)}/>
-                </div>
-                <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="email" style={{ display: 'block', marginBottom: '10px' }}>Email:</label>
-                    <input type="email" id="email" name="email" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={handleEmailChange}/>
-                </div>
-                <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="dob" style={{ display: 'block', marginBottom: '10px' }}>Date of Birth:</label>
-                    <input type="date" id="dob" name="dob" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setDateOfBirth(e.target.value)}/>
-                </div>
-                <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="phone" style={{ display: 'block', marginBottom: '10px' }}>Phone (optional):</label>
-                    <input type="tel" id="phone" name="phone" style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setPhone(e.target.value)}/>
-                </div>
-                <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="address" style={{ display: 'block', marginBottom: '10px' }}>Address:</label>
-                    <input type="text" id="address" name="address" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setAddress(e.target.value)}/>
-                </div>
-                {password.length < 8 && (
-                    <div style={{ marginBottom: '20px', color: 'red', fontSize: '0.9em' }}>
-                        Password must be at least 8 characters long.
-                    </div>
-                )}
-                {password !== confirmPassword && (
-                    <div style={{ marginBottom: '20px', color: 'red', fontSize: '0.9em' }}>
-                        Passwords do not match.
-                    </div>
-                )}
-                <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="password" style={{ display: 'block', marginBottom: '10px' }}>Password:</label>
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                        <input type="password" id="password" name="password" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={handlePasswordChange}/>
-                        <IconButton
-                        onClick={
-                            () => {
-                                const passwordField = document.getElementById('password') as HTMLInputElement;
-                                if (passwordField && passwordField.type === 'password') {
-                                    passwordField.type = 'text';
-                                    setPassVisible(true);
-                                } else {
-                                    passwordField.type = 'password';
-                                    setPassVisible(false);
-                                }
-                            }
-                        }
-                        backgroundColor="transparent"
-                        color="White"
-                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
+        <div className="signup-container-page">
+            <motion.div 
+                className="signup-form-container"
+                initial={{ opacity: 0, y: -50 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.5 }}
+            >
+                <motion.h1 
+                    className="signup-heading"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                    Create Account
+                </motion.h1>
+                <motion.h3 
+                    className="signup-subheading"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                    Join Our Community Today
+                </motion.h3>
+                <div className="signup-input-container">
+                    <form>
+                        <motion.div 
+                            className="signup-input-with-icon"
+                           
                         >
-                            {(passVisible) ? <FaEyeSlash /> : <FaEye />}
-                        </IconButton>
-                    </div>
-                </div>
-                <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="confirmPassword" style={{ display: 'block', marginBottom: '10px' }}>Confirm Password:</label>
-
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required style={{ width: '100%', padding: '12px', boxSizing: 'border-box' }} onChange={(e) => setConfirmPassword(e.target.value)}/>
-                        <IconButton
-                        onClick={
-                            () => {
-                                const passwordField = document.getElementById('confirmPassword') as HTMLInputElement;
-                                if (passwordField && passwordField.type === 'password') {
-                                    passwordField.type = 'text';
-                                    setConfirmPassVisible(true);
-                                } else {
-                                    passwordField.type = 'password';
-                                    setConfirmPassVisible(false);
-                                }
-                            }
-                        }
-                        backgroundColor="transparent"
-                        color="White"
-                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
+                            <IoPerson className="signup-input-icon" />
+                            <input type="text" placeholder="First Name" className="signup-input" required />
+                        </motion.div>
+                        <motion.div 
+                            className="signup-input-with-icon"
+                          
                         >
-                            {(confirmPassVisible) ? <FaEyeSlash /> : <FaEye />}
-                        </IconButton>
-                    </div>
+                            <IoPerson className="signup-input-icon" />
+                            <input type="text" placeholder="Last Name" className="signup-input" required />
+                        </motion.div>
+                        <motion.div 
+                            className="signup-input-with-icon"
+                           
+                        >
+                            <FaCalendar className="signup-input-icon" />
+                            <input type="text" placeholder="Date of Birth (MM/DD/YYYY)" className="signup-input" required />
+                        </motion.div>
+                        <motion.div 
+                            className="signup-input-with-icon"
+                          
+                        >
+                            <MdLocalPhone className="signup-input-icon" />
+                            <input type="text" placeholder="Phone (Optional)" className="signup-input" />
+                        </motion.div>
+                        <motion.div 
+                            className="signup-input-with-icon"
+                           
+                        >
+                            <FaLocationDot className="signup-input-icon" />
+                            <input type="text" placeholder="Address" className="signup-input" required />
+                        </motion.div>
+                        <motion.div 
+                            className="signup-input-with-icon"
+                            
+                        >
+                            <MdOutlineLock className="signup-input-icon" />
+                            <input
+                                type={passVisible ? "text" : "password"}
+                                placeholder="Password"
+                                className="signup-input"
+                                required
+                            />
+                            <span
+                                onClick={() => setPassVisible(!passVisible)}
+                                style={{
+                                    position: 'absolute',
+                                    right: '10px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    cursor: 'pointer',
+                                    color: '#E9204F',
+                                }}
+                            >
+                                {passVisible ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                        </motion.div>
+                        <motion.div 
+                            className="signup-input-with-icon"
+                           
+                        >
+                            <MdOutlineLock className="signup-input-icon" />
+                            <input
+                                type={confirmPassVisible ? "text" : "password"}
+                                placeholder="Confirm Password"
+                                className="signup-input"
+                                required
+                            />
+                            <span
+                                onClick={() => setConfirmPassVisible(!confirmPassVisible)}
+                                style={{
+                                    position: 'absolute',
+                                    right: '10px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    cursor: 'pointer',
+                                    color: '#E9204F',
+                                }}
+                            >
+                                {confirmPassVisible ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                        </motion.div>
+                        <motion.button 
+                            type="submit" 
+                            className="signup-button"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            Sign Up
+                        </motion.button>
+                    </form>
                 </div>
-                {<button type="submit" style={{ padding: '15px', backgroundColor: '#E9204F', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '1em' }}  onClick={(e) => {
-                    if (password === confirmPassword) {
-                        pushUserInfo();
-                        handleCreateAccount();
-                        handleLogin();
-                        setConfirmPassword("");
-                    }
-                    e.preventDefault();
-                }}>Sign Up</button>}
-            </form>
-            {user && <Navigate to="/"/>}
-            <p style={{ marginTop: '30px', fontSize: '1em' }}>
-                Already have an account? <Link to="/login" style={{ color: '#007BFF' }}>Login</Link>
-            </p>
-            <p style={{ marginTop: '30px', fontSize: '1em' }}>{createAccountStatus}</p>
+            </motion.div>
         </div>
     );
-
-    
-  function pushUserInfo() {
-    const db = getDatabase();
-
-    const usersRef = ref(db, "users/" + email.replace('.', ',') );
-    set(usersRef, {
-        email: email,
-        Name: Name,
-        Phone: Phone,
-        DateOfBirth: DateOfBirth,
-        Address: address, 
-        cart: {
-            totalItems: 0,
-        },
-        tours: {
-            totalItems: 0,
-        }
-
-    });
-
-}
 }
 
 
