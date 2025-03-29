@@ -11,8 +11,6 @@ export default function Login() {
   const [passVisible, setPassVisible] = useState(false); 
 
   const {
-    user,
-    loginStatus,
     handleEmailChange,
     handlePasswordChange,
     handleLogin,
