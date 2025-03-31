@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import '../CSS/Account.css';
 import { UserContext } from '../App';
 import useLogin from '../Auth/functions';
 import { User, Mail, Phone, Shield, LogOut, Package, Home, Ticket } from 'lucide-react';
@@ -75,7 +76,6 @@ const Account: React.FC = () => {
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
-    
 
     const {
         handleSignout,
@@ -220,134 +220,132 @@ const Account: React.FC = () => {
 
     return (
         <>
-        <div style={containerStyle}>
+        <div className="account-container">
             <ToastContainer />
             {user ? (
-            <div style={cardStyle}>
+            <div className="account-card">
 
-                <div style={sidebarStyle}>
-                <div style={profileHeaderStyle}>
-                    <div>
-                    <h2 style={{ margin: 0, fontSize: '16px' }}>{userData.name}</h2>
-                    <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: '#A0A0A0' }}>{userData.email}</p>
+                <div className="account-sidebar">
+                    <div className="account-profile-header">
+                        <div>
+                        <h2>{userData.name}</h2>
+                        <p>{userData.email}</p>
+                        </div>
                     </div>
-                </div>
-                <nav>
-                    {tabs.map((tab) => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        style={tabStyle(activeTab === tab.id)}
-                    >
-                        {tab.icon}
-                        <span>{tab.label}</span>
-                    </button>
-                    ))}
-                    <button
-                    onClick={() => {
-                        handleSignout();
-                        window.location.href = `#/signin`;
-                    }}
-                    style={signOutButtonStyle}
-                    >
-                    <LogOut style={{ width: '20px', height: '20px' }} /> 
-                    <span>Sign out</span>
-                    </button>
-                </nav>
+                    <nav className="account-nav">
+                        {tabs.map((tab) => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`account-tab ${activeTab === tab.id ? 'account-tab-active' : ''}`}
+
+                        >
+                            {tab.icon}
+                            <span>{tab.label}</span>
+                        </button>
+                        ))}
+                        <button
+                            onClick={() => {
+                                handleSignout();
+                                window.location.href = `#/login`;
+                            }}
+                            className="account-sign-out-button"
+                            >
+                            <LogOut style={{ width: '20px', height: '20px'}} /> 
+                            <span>Sign out</span>
+                        </button>
+                    </nav>
                 </div>
 
-
-                <div style={contentStyle}>
+                <div className="account-content">
                 {activeTab === 'profile' && (
                     <div>
-                    <h1 style={{ fontSize: '24px', marginBottom: '24px' }}>Profile Information</h1>
+                    <h1>Profile Information</h1>
                     <div>
                         {editing ? (
-                        <div style={{ marginTop: '16px' }}>
-                            <div style={infoCardStyle}>
+                        <div>
+                            <div className="account-info-card">
                             <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                             <div>
-                                <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Full Name</p>
+                                <p>Full Name</p>
                                 <input
                                 type="text"
                                 value={name || ''}
                                 onChange={(e) => setName(e.target.value)}
-                                style={inputStyle}
+                                className="account-input"
                                 />
                             </div>
                             </div>
-                            <div style={infoCardStyle}>
+                            <div className="account-info-card">
                             <Mail style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                             <div>
-                                <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Email Address</p>
-                                <p style={{ margin: 0, fontWeight: 500 }}>{email || 'Not set'}</p>
-                                <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: '#FF4545' }}>Email address cannot be updated. Please contact us to learn more.</p>
+                                <p>Email Address</p>
+                                <p>{email || 'Not set'}</p>
+                                <p style={{ color: '#FF4545', fontSize: '14px' }}>Email address cannot be updated. Please contact us to learn more.</p>
                             </div>
                             </div>
-                            <div style={infoCardStyle}>
+                            <div className="account-info-card">
                             <Phone style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                             <div>
-                                <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Phone Number</p>
+                                <p>Phone Number</p>
                                 <input
                                 type="text"
                                 value={phone || ''}
                                 onChange={(e) => setPhone(e.target.value)}
-                                style={inputStyle}
+                                className="account-input"
                                 />
                             </div>
                             </div>
-                            <div style={infoCardStyle}>
+                            <div className="account-info-card">
                                 <Home style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                                 <div>
-                                    <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
+                                    <p>Address</p>
                                     <input
                                     type="text"
                                     value={userData.address || ''}
                                     onChange={(e) => setUserData({ ...userData, address: e.target.value })}
-                                    style={inputStyle}
+                                    className="account-input"
                                     />
                                 </div>
                             </div>
-                            <button style={buttonStyle} onClick={() =>{ setEditing(false)
-                            updateUserData()
-                            }}>
+                            <button className="account-button" onClick={() => { setEditing(false); updateUserData(); }}>
                             Save
                             </button>
-                            <button style={{ ...buttonStyle, backgroundColor: '#FF4545', marginLeft: '8px' }} onClick={() => setEditing(false)}>
+                            <button className="account-button" style={{ backgroundColor: '#FF4545', marginLeft: '8px' }} onClick={() => setEditing(false)}>
                             Cancel
                             </button>
                         </div>
                         ) : (
                         <>
-                            <div style={infoCardStyle}>
+                            <div className="account-info-card">
                             <User style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                             <div>
-                                <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Full Name</p>
-                                <p style={{ margin: 0, fontWeight: 500 }}>{userData.name || 'Not set'}</p>
+                                <p>Full Name</p>
+                                <p>{userData.name || 'Not set'}</p>
                             </div>
                             </div>
-                            <div style={infoCardStyle}>
+                            <div className="account-info-card">
                             <Mail style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                             <div>
-                                <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Email Address</p>
-                                <p style={{ margin: 0, fontWeight: 500 }}>{userData.email || 'Not set'}</p>
+                                <p>Email Address</p>
+                                <p>{userData.email || 'Not set'}</p>
                             </div>
                             </div>
-                            <div style={infoCardStyle}>
+                            <div className="account-info-card">
                             <Phone style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                             <div>
-                                <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Phone Number</p>
-                                <p style={{ margin: 0, fontWeight: 500 }}>{userData.phone ? formatPhoneNumber(userData.phone) : 'Not set'}</p>
+                                <p>Phone Number</p>
+                                <p>{userData.phone ? formatPhoneNumber(userData.phone) : 'Not set'}</p>
                             </div>
                             </div>
-                            <div style={infoCardStyle}>
+                            <div className="account-info-card">
                                 <Home style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                                 <div>
-                                    <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Address</p>
-                                    <p style={{ margin: 0, fontWeight: 500 }}>{userData.address || 'Not set'}</p>
+                                    <p>Address</p>
+                                    <p>{userData.address || 'Not set'}</p>
                                 </div>
                             </div>
-                            <button style={buttonStyle} onClick={() => setEditing(true)}>
+                            <button className="account-button" onClick={() => setEditing(true)}>
                             Edit Profile
                             </button>
                         </>
@@ -363,7 +361,7 @@ const Account: React.FC = () => {
                                     <h2 style={{ fontSize: '20px', marginBottom: '16px' }}>Order Date: {order.date}</h2>
                                     <p style={{ fontSize: '16px', color: '#A0A0A0' }}>Awaiting shipping info</p>
                                     {order.items.map((item, itemIndex) => (
-                                        <div key={itemIndex} style={infoCardStyle}>
+                                        <div key={itemIndex} className="account-info-card">
                                             <img
                                                 src={item.imageUrl}
                                                 alt={item.title}
@@ -403,7 +401,7 @@ const Account: React.FC = () => {
                                 <div key={tourOrderIndex} style={{ marginBottom: '24px' }}>
 
                                     {tourOrder.items.map((item, itemIndex) => (
-                                        <div key={itemIndex} style={infoCardStyle}>
+                                        <div key={itemIndex} className="account-info-card">
                                             <div style={{ flex: 1 }}>
                                                 <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#E9204F' }}>{item.place}</p>
                                                 <p><strong>Address:</strong> {item.address}</p>
@@ -434,7 +432,7 @@ const Account: React.FC = () => {
                     <h1 style={{ fontSize: '24px', marginBottom: '24px' }}>Security Settings</h1>
                     <p style={{ color: '#A0A0A0' }}>Manage your account security and privacy settings.</p>
                     <div style={{ marginTop: '16px' }}>
-                        <div style={infoCardStyle}>
+                        <div className='account-info-card'>
                         <Shield style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                         <div>
                             <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Current Password</p>
@@ -442,11 +440,11 @@ const Account: React.FC = () => {
                             type="password"
                             value={currentPassword}
                             onChange={(e) => setCurrentPassword(e.target.value)}
-                            style={inputStyle}
+                            className='account-input'
                             />
                         </div>
                         </div>
-                        <div style={infoCardStyle}>
+                        <div className='account-info-card'>
                         <Shield style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                         <div>
                             <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>New Password</p>
@@ -454,11 +452,11 @@ const Account: React.FC = () => {
                             type="password"
                             value={newPassword}
                             onChange={(e) => {setNewPassword(e.target.value); handlePasswordChange(e)}}
-                            style={inputStyle}
+                            className='account-input'
                             />
                         </div>
                         </div>
-                        <div style={infoCardStyle}>
+                        <div className='account-info-card'>
                         <Shield style={{ width: '24px', height: '24px', color: '#A0A0A0' }} />
                         <div>
                             <p style={{ margin: '0 0 4px 0', fontSize: '14px', color: '#A0A0A0' }}>Confirm New Password</p>
@@ -466,11 +464,11 @@ const Account: React.FC = () => {
                             type="password"
                             value={confirmNewPassword}
                             onChange={(e) => setConfirmNewPassword(e.target.value)}
-                            style={inputStyle}
+                            className='account-input'
                             />
                         </div>
                         </div>
-                        <button style={buttonStyle} onClick={updatePassword}>
+                        <button className='account-button' onClick={updatePassword}>
                         Update Password
                         </button>
                     </div>
@@ -489,99 +487,5 @@ const Account: React.FC = () => {
         </>
     );
 }
-
-const containerStyle: React.CSSProperties = {
-    minHeight: '80vh',
-    backgroundColor: '#121212',
-    color: '#ffffff',
-    padding: '32px',
-    marginTop: '72px'
-};
-
-const cardStyle: React.CSSProperties = {
-    backgroundColor: '#1E1E1E',
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-    display: 'grid',
-    gridTemplateColumns: '1fr 3fr',
-    minHeight: '600px'
-};
-
-const sidebarStyle: React.CSSProperties = {
-    borderRight: '1px solid #333',
-    padding: '24px'
-};
-
-const profileHeaderStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    marginBottom: '32px'
-};
-
-const tabStyle = (isActive: boolean): React.CSSProperties => ({
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    padding: '12px 16px',
-    backgroundColor: isActive ? '#2D2D2D' : 'transparent',
-    color: isActive ? '#ffffff' : '#A0A0A0',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-    marginBottom: '8px',
-    transition: 'all 0.2s ease',
-    textAlign: 'left'
-});
-
-const contentStyle: React.CSSProperties = {
-    padding: '32px'
-};
-
-const infoCardStyle: React.CSSProperties = {
-    backgroundColor: '#2D2D2D',
-    padding: '16px',
-    borderRadius: '8px',
-    marginBottom: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '16px'
-};
-
-const buttonStyle: React.CSSProperties = {
-    backgroundColor: '#007AFF',
-    color: 'white',
-    padding: '8px 16px',
-    borderRadius: '6px',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s ease'
-};
-
-const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '8px',
-    borderRadius: '6px',
-    border: '1px solid #A0A0A0',
-    backgroundColor: '#1E1E1E',
-    color: '#ffffff',
-    marginBottom: '8px'
-};
-
-const signOutButtonStyle: React.CSSProperties = {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    padding: '12px 16px',
-    backgroundColor: 'transparent',
-    color: '#FF4545',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-    marginTop: '16px',
-    textAlign: 'left'
-};
 
 export default Account;
