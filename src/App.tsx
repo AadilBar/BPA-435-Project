@@ -22,7 +22,7 @@ import Privacy from './pages/Privacy.tsx';
 import Account from './pages/Account.tsx';
 import OrderCompletion from './pages/Order_Completion.tsx';
 import GeminiChatComponent from './components/GeminiChat.tsx';
-
+import Albums from './pages/albums.tsx'
 const UserContext = createContext<{ user: User | null, setUser: React.Dispatch<React.SetStateAction<User | null>> }>({ user: null, setUser: () => {} });
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
                         <Route path="/account" element={<Account/>} />
                         <Route path="/completion" element={<OrderCompletion/>} />   
                         <Route path="*" element={<NotFound />} />          
-
+                        <Route path="/albums" element={<Albums />} />
                     </Routes>
 
 
