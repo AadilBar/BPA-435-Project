@@ -252,7 +252,7 @@ function Payment() {
                         if (cartItems.length > 0) {
                             push(orderRef, {
                                 date: new Date().toLocaleDateString(),
-                                total: total,
+                                total: subtotal + selectedShippingOption.price,
                                 items: [...cartItems],
                                 tours: [...tourItems]
                             }).catch((error: any) => {
@@ -264,7 +264,7 @@ function Payment() {
                         if (tourItems.length > 0) {
                             push(toursRef, {
                                 date: new Date().toLocaleDateString(),
-                                total: total,
+                                total: ticketsTotal,
                                 items: [...tourItems]
                             }).catch((error: any) => {
                                 console.error("Error adding item to Firebase:", error);
