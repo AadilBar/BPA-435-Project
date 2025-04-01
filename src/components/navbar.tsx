@@ -12,7 +12,7 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import useLogin from '../Auth/functions';
 import { UserContext } from '../App';
-import { FaShoppingCart, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { FaShoppingCart, FaSignOutAlt, FaUserCircle, FaMusic, FaMapSigns, FaStore, FaEnvelope, FaInfoCircle } from "react-icons/fa";
 import { child, get, getDatabase, onValue, ref } from 'firebase/database';
 import { keyframes } from '@emotion/react';
 
@@ -94,7 +94,7 @@ function Navbar() {
     handleSignout,
   } = useLogin();
 
-  const NavLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, children }) => (
+  const NavLink: React.FC<{ to: string; children: React.ReactNode; icon: React.ReactNode }> = ({ to, children, icon }) => (
     <RouterLink to={to} onClick={() => window.scrollTo(0, 0)}>
       <Box
         fontFamily="Sansation"
@@ -107,6 +107,9 @@ function Navbar() {
         onClick={() => setOpen(false)}
         transition="color 0.3s ease"
         borderRadius="8px"
+        display="flex"
+        alignItems="center"
+        gap="8px"
         _after={{
           content: '""',
           display: 'block',
@@ -119,7 +122,6 @@ function Navbar() {
         _hover={
           location.pathname !== to
         ? {
-        color: '#E9204F',
         _after: {
           width: '100%',
         },
@@ -127,7 +129,15 @@ function Navbar() {
         : {}
         }
       >
-        {children}
+        <Box color={location.pathname === to ? 'black' : 'white'}>
+          {icon}
+        </Box>
+        <Box 
+          color={location.pathname === to ? 'black' : 'white'}
+          _hover={location.pathname !== to ? { color: '#E9204F' } : {}}
+        >
+          {children}
+        </Box>
       </Box>
     </RouterLink>
   );
@@ -143,59 +153,105 @@ function Navbar() {
         position="relative"
         w="100%"
         h={{ base: '72px', md: '80px' }} 
-        px={4}
+        px={{ base: 2, sm: 3, md: 4 }}
       >
+        {/* Left divider line */}
+        <Box 
+          position="absolute"
+          top="50%"
+          transform="translateY(-50%)"
+          left={{ base: '34%', md: '37%' }}
+          width={{ base: '8%', md: '5%' }}
+          height="1px"
+          bg="white"
+          display={{ base: 'none', md: 'none', lg: 'block' }}
+        />
 
+        {/* Right divider line */}
+        <Box 
+          position="absolute"
+          top="50%"
+          transform="translateY(-50%)"
+          right={{ base: '34%', md: '37%' }}
+          width={{ base: '8%', md: '5%' }}
+          height="1px"
+          bg="white"
+          display={{ base: 'none', md: 'none', lg: 'block' }}
+        />
 
         <Flex
           flex="1"
-          justify="right"
+          justify="center"
           align="center"
           display={{ base: 'none', md: 'flex' }}
+          gap={{ md: 1, lg: 2 }}
         >
-          <NavLink to="/about-us">ABOUT US</NavLink>
-          <NavLink to="/tour">TOUR</NavLink>
+          <NavLink to="/albums" icon={<FaMusic />}>
+            <Box as="span" display={{ md: 'inline', lg: 'inline' }}>ALBUMS</Box>
+          </NavLink>
+          <NavLink to="/tour" icon={<FaMapSigns />}>
+            <Box as="span" display={{ md: 'inline', lg: 'inline' }}>TOUR</Box>
+          </NavLink>
+          <NavLink to="/store" icon={<FaStore />}>
+            <Box as="span" display={{ md: 'inline', lg: 'inline' }}>STORE</Box>
+          </NavLink>
         </Flex>
-        <Box mx={{ base: 0, md: 1 }}>
+        
+        <Box mx={{ base: 0, md: 1 }} minW={{ base: "auto", md: "50px" }}>
           <RouterLink to="/" onClick={() => window.scrollTo(0, 0)}>
             <Image
               src={` /images/Full Logo.png`}
               alt="Home"
-              height="50px"
+              height={{ base: "45px", md: "50px" }}
               transition="transform 0.3s ease"
               _hover={{ transform: 'scale(1.1)' }}
             /> 
           </RouterLink>
         </Box>
+        
         <Flex
           flex="1"
-          justify="left"
+          justify="center"
           align="center"
           display={{ base: 'none', md: 'flex' }}
+          gap={{ md: 1, lg: 2 }}
         >
-          <NavLink to="/store">STORE</NavLink>
-          <NavLink to="/contact-us">CONTACT US</NavLink>
-          <NavLink to="/albums">ALBUMS</NavLink>
+          <NavLink to="/contact-us" icon={<FaEnvelope />}>
+            <Box as="span" display={{ md: 'inline', lg: 'inline' }}>CONTACT</Box>
+          </NavLink>
+          <NavLink to="/about-us" icon={<FaInfoCircle />}>
+            <Box as="span" display={{ md: 'inline', lg: 'inline' }}>ABOUT</Box>
+          </NavLink>
         </Flex>
 
-
-        <Box position="absolute" right="0" mr={5} display={{ base: 'none', md: 'flex' }}>
+        <Box 
+          position="absolute" 
+          right="0" 
+          mr={{ base: 2, sm: 3, md: 5 }} 
+          display={{ base: 'none', md: 'flex' }}
+        >
           <Flex align="center">
             {!user ? (
               <>
                 <RouterLink to="/signup">
-                  <Button p={5}>Sign Up</Button>
+                  <Button p={{ base: 3, md: 4, lg: 5 }} fontSize={{ base: "sm", lg: "md" }}>Sign Up</Button>
                 </RouterLink>
-                <Box width="10px" />
+                <Box width={{ base: "5px", md: "10px" }} />
                 <RouterLink to="/login">
-                  <Button p={5} backgroundColor={"#E9204F"}>Login</Button>
+                  <Button p={{ base: 3, md: 4, lg: 5 }} backgroundColor={"#E9204F"} fontSize={{ base: "sm", lg: "md" }}>Login</Button>
                 </RouterLink>
               </>
             ) : (
                 <>
                 <RouterLink to="/cart">
                   <Box position="relative">
-                    <IconButton color="white" size={"2xl"} variant={"ghost"} animation={cartBounce ? `${bounceAnimation} 0.5s` : 'none'}>
+                    <IconButton 
+                      color="white" 
+                      size={{ base: "lg", lg: "2xl" }} 
+                      variant={"ghost"} 
+                      animation={cartBounce ? `${bounceAnimation} 0.5s` : 'none'}
+                      aria-label="Shopping cart"
+                    >
                       <FaShoppingCart />
                     </IconButton>
                     {(cartItems > 0 || tourItems > 0) && (
@@ -219,16 +275,17 @@ function Navbar() {
                     )}
                   </Box>
                 </RouterLink>
-                <Box width="10px" />
+                <Box width={{ base: "5px", md: "10px" }} />
                 <Box position="relative">
                   <Button
-                  p={5}
-                  backgroundColor={"#E9204F"}
-                  onClick={() => setDropOpen(!dropOpen)}
-                  _hover={{ bg: "#c5173e" }}
-                  _active={{ bg: "#a31332" }}
+                    p={{ base: 3, md: 4, lg: 5 }}
+                    backgroundColor={"#E9204F"}
+                    onClick={() => setDropOpen(!dropOpen)}
+                    _hover={{ bg: "#c5173e" }}
+                    _active={{ bg: "#a31332" }}
+                    fontSize={{ base: "sm", lg: "md" }}
                   >
-                  Hi, {Name.split(' ')[0] + "  "}▼
+                    Hi, {Name.split(' ')[0]}▼
                   </Button>
                   {dropOpen && (
                   <Box
@@ -306,12 +363,12 @@ function Navbar() {
             <Box height="20px" />
             <DrawerBody>
             <VStack align="start">
-                <NavLink to="/">HOME</NavLink>
-                <NavLink to="/about-us">ABOUT US</NavLink>
-                <NavLink to="/tour">TOUR</NavLink>
-                <NavLink to="/store">STORE</NavLink>
-                <NavLink to="/contact-us">CONTACT US</NavLink>
-                <NavLink to="/albums">ALBUMS</NavLink>
+                <NavLink to="/" icon={<FaMusic />}>HOME</NavLink>
+                <NavLink to="/about-us" icon={<FaInfoCircle />}>ABOUT US</NavLink>
+                <NavLink to="/tour" icon={<FaMapSigns />}>TOUR</NavLink>
+                <NavLink to="/store" icon={<FaStore />}>STORE</NavLink>
+                <NavLink to="/contact-us" icon={<FaEnvelope />}>CONTACT US</NavLink>
+                <NavLink to="/albums" icon={<FaMusic />}>ALBUMS</NavLink>
                 <Box mt={8} ml={3} display="flex" justifyContent="space-between" width="60%">
                 <Flex align="center">
             {!user ? (
