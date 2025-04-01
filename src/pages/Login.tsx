@@ -5,9 +5,16 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import { useState } from "react";
 import { motion } from "framer-motion"; 
+import useLogin from '../Auth/functions';
 
 export default function Login() {
   const [passVisible, setPassVisible] = useState(false); 
+
+  const {
+    handleEmailChange,
+    handlePasswordChange,
+    handleLogin,
+  } = useLogin();
 
   return (
     <div className="login-container-page">
@@ -39,7 +46,7 @@ export default function Login() {
               <label htmlFor="email-input" style={{fontSize: '1.1rem'}}>Email:</label>
               <div className="input-with-icon">{/*Putting DIV because thats how I'm putting the icon and input in same line */}
                 <MdEmail className="input-icon" />
-                <input className="email-input" type="email" placeholder="Enter Your Email" required />
+                <input className="email-input" type="email" placeholder="Enter Your Email" required onChange={handleEmailChange}/>
               </div>
             </div>
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px' }}> {/*This div is here because I'm doing a flex gap DO NOT DELETE*/}
@@ -51,6 +58,7 @@ export default function Login() {
                   type={passVisible ? "text" : "password"} 
                   placeholder="Enter Your Password"
                   required
+                  onChange={handlePasswordChange}
                 />
                 <span
                   onClick={() => setPassVisible(!passVisible)} 
@@ -72,6 +80,11 @@ export default function Login() {
               className='Login-submit'
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={(e) => {
+                e.preventDefault(); 
+                handleLogin(); 
+              }}
+              
             >
               Log In
             </motion.button>

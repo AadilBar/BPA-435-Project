@@ -49,10 +49,44 @@ export default function Footer() {
           </Link>
         </Flex>
 
+        <Box width="100%" maxW="800px" height="1px" bg="gray.600" mb={4} />
 
-        <Text color="white" mb={2}>
+        <Flex direction="column" align="center" width="100%" maxW="800px" mb={4}>
+          <Box textAlign="center" mb={4}>
+            <Text color="white" fontSize="16px" fontWeight="bold" mb={2}>
+              Waubonsie Valley High School
+            </Text>
+            <Text color="white" fontSize="14px" mb={2}>
+              Aurora, IL
+            </Text>
+          </Box>
+
+          <Box textAlign="center" mb={4}>
+            <Text color="white" fontSize="16px" fontWeight="bold" mb={2}>
+              BPA 435 Website Design Team
+            </Text>
+            <Text color="white" fontSize="14px" mb={2}>
+              Capture the Moment
+            </Text>
+          </Box>
+
+          <Box textAlign="center">
+            <Text color="white" fontSize="16px" fontWeight="bold" mb={2}>
+              Created by:
+            </Text>
+            <Flex direction="column" align="center" gap={1}>
+              <Text color="white" fontSize="14px">Aadil Brakat</Text>
+              <Text color="white" fontSize="14px">Amogh Shivanna</Text>
+              <Text color="white" fontSize="14px">Jeevith Veerasarvanan</Text>
+              <Text color="white" fontSize="14px">Pradyun Fatwani</Text>
+            </Flex>
+          </Box>
+        </Flex>
+
+        <Text color="white" textAlign="center" mb={4}>
           &copy; 2025 Stage Fright
         </Text>
+
         <Flex gap={4} justify="center" align="center" direction="row">
           <RouterLink to="/contact-us" color="white" onClick={() => window.scrollTo(0, 0)}>
             <Link
@@ -66,29 +100,29 @@ export default function Footer() {
             </Link>
           </RouterLink>
           <Text color="white">|</Text>
-            <RouterLink to="/terms" color="white" onClick={() => window.scrollTo(0, 0)}>
+          <RouterLink to="/terms" color="white" onClick={() => window.scrollTo(0, 0)}>
             <Link
               _hover={{
-              textDecoration: "underline",
-              color: "red",
-              transition: "color 0.3s ease",
+                textDecoration: "underline",
+                color: "red",
+                transition: "color 0.3s ease",
               }}
             >
               Terms
             </Link>
-            </RouterLink>
+          </RouterLink>
           <Text color="white">|</Text>
-            <RouterLink to="/privacy" color="white" onClick={() => window.scrollTo(0, 0)}>
+          <RouterLink to="/privacy" color="white" onClick={() => window.scrollTo(0, 0)}>
             <Link
               _hover={{
-              textDecoration: "underline",
-              color: "red",
-              transition: "color 0.3s ease",
+                textDecoration: "underline",
+                color: "red",
+                transition: "color 0.3s ease",
               }}
             >
               Privacy
             </Link>
-            </RouterLink>
+          </RouterLink>
         </Flex>
       </Flex>
     </Box>

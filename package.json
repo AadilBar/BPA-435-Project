@@ -19,6 +19,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@google/generative-ai": "^0.24.0",
+    "@react-spring/parallax": "^9.7.5",
     "@react-spring/web": "^9.7.5",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",

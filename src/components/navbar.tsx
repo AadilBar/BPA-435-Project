@@ -327,28 +327,30 @@ function Navbar() {
             ) : (
               <>
                 <RouterLink to="/cart">
-                <Box position="relative">
-                  <IconButton color="white" size={"2xl"} variant={"ghost"} animation={cartBounce ? `${bounceAnimation} 0.5s` : 'none'}>
-                    <FaShoppingCart />
-                  </IconButton>
-                  <Box
-                      position="absolute"
-                      top="3"
-                      right="2"
-                      bg="#E9204F"
-                      color="white"
-                      borderRadius="full"
-                      width="20px"
-                      height="20px"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      fontSize="12px"
-                      animation={cartBounce ? `${scaleBounceAnimation} 0.5s` : 'none'}
-                    >
-                      1
+                  <Box position="relative">
+                    <IconButton color="white" size={"2xl"} variant={"ghost"} animation={cartBounce ? `${bounceAnimation} 0.5s` : 'none'}>
+                      <FaShoppingCart />
+                    </IconButton>
+                    {(cartItems > 0 || tourItems > 0) && (
+                      <Box
+                        position="absolute"
+                        top="3"
+                        right="2"
+                        bg="#E9204F"
+                        color="white"
+                        borderRadius="full"
+                        width="20px"
+                        height="20px"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        fontSize="12px"
+                        animation={cartBounce ? `${scaleBounceAnimation} 0.5s` : 'none'}
+                      >
+                        {cartItems + tourItems}
+                      </Box>
+                    )}
                   </Box>
-                </Box>
                 </RouterLink>
                 <Box width="10px" />
                 <Box position="relative">

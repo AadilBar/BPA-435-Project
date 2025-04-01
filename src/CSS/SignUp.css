@@ -87,3 +87,13 @@ transition: transform 0.3s, box-shadow 0.3s;
     transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(233, 32, 79, 0.5);
 }
+
+.signup-name-fields {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.signup-name-fields .signup-input-with-icon {
+    flex: 1;
+}
