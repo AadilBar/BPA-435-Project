@@ -1,0 +1,539 @@
+.home-page-container {
+    margin-top: 80px;
+}
+
+/* Hero Section */
+.home-page-hero {
+  height: calc(100vh - 80px);
+  width: 100%;
+  position: relative;
+  background-image: url('/images/Home/home-page-hero.jpg');
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden;
+  filter: grayscale(100%);
+}
+.home-page-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(51, 51, 51, 0.7);
+}
+.home-page-hero-overlay {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: inherit; /* Ensure text color is not affected */
+  filter: none; /* Remove grayscale filter from overlay text */
+}
+.home-page-hero-overlay h1 {
+    color: white;
+    font-size: clamp(40px, 5vw, 75px);
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Tour Section */
+.home-page-tour-container {
+    /* Replace fixed height to allow container to shrink if content is less */
+    /* height: calc(95vh - 80px); */
+    min-height: calc(95vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #111, #1a1a1a);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+.tour-title {
+    font-size: clamp(24px, 3vw, 32px);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    line-height: 1.5;
+}
+.home-page-tour-typewriter {
+    display: inline-block;
+    height: 1.2em;
+    overflow: hidden;
+    color: red;
+}
+.tour-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+.tour-stat {
+    background: #222;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    flex: 1;
+}
+.tour-stat h3 {
+    font-size: clamp(20px, 2.5vw, 28px);
+    color: #ff4d4d;
+    margin-bottom: 5px;
+}
+.tour-stat p {
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: #cccccc;
+}
+.tour-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+.tour-box {
+    background: #222;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.tour-box h3 {
+    font-size: clamp(16px, 2vw, 20px);
+    color: #ff4d4d;
+    margin-bottom: 8px;
+}
+.tour-box p {
+    font-size: clamp(12px, 1.5vw, 16px);
+    color: #cccccc;
+}
+.tour-box:hover {
+    transform: scale(1.05);
+    background-color: #333;
+}
+
+/* Merch Section */
+.home-page-merch-container {
+    margin: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 50px;
+    background: linear-gradient(to bottom, #111, #1a1a1a);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+.merch-title {
+    font-size: clamp(28px, 4vw, 36px);
+    color: #ff4d4d;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+.merch-options {
+    display: flex;
+    gap: 20px;
+}
+.merch-options button {
+    background: #333;
+    color: #ffffff;
+    font-size: clamp(18px, 2.5vw, 22px); /* increased size */
+    padding: 12px 24px; /* increased padding */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.merch-options button:hover {
+    transform: scale(1.05);
+}
+.merch-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+.merch-box {
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    height: 0;
+    padding-bottom: 100%;
+    transition: transform 0.3s ease;
+}
+.merch-box:hover {
+    transform: scale(1.05);
+}
+
+/* Combined Album and Tour Section */
+.record-tour-section {
+    background: radial-gradient(circle at center, #1a1a1a, #111);
+    padding: 20px 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    display: flex;
+    gap: 40px;
+    height: calc(95vh - 80px);
+}
+.record-tour-section .record-column,
+.record-tour-section .tour-column {
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    background: #222;
+}
+.record-column {
+    display: flex;
+    flex-direction: column;
+}
+.latest-album,
+.previous-releases-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+}
+.record-column .record-image {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+.record-column .record-info h2 {
+    color: #ff4d4d;
+    margin-bottom: 10px;
+}
+.record-column .record-info p {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+.tour-column-sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+    background-image: url('/images/Shows/UnitedCenter.png');
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+}
+
+.tour-header h2 {
+    font-size: 2.5em;
+    margin: 0;
+    color: white;
+}
+
+.tour-header h3 {
+    font-size: 1.2em;
+    margin: 0;
+    color: white;
+}
+
+.tour-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tour-footer h5 {
+    font-size: 1em;
+    margin: 0;
+    color: white;
+}
+
+.tour-footer button {
+  margin-left: 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.tour-footer button:hover {
+  background-color: #e63939;
+  transform: scale(1.05);
+}
+
+/* Latest Albums Styling */
+.record-title {
+    font-size: 2.5em;
+    color: #ff4d4d;
+    margin-bottom: 5px;
+}
+
+.record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Optional: adjust margins as needed */
+}
+
+.see-all-button {
+    background: none;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.see-all-button:hover {
+  background-color: #ff4d4d;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.see-tours-button {
+    background: none;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.see-tours-button:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.record2-card {
+    display: flex;
+    background: linear-gradient(to right, rgb(43, 43, 43), #111);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.record-card-image {
+    width: 40%; /* increased from 30% */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.record-card-details {
+    width: 60%; /* decreased from 70% */
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.record-name {
+    font-size: 1.8rem;
+    color: #ff4d4d;
+  
+}
+.record-rating {
+    font-size: 1.2re;
+    color: #ff4d4d;  /* changed stars color to red */
+    margin-bottom: 3px;
+}
+
+.record-award {
+    font-size: 1em;
+    color: #fff;
+    margin-bottom: 3px;
+}
+
+.record-description {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.previous-releases-title {
+    font-size: 1.8em;
+    color: #ff4d4d;
+    margin-bottom: 10px;
+}
+
+.previous-releases {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+
+.release-box::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ccc;
+    font-size: 1em;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .record-tour-section {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+        margin: 10px 0;
+        height: auto; /* allow natural height */
+    }
+
+    .record-tour-section .record-column,
+    .record-tour-section .tour-column {
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* Order: record section first, tour section second */
+    .record-column {
+        order: 1;
+    }
+    .tour-column {
+        order: 2;
+    }
+
+    /* Redesign album card layout for mobile */
+    .record2-card {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    .record-card-image {
+        width: 100%;
+        height: auto;
+    }
+    .record-card-details {
+        width: 100%;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    /* Adjust tour section styling */
+    .tour-column-sub {
+        height: auto;
+        padding: 10px;
+    }
+    .tour-header h2 {
+        font-size: 1.5em;
+    }
+    .tour-header h3 {
+        font-size: 1em;
+    }
+    .tour-footer h5 {
+        font-size: 0.9em;
+    }
+    .tour-footer button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+
+    /* Rewrite Merch Section for Mobile */
+    .home-page-merch-container {
+        padding: 20px;
+        margin: 10px;
+        gap: 20px;
+    }
+    .merch-title {
+        font-size: 1.9rem;
+        text-align: center;
+    }
+    /* Change merch-options to a 2x2 grid for mobile */
+    .merch-options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .merch-options button {
+        width: 100%;
+        font-size: 1rem; /* increased from 0.9rem */
+        padding: 12px; /* increased from 10px */
+        margin-bottom: 0; /* removed extra margin */
+    }
+    .merch-boxes {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .merch-box {
+        position: relative;
+        height: auto;
+        padding-bottom: 75%;
+    }
+    .merch-box img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+
+    /* Set tour section height to 80vh on mobile */
+    .home-page-tour-container {
+        min-height: 70vh;
+    }
+}
+
+@media (min-width: 1500px) {
+    .record-tour-section {
+        padding: 40px;
+        gap: 60px;
+    }
+    /* Align the record card and titles by removing centered margins and applying a left margin */
+    .record2-card {
+        max-width: 90%;
+        margin-left: 40px;
+    }
+    /* Add left margin to the section titles and reviews container */
+    .record-title,
+    .previous-releases-title,
+    .previous-releases {
+        margin-left: 40px;
+    }
+    .record-card-image {
+        width: 45%;
+    }
+    .record-card-details {
+        width: 55%;
+        padding-left: 40px;
+    }
+    .tour-column-sub {
+        background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/Shows/UnitedCenter.png');
+        background-size: cover;
+        background-position: center;
+    }
+    .tour-header h2 {
+        font-size: 3em;
+    }
+    .tour-header h3 {
+        font-size: 1.5em;
+    }
+    .tour-footer button {
+        padding: 15px 30px;
+        font-size: 1.2em;
+    }
+    .home-page-tour-container {
+      height: 75vh;
+  }
+}
