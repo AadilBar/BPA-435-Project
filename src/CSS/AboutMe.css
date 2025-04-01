@@ -345,11 +345,58 @@
         line-height: 1.6;
     }
 
-
     .member_description {
         font-size: 0.95rem;  /* Slightly smaller font */
         color: #dcdcdc;
         line-height: 1.6;
+    }
+
+    /* Mobile-friendly Member Details */
+    .member-details-container.mobile {
+        flex-direction: column;
+        height: auto;
+        gap: 20px; /* space between sections */
+    }
+    
+    .member-details-image {
+        width: 100%;
+        height: 250px; /* adjust image height */
+    }
+    
+    .member-details-description,
+    .member-details-awards {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .mobile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+    }
+
+    /* Mobile Timeline Section Styles */
+    .timeline-section-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        background-color: #000; /* dark background */
+        color: #fff;
+    }
+    .timeline-event-mobile {
+        padding: 15px;
+        border-bottom: 1px solid #555;
+    }
+    .timeline-mobile-year {
+        font-size: 2rem;
+        color: #ff4d4d;
+        margin: 0 0 10px;
+    }
+    .timeline-mobile-description {
+        font-size: 1rem;
+        margin: 0;
     }
 }
 
@@ -365,188 +412,211 @@
     transform: translateY(0);
 }
 
+/* General styles for the Meet the Band section */
 .meet-the-band-section {
-  background-color: black;
-  padding: 50px 20px;
-  text-align: center;
+    padding: 50px 20px;
+    background-color: #1a1a1a;
+    color: #fff;
+    text-align: center;
 }
 
 .meet-the-band-title {
-  font-size: 3rem;
-  color: white;
-  margin-bottom: 40px;
-  font-family: 'Sansation', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ff4d4d;
+    text-transform: uppercase;
 }
 
-/* Band Tiles Container */
+/* Band Tiles - Grid Layout */
 .band-tiles {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 15px; /* Reduced gap between tiles */
-  padding: 20px 0; /* Add some padding to the top and bottom */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Default: 4 columns for desktop */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Individual Band Tile */
 .band-tile {
-  position: relative;
-  width: 320px; /* Slightly wider */
-  height: 450px; /* Increased height for more vertical space */
-  background-color: black;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .band-tile:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 10px 20px rgba(255, 0, 0, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
 }
 
-/* Band Tile Image */
+.band-tile.active {
+    border: 2px solid #ff4d4d;
+}
+
 .band-tile-image {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: filter 0.3s ease;
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
 }
 
-.band-tile:hover .band-tile-image {
-  filter: brightness(0.5) sepia(1) hue-rotate(-50deg) saturate(3);
-}
-
-/* Band Tile Overlay */
 .band-tile-overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 20px;
-  text-align: center;
-  font-family: 'Sansation', sans-serif;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    transition: opacity 0.3s ease;
 }
 
 .band-tile-overlay h3 {
-  font-size: 1.5rem;
-  margin: 0;
+    margin: 0;
+    font-size: 1.2rem;
 }
 
 .band-tile-overlay p {
-  font-size: 1rem;
-  margin: 5px 0 0;
-}
-
-/* Highlight the active member */
-.band-tile.active {
-  transform: scale(1.1);
-  box-shadow: 0px 15px 30px rgba(255, 0, 0, 0.7);
+    margin: 5px 0 0;
+    font-size: 0.9rem;
 }
 
 /* Member Details Section */
 .member-details {
     margin-top: 40px;
-    padding: 40px;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Sansation', sans-serif;
-    border: 2px solid red; /* Added red border */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .member-details-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center; /* Center content vertically */
-  justify-content: space-between; /* Equal spacing between sections */
-  width: 100%;
-  max-width: 1200px;
-  height: 400px; /* Ensure equal height for all sections */
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
 }
 
-/* Left: Member Image */
 .member-details-image {
-  flex: 1; /* Equal portion of the screen */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; /* Fill the container height */
-  background-size: cover;
-  background-position: center;
-  border-radius: 15px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    width: 30%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
 }
 
-/* Middle: Member Description */
 .member-details-description {
-  flex: 1; /* Equal portion of the screen */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  text-align: center;
-  padding: 0 20px; /* Add some horizontal padding */
+    width: 40%;
+    padding: 0 20px;
+    text-align: left;
 }
 
 .member-details-description h3 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin: 0;
+    color: #ff4d4d;
 }
 
 .member-details-description h4 {
-  font-size: 1.8rem;
-  color: rgba(255, 0, 0, 0.8);
-  margin-bottom: 20px;
+    font-size: 1.2rem;
+    margin: 5px 0;
+    color: #ccc;
 }
 
 .member-details-description p {
-  font-size: 1.4rem;
-  line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
-/* Right: Member Awards */
 .member-details-awards {
-  flex: 1; /* Equal portion of the screen */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: flex-start; /* Align content to the left */
-  text-align: left;
-  padding: 0 20px; /* Add some horizontal padding */
+    width: 30%;
+    text-align: left;
 }
 
 .member-details-awards h5 {
-  font-size: 1.5rem;
-  color: rgba(255, 0, 0, 0.8);
-  margin-bottom: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #ff4d4d;
 }
 
 .member-details-awards ul {
-  list-style: none; /* Remove default bullet points */
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .member-details-awards li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 .award-icon {
-  width: 30px;
-  height: 30px;
-  color: rgba(255, 0, 0, 0.8);
-  background-color: white;
-  border-radius: 50%;
-  padding: 5px;
-  margin-right: 10px;
+    margin-right: 10px;
+    color: #ff4d4d;
 }
 
+/* Mobile Styles (2x2 Grid) */
+@media (max-width: 768px) {
+    .band-tiles {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 grid for mobile */
+        gap: 15px;
+    }
+
+    .band-tile-image {
+        height: 200px; /* Reduced height for mobile */
+    }
+
+    .band-tile-overlay h3 {
+        font-size: 1rem;
+    }
+
+    .band-tile-overlay p {
+        font-size: 0.8rem;
+    }
+
+    .member-details-container.mobile {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .member-details-image {
+        width: 100%;
+        height: 250px;
+        margin-bottom: 15px;
+    }
+
+    .member-details-description {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+
+    .member-details-awards {
+        width: 100%;
+    }
+
+    .member-details-description h3 {
+        font-size: 1.5rem;
+    }
+
+    .member-details-description h4 {
+        font-size: 1rem;
+    }
+
+    .member-details-description p {
+        font-size: 0.9rem;
+    }
+
+    .member-details-awards h5 {
+        font-size: 1rem;
+    }
+
+    .member-details-awards li {
+        font-size: 0.8rem;
+    }
+}
 .member-details-awards li span {
   font-size: 1.2rem;
   color: white;

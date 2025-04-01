@@ -147,7 +147,7 @@ export default function Home() {
 
     {/* Record and Tour Section */}
     <div className="record-tour-section">
-      <div className="record-column animate-on-scroll">
+      <div className="record-column">
         {/* Latest Album Header */}
         <div className="record-header">
           <h2 className="record-title">Latest Album</h2>
@@ -155,7 +155,7 @@ export default function Home() {
           <button className="see-all-button">See All</button>
           </RouterLink>
         </div>
-        <div className="record2-card animate-on-scroll">
+        <div className="record2-card">
        <div className="record-card-image">
          {/* Placeholder image for record */}
          <img src="/images/Merch/Vinyls/home-soaring.png" alt="Record Cover" />
@@ -172,16 +172,16 @@ export default function Home() {
 
          <h3 className="previous-releases-title">What Fans Have to Say</h3>
          <div className="previous-releases">
-             <div className="release-box animate-on-scroll">
+             <div className="release-box">
              <TwitterEmbed tweetText="Yes it's finally out! Another Hit that doesn't miss!" author="Aadil Brakat" tweetUrl="https://platform.twitter.com/widgets.js" date="April 1, 2025" profilePic="/images/Home/People/pfp1.jpg" />
              </div>
-             <div className="release-box animate-on-scroll">
+             <div className="release-box">
              <TwitterEmbed tweetText='Love this album! The tracks are so inspiring!' author='Liam Johnson' tweetUrl="https://platform.twitter.com/widgets.js" date="April 1, 2025" profilePic="/images/Home/People/pfp2.jpg" />
              </div>
-             <div className="release-box animate-on-scroll">
-             <TwitterEmbed tweetText='This is exactly what I needed. The music speaks to my soul.' author='Ethan Brown' tweetUrl="https://platform.twitter.com/widgets.js" date="April 2, 2025" profilePic="/images/Home/People/pfp3.jpg"/>
+             <div className="release-box">
+             <TwitterEmbed tweetText='This is exactly what I needed. The music speaks to my soul.' author='Jane Smith' tweetUrl="https://platform.twitter.com/widgets.js" date="April 2, 2025" profilePic="/images/Home/People/pfp3.jpg"/>
              </div>
-             <div className="release-box animate-on-scroll">
+             <div className="release-box">
              <TwitterEmbed tweetText='This album is a huge masterpiece. Can’t stop listening!' author='Noah Wilson' tweetUrl="https://platform.twitter.com/widgets.js" date="April 3, 2025" profilePic="/images/Home/People/pfp4.jpg"/>
              </div>
          </div>
