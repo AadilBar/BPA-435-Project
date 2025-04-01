@@ -9,6 +9,7 @@ import { LuPhoneCall, LuMail } from "react-icons/lu";
 import { toast, ToastContainer } from "react-toastify";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
+import Footer from '../components/footer';
 import 'swiper/css/autoplay'
 
 export default function Contact() {
@@ -608,6 +609,7 @@ export default function Contact() {
                     </div>
                 </motion.div>
             </div>
+            <Footer />
         </div>
     );
 }

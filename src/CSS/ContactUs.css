@@ -513,7 +513,9 @@
         padding: 0px 0px;
     }
 }
-
+.contact_info_title, .contact_info_phone, .phone_icon, .contact_info_email, .contact_info_message{
+    color: white;
+}
 .contact_info_container {
     margin-top: 100px;
     height: 100vh;
