@@ -17,6 +17,7 @@ export default function About() {
     const heroSectionRef = useRef<HTMLDivElement>(null);
     const heroImageRef = useRef<HTMLImageElement>(null);
     const [selectedMember, setSelectedMember] = useState(0);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     const members = [
         {
@@ -24,7 +25,7 @@ export default function About() {
             name: "Sophia Bennett",
             position: "Vocalist",
             description:
-                "Sophia Reed, a captivating vocalist, possesses a powerful and soulful voice that effortlessly blends raw emotion with technical precision. Her stage presence and vocal range have mesmerized audiences worldwide.",
+                "Sophia Bennett, a captivating vocalist, possesses a powerful and soulful voice that effortlessly blends raw emotion with technical precision. Her stage presence and vocal range have mesmerized audiences worldwide.",
             details:
                 "Sophia has been singing since she was 5 years old. She draws inspiration from artists like Adele and Freddie Mercury. Her powerful voice has been the backbone of the band's success. She has performed at over 200 concerts and is known for her ability to connect deeply with the audience.",
             awards: [
@@ -38,7 +39,7 @@ export default function About() {
             name: "Ryan Ali",
             position: "Guitarist",
             description:
-                "Ryan Blake, a gifted guitarist with a fiery stage presence, delivers electrifying solos and intricate riffs that ignite the energy of every performance. His passion for music is evident in every note he plays.",
+                "Ryan Ali, a gifted guitarist with a fiery stage presence, delivers electrifying solos and intricate riffs that ignite the energy of every performance. His passion for music is evident in every note he plays.",
             details:
                 "Ryan started playing guitar at the age of 10. He is known for his intricate riffs and solos, inspired by legends like Jimi Hendrix and Slash. Ryan has composed over 50 original tracks and is the creative force behind many of the band's hit songs.",
             awards: [
@@ -52,7 +53,7 @@ export default function About() {
             name: "Emily Young",
             position: "Pianist",
             description:
-                "Emily Hayes, a pianist renowned for her powerful and driving grooves, provides the solid foundation that anchors the band’s sound. Her unique style blends classical training with modern influences.",
+                "Emily Young, a pianist renowned for her powerful and driving grooves, provides the solid foundation that anchors the band’s sound. Her unique style blends classical training with modern influences.",
             details:
                 "Emily is the heart of the rhythm section. Her piano melodies are influenced by funk and jazz, giving the band a unique groove. She has been playing piano since she was 7 years old and has collaborated with several renowned artists in the industry.",
             awards: [
@@ -76,6 +77,14 @@ export default function About() {
             ],
         },
     ];
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         if (timelineMain.current) {
@@ -235,74 +244,108 @@ export default function About() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="timeline-section">
-        <video
-          className="timeline-video"
-          src="/images/mosh-pit-background.mp4"
-          autoPlay
-          loop
-          muted
-        ></video>
-          {/* Canvas Layer */}
-          <canvas id="timeline-canvas"></canvas>
-
-          {/* Content Layer */}
-          <div className="timeline-content" ref={timelineMain}>
-            {/* Pinned "Our Journey" Section */}
-            <div ref={journeyRef} className="timeline-left">
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <div className="timeline-left-dash" />
-                <h1 className="timeline-left-title">
-                  OUR <br /> JOURNEY
-                </h1>
+        {isMobile ? (
+          <div className="timeline-section-mobile">
+            {[
+              {
+                year: "2001",
+                text: "We started as a small group creating tunes in our garage. We didn't have much to our name but we all had a love for music."
+              },
+              {
+                year: "2006",
+                text: "As time passed our crew started to get busy with their lives, leaving behind our jam sessions."
+              },
+              {
+                year: "2007",
+                text: "One day our lead guitarist Ryan decided to post one of our sounds on SoundCloud, sparking immense interest."
+              },
+              {
+                year: "2010",
+                text: "We officially became a band and started creating music under the name Stage Fright."
+              },
+              {
+                year: "2015",
+                text: "After dropping our debut album Resounding, we earned awards and grew rapidly."
+              },
+              {
+                year: "2020",
+                text: "After 10 successful years, we went on our first tour, sharing our music with the world."
+              }
+            ].map((event, idx) => (
+              <div key={idx} className="timeline-event-mobile">
+                <h2 className="timeline-mobile-year">{event.year}</h2>
+                <p className="timeline-mobile-description">{event.text}</p>
               </div>
-            </div>
-
-            {/* Scrollable Timeline Section */}
-            <div ref={splitLayoutRef} className="timeline-right">
-              <div className="timeline-right-section" style={{marginTop: "25vh"}}>
-                <h2 className="timeline-right-year">2001</h2>
-                <p className="timeline-description">
-                  We started as a small group creating tunes in our garage. We didn't have much to our name but we all had a love for music. Remixing our favorite Metallica and Beatles songs was the highlight of our weekends.
-                </p>
+            ))}
+          </div>
+        ) : (
+          <div className="timeline-section">
+            <video
+              className="timeline-video"
+              src="/images/mosh-pit-background.mp4"
+              autoPlay
+              loop
+              muted
+            ></video>
+            {/* Canvas Layer */}
+            <canvas id="timeline-canvas"></canvas>
+            {/* Content Layer */}
+            <div className="timeline-content" ref={timelineMain}>
+              {/* Pinned "Our Journey" Section */}
+              <div ref={journeyRef} className="timeline-left">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div className="timeline-left-dash" />
+                  <h1 className="timeline-left-title">
+                    OUR <br /> JOURNEY
+                  </h1>
+                </div>
               </div>
-              <div className="timeline-right-section">
-                <h2 className="timeline-right-year">2006</h2>
-                <p className="timeline-description">
-                  As time passed our crew started to get busy with their lives, leaving behind our jam sessions. Luckily, we never lost our passion for music. At a highschool reunion we ditched and decided to hit the garage for old times sake.
-                </p>
-              </div>
-              <div className="timeline-right-section">
-                <h2 className="timeline-right-year">2007</h2>
-                <p className="timeline-description">
-                  One day our lead guitarist Ryan decided to post one of our sounds on soundcloud, an upcoming platform. We were shocked when he called us and told us that there was immense interest in our music.
-                </p>
-              </div>
-              <div className="timeline-right-section">
-                <h2 className="timeline-right-year">2010</h2>
-                <p className="timeline-description">
-                  We officially became a band and started creating music under the name Stage Fright. All of our original crew had joined back togethher and we were ready to let out our passion.
-                </p>
-              </div>
-              <div className="timeline-right-section">
-                <h2 className="timeline-right-year">2015</h2>
-                <p className="timeline-description">
-                  After dropping our debut album Resounding, we started growing at a crazy rate and continued to make music. We eventually earned some awards for best up and coming and band of the year.
-                </p>
-              </div>
-              <div className="timeline-right-section" ref={timelineEnd} style={{marginBottom: "25vh"}}>
-                <h2 className="timeline-right-year">2020</h2>
-                <p className="timeline-description">
-                  After successfully running our band for 10 years, we decided to go on our first tour. We were excited to meet our fans and share our music with the world. The tour was a huge success, and from then it's history.
-                </p>
+              {/* Scrollable Timeline Section */}
+              <div ref={splitLayoutRef} className="timeline-right">
+                <div className="timeline-right-section" style={{ marginTop: "25vh" }}>
+                  <h2 className="timeline-right-year">2001</h2>
+                  <p className="timeline-description">
+                    We started as a small group creating tunes in our garage. We didn't have much to our name but we all had a love for music.
+                  </p>
+                </div>
+                <div className="timeline-right-section">
+                  <h2 className="timeline-right-year">2006</h2>
+                  <p className="timeline-description">
+                    As time passed our crew started to get busy with their lives, leaving behind our jam sessions.
+                  </p>
+                </div>
+                <div className="timeline-right-section">
+                  <h2 className="timeline-right-year">2007</h2>
+                  <p className="timeline-description">
+                    One day our lead guitarist Ryan decided to post one of our sounds on SoundCloud, sparking immense interest.
+                  </p>
+                </div>
+                <div className="timeline-right-section">
+                  <h2 className="timeline-right-year">2010</h2>
+                  <p className="timeline-description">
+                    We officially became a band and started creating music under the name Stage Fright.
+                  </p>
+                </div>
+                <div className="timeline-right-section">
+                  <h2 className="timeline-right-year">2015</h2>
+                  <p className="timeline-description">
+                    After dropping our debut album Resounding, we earned awards and grew rapidly.
+                  </p>
+                </div>
+                <div className="timeline-right-section" ref={timelineEnd} style={{ marginBottom: "25vh" }}>
+                  <h2 className="timeline-right-year">2020</h2>
+                  <p className="timeline-description">
+                    After 10 successful years, we went on our first tour, sharing our music with the world.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="meet-the-band-section">
           <h2 className="meet-the-band-title">Our Members</h2>
-          <div className="band-tiles">
+          <div className={`band-tiles ${isMobile ? "mobile-grid" : ""}`}>
             {members.map((member, index) => (
               <div
                 key={index}
@@ -323,7 +366,7 @@ export default function About() {
 
           {/* Dynamic Information Section */}
           <div className="member-details">
-            <div className="member-details-container">
+            <div className={`member-details-container ${isMobile ? 'mobile' : ''}`}>
               {/* Left: Member Image */}
               <div
                 className="member-details-image"

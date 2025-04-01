@@ -307,14 +307,7 @@ const ProductDetails: React.FC = () => {
                         </ul>
                     </div>
                 </motion.section>
-                <motion.section className='card' variants={fadeIn}>
-                    <h2 style={{ color: '#ff6347' }}>Event Sponsors</h2>
-                    <div className="sponsor-logos">
-                        <img src="/images/sponsor1.png" alt="Sponsor 1" />
-                        <img src="/images/sponsor2.png" alt="Sponsor 2" />
-                        <img src="/images/sponsor3.png" alt="Sponsor 3" />
-                    </div>
-                </motion.section>
+              
                
             </main>
             <Footer />

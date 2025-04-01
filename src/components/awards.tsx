@@ -19,7 +19,7 @@ const Awards: React.FC<AwardProps> = ({
 }) => {
     return (
         <div className='awards-component-container'>
-            <div className='award-icon'><Icon /></div>
+            <div className='award2-icon'><Icon /></div>
             <h1 className='award-name'>{award_name}</h1>
             <p className='award-year'>{year}</p>
             <p className='award-place'>{award_place}</p>
