@@ -103,7 +103,6 @@ export default function Home() {
      {/* Hero Section */}
      <div className="home-page-hero">
        <div className="home-page-hero-overlay">
-         <h1>Welcome to Stage Fright</h1>
        </div>
      </div>
      

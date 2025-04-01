@@ -7,20 +7,10 @@
   height: calc(100vh - 80px);
   width: 100%;
   position: relative;
-  background-image: url('/images/Home/home-page-hero.jpg');
+  background-image: url('/images/Stage_Fright_Main_Page_Image.png');
   background-size: cover;
   background-position: center center;
   overflow: hidden;
-  filter: grayscale(100%);
-}
-.home-page-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(51, 51, 51, 0.7);
 }
 .home-page-hero-overlay {
   height: 100%;
@@ -399,6 +389,13 @@
         height: auto; /* allow natural height */
     }
 
+    /* Use mobile-specific hero image for mobile devices */
+    .home-page-hero {
+        background-image: url('/images/Stage_Fright_Main_Page_Image_Mobile.png');
+    }
+    
+
+    
     .record-tour-section .record-column,
     .record-tour-section .tour-column {
         width: 100%;
