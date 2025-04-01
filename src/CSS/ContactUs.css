@@ -1,10 +1,11 @@
 .contact-page-container {
     margin-top: 80px;
-    height: calc(40vh - 80px);
+    min-height: calc(100vh - 80px); /* updated to allow scrolling */
     background-color: #1a1a1a;
 }
 
 .contact-hero {
+    min-height: calc(40vh - 80px); /* updated to allow scrolling */
     display: flex;
     align-items: center;
     justify-content: center;

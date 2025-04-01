@@ -1,0 +1,116 @@
+/* Twitter Embed Styles */
+.twitter-card-wrapper {
+    position: relative;
+    max-width: 350px; /* reduced width for compact layout */
+    margin: 0 auto;
+}
+
+.twitter-tweet {
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 10px; /* reduced padding for a more compact layout */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+    font-size: 14px; /* smaller font size */
+    line-height: 1.6;
+    transition: transform 0.3s ease;
+}
+
+.twitter-tweet:hover {
+    transform: scale(1.02);
+}
+
+.twitter-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.twitter-author {
+    font-weight: bold;
+    color: #ff4d4d; /* Matches site theme */
+}
+
+.twitter-verified {
+    color: #1da1f2; /* Twitter blue */
+    font-size: 12px;
+    background: #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.twitter-date {
+    font-size: 12px;
+    color: #999999;
+}
+
+.twitter-tweet p {
+    margin: 0 0 5px;
+    color: #e6e6e6;
+}
+
+.twitter-tweet a {
+    color: #1da1f2;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.twitter-tweet a:hover {
+    color: #ff4d4d; /* Changes to red on hover for consistency */
+    text-decoration: underline;
+}
+
+.twitter-profile-pic {
+    width: 40px; /* maintained smaller size */
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-right: 8px; /* added space to the right of pfp */
+    object-fit: cover;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .twitter-card-wrapper {
+        max-width: 100%;
+        margin: 0 10px;
+    }
+    .twitter-tweet {
+        font-size: 16px;
+        padding: 15px;
+    }
+    .twitter-header {
+        flex-direction: column;      /* stack elements vertically */
+        align-items: flex-start;      /* left align content */
+        gap: 4px;                    /* smaller gap */
+    }
+    .twitter-profile-pic {
+        width: 40px;
+        height: 40px;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+    .twitter-verified {
+        display: none;               /* remove check mark on mobile */
+    }
+    .twitter-date {
+        display: block;
+        margin-top: 4px;             /* space between name and date */
+        align-self: flex-start;      /* left align the date */
+    }
+}
+
+/* Hide mobile break on larger screens */
+.mobile-break {
+    display: none;
+}
+
+
+

@@ -23,66 +23,98 @@ import Account from './pages/Account.tsx';
 import OrderCompletion from './pages/Order_Completion.tsx';
 import GeminiChatComponent from './components/GeminiChat.tsx';
 import Albums from './pages/albums.tsx'
+import Lenis from '@studio-freight/lenis';
+import { useRef } from 'react';
 const UserContext = createContext<{ user: User | null, setUser: React.Dispatch<React.SetStateAction<User | null>> }>({ user: null, setUser: () => {} });
 
+
 function App() {
-
-    const [user, setUser] = useState<User | null>(null);
-    
-    
-
-      useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user1: User | null) => {
-            setUser(user1);
-        });
-        return () => unsubscribe();
-      }, [auth]);
-
-    return (
-        <UserContext.Provider value={{ user, setUser }}>
-            <Provider>
-                <HashRouter>
-                    <div style={{ position: "fixed", top: 0, width: '100%', zIndex: 1000 }}>
-                        <Navbar />
-                        <GeminiChatComponent />
-                    </div>
+   const lenis = useRef<Lenis>();
 
 
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about-us" element={<About />} />
-                        <Route path="/tour" element={<Tour />} />
-                        <Route path="/store" element={<Store />} />
-                        <Route path="/contact-us" element={<Contact />} />
-                        <Route path="/checkout" element={<Checkout />} />
-                        <Route path="/tour_details" element={<Tour_details />} />
-                        <Route path="/login" element={<Login/>} />
-                        <Route path="/signup" element={<SignUp/>} />
-                        <Route path="/cart" element={<Cart/>} />
-                        <Route path="/payment" element={<Payment/>} />    
-                        <Route path="/terms" element={<Terms/>} />    
-                        <Route path="/privacy" element={<Privacy/>} />
-                        <Route path="/account" element={<Account/>} />
-                        <Route path="/completion" element={<OrderCompletion/>} />   
-                        <Route path="*" element={<NotFound />} />          
-                        <Route path="/albums" element={<Albums />} />
-                    </Routes>
+   useEffect(() => {
+     lenis.current = new Lenis({
+       duration: 1.2,
+       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing
+   });
 
 
-                </HashRouter>
-            </Provider>
-        </UserContext.Provider>
-    );
+      const raf = (time: number) => {
+       lenis.current?.raf(time);
+       requestAnimationFrame(raf);
+     };
+      requestAnimationFrame(raf);
+      return () => {
+       lenis.current?.destroy();
+     };
+   }, []);
+   const [user, setUser] = useState<User | null>(null);
+  
+  
+
+
+     useEffect(() => {
+       const unsubscribe = auth.onAuthStateChanged((user1: User | null) => {
+           setUser(user1);
+       });
+       return () => unsubscribe();
+     }, [auth]);
+
+
+   return (
+       <UserContext.Provider value={{ user, setUser }}>
+           <Provider>
+               <HashRouter>
+                   <div style={{ position: "fixed", top: 0, width: '100%', zIndex: 1000 }}>
+                       <Navbar />
+                       <GeminiChatComponent />
+                   </div>
+
+
+
+
+                   <Routes>
+                       <Route path="/" element={<Home />} />
+                       <Route path="/about-us" element={<About />} />
+                       <Route path="/tour" element={<Tour />} />
+                       <Route path="/store" element={<Store />} />
+                       <Route path="/contact-us" element={<Contact />} />
+                       <Route path="/checkout" element={<Checkout />} />
+                       <Route path="/tour_details" element={<Tour_details />} />
+                       <Route path="/login" element={<Login/>} />
+                       <Route path="/signup" element={<SignUp/>} />
+                       <Route path="/cart" element={<Cart/>} />
+                       <Route path="/payment" element={<Payment/>} />   
+                       <Route path="/terms" element={<Terms/>} />   
+                       <Route path="/privacy" element={<Privacy/>} />
+                       <Route path="/account" element={<Account/>} />
+                       <Route path="/completion" element={<OrderCompletion/>} />  
+                       <Route path="*" element={<NotFound />} />         
+                       <Route path="/albums" element={<Albums />} />
+                   </Routes>
+
+
+
+
+               </HashRouter>
+           </Provider>
+       </UserContext.Provider>
+   );
+
 
 }
 
+
 const NotFound = () => {
-    return (
-      <div style={{ textAlign: 'center', marginTop: '200px' }}>
-        <h1 style={{ fontSize: '3rem', color: '#ff0000' }}>404 Page Not Found</h1>
-        <p style={{ fontSize: '1.5rem' }}>The page you're looking for doesn't exist.</p>
-      </div>
-    );
+   return (
+     <div style={{ textAlign: 'center', marginTop: '200px' }}>
+       <h1 style={{ fontSize: '3rem', color: '#ff0000' }}>404 Page Not Found</h1>
+       <p style={{ fontSize: '1.5rem' }}>The page you're looking for doesn't exist.</p>
+     </div>
+   );
 };
 export {UserContext};
 export default App;
+
+
+
