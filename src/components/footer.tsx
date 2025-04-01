@@ -75,9 +75,9 @@ export default function Footer() {
               Created by:
             </Text>
             <Flex direction="column" align="center" gap={1}>
-              <Text color="white" fontSize="14px">Aadil Brakat</Text>
+              <Text color="white" fontSize="14px">Aadil Barkat</Text>
               <Text color="white" fontSize="14px">Amogh Shivanna</Text>
-              <Text color="white" fontSize="14px">Jeevith Veerasarvanan</Text>
+              <Text color="white" fontSize="14px">Jeevith Veerasaravanan</Text>
               <Text color="white" fontSize="14px">Pradyun Fatwani</Text>
             </Flex>
           </Box>

@@ -42,6 +42,7 @@ const GeminiChatComponent = () => {
             *   **Tour:** Tour dates and locations. Link: &*/tour*&
             *   **Store:** Merchandise for sale. Link: &*/store*&
             *   **Contact Us:** A form or contact information to reach the band. Link: &*/contact-us*&
+            *   **Contact Us:** A form or contact information to reach the band. Link: &*/albums*&
             *   **Login:** Page for existing users to log in. Link: &*/login*&
             *   **Sign Up:** Page for new users to create an account. Link: &*/signup*&
             *   **Cart:** Shopping cart page. Link: &*/cart*&
@@ -119,7 +120,7 @@ const GeminiChatComponent = () => {
                 *   **AI:** "you can log in by going to the 'login' page, which you can access here: &*/login*&"
             *   **User:** "Do you take Doge coin"
                 *   **AI:** "I'm sorry, I don't have the answer to that question right now. You can try contacting us directly through the 'Contact Us' page, which you can access here: &*/contact-us*&."
-
+            
                     
 
         `,

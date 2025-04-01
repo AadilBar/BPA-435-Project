@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansation&display=swap');
 
+.canvas {
+    width: 100%;
+    height: 100%;
+}
+
 .hero2-overlay {
     background-size: cover;
     background-position: center;
@@ -91,71 +96,115 @@
     border-radius: 5px;
 }
 
-.background_lore_background {
-    background-color: rgb(99, 66, 130);
-    background-image: url('/images/membership2.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
-    width: 100%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    grid-template-rows: 0.1fr 3fr 1fr;
-    gap: 2rem;
-    padding: 2rem;
-    box-sizing: border-box;
-}
+/* Removed background_lore_background styles */
 
-.video {
+/* Timeline Section */
+.timeline-section {
+    position: relative;
     width: 100%;
     height: auto;
-    border-width: thick;
-    border-style: groove;
-    border-color: rgb(88, 112, 79);
-    border-radius: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
 }
 
-.video_container {
-    grid-area: 2 / 1 / 2 / 2;
-    padding-left: 3rem;
-    padding-right: 3rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+.timeline-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%); /* Make the video black and white */
+    z-index: 0; /* Bottom layer */
 }
 
-.video_caption {
-    text-align: center;
-    font-size: larger;
-    font-weight: bold;
-    margin-top: 1rem;
+#timeline-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* Transparent canvas background */
+    z-index: 1; /* Middle layer */
 }
 
-.background_info {
-    grid-area: 2 / 2 / 2 / 3;
-    font-size: 2rem;
-    color: #fff;
-    text-align: center;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+.timeline-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-.background_title {
-    font-weight: bold;
+.timeline-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
-.background_description1, .background_description2, .background_description3 {
-    font-size: large;
+.timeline-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
 }
 
-.background_description2, .background_description3 {
-    margin-top: 30px;
+.timeline-right-section {
+    height: 50vh; /* Each section takes up half a viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.background_description1 {
-    margin-top: 30px;
+.timeline-left-dash {
+    width: 3px; /* Increased width for visibility */
+    height: 200px; /* Increased height for better proportions */
+    background-color: rgb(233, 32, 79); /* Adjusted to match the red-themed design */
+    margin-right: 20px; /* Add spacing to the right of the dash */
+}
+
+.timeline-left > div {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add spacing between dash and title */
+}
+
+.timeline-left-title {
+    font-size: 6rem; /* Massive font size for clarity */
+    margin: 0;
+    color: white;
+    text-align: left;
+    line-height: 1.2; /* Adjust line height for better spacing */
+    word-break: break-word; /* Ensure proper line breaking */
+}
+
+.timeline-right-year {
+    font-size: 4rem; /* Adjust font size for the year */
+    color: rgb(233, 32, 79);
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 1rem;
+}
+
+.timeline-right {
+    display: flex;
+    align-items: center;
+}
+
+.timeline-description {
+    font-size: 1.5rem; /* Increased size for better readability */
+    color: white;
+    padding-left: 20px; /* Adjusted padding */
+    line-height: 1.5; /* Maintain good text spacing */
 }
 
 /* MEMBERS PAGE */
@@ -168,7 +217,6 @@
 .member_title {
     text-align: center;
     color: #f5f5f5;
-    margin-top: 40px;
     font-weight: bold;
     font-size: 4rem;
     background-color: #333;
@@ -297,11 +345,58 @@
         line-height: 1.6;
     }
 
-
     .member_description {
         font-size: 0.95rem;  /* Slightly smaller font */
         color: #dcdcdc;
         line-height: 1.6;
+    }
+
+    /* Mobile-friendly Member Details */
+    .member-details-container.mobile {
+        flex-direction: column;
+        height: auto;
+        gap: 20px; /* space between sections */
+    }
+    
+    .member-details-image {
+        width: 100%;
+        height: 250px; /* adjust image height */
+    }
+    
+    .member-details-description,
+    .member-details-awards {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .mobile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+    }
+
+    /* Mobile Timeline Section Styles */
+    .timeline-section-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        background-color: #000; /* dark background */
+        color: #fff;
+    }
+    .timeline-event-mobile {
+        padding: 15px;
+        border-bottom: 1px solid #555;
+    }
+    .timeline-mobile-year {
+        font-size: 2rem;
+        color: #ff4d4d;
+        margin: 0 0 10px;
+    }
+    .timeline-mobile-description {
+        font-size: 1rem;
+        margin: 0;
     }
 }
 
@@ -315,4 +410,215 @@
 .fade-in {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* General styles for the Meet the Band section */
+.meet-the-band-section {
+    padding: 50px 20px;
+    background-color: #1a1a1a;
+    color: #fff;
+    text-align: center;
+}
+
+.meet-the-band-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ff4d4d;
+    text-transform: uppercase;
+}
+
+/* Band Tiles - Grid Layout */
+.band-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Default: 4 columns for desktop */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.band-tile {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.band-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+}
+
+.band-tile.active {
+    border: 2px solid #ff4d4d;
+}
+
+.band-tile-image {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+.band-tile-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+}
+
+.band-tile-overlay h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.band-tile-overlay p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+/* Member Details Section */
+.member-details {
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.member-details-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.member-details-image {
+    width: 30%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+.member-details-description {
+    width: 40%;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.member-details-description h3 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #ff4d4d;
+}
+
+.member-details-description h4 {
+    font-size: 1.2rem;
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.member-details-description p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.member-details-awards {
+    width: 30%;
+    text-align: left;
+}
+
+.member-details-awards h5 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #ff4d4d;
+}
+
+.member-details-awards ul {
+    list-style: none;
+    padding: 0;
+}
+
+.member-details-awards li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.award-icon {
+    margin-right: 10px;
+    color: #ff4d4d;
+}
+
+/* Mobile Styles (2x2 Grid) */
+@media (max-width: 768px) {
+    .band-tiles {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 grid for mobile */
+        gap: 15px;
+    }
+
+    .band-tile-image {
+        height: 200px; /* Reduced height for mobile */
+    }
+
+    .band-tile-overlay h3 {
+        font-size: 1rem;
+    }
+
+    .band-tile-overlay p {
+        font-size: 0.8rem;
+    }
+
+    .member-details-container.mobile {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .member-details-image {
+        width: 100%;
+        height: 250px;
+        margin-bottom: 15px;
+    }
+
+    .member-details-description {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+
+    .member-details-awards {
+        width: 100%;
+    }
+
+    .member-details-description h3 {
+        font-size: 1.5rem;
+    }
+
+    .member-details-description h4 {
+        font-size: 1rem;
+    }
+
+    .member-details-description p {
+        font-size: 0.9rem;
+    }
+
+    .member-details-awards h5 {
+        font-size: 1rem;
+    }
+
+    .member-details-awards li {
+        font-size: 0.8rem;
+    }
+}
+.member-details-awards li span {
+  font-size: 1.2rem;
+  color: white;
+  line-height: 1.6;
 }

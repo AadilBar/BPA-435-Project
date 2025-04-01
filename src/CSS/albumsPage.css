@@ -1,0 +1,205 @@
+
+.albums-page-container {
+    margin-top: 0;
+    overflow-x: hidden;
+    background-color: #000;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #000;
+    color: white;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.hero-section h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    z-index: 1;
+    animation: fadeIn 2s ease-in-out;
+}
+.hero-section .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: 0;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Horizontal Scrolling Section */
+.award-title{
+    height: 30vh;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+}
+.horizontal-scroll-section {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+ 
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+   
+}
+.horizontal-scroll-container {
+    display: flex;
+    gap: 40px;
+    position: absolute;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+}
+.horizontal-scroll-item {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 400px;
+    background-color: #222;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    transition: transform 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+}
+.horizontal-scroll-item:hover {
+    transform: scale(1.1);
+    background-color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Parallax Section */
+.parallax-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    animation: parallaxFadeIn 1.5s ease-in-out;
+    background-color: rgb(134, 92, 92);
+    background-blend-mode: multiply;
+
+}
+@keyframes parallaxFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 3D Albums Page Section */
+.threeD-albumsPage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+    background-color: #000;
+}
+
+.threeD-albumsPage-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Whats Next Section */
+.whats-next-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        background: linear-gradient(to right, darkgrey, black);
+    padding: 20px;
+}
+.whats-next-text {
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(to right, red 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.upcoming-albums-section{
+    display: flex;
+    flex-direction: row;
+   max-height: 0px;
+    padding: 20px;
+    background-color: #000;
+}
+.upcoming-albums-left{
+    flex: 1; 
+    display: flex;
+    color: white;
+    justify-content: center;
+    font-size: 75px;
+}
+.upcoming-albums-right{
+    flex: 1;
+   
+}
+.upcoming-albums-content{
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+}
+@media (max-width: 768px) {
+   .award-title, .upcoming-albums-left{
+    font-size: 50px;
+   }
+   .threeD-albumsPage-title, .whats-next-text, .award-title, .upcoming-albums-left{
+    text-align: center;
+   }
+   .upcoming-albums-mobile{
+    gap: 20px;
+    padding: 20px 20px; 
+   }
+   .upcoming-albums-list{
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+   }
+}
