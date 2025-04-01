@@ -131,7 +131,7 @@ const Albums: React.FC = () => {
        <div className="albums-page-container">
            {/* Hero Section */}
            <div className="hero-section">
-               <img className="background-image" src="/images/Contact/C8.jpg" alt="Background" />
+               <img className="background-image bw-filter" src="/images/Contact/C8.jpg" alt="Background" />
                <h1>Experience Stage Fright Music</h1>
            </div>
 
