@@ -105,7 +105,7 @@ export default function Footer() {
 
           <Flex gap={4} justify="center" align="center">
             <Link
-              href="#/contact-us"
+              href="/#/contact-us"
               onClick={() => window.scrollTo(0, 0)}
               color="white"
               _hover={{
@@ -118,7 +118,7 @@ export default function Footer() {
             </Link>
             <Text color="white">|</Text>
             <Link
-              href="#/terms"
+              href="/#/terms"
               onClick={() => window.scrollTo(0, 0)}
               color="white"
               _hover={{
@@ -131,7 +131,7 @@ export default function Footer() {
             </Link>
             <Text color="white">|</Text>
             <Link
-              href="#/privacy"
+              href="/#/privacy"
               onClick={() => window.scrollTo(0, 0)}
               color="white"
               _hover={{
